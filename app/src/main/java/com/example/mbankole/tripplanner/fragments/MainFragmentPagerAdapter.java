@@ -63,7 +63,7 @@ public class MainFragmentPagerAdapter  extends FragmentPagerAdapter {
             case 2:
                 return getPeopleFragment();
             case 3:
-                getPlanFragment();
+                return getPlanFragment();
             default:
                 return null;
         }
