@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TripPlanner</string>
+    <string name="google_maps_api_key">AIzaSyAu4LnwwfQl6FQhWvl2K_mtjAj844rMyGU</string>
 </resources>
