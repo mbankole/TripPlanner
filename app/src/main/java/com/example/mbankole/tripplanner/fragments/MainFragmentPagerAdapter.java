@@ -34,7 +34,8 @@ public class MainFragmentPagerAdapter  extends FragmentPagerAdapter {
 
     public MapFragment getMapFragment() {
         if (mapFragment == null) {
-            mapFragment = MapFragment.newInstance();
+            mapFragment = new MapFragment();
+            //mapFragment.setFm(fragmentManager);
         }
         return mapFragment;
     }
