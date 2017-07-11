@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 25
     buildToolsVersion "26.0.0"
     defaultConfig {
         applicationId "com.example.mbankole.tripplanner"
@@ -25,6 +25,13 @@ dependencies {
     compile 'com.github.hotchemi:permissionsdispatcher:2.4.0'
     compile 'com.google.android.gms:play-services-maps:11.0.1'
     compile 'com.google.android.gms:play-services-location:11.0.1'
+    compile 'com.github.bumptech.glide:glide:3.8.0'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.google.maps.android:android-maps-utils:0.5+'
     annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.4.0'
+    annotationProcessor 'org.parceler:parceler:1.1.6'
+    compile 'com.android.support:support-core-utils:25.3.1'
+    compile 'com.android.support:design:23.1.0'
+    compile "com.android.support:appcompat-v7:25.3.1"
+    compile "com.android.support:design:25.3.1"
 }
