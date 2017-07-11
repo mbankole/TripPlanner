@@ -10,13 +10,14 @@ import android.support.v4.app.FragmentPagerAdapter;
  */
 
 public class MainFragmentPagerAdapter  extends FragmentPagerAdapter {
-    final int PAGE_COUNT = 3;
-    private String tabTitles[] = new String[]{"Map", "locations", "people"};
+    final int PAGE_COUNT = 4;
+    private String tabTitles[] = new String[]{"Map", "locations", "people", "plan"};
     private Context context;
     FragmentManager fragmentManager;
     LocationsFragment locationsFragment;
     MapFragment mapFragment;
     PeopleFragment peopleFragment;
+    PlanFragment planFragment;
 
     public MainFragmentPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
@@ -45,6 +46,13 @@ public class MainFragmentPagerAdapter  extends FragmentPagerAdapter {
         return peopleFragment;
     }
 
+    public PlanFragment getPlanFragment() {
+        if (planFragment == null) {
+            planFragment = PlanFragment.newInstance();
+        }
+        return planFragment;
+    }
+
     @Override
     public Fragment getItem(int position) {
         switch (position) {
@@ -54,6 +62,8 @@ public class MainFragmentPagerAdapter  extends FragmentPagerAdapter {
                 return getLocationsFragment();
             case 2:
                 return getPeopleFragment();
+            case 3:
+                getPlanFragment();
             default:
                 return null;
         }
