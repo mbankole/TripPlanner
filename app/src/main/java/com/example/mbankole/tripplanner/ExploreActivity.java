@@ -5,7 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.mbankole.tripplanner.fragments.MainFragmentPagerAdapter;
+import com.example.mbankole.tripplanner.adapters.MainFragmentPagerAdapter;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.User;
 

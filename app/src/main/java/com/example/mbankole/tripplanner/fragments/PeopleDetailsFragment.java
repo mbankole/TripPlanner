@@ -20,6 +20,7 @@ public class PeopleDetailsFragment extends DialogFragment {
     TextView tvUsername;
     TextView tvInterests;
 
+
     public static PeopleDetailsFragment newInstance(User user) {
         PeopleDetailsFragment frag = new PeopleDetailsFragment();
         Bundle args = new Bundle();
@@ -40,6 +41,9 @@ public class PeopleDetailsFragment extends DialogFragment {
         // Get field from view
         User user = getArguments().getParcelable("user");
         tvUsername = (TextView) view.findViewById(R.id.tvUserDetailsName);
+        tvInterests = (TextView) view.findViewById(R.id.tvInterests);
+
         tvUsername.setText(user.name);
+
     }
 }

@@ -1,9 +1,14 @@
-package com.example.mbankole.tripplanner.fragments;
+package com.example.mbankole.tripplanner.adapters;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.example.mbankole.tripplanner.fragments.LocationsFragment;
+import com.example.mbankole.tripplanner.fragments.MapFragment;
+import com.example.mbankole.tripplanner.fragments.PeopleFragment;
+import com.example.mbankole.tripplanner.fragments.PlanFragment;
 
 /**
  * Created by mbankole on 7/11/17.
