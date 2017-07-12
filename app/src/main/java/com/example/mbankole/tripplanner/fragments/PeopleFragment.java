@@ -28,6 +28,7 @@ public class PeopleFragment extends Fragment {
     ArrayList<User> users;
     RecyclerView rvUsers;
     ArrayList<User> friends;
+    android.app.FragmentManager fm;
 
     public static PeopleFragment newInstance() {
         Bundle args = new Bundle();
@@ -35,6 +36,7 @@ public class PeopleFragment extends Fragment {
         PeopleFragment fragment = new PeopleFragment();
         fragment.setArguments(args);
         return fragment;
+
     }
 
     @Nullable
@@ -42,6 +44,8 @@ public class PeopleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // inflate the layout
         View v = inflater.inflate(R.layout.fragment_people, container, false);
+
+        fm = getActivity().getFragmentManager();
         // find RecyclerView
         rvUsers = (RecyclerView) v.findViewById(R.id.rvUsers);
         // init the arraylist (data source)
@@ -49,6 +53,7 @@ public class PeopleFragment extends Fragment {
         friends = new ArrayList<>();
         // construct the adapter from this data source
         userAdapter = new UserAdapter(users);
+        userAdapter.setFm(fm);
         // RecyclerView setup (layout manager, use adapter)
         rvUsers.setLayoutManager(new LinearLayoutManager(getContext()));
         // set the adapter

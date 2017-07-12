@@ -1,16 +1,23 @@
 package com.example.mbankole.tripplanner.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
 /**
  * Created by danahe97 on 7/11/17.
  */
 
-public class User {
+
+public class User implements Parcelable {
 
     public String name;
     public int uid;
+    public String imageUrl;
     public ArrayList<Integer> friends;
+
+
 
     public static User generateAdam() {
         User user = new User();
@@ -38,4 +45,40 @@ public class User {
         user.friends.add(2);
         return user;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeInt(this.uid);
+        dest.writeString(this.imageUrl);
+        dest.writeList(this.friends);
+    }
+
+    public User() {
+    }
+
+    protected User(Parcel in) {
+        this.name = in.readString();
+        this.uid = in.readInt();
+        this.imageUrl = in.readString();
+        this.friends = new ArrayList<Integer>();
+        in.readList(this.friends, Integer.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }

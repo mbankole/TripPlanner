@@ -136,8 +136,14 @@ public class MapFragment extends Fragment implements GoogleMap.OnPoiClickListene
         }
         Location location = locationManager.getLastKnownLocation(locationManager
                 .getBestProvider(criteria, false));
-        double latitude = location.getLatitude();
-        double longitude = location.getLongitude();
+
+        double latitude = 0;
+        double longitude = 0;
+
+        if (location != null) {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+        } else return;
         if ((latitude != lastLatitude || longitude != lastLongitude) || force) {
             // create marker
             MarkerOptions marker = new MarkerOptions().position(

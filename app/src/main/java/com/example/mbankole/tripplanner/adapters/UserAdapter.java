@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.mbankole.tripplanner.R;
+import com.example.mbankole.tripplanner.fragments.PeopleDetailsFragment;
 import com.example.mbankole.tripplanner.models.User;
 
 import java.util.List;
@@ -20,9 +21,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     List<User> mUsers;
     Context context;
+    android.app.FragmentManager fm;
 
     public UserAdapter(List<User> users) {
         mUsers = users;
+    }
+
+    public void setFm(android.app.FragmentManager fm) {
+        this.fm = fm;
     }
 
     @Override
@@ -47,13 +53,24 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         return mUsers.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView tvUsername;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                User user = mUsers.get(position);
+                PeopleDetailsFragment frag = PeopleDetailsFragment.newInstance(user);
+                frag.show(fm, "name");
+            }
         }
     }
 }
