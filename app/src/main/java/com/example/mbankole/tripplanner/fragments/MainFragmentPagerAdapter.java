@@ -35,7 +35,7 @@ public class MainFragmentPagerAdapter  extends FragmentPagerAdapter {
     public MapFragment getMapFragment() {
         if (mapFragment == null) {
             mapFragment = new MapFragment();
-            //mapFragment.setFm(fragmentManager);
+            mapFragment.setFm(fragmentManager);
         }
         return mapFragment;
     }
@@ -50,6 +50,7 @@ public class MainFragmentPagerAdapter  extends FragmentPagerAdapter {
     public PlanFragment getPlanFragment() {
         if (planFragment == null) {
             planFragment = PlanFragment.newInstance();
+            //planFragment.viewPager = this;
         }
         return planFragment;
     }

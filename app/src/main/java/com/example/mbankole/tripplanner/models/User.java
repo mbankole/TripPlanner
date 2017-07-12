@@ -20,4 +20,22 @@ public class User {
         user.friends.add(2);
         return user;
     }
+
+    public static User generateTom() {
+        User user = new User();
+        user.name = "Tom";
+        user.uid = 2;
+        user.friends = new ArrayList<Integer>();
+        user.friends.add(1);
+        return user;
+    }
+
+    public static User generatePhilp() {
+        User user = new User();
+        user.name = "Philp";
+        user.uid = 3;
+        user.friends = new ArrayList<Integer>();
+        user.friends.add(2);
+        return user;
+    }
 }
