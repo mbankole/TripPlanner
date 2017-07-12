@@ -37,6 +37,5 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/tvUserDetailsName"
-        android:background="none"
         app:srcCompat="@android:drawable/ic_menu_add" />
 </RelativeLayout>

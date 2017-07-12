@@ -12,6 +12,7 @@ import com.example.mbankole.tripplanner.R;
 
 /**
  * Created by mbankole on 7/11/17.
+ *
  */
 
 public class PlanFragment  extends Fragment {

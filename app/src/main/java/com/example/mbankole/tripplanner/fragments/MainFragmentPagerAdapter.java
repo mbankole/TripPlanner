@@ -7,11 +7,12 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 /**
  * Created by mbankole on 7/11/17.
+ *
  */
 
 public class MainFragmentPagerAdapter  extends FragmentPagerAdapter {
-    final int PAGE_COUNT = 4;
-    private String tabTitles[] = new String[]{"Map", "locations", "people", "plan"};
+    final int PAGE_COUNT = 3;
+    private String tabTitles[] = new String[]{"Map", "locations", "people"};
     private Context context;
     FragmentManager fragmentManager;
     LocationsFragment locationsFragment;

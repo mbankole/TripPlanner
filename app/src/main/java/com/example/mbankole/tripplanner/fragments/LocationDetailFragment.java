@@ -15,6 +15,7 @@ import com.example.mbankole.tripplanner.models.Location;
 
 /**
  * Created by mbankole on 7/12/17.
+ *
  */
 
 public class LocationDetailFragment extends DialogFragment implements  View.OnClickListener{

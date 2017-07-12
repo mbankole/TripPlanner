@@ -2,6 +2,7 @@ package com.example.mbankole.tripplanner.fragments;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -23,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -176,12 +178,26 @@ public class MapFragment extends Fragment implements GoogleMap.OnPoiClickListene
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // perform query here
-
                 return true;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        MenuItem miProfile = menu.findItem(R.id.miProfile);
+        miProfile.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                return false;
+            }
+        });
+        MenuItem miPlan = menu.findItem(R.id.miPlan);
+        miPlan.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Intent i = new Intent(getContext(), PlanActivity.class);
+                startActivity(i);
                 return false;
             }
         });
