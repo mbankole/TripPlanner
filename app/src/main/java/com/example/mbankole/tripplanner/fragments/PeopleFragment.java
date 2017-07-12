@@ -55,7 +55,9 @@ public class PeopleFragment extends Fragment {
         rvUsers.setAdapter(userAdapter);
         for (int i=0; i < 20; i++) {
             User friend = new User();
-            friends.add(friend.generateAdam());
+            friends.add(User.generateAdam());
+            friends.add(User.generatePhilp());
+            friends.add(User.generateTom());
         }
         addItems(friends);
         return v;
