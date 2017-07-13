@@ -8,10 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.models.Location;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by mbankole on 7/12/17.
@@ -21,6 +24,7 @@ import com.example.mbankole.tripplanner.models.Location;
 public class LocationDetailFragment extends DialogFragment implements  View.OnClickListener{
     TextView tvName;
     TextView tvLatLong;
+    ImageView ivPhoto;
     Button btAdd;
 
     private final String TAG = "POIDETAILFRAGMENT";
@@ -49,8 +53,13 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
         tvName = (TextView) view.findViewById(R.id.tvName);
         tvLatLong = (TextView) view.findViewById(R.id.tvLatLong);
         btAdd = (Button) view.findViewById(R.id.btAdd);
+        ivPhoto = (ImageView)view.findViewById(R.id.ivPhoto);
         tvName.setText(loc.name);
-        tvLatLong.setText("lat:" + loc.latLng.latitude + " long:" + loc.latLng.longitude);
+        //tvLatLong.setText("lat:" + loc.latLng.latitude + " long:" + loc.latLng.longitude);
+        Picasso.with(getContext())
+                .load(loc.photoUrl)
+                .memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
+                .into(ivPhoto);
     }
 
     public void debug(String message) {

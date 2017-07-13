@@ -16,11 +16,19 @@
         tools:layout_editor_absoluteY="0dp"
         android:layout_alignParentEnd="true"></android.support.v7.widget.Toolbar>
 
-    <com.google.android.gms.maps.MapView
+    <!-- This can go anywhere in your layout (see other demos for some examples). -->
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        class="com.google.android.gms.maps.SupportMapFragment" />
+
+    <!--<com.google.android.gms.maps.MapView
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/mapView"
         android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" />-->
 
 </RelativeLayout>
