@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.LocationsAdapter;
 import com.example.mbankole.tripplanner.models.Location;
@@ -36,6 +37,7 @@ public class LocationsFragment extends Fragment {
     ArrayList<Location> locations;
     RecyclerView rvLocations;
     ArrayList<Location> landmarks;
+    public ExploreActivity exploreActivity;
 
     public static LocationsFragment newInstance() {
         Bundle args = new Bundle();
@@ -61,6 +63,7 @@ public class LocationsFragment extends Fragment {
         rvLocations.setLayoutManager(new LinearLayoutManager(getContext()));
         // set the adapter
         rvLocations.setAdapter(locationsAdapter);
+        locationsAdapter.exploreActivity = exploreActivity;
         for (int i=0; i < 20; i++) {
             landmarks.add(Location.generateEiffelTower());
             landmarks.add(Location.generateStatueOfLiberty());

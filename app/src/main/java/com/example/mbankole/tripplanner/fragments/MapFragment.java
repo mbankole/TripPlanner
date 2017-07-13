@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.ApiClients.GmapPlaceDetailClient;
+import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.models.Location;
@@ -58,6 +59,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
     boolean mapReady = false;
     FragmentManager fm;
     private GoogleMap mMap;
+    public ExploreActivity exploreActivity;
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private boolean mPermissionDenied = false;
@@ -146,6 +148,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                     e.printStackTrace();
                 }
                 LocationDetailFragment frag = LocationDetailFragment.newInstance(loc);
+                frag.exploreActivity = exploreActivity;
                 frag.show(fm, "detail");
             }
 

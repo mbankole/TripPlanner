@@ -50,4 +50,14 @@ public class ExploreActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(this, ToastString, Toast.LENGTH_LONG);
         toast.show();
     }
+
+    public void addLocation(Location location) {
+        places.add(location);
+        String ToastString = "";
+        for (int i=0; i<places.size(); i++) {
+            ToastString += places.get(i).name;
+        }
+        Toast toast = Toast.makeText(this, ToastString, Toast.LENGTH_LONG);
+        toast.show();
+    }
 }

@@ -36,6 +36,7 @@ public class MainFragmentPagerAdapter  extends FragmentPagerAdapter {
     public LocationsFragment getLocationsFragment() {
         if (locationsFragment == null) {
             locationsFragment = LocationsFragment.newInstance();
+            locationsFragment.exploreActivity = exploreActivity;
         }
         return locationsFragment;
     }
@@ -43,6 +44,7 @@ public class MainFragmentPagerAdapter  extends FragmentPagerAdapter {
     public MapFragment getMapFragment() {
         if (mapFragment == null) {
             mapFragment = new MapFragment();
+            mapFragment.exploreActivity = exploreActivity;
             mapFragment.setFm(fragmentManager);
         }
         return mapFragment;
