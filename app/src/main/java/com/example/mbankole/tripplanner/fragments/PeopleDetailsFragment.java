@@ -6,9 +6,12 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
+import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.User;
 
 /**
@@ -19,6 +22,9 @@ public class PeopleDetailsFragment extends DialogFragment {
 
     TextView tvUsername;
     TextView tvInterests;
+    ImageButton ibAddUser;
+    String interestsString;
+    public ExploreActivity exploreActivity;
 
 
     public static PeopleDetailsFragment newInstance(User user) {
@@ -39,11 +45,29 @@ public class PeopleDetailsFragment extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Get field from view
-        User user = getArguments().getParcelable("user");
+        final User user = getArguments().getParcelable("user");
         tvUsername = (TextView) view.findViewById(R.id.tvUserDetailsName);
         tvInterests = (TextView) view.findViewById(R.id.tvInterests);
+        ibAddUser = (ImageButton) view.findViewById(R.id.ibAddUser);
+        ibAddUser.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                exploreActivity.addUser(user);
+
+            }
+        });
+        if (user.interests != null) {
+            interestsString = "";
+            for (int i = 0; i < user.interests.size(); i++) {
+                Location location = user.interests.get(i);
+                interestsString += location.name + ", ";
+            }
+        } else {
+            interestsString = "This user has not added any interests.";
+        }
         tvUsername.setText(user.name);
+        tvInterests.setText(interestsString);
 
     }
 }

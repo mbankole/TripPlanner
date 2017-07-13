@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.UserAdapter;
 import com.example.mbankole.tripplanner.models.User;
@@ -37,6 +38,7 @@ public class PeopleFragment extends Fragment {
     RecyclerView rvUsers;
     ArrayList<User> friends;
     android.app.FragmentManager fm;
+    public ExploreActivity exploreActivity;
 
     public static PeopleFragment newInstance() {
         Bundle args = new Bundle();
@@ -62,6 +64,7 @@ public class PeopleFragment extends Fragment {
         // construct the adapter from this data source
         userAdapter = new UserAdapter(users);
         userAdapter.setFm(fm);
+        userAdapter.exploreActivity = exploreActivity;
         // RecyclerView setup (layout manager, use adapter)
         rvUsers.setLayoutManager(new LinearLayoutManager(getContext()));
         // set the adapter

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.adapters.MainFragmentPagerAdapter;
 import com.example.mbankole.tripplanner.models.Location;
@@ -29,6 +30,7 @@ public class ExploreActivity extends AppCompatActivity {
         fragmentPager = new MainFragmentPagerAdapter(getSupportFragmentManager(),
                 ExploreActivity.this);
         viewPager.setAdapter(fragmentPager);
+        fragmentPager.exploreActivity = this;
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
@@ -37,5 +39,15 @@ public class ExploreActivity extends AppCompatActivity {
         //setSupportActionBar(toolbar);
         //Intent i = new Intent(MainActivity.this, MapDemoActivity.class);
         //startActivity(i);
+    }
+
+    public void addUser(User user) {
+        people.add(user);
+        String ToastString = "";
+        for (int i=0; i<people.size(); i++) {
+            ToastString += people.get(i).name;
+        }
+        Toast toast = Toast.makeText(this, ToastString, Toast.LENGTH_LONG);
+        toast.show();
     }
 }

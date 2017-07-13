@@ -16,8 +16,7 @@ public class User implements Parcelable {
     public int uid;
     public String imageUrl;
     public ArrayList<Integer> friends;
-
-
+    public ArrayList<Location> interests;
 
     public static User generateAdam() {
         User user = new User();
@@ -25,6 +24,9 @@ public class User implements Parcelable {
         user.uid = 1;
         user.friends = new ArrayList<Integer>();
         user.friends.add(2);
+        user.interests = new ArrayList<Location>();
+        user.interests.add(Location.generateEiffelTower());
+        user.interests.add(Location.generateTajMahal());
         return user;
     }
 
