@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.models.Location;
+import com.example.mbankole.tripplanner.utility.gradient;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
@@ -67,6 +68,7 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
         Picasso.with(getContext())
                 .load(loc.photoUrl)
                 .memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
+                .transform(new gradient())
                 .into(ivPhoto);
     }
 

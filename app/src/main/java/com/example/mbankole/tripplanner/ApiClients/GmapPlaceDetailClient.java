@@ -19,7 +19,7 @@ public class GmapPlaceDetailClient {
         String relativeUrl = "place/photo";
         String absoluteUrl = getAbsoluteUrl(relativeUrl);
         absoluteUrl = absoluteUrl + "?key=" + API_KEY;
-        absoluteUrl = absoluteUrl + "&maxwidth=500";
+        absoluteUrl = absoluteUrl + "&maxwidth=1000";
         absoluteUrl = absoluteUrl + "&photoreference=" + ref;
         return absoluteUrl;
     }
