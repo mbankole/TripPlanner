@@ -49,7 +49,7 @@ import permissions.dispatcher.PermissionUtils;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,
-        GoogleMap.OnPoiClickListener{
+        GoogleMap.OnPoiClickListener {
 
     MapView mMapView;
     private GoogleMap nGoogleMap;
