@@ -5,9 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -60,7 +60,7 @@ public class LocationsFragment extends Fragment {
         // construct the adapter from this data source
         locationsAdapter = new LocationsAdapter(locations);
         // RecyclerView setup (layout manager, use adapter)
-        rvLocations.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvLocations.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         // set the adapter
         rvLocations.setAdapter(locationsAdapter);
         locationsAdapter.exploreActivity = exploreActivity;
