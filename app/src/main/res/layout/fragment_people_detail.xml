@@ -12,7 +12,7 @@
         android:layout_margin="8dp"
         app:srcCompat="@android:color/black" />
 
-    <TextView
+    <com.example.mbankole.tripplanner.utility.RalewayBoldTextView
         android:id="@+id/tvUserDetailsName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
         android:layout_marginTop="8dp"
         android:textAppearance="@android:style/TextAppearance.Large" />
 
-    <TextView
+    <com.example.mbankole.tripplanner.utility.RalewayLightTextView
         android:id="@+id/tvInterests"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

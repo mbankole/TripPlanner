@@ -1,20 +1,37 @@
 package com.example.mbankole.tripplanner.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.ExploreActivity;
+import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.LocationsAdapter;
 import com.example.mbankole.tripplanner.models.Location;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ericar on 7/11/17.
@@ -53,65 +70,35 @@ public class LocationsFragment extends Fragment {
         // construct the adapter from this data source
         locationsAdapter = new LocationsAdapter(locations);
         // RecyclerView setup (layout manager, use adapter)
-        rvLocations.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvLocations.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
         // set the adapter
         rvLocations.setAdapter(locationsAdapter);
         locationsAdapter.exploreActivity = exploreActivity;
 
-        //Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        //((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        //setHasOptionsMenu(true);
+        Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        setHasOptionsMenu(true);
         return v;
     }
-    /*
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
-        // Implementing ActionBar Search inside a fragment
-        MenuItem item = menu.add("Search");
-        //item.setIcon(R.drawable.ic_action_search); // sets icon
-        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-        SearchView sv = new SearchView(getActivity());
-
-        // modifying the text inside edittext component
-        //int id = sv.getContext().getResources().getIdentifier("android:id/search_src_text", null, null);
-        //TextView textView = (TextView) sv.findViewById(id);
-        //textView.setHint("Search location...");
-        //textView.setHintTextColor(getResources().getColor(R.color.DarkGray));
-        //textView.setTextColor(getResources().getColor(R.color.butts));
-
-        // implementing the listener
-        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        inflater.inflate(R.menu.menu_map, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+        final MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setVisibility(View.GONE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
-                if (s.length() < 4) {
-                    Toast.makeText(getActivity(),
-                            "Your search query must not be less than 3 characters",
-                            Toast.LENGTH_LONG).show();
-                    return true;
-                } else {
-                    //doSearch(s);
-                    Toast.makeText(getActivity(),
-                            "eneterer",
-                            Toast.LENGTH_LONG).show();
-                    return false;
-                }
+            public boolean onQueryTextSubmit(String query) {
+                return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Toast.makeText(getActivity(),
-                        "Your search query must not be less than 3 characters",
-                        Toast.LENGTH_LONG).show();
-                return true;
+                return false;
             }
         });
-        item.setActionView(sv);
-        /*inflater.inflate(R.menu.menu_map, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-        final MenuItem searchItem = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setVisibility(View.GONE);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -155,7 +142,7 @@ public class LocationsFragment extends Fragment {
                 return false;
             }
         });
-    }*/
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {}
