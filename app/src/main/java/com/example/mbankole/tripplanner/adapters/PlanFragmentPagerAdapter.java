@@ -5,8 +5,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.example.mbankole.tripplanner.fragments.ListView;
 import com.example.mbankole.tripplanner.fragments.LocationsFragment;
 import com.example.mbankole.tripplanner.fragments.MapFragment;
+import com.example.mbankole.tripplanner.fragments.MapView;
 import com.example.mbankole.tripplanner.fragments.PeopleFragment;
 import com.example.mbankole.tripplanner.fragments.PlanFragment;
 
@@ -24,6 +26,8 @@ public class PlanFragmentPagerAdapter  extends FragmentPagerAdapter {
     MapFragment mapFragment;
     PeopleFragment peopleFragment;
     PlanFragment planFragment;
+    ListView listView;
+    MapView mapView;
 
     public PlanFragmentPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
@@ -61,6 +65,24 @@ public class PlanFragmentPagerAdapter  extends FragmentPagerAdapter {
         return planFragment;
     }
 
+
+    public ListView getListView() {
+        if (listView == null) {
+            listView = ListView.newInstance();
+            //planFragment.viewPager = this;
+        }
+        return listView;
+    }
+
+
+    public MapView getMapView() {
+        if (mapView == null) {
+            mapView = MapView.newInstance();
+            //mapView.viewPager = this;
+        }
+        return mapView;
+    }
+
     @Override
     public Fragment getItem(int position) {
         switch (position) {
@@ -72,6 +94,10 @@ public class PlanFragmentPagerAdapter  extends FragmentPagerAdapter {
                 return getPeopleFragment();
             case 3:
                 return getPlanFragment();
+            case 4:
+                return getListView();
+            case 5:
+                return getMapView();
             default:
                 return null;
         }
@@ -87,3 +113,10 @@ public class PlanFragmentPagerAdapter  extends FragmentPagerAdapter {
         return tabTitles[position];
     }
 }
+
+
+/**
+ * Created by ericar on 7/11/17.
+ *
+ */
+
