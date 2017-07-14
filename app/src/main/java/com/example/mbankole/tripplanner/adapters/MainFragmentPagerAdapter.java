@@ -70,8 +70,10 @@ public class MainFragmentPagerAdapter  extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
+                //return PlaceholderFragment.newInstance();
                 return getMapFragment();
             case 1:
+                //return PlaceholderFragment.newInstance();
                 return getLocationsFragment();
             case 2:
                 return getPeopleFragment();

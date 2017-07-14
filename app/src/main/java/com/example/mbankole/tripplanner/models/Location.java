@@ -56,13 +56,14 @@ public class Location implements Parcelable {
     }
 
     public static void locationFromJson(JSONObject obj, Location loc) throws JSONException{
-        JSONObject result = obj.getJSONObject("result");
+        JSONObject result = obj;
+        if (obj.has("result")) result = obj.getJSONObject("result");
         loc.name = result.getString("name");
-        loc.address = result.getString("formatted_address");
-        loc.phoneNumber = result.getString("formatted_phone_number");
-        loc.iconUrl = result.getString("icon");
+        loc.address = result.optString("formatted_address", "No Address");
+        loc.phoneNumber = result.optString("formatted_phone_number", "No Phone Number");
+        loc.iconUrl = result.optString("icon", null);
         JSONArray photoData = result.getJSONArray("photos");
-        loc.photoRef = photoData.getJSONObject(0).getString("photo_reference");
+        loc.photoRef = photoData.getJSONObject(0).optString("photo_reference", null);
         loc.photoUrl = GmapClient.generateImageUrl(loc.photoRef);
         JSONObject latlngObj = result.getJSONObject("geometry").getJSONObject("location");
         loc.latLng = new LatLng(latlngObj.getDouble("lat"), latlngObj.getDouble("lng"));
