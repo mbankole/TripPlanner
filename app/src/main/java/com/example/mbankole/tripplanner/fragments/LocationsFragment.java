@@ -16,12 +16,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.LocationsAdapter;
 import com.example.mbankole.tripplanner.models.Location;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ericar on 7/11/17.
@@ -36,7 +44,7 @@ public class LocationsFragment extends Fragment {
     LocationsAdapter locationsAdapter;
     ArrayList<Location> locations;
     RecyclerView rvLocations;
-    ArrayList<Location> landmarks;
+    ArrayList<Location> searchResults;
     public ExploreActivity exploreActivity;
 
     public static LocationsFragment newInstance() {
@@ -56,7 +64,7 @@ public class LocationsFragment extends Fragment {
         rvLocations = (RecyclerView) v.findViewById(R.id.rvLocations);
         // init the arraylist (data source)
         locations = new ArrayList<>();
-        landmarks = new ArrayList<>();
+        searchResults = new ArrayList<>();
         // construct the adapter from this data source
         locationsAdapter = new LocationsAdapter(locations);
         // RecyclerView setup (layout manager, use adapter)
@@ -64,17 +72,10 @@ public class LocationsFragment extends Fragment {
         // set the adapter
         rvLocations.setAdapter(locationsAdapter);
         locationsAdapter.exploreActivity = exploreActivity;
-        for (int i=0; i < 20; i++) {
-            landmarks.add(Location.generateEiffelTower());
-            landmarks.add(Location.generateStatueOfLiberty());
-            landmarks.add(Location.generateTajMahal());
-        }
 
         Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         setHasOptionsMenu(true);
-
-        addItems(landmarks);
         return v;
     }
 
@@ -82,16 +83,31 @@ public class LocationsFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_map, menu);
         super.onCreateOptionsMenu(menu, inflater);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
+        final MenuItem searchItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // perform query here
+                GmapClient.locationSearch(query, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            JSONArray results = response.getJSONArray("results");
+                            for (int i = 0; i < results.length(); i++) {
+                                addItem(Location.locationFromJson(results.getJSONObject(i)));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        searchView.clearFocus();
+                    }
+                });
                 return true;
             }
             @Override
             public boolean onQueryTextChange(String newText) {
+
                 return false;
             }
         });
@@ -113,5 +129,10 @@ public class LocationsFragment extends Fragment {
             locations.add(location);
             locationsAdapter.notifyItemInserted(locations.size() - 1);
         }
+    }
+
+    public void addItem(Location loc) {
+        locations.add(loc);
+        locationsAdapter.notifyItemInserted(locations.size() - 1);
     }
 }

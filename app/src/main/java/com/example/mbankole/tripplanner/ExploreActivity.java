@@ -35,6 +35,8 @@ public class ExploreActivity extends AppCompatActivity {
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+        viewPager.setCurrentItem(2);
+        viewPager.setCurrentItem(0);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         //Intent i = new Intent(MainActivity.this, MapDemoActivity.class);
@@ -59,5 +61,6 @@ public class ExploreActivity extends AppCompatActivity {
         }
         Toast toast = Toast.makeText(this, ToastString, Toast.LENGTH_LONG);
         toast.show();
+        fragmentPager.getLocationsFragment().addItem(location);
     }
 }

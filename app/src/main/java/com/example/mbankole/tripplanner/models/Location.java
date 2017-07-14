@@ -8,7 +8,7 @@ import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.example.mbankole.tripplanner.ApiClients.GmapPlaceDetailClient;
+import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PointOfInterest;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -51,6 +51,11 @@ public class Location implements Parcelable {
 
     public static Location locationFromJson(JSONObject obj) throws JSONException{
         Location loc = new Location();
+        locationFromJson(obj,loc);
+        return loc;
+    }
+
+    public static void locationFromJson(JSONObject obj, Location loc) throws JSONException{
         JSONObject result = obj.getJSONObject("result");
         loc.name = result.getString("name");
         loc.address = result.getString("formatted_address");
@@ -58,11 +63,9 @@ public class Location implements Parcelable {
         loc.iconUrl = result.getString("icon");
         JSONArray photoData = result.getJSONArray("photos");
         loc.photoRef = photoData.getJSONObject(0).getString("photo_reference");
-        loc.photoUrl = GmapPlaceDetailClient.generateImageUrl(loc.photoRef);
+        loc.photoUrl = GmapClient.generateImageUrl(loc.photoRef);
         JSONObject latlngObj = result.getJSONObject("geometry").getJSONObject("location");
         loc.latLng = new LatLng(latlngObj.getDouble("lat"), latlngObj.getDouble("lng"));
-
-        return loc;
     }
 
     public static void loadPhoto(final Location loc, final ImageView iv) {
@@ -70,7 +73,7 @@ public class Location implements Parcelable {
             iv.setImageBitmap(loc.photo);
             return;
         }
-        GmapPlaceDetailClient.getImageFromReference(loc.photoRef, new AsyncHttpResponseHandler() {
+        GmapClient.getImageFromReference(loc.photoRef, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 Log.d(TAG, "onSuccess: " + responseBody.toString());
@@ -110,7 +113,23 @@ public class Location implements Parcelable {
         location.uid = 3;
         return location;
     }
-
+    /*
+    public static  Location generateMuseum() {
+        final Location loc = null;
+        GmapClient.getDetailFromId("ChIJAAAAAAAAAAAREthJEc0p6dE", new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                Log.d(TAG, response.toString());
+                try {
+                    Location.locationFromJson(response, loc);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return loc;
+    }
+    */
     //some placeIds
     // museum of pop culture - ChIJAAAAAAAAAAAREthJEc0p6dE
     // space needle - ChIJAAAAAAAAAAARDZLQnmioK9s
