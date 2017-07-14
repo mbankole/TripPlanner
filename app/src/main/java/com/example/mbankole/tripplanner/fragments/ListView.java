@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,11 +18,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mbankole.tripplanner.R;
-import com.example.mbankole.tripplanner.adapters.LocationsAdapter;
+import com.example.mbankole.tripplanner.adapters.PlanLocationsAdapter;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.User;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by ericar on 7/13/17.
@@ -33,7 +35,7 @@ public class ListView extends Fragment{
     public ArrayList<Location> places;
     ArrayList<Location> locations;
     RecyclerView rvPlanList;
-    LocationsAdapter locationAdapter;
+    PlanLocationsAdapter locationAdapter;
     android.app.FragmentManager fm;
 
 
@@ -57,13 +59,38 @@ public class ListView extends Fragment{
         // find RecyclerView
         rvPlanList = (RecyclerView) v.findViewById(R.id.rvPlanList);
         // construct the adapter from this data source
-        locationAdapter = new LocationsAdapter(locations);
+        locationAdapter = new PlanLocationsAdapter(locations);
         locationAdapter.setFm(fm);
 //        locationAdapter.exploreActivity = exploreActivity;
         // RecyclerView setup (layout manager, use adapter)
         rvPlanList.setLayoutManager(new LinearLayoutManager(getContext()));
         // set the adapter
         rvPlanList.setAdapter(locationAdapter);
+
+        // Extend the Callback class
+        ItemTouchHelper.Callback _ithCallback = new ItemTouchHelper.Callback() {
+            @Override
+            public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                return makeFlag(ItemTouchHelper.ACTION_STATE_DRAG,
+                        ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.START | ItemTouchHelper.END);
+            }
+
+            //and in your imlpementaion of
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                // get the viewHolder's and target's positions in your adapter data, swap them
+                Collections.swap(locations, viewHolder.getAdapterPosition(), target.getAdapterPosition());
+                // and notify the adapter that its dataset has changed
+                locationAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+                return true;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+
+            }
+        };
+        ItemTouchHelper ith = new ItemTouchHelper(_ithCallback);
+        ith.attachToRecyclerView(rvPlanList);
 
         Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
