@@ -102,8 +102,7 @@ public class ExploreActivity extends AppCompatActivity {
         miPlan.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Intent i = new Intent(ExploreActivity.this, PlanActivity.class);
-                startActivity(i);
+                launchPlanActivity();
                 return false;
             }
         });

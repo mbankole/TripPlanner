@@ -23,9 +23,12 @@ import android.view.ViewGroup;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.User;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
@@ -127,7 +130,9 @@ public class MapView extends Fragment implements OnMapReadyCallback,
         mMap = map;
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 //        enableMyLocation();
-        addPins(map);
+        if (places.size() != 0) {
+            addPins(map);
+        }
     }
 
     private void enableMyLocation() {
@@ -144,11 +149,17 @@ public class MapView extends Fragment implements OnMapReadyCallback,
     }
 
     public void addPins(GoogleMap map) {
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
         for (int i = 0; i < places.size(); i++) {
             map.addMarker(new MarkerOptions()
                     .position(places.get(i).latLng)
                     .title(places.get(i).name));
+            builder.include(places.get(i).latLng);
         }
+        LatLngBounds bounds = builder.build();
+        int padding = 240; // offset from edges of the map in pixels
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+        map.moveCamera(cu);
     }
 
     @Override
