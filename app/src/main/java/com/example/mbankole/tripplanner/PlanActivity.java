@@ -16,7 +16,7 @@ public class PlanActivity extends AppCompatActivity {
     PlanFragmentPagerAdapter fragmentPager;
     ArrayList<User> people;
     ArrayList<Location> places;
-    ExploreActivity exploreActivity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

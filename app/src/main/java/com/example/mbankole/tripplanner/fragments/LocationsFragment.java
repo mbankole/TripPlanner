@@ -98,6 +98,11 @@ public class LocationsFragment extends Fragment {
             public boolean onQueryTextChange(String newText) {
                 return false;
             }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
         });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
