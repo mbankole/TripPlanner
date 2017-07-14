@@ -1,7 +1,6 @@
 package com.example.mbankole.tripplanner.fragments;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.LocationManager;
@@ -27,7 +26,6 @@ import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.ExploreActivity;
-import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.models.Location;
 import com.google.android.gms.maps.GoogleMap;
@@ -140,8 +138,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         miPlan.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Intent i = new Intent(getContext(), PlanActivity.class);
-                startActivity(i);
+                exploreActivity.launchPlanActivity();
                 return false;
             }
         });

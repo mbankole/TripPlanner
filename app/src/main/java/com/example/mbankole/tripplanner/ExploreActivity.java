@@ -1,5 +1,6 @@
 package com.example.mbankole.tripplanner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -62,5 +63,12 @@ public class ExploreActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(this, ToastString, Toast.LENGTH_LONG);
         toast.show();
         fragmentPager.getLocationsFragment().addItem(location);
+    }
+
+    public void launchPlanActivity() {
+        Intent i = new Intent(this, PlanActivity.class);
+        i.putParcelableArrayListExtra("people", people);
+        i.putParcelableArrayListExtra("places", places);
+        startActivity(i);
     }
 }

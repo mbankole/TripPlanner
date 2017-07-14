@@ -1,6 +1,5 @@
 package com.example.mbankole.tripplanner.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,7 +18,6 @@ import android.view.ViewGroup;
 
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.ExploreActivity;
-import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.LocationsAdapter;
 import com.example.mbankole.tripplanner.models.Location;
@@ -138,8 +136,7 @@ public class LocationsFragment extends Fragment {
         miPlan.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Intent i = new Intent(getContext(), PlanActivity.class);
-                startActivity(i);
+                exploreActivity.launchPlanActivity();
                 return false;
             }
         });

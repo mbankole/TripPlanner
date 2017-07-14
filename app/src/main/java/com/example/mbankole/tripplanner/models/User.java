@@ -48,6 +48,9 @@ public class User implements Parcelable {
         return user;
     }
 
+    public User() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -59,9 +62,7 @@ public class User implements Parcelable {
         dest.writeInt(this.uid);
         dest.writeString(this.imageUrl);
         dest.writeList(this.friends);
-    }
-
-    public User() {
+        dest.writeTypedList(this.interests);
     }
 
     protected User(Parcel in) {
@@ -70,9 +71,10 @@ public class User implements Parcelable {
         this.imageUrl = in.readString();
         this.friends = new ArrayList<Integer>();
         in.readList(this.friends, Integer.class.getClassLoader());
+        this.interests = in.createTypedArrayList(Location.CREATOR);
     }
 
-    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+    public static final Creator<User> CREATOR = new Creator<User>() {
         @Override
         public User createFromParcel(Parcel source) {
             return new User(source);
