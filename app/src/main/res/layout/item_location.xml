@@ -10,16 +10,34 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         app:srcCompat="@color/black"
-        android:layout_below="@+id/tvLocationname"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/tvLocationname"
+        android:layout_marginStart="21dp" />
 
     <com.example.mbankole.tripplanner.utility.RalewayLightTextView
         android:id="@+id/tvLocationname"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Location Name"
+        android:text="        Location Name"
         android:textAppearance="@android:style/TextAppearance.Large"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tvLocationname"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="38dp"
+        android:text="TextView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="93dp"
+        android:layout_toEndOf="@+id/textView"
+        app:srcCompat="@color/black" />
 </RelativeLayout>
