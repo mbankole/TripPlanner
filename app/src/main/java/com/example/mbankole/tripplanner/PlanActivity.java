@@ -1,5 +1,6 @@
 package com.example.mbankole.tripplanner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -22,13 +23,16 @@ public class PlanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        people = new ArrayList<>();
-        places = new ArrayList<>();
-
+        Intent getI = getIntent();
+        people = getI.getParcelableArrayListExtra("people");
+        places = getI.getParcelableArrayListExtra("places");
+        
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         fragmentPager = new PlanFragmentPagerAdapter(getSupportFragmentManager(),
                 PlanActivity.this);
         viewPager.setAdapter(fragmentPager);
+        fragmentPager.people = people;
+        fragmentPager.places = places;
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
