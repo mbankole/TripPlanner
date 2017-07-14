@@ -18,6 +18,7 @@ public class PlanActivity extends AppCompatActivity {
     ArrayList<User> people;
     ArrayList<Location> places;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
