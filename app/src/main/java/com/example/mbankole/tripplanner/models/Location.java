@@ -182,3 +182,6 @@ public class Location implements Parcelable {
         }
     };
 }
+/**
+ * Created by ericar on 7/11/17.
+ */
