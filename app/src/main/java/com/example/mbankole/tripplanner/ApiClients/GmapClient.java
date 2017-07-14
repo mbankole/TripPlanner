@@ -8,12 +8,21 @@ import com.loopj.android.http.RequestParams;
  * Created by mbankole on 7/13/17.
  */
 
-public class GmapPlaceDetailClient {
+public class GmapClient {
     private static final String BASE_URL = "https://maps.googleapis.com/maps/api/";
     private static final String API_KEY = "AIzaSyAu4LnwwfQl6FQhWvl2K_mtjAj844rMyGU";
     //pls no stealing
 
     private static AsyncHttpClient client = new AsyncHttpClient();
+
+    public static void locationSearch(String query, AsyncHttpResponseHandler responseHandler) {
+        String relativeUrl = "place/textsearch/json";
+        String absoluteUrl = getAbsoluteUrl(relativeUrl);
+        RequestParams params = new RequestParams();
+        params.put("key", API_KEY );
+        params.put("query", query);
+        client.get(absoluteUrl, params, responseHandler);
+    }
 
     public static String generateImageUrl(String ref) {
         String relativeUrl = "place/photo";
@@ -41,14 +50,6 @@ public class GmapPlaceDetailClient {
         params.put("photoreference", ref);
         params.put("maxwidth", 500);
         client.get(absoluteUrl, params, responseHandler);
-    }
-
-    public static void get(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-        client.get(getAbsoluteUrl(url), params, responseHandler);
-    }
-
-    public static void post(String url, RequestParams params, AsyncHttpResponseHandler responseHandler) {
-        client.post(getAbsoluteUrl(url), params, responseHandler);
     }
 
     private static String getAbsoluteUrl(String relativeUrl) {
