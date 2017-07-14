@@ -1,23 +1,16 @@
 package com.example.mbankole.tripplanner.models;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PointOfInterest;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ericar on 7/11/17.
@@ -69,31 +62,6 @@ public class Location implements Parcelable {
         loc.latLng = new LatLng(latlngObj.getDouble("lat"), latlngObj.getDouble("lng"));
     }
 
-    public static void loadPhoto(final Location loc, final ImageView iv) {
-        if (loc.photo != null) {
-            iv.setImageBitmap(loc.photo);
-            return;
-        }
-        GmapClient.getImageFromReference(loc.photoRef, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                Log.d(TAG, "onSuccess: " + responseBody.toString());
-                loc.photo = BitmapFactory.decodeByteArray(responseBody, 0, responseBody.length);
-                //iv.setImageBitmap(loc.photo);
-                //iv.setVisibility(View.VISIBLE);
-                //iv.invalidate();
-                //iv.refreshDrawableState();
-                Glide.with(iv.getContext()).load(responseBody).asBitmap().override(300, 300).fitCenter().into(iv);
-
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.d(TAG, "onFailure: " + responseBody.toString());
-            }
-        });
-    }
-
     public static Location generateEiffelTower() {
         Location location = new Location();
         location.name = "EiffelTower";
@@ -114,23 +82,7 @@ public class Location implements Parcelable {
         location.uid = 3;
         return location;
     }
-    /*
-    public static  Location generateMuseum() {
-        final Location loc = null;
-        GmapClient.getDetailFromId("ChIJAAAAAAAAAAAREthJEc0p6dE", new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Log.d(TAG, response.toString());
-                try {
-                    Location.locationFromJson(response, loc);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        return loc;
-    }
-    */
+
     //some placeIds
     // museum of pop culture - ChIJAAAAAAAAAAAREthJEc0p6dE
     // space needle - ChIJAAAAAAAAAAARDZLQnmioK9s
