@@ -8,12 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mbankole.tripplanner.R;
+import com.example.mbankole.tripplanner.models.Location;
+import com.example.mbankole.tripplanner.models.User;
+
+import java.util.ArrayList;
 
 /**
  * Created by ericar on 7/13/17.
  */
 
 public class ListView extends Fragment{
+
+    public ArrayList <User> people;
+    public ArrayList<Location> places;
 
 
     public static ListView newInstance() {

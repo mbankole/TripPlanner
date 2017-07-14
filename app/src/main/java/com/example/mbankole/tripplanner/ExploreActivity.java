@@ -131,4 +131,11 @@ public class ExploreActivity extends AppCompatActivity {
         toast.show();
         fragmentPager.getLocationsFragment().addItem(location);
     }
+
+    public void launchPlanActivity() {
+        Intent i = new Intent(this, PlanActivity.class);
+        i.putParcelableArrayListExtra("people", people);
+        i.putParcelableArrayListExtra("places", places);
+        startActivity(i);
+    }
 }

@@ -69,17 +69,17 @@ public class PeopleFragment extends Fragment {
             friends.add(User.generateTom());
         }
 
-        //Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-        //((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        //setHasOptionsMenu(true);
+        Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        setHasOptionsMenu(true);
 
         addItems(friends);
         return v;
     }
-    /*
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_people, menu);
+        inflater.inflate(R.menu.menu_map, menu);
         super.onCreateOptionsMenu(menu, inflater);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
@@ -101,7 +101,15 @@ public class PeopleFragment extends Fragment {
                 return false;
             }
         });
-    }*/
+        MenuItem miPlan = menu.findItem(R.id.miPlan);
+        miPlan.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                exploreActivity.launchPlanActivity();
+                return false;
+            }
+        });
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {}

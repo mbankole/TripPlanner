@@ -131,8 +131,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         miPlan.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Intent i = new Intent(getContext(), PlanActivity.class);
-                startActivity(i);
+                exploreActivity.launchPlanActivity();
                 return false;
             }
         });

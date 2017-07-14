@@ -120,8 +120,7 @@ public class LocationsFragment extends Fragment {
         miPlan.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Intent i = new Intent(getContext(), PlanActivity.class);
-                startActivity(i);
+                exploreActivity.launchPlanActivity();
                 return false;
             }
         });
