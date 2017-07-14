@@ -26,9 +26,14 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.View
     List<Location> mLocations;
     Context context;
     public ExploreActivity exploreActivity;
+    android.app.FragmentManager fm;
 
     public LocationsAdapter(List<Location> locations) {
         mLocations = locations;
+    }
+
+    public void setFm(android.app.FragmentManager fm) {
+        this.fm = fm;
     }
 
     @Override
@@ -54,8 +59,7 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.View
     }
 
     @Override
-    public int getItemCount() {
-        return mLocations.size();
+    public int getItemCount() {return mLocations.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
