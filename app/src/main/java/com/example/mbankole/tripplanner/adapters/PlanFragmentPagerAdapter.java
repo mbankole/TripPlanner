@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.mbankole.tripplanner.fragments.ListView;
-import com.example.mbankole.tripplanner.fragments.MapView;
+import com.example.mbankole.tripplanner.fragments.PlanListFragment;
+import com.example.mbankole.tripplanner.fragments.PlanMapFragment;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.User;
 
@@ -22,8 +22,8 @@ public class PlanFragmentPagerAdapter  extends FragmentPagerAdapter {
     private String tabTitles[] = new String[]{"Map", "List"};
     private Context context;
     FragmentManager fragmentManager;
-    ListView listView;
-    MapView mapView;
+    PlanListFragment planListFragment;
+    PlanMapFragment planMapFragment;
     public ArrayList<User> people;
     public ArrayList<Location> places;
 
@@ -33,33 +33,33 @@ public class PlanFragmentPagerAdapter  extends FragmentPagerAdapter {
         this.context = context;
     }
 
-    public ListView getListView() {
-        if (listView == null) {
-            listView = ListView.newInstance();
-            listView.people = people;
-            listView.places = places;
+    public PlanListFragment getPlanListFragment() {
+        if (planListFragment == null) {
+            planListFragment = PlanListFragment.newInstance();
+            planListFragment.people = people;
+            planListFragment.places = places;
             //planFragment.viewPager = this;
         }
-        return listView;
+        return planListFragment;
     }
 
-    public MapView getMapView() {
-        if (mapView == null) {
-            mapView = MapView.newInstance();
-            mapView.people = people;
-            mapView.places = places;
-            //mapView.viewPager = this;
+    public PlanMapFragment getPlanMapFragment() {
+        if (planMapFragment == null) {
+            planMapFragment = PlanMapFragment.newInstance();
+            planMapFragment.people = people;
+            planMapFragment.places = places;
+            //planMapFragment.viewPager = this;
         }
-        return mapView;
+        return planMapFragment;
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return getMapView();
+                return getPlanMapFragment();
             case 1:
-                return getListView();
+                return getPlanListFragment();
             default:
                 return null;
         }
