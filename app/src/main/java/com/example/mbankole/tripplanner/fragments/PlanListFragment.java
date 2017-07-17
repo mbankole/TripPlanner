@@ -145,9 +145,3 @@ public class PlanListFragment extends Fragment{
     }
 }
 
-
-/**
- * Created by ericar on 7/11/17.
- *
- */
-

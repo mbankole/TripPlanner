@@ -2,8 +2,6 @@ package com.example.mbankole.tripplanner.fragments;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,7 +20,6 @@ import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.models.Location;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.PointOfInterest;
@@ -34,21 +31,10 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 import permissions.dispatcher.PermissionUtils;
 
-/**
- * A fragment that launches other parts of the demo application.
- */
-
 public class MapFragment extends Fragment implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,
         GoogleMap.OnPoiClickListener {
 
-    MapView mMapView;
-    private GoogleMap nGoogleMap;
-    LocationManager locationManager;
-    Criteria criteria;
-    double lastLatitude;
-    double lastLongitude;
-    boolean mapReady = false;
     FragmentManager fm;
     private GoogleMap mMap;
     public ExploreActivity exploreActivity;

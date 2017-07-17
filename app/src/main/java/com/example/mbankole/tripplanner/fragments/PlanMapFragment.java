@@ -190,10 +190,3 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     }
 
 }
-
-
-/**
- * Created by ericar on 7/11/17.
- *
- */
-
