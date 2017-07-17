@@ -44,7 +44,7 @@ import static com.example.mbankole.tripplanner.R.id.map;
  * Created by ericar on 7/13/17.
  */
 
-public class MapView extends Fragment implements OnMapReadyCallback,
+public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback {
 
     public ArrayList<User> people;
@@ -63,10 +63,10 @@ public class MapView extends Fragment implements OnMapReadyCallback,
 
     private View v;
 
-    public static MapView newInstance() {
+    public static PlanMapFragment newInstance() {
         Bundle args = new Bundle();
         //args.putParcelable("user", user);
-        MapView fragment = new MapView();
+        PlanMapFragment fragment = new PlanMapFragment();
         fragment.setArguments(args);
         return fragment;
     }

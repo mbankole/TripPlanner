@@ -29,7 +29,7 @@ import java.util.Collections;
  * Created by ericar on 7/13/17.
  */
 
-public class ListView extends Fragment{
+public class PlanListFragment extends Fragment{
 
     public ArrayList <User> people;
     public ArrayList<Location> places;
@@ -39,10 +39,10 @@ public class ListView extends Fragment{
     android.app.FragmentManager fm;
 
 
-    public static ListView newInstance() {
+    public static PlanListFragment newInstance() {
         Bundle args = new Bundle();
         //args.putParcelable("user", user);
-        ListView fragment = new ListView();
+        PlanListFragment fragment = new PlanListFragment();
         fragment.setArguments(args);
         return fragment;
     }

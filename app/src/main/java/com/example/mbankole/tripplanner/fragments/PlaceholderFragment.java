@@ -14,10 +14,10 @@ import com.example.mbankole.tripplanner.R;
  */
 
 public class PlaceholderFragment extends Fragment {
-    public static ListView newInstance() {
+    public static PlanListFragment newInstance() {
         Bundle args = new Bundle();
         //args.putParcelable("user", user);
-        ListView fragment = new ListView();
+        PlanListFragment fragment = new PlanListFragment();
         fragment.setArguments(args);
         return fragment;
     }
