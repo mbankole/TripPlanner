@@ -1,6 +1,5 @@
 package com.example.mbankole.tripplanner.models;
 
-import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -11,6 +10,8 @@ import com.google.android.gms.maps.model.PointOfInterest;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by ericar on 7/11/17.
@@ -30,8 +31,8 @@ public class Location implements Parcelable {
     public String googleId;
     public String photoRef;
     public String photoUrl;
-    public Bitmap photo;
     public double rating;
+    public ArrayList<User> people;
 
     public Location() {}
 
@@ -60,6 +61,7 @@ public class Location implements Parcelable {
         loc.photoUrl = GmapClient.generateImageUrl(loc.photoRef);
         JSONObject latlngObj = result.getJSONObject("geometry").getJSONObject("location");
         loc.latLng = new LatLng(latlngObj.getDouble("lat"), latlngObj.getDouble("lng"));
+        loc.people = new ArrayList<>();
     }
 
     public static Location generateEiffelTower() {
@@ -106,7 +108,9 @@ public class Location implements Parcelable {
         dest.writeString(this.desc);
         dest.writeString(this.googleId);
         dest.writeString(this.photoRef);
+        dest.writeString(this.photoUrl);
         dest.writeDouble(this.rating);
+        dest.writeTypedList(this.people);
     }
 
     protected Location(Parcel in) {
@@ -119,7 +123,9 @@ public class Location implements Parcelable {
         this.desc = in.readString();
         this.googleId = in.readString();
         this.photoRef = in.readString();
+        this.photoUrl = in.readString();
         this.rating = in.readDouble();
+        this.people = in.createTypedArrayList(User.CREATOR);
     }
 
     public static final Creator<Location> CREATOR = new Creator<Location>() {
