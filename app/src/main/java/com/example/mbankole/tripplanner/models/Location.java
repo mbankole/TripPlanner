@@ -60,6 +60,7 @@ public class Location implements Parcelable {
         loc.photoUrl = GmapClient.generateImageUrl(loc.photoRef);
         JSONObject latlngObj = result.getJSONObject("geometry").getJSONObject("location");
         loc.latLng = new LatLng(latlngObj.getDouble("lat"), latlngObj.getDouble("lng"));
+        loc.googleId = result.getString("place_id");
     }
 
     public static Location generateEiffelTower() {

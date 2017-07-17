@@ -1,5 +1,6 @@
 package com.example.mbankole.tripplanner.ApiClients;
 
+import com.example.mbankole.tripplanner.models.Location;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -49,6 +50,16 @@ public class GmapClient {
         params.put("key", API_KEY );
         params.put("photoreference", ref);
         params.put("maxwidth", 500);
+        client.get(absoluteUrl, params, responseHandler);
+    }
+
+    public static void getDirections(Location origin, Location destination, AsyncHttpResponseHandler responseHandler) {
+        String relativeUrl = "directions/json";
+        String absoluteUrl = getAbsoluteUrl(relativeUrl);
+        RequestParams params = new RequestParams();
+        params.put("key", API_KEY );
+        params.put("origin", "place_id:" + origin.googleId);
+        params.put("destination", "place_id:" + destination.googleId);
         client.get(absoluteUrl, params, responseHandler);
     }
 
