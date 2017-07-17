@@ -69,21 +69,28 @@ public class ExploreActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // perform query here
-                GmapClient.locationSearch(query, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        viewPager.setCurrentItem(1);
-                        try {
-                            JSONArray results = response.getJSONArray("results");
-                            for (int i = 0; i < results.length(); i++) {
-                                fragmentPager.getLocationsFragment().addItem(Location.locationFromJson(results.getJSONObject(i)));
+                switch (viewPager.getCurrentItem()) {
+                    case 0:
+                        //map view
+                    case 1:
+                        GmapClient.locationSearch(query, new JsonHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                viewPager.setCurrentItem(1);
+                                try {
+                                    JSONArray results = response.getJSONArray("results");
+                                    for (int i = 0; i < results.length(); i++) {
+                                        fragmentPager.getLocationsFragment().addSearchResult(Location.locationFromJson(results.getJSONObject(i)));
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                searchView.clearFocus();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        searchView.clearFocus();
-                    }
-                });
+                        });
+                    case 2:
+                        //people view
+                }
                 return true;
             }
             @Override

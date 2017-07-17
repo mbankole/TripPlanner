@@ -24,7 +24,7 @@ import com.squareup.picasso.Picasso;
 
 public class LocationDetailFragment extends DialogFragment implements  View.OnClickListener{
     TextView tvName;
-    TextView tvLatLong;
+    TextView tvAddress;
     ImageView ivPhoto;
     Button btAdd;
     ExploreActivity exploreActivity;
@@ -53,7 +53,7 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
         // Get field from view
         final Location loc = getArguments().getParcelable("location");
         tvName = (TextView) view.findViewById(R.id.tvName);
-        tvLatLong = (TextView) view.findViewById(R.id.tvLatLong);
+        tvAddress = (TextView) view.findViewById(R.id.tvAddress);
         btAdd = (Button) view.findViewById(R.id.btAdd);
         btAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,12 +63,14 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
         });
         ivPhoto = (ImageView)view.findViewById(R.id.ivPhoto);
         tvName.setText(loc.name);
-        //tvLatLong.setText("lat:" + loc.latLng.latitude + " long:" + loc.latLng.longitude);
-        Picasso.with(getContext())
-                .load(loc.photoUrl)
-                //.memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
-                .transform(new gradient())
-                .into(ivPhoto);
+        tvAddress.setText(loc.address);
+        if (loc.photoUrl != null) {
+            Picasso.with(getContext())
+                    .load(loc.photoUrl)
+                    //.memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
+                    .transform(new gradient())
+                    .into(ivPhoto);
+        }
     }
 
     public void debug(String message) {
