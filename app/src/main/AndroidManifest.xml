@@ -46,8 +46,9 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".ExploreActivity"></activity>
-        <activity android:name=".PlanActivity"></activity>
+        <activity android:name=".ExploreActivity" />
+        <activity android:name=".PlanActivity" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>
