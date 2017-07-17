@@ -37,6 +37,7 @@ public class PlanActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         fragmentPager = new PlanFragmentPagerAdapter(getSupportFragmentManager(),
                 PlanActivity.this);
+        fragmentPager.planActivity = this;
         viewPager.setAdapter(fragmentPager);
         fragmentPager.people = people;
         fragmentPager.places = places;
@@ -94,5 +95,10 @@ public class PlanActivity extends AppCompatActivity {
         });
 
         return true;
+    }
+
+    public void refresh() {
+        fragmentPager.getPlanListFragment().refresh();
+        fragmentPager.getPlanMapFragment().refresh();
     }
 }

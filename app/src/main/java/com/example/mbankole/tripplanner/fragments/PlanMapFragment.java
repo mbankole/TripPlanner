@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.User;
@@ -47,6 +48,7 @@ import static com.example.mbankole.tripplanner.R.id.map;
 public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback {
 
+    public PlanActivity planActivity;
     public ArrayList<User> people;
     public ArrayList<Location> places;
     FragmentManager fm;
@@ -154,8 +156,9 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     public void addPins(GoogleMap map) {
         IconGenerator iconFactory = new IconGenerator(getContext());
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         for (int i = 0; i < places.size(); i++) {
-            addIcon(iconFactory, places.get(i).name, places.get(i).latLng, map);
+            addIcon(iconFactory, alphabet.charAt(i) + ": " + places.get(i).name, places.get(i).latLng, map);
 //            map.addMarker(new MarkerOptions()
 //                    .position(places.get(i).latLng)
 //                    .title(places.get(i).name));
@@ -201,6 +204,11 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
             //showMissingPermissionError();
             mPermissionDenied = false;
         }
+    }
+
+    public void refresh() {
+        mMap.clear();
+        addPins(mMap);
     }
 
 }
