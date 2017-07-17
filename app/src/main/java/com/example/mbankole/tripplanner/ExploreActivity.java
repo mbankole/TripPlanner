@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
-import com.example.mbankole.tripplanner.adapters.MainFragmentPagerAdapter;
+import com.example.mbankole.tripplanner.adapters.ExploreFragmentPagerAdapter;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -28,7 +28,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class ExploreActivity extends AppCompatActivity {
 
-    MainFragmentPagerAdapter fragmentPager;
+    ExploreFragmentPagerAdapter fragmentPager;
     ArrayList<User> people;
     ArrayList<Location> places;
     ViewPager viewPager;
@@ -42,7 +42,7 @@ public class ExploreActivity extends AppCompatActivity {
         places = new ArrayList<>();
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        fragmentPager = new MainFragmentPagerAdapter(getSupportFragmentManager(),
+        fragmentPager = new ExploreFragmentPagerAdapter(getSupportFragmentManager(),
                 ExploreActivity.this);
         viewPager.setAdapter(fragmentPager);
         fragmentPager.exploreActivity = this;

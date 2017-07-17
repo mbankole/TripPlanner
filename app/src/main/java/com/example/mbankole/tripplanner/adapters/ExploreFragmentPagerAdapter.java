@@ -16,7 +16,7 @@ import com.example.mbankole.tripplanner.fragments.PlanFragment;
  *
  */
 
-public class MainFragmentPagerAdapter  extends FragmentPagerAdapter {
+public class ExploreFragmentPagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 3;
     private String tabTitles[] = new String[]{"Map", "locations", "people"};
     private Context context;
@@ -27,7 +27,7 @@ public class MainFragmentPagerAdapter  extends FragmentPagerAdapter {
     PlanFragment planFragment;
     public ExploreActivity exploreActivity;
 
-    public MainFragmentPagerAdapter(FragmentManager fm, Context context) {
+    public ExploreFragmentPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
         fragmentManager = fm;
         this.context = context;
