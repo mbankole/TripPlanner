@@ -57,6 +57,8 @@ public class ExploreActivity extends AppCompatActivity {
         //startActivity(i);
     }
 
+    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
