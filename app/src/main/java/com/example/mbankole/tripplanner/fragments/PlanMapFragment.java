@@ -20,9 +20,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.models.Location;
+import com.example.mbankole.tripplanner.models.Route;
 import com.example.mbankole.tripplanner.models.User;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -30,13 +32,20 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.ui.IconGenerator;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import cz.msebera.android.httpclient.Header;
 import permissions.dispatcher.PermissionUtils;
 
 import static com.example.mbankole.tripplanner.R.id.map;
@@ -46,7 +55,7 @@ import static com.example.mbankole.tripplanner.R.id.map;
  */
 
 public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback {
+        ActivityCompat.OnRequestPermissionsResultCallback, GoogleMap.OnMarkerClickListener {
 
     public PlanActivity planActivity;
     public ArrayList<User> people;
@@ -134,9 +143,13 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     public void onMapReady(GoogleMap map) {
         mMap = map;
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        map.setOnMarkerClickListener(this);
 //        enableMyLocation();
         if (places.size() != 0) {
             addPins(map);
+        }
+        if (places.size() > 1) {
+            showRoutes(places);
         }
     }
 
@@ -158,7 +171,7 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         for (int i = 0; i < places.size(); i++) {
-            addIcon(iconFactory, alphabet.charAt(i) + ": " + places.get(i).name, places.get(i).latLng, map);
+            addIcon(iconFactory, alphabet.charAt(i) + ": " + places.get(i).name, places.get(i), map);
 //            map.addMarker(new MarkerOptions()
 //                    .position(places.get(i).latLng)
 //                    .title(places.get(i).name));
@@ -171,12 +184,13 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     }
 
 
-    private void addIcon(IconGenerator iconFactory, CharSequence text, LatLng position, GoogleMap map) {
+    private void addIcon(IconGenerator iconFactory, CharSequence text, Location location, GoogleMap map) {
         MarkerOptions markerOptions = new MarkerOptions().
                 icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(text))).
-                position(position).
+                position(location.latLng).
                 anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
-        map.addMarker(markerOptions);
+        Marker marker = map.addMarker(markerOptions);
+        marker.setTag(location);
     }
 
     @Override
@@ -211,4 +225,52 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         addPins(mMap);
     }
 
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        Location location = (Location) marker.getTag();
+        LocationDetailFragment frag = LocationDetailFragment.newInstance(location, true);
+        frag.show(fm, "name");
+        return false;
+    }
+
+    private void showRoutes(ArrayList<Location> places) {
+        for (int i = 0; i < places.size() - 1; i++) {
+            GmapClient.getDirections(places.get(i), places.get(i + 1), new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    try {
+                        Route rt = Route.routeFromJson(response);
+                        mMap.addPolyline(new PolylineOptions().addAll(rt.latLongArray));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                    super.onSuccess(statusCode, headers, response);
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    super.onFailure(statusCode, headers, throwable, errorResponse);
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                    super.onFailure(statusCode, headers, throwable, errorResponse);
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                    super.onFailure(statusCode, headers, responseString, throwable);
+                }
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                    super.onSuccess(statusCode, headers, responseString);
+                }
+            });
+        }
+    }
 }

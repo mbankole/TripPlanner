@@ -52,6 +52,7 @@ public class PlanFragmentPagerAdapter  extends FragmentPagerAdapter {
             planMapFragment.people = people;
             planMapFragment.places = places;
             planMapFragment.planActivity = planActivity;
+            planMapFragment.setFm(fragmentManager);
             //planMapFragment.viewPager = this;
         }
         return planMapFragment;
