@@ -28,8 +28,11 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.ui.IconGenerator;
 
 import java.util.ArrayList;
 
@@ -149,17 +152,28 @@ public class MapView extends Fragment implements OnMapReadyCallback,
     }
 
     public void addPins(GoogleMap map) {
+        IconGenerator iconFactory = new IconGenerator(getContext());
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         for (int i = 0; i < places.size(); i++) {
-            map.addMarker(new MarkerOptions()
-                    .position(places.get(i).latLng)
-                    .title(places.get(i).name));
+            addIcon(iconFactory, places.get(i).name, places.get(i).latLng, map);
+//            map.addMarker(new MarkerOptions()
+//                    .position(places.get(i).latLng)
+//                    .title(places.get(i).name));
             builder.include(places.get(i).latLng);
         }
         LatLngBounds bounds = builder.build();
         int padding = 240; // offset from edges of the map in pixels
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
         map.moveCamera(cu);
+    }
+
+
+    private void addIcon(IconGenerator iconFactory, CharSequence text, LatLng position, GoogleMap map) {
+        MarkerOptions markerOptions = new MarkerOptions().
+                icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(text))).
+                position(position).
+                anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
+        map.addMarker(markerOptions);
     }
 
     @Override
