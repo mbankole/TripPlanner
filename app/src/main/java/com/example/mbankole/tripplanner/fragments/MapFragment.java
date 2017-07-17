@@ -157,7 +157,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                LocationDetailFragment frag = LocationDetailFragment.newInstance(loc);
+                LocationDetailFragment frag = LocationDetailFragment.newInstance(loc, false);
                 frag.exploreActivity = exploreActivity;
                 frag.show(fm, "detail");
             }

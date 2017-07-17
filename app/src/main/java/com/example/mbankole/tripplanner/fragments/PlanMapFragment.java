@@ -30,8 +30,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.ui.IconGenerator;
 
@@ -46,7 +46,7 @@ import static com.example.mbankole.tripplanner.R.id.map;
  */
 
 public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback {
+        ActivityCompat.OnRequestPermissionsResultCallback, GoogleMap.OnMarkerClickListener {
 
     public PlanActivity planActivity;
     public ArrayList<User> people;
@@ -134,6 +134,7 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     public void onMapReady(GoogleMap map) {
         mMap = map;
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        map.setOnMarkerClickListener(this);
 //        enableMyLocation();
         if (places.size() != 0) {
             addPins(map);
@@ -158,7 +159,7 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         for (int i = 0; i < places.size(); i++) {
-            addIcon(iconFactory, alphabet.charAt(i) + ": " + places.get(i).name, places.get(i).latLng, map);
+            addIcon(iconFactory, alphabet.charAt(i) + ": " + places.get(i).name, places.get(i), map);
 //            map.addMarker(new MarkerOptions()
 //                    .position(places.get(i).latLng)
 //                    .title(places.get(i).name));
@@ -171,12 +172,13 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     }
 
 
-    private void addIcon(IconGenerator iconFactory, CharSequence text, LatLng position, GoogleMap map) {
+    private void addIcon(IconGenerator iconFactory, CharSequence text, Location location, GoogleMap map) {
         MarkerOptions markerOptions = new MarkerOptions().
                 icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(text))).
-                position(position).
+                position(location.latLng).
                 anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
-        map.addMarker(markerOptions);
+        Marker marker = map.addMarker(markerOptions);
+        marker.setTag(location);
     }
 
     @Override
@@ -211,6 +213,13 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         addPins(mMap);
     }
 
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        Location location = (Location) marker.getTag();
+        LocationDetailFragment frag = LocationDetailFragment.newInstance(location, true);
+        frag.show(fm, "name");
+        return false;
+    }
 }
 
 
