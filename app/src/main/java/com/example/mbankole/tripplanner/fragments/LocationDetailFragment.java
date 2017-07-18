@@ -33,10 +33,11 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
 
     public LocationDetailFragment() {}
 
-    public static LocationDetailFragment newInstance(Location loc) {
+    public static LocationDetailFragment newInstance(Location loc, Boolean plan) {
         LocationDetailFragment frag = new LocationDetailFragment();
         Bundle args = new Bundle();
         args.putParcelable("location", loc);
+        args.putBoolean("plan", plan);
         frag.setArguments(args);
         return frag;
     }
@@ -70,6 +71,10 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
                     //.memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
                     .transform(new gradient())
                     .into(ivPhoto);
+        }
+        Boolean plan = getArguments().getBoolean("plan");
+        if (plan) {
+            btAdd.setVisibility(View.GONE);
         }
     }
 

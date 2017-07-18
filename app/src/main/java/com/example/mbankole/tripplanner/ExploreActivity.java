@@ -8,12 +8,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.adapters.ExploreFragmentPagerAdapter;
+import com.example.mbankole.tripplanner.fragments.LocationDetailFragment;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -57,7 +59,7 @@ public class ExploreActivity extends AppCompatActivity {
         //startActivity(i);
     }
 
-    
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -127,6 +129,10 @@ public class ExploreActivity extends AppCompatActivity {
         }
         Toast toast = Toast.makeText(this, ToastString, Toast.LENGTH_LONG);
         toast.show();
+    }
+
+    public void populateLocations() {
+
     }
 
     public void addLocation(Location location) {

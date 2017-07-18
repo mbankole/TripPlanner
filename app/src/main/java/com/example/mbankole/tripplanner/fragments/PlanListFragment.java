@@ -16,7 +16,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.PlanLocationsAdapter;
 import com.example.mbankole.tripplanner.models.Location;
@@ -33,10 +35,10 @@ public class PlanListFragment extends Fragment{
 
     public ArrayList <User> people;
     public ArrayList<Location> places;
-    ArrayList<Location> locations;
     RecyclerView rvPlanList;
     PlanLocationsAdapter locationAdapter;
     android.app.FragmentManager fm;
+    public PlanActivity planActivity;
 
 
     public static PlanListFragment newInstance() {
@@ -53,13 +55,11 @@ public class PlanListFragment extends Fragment{
         // inflate the layout
         View v = inflater.inflate(R.layout.fragment_listsview, container, false);
 
-        locations = new ArrayList<>();
-
         fm = getActivity().getFragmentManager();
         // find RecyclerView
         rvPlanList = (RecyclerView) v.findViewById(R.id.rvPlanList);
         // construct the adapter from this data source
-        locationAdapter = new PlanLocationsAdapter(locations);
+        locationAdapter = new PlanLocationsAdapter(places);
         locationAdapter.setFm(fm);
 //        locationAdapter.exploreActivity = exploreActivity;
         // RecyclerView setup (layout manager, use adapter)
@@ -75,12 +75,20 @@ public class PlanListFragment extends Fragment{
                         ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.START | ItemTouchHelper.END);
             }
 
-            //and in your imlpementaion of
+            //and in your implementaion of
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 // get the viewHolder's and target's positions in your adapter data, swap them
-                Collections.swap(locations, viewHolder.getAdapterPosition(), target.getAdapterPosition());
+                Collections.swap(places, viewHolder.getAdapterPosition(), target.getAdapterPosition());
                 // and notify the adapter that its dataset has changed
                 locationAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+                planActivity.refresh();
+
+                String ToastString = "";
+                for (int i=0; i<places.size(); i++) {
+                    ToastString += places.get(i).name;
+                }
+                Toast toast = Toast.makeText(getContext(), ToastString, Toast.LENGTH_LONG);
+                toast.show();
                 return true;
             }
 
@@ -96,7 +104,7 @@ public class PlanListFragment extends Fragment{
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         setHasOptionsMenu(true);
 
-        addItems(places);
+        locationAdapter.notifyItemInserted(places.size() - 1);
         return v;
     }
 
@@ -136,18 +144,9 @@ public class PlanListFragment extends Fragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {}
 
-    public void addItems(ArrayList<Location> response) {
-        for (int i = 0; i < response.size(); i++) {
-            Location location = response.get(i);
-            locations.add(location);
-            locationAdapter.notifyItemInserted(locations.size() - 1);
-        }
+    public void refresh() {
+ //       locations.clear();
+ //       addItems(places);
     }
 }
-
-
-/**
- * Created by ericar on 7/11/17.
- *
- */
 

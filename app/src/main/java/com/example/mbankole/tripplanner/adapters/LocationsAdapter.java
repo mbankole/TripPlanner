@@ -55,6 +55,9 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.View
                 .load(location.photoUrl)
                 //.memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
                 .transform(new gradient())
+//                .resize(300, 300)
+//                .centerCrop()
+//                .transform(new jp.wasabeef.picasso.transformations.RoundedCornersTransformation(80, 0))
                 .into(holder.ivLocationImage);
     }
 

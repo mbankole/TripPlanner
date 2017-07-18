@@ -20,19 +20,31 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mbankole.tripplanner.ApiClients.GmapClient;
+import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.models.Location;
+import com.example.mbankole.tripplanner.models.Route;
 import com.example.mbankole.tripplanner.models.User;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.android.ui.IconGenerator;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import cz.msebera.android.httpclient.Header;
 import permissions.dispatcher.PermissionUtils;
 
 import static com.example.mbankole.tripplanner.R.id.map;
@@ -42,8 +54,9 @@ import static com.example.mbankole.tripplanner.R.id.map;
  */
 
 public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback {
+        ActivityCompat.OnRequestPermissionsResultCallback, GoogleMap.OnMarkerClickListener {
 
+    public PlanActivity planActivity;
     public ArrayList<User> people;
     public ArrayList<Location> places;
     FragmentManager fm;
@@ -129,9 +142,13 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     public void onMapReady(GoogleMap map) {
         mMap = map;
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        map.setOnMarkerClickListener(this);
 //        enableMyLocation();
         if (places.size() != 0) {
             addPins(map);
+        }
+        if (places.size() > 1) {
+            showRoutes(places);
         }
     }
 
@@ -149,17 +166,30 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     }
 
     public void addPins(GoogleMap map) {
+        IconGenerator iconFactory = new IconGenerator(getContext());
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         for (int i = 0; i < places.size(); i++) {
-            map.addMarker(new MarkerOptions()
-                    .position(places.get(i).latLng)
-                    .title(places.get(i).name));
+            addIcon(iconFactory, alphabet.charAt(i) + ": " + places.get(i).name, places.get(i), map);
+//            map.addMarker(new MarkerOptions()
+//                    .position(places.get(i).latLng)
+//                    .title(places.get(i).name));
             builder.include(places.get(i).latLng);
         }
         LatLngBounds bounds = builder.build();
         int padding = 240; // offset from edges of the map in pixels
         CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
         map.moveCamera(cu);
+    }
+
+
+    private void addIcon(IconGenerator iconFactory, CharSequence text, Location location, GoogleMap map) {
+        MarkerOptions markerOptions = new MarkerOptions().
+                icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(text))).
+                position(location.latLng).
+                anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
+        Marker marker = map.addMarker(markerOptions);
+        marker.setTag(location);
     }
 
     @Override
@@ -189,11 +219,33 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
+    public void refresh() {
+        mMap.clear();
+        addPins(mMap);
+        showRoutes(places);
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        Location location = (Location) marker.getTag();
+        LocationDetailFragment frag = LocationDetailFragment.newInstance(location, true);
+        frag.show(fm, "name");
+        return false;
+    }
+
+    private void showRoutes(ArrayList<Location> places) {
+        for (int i = 0; i < places.size() - 1; i++) {
+            GmapClient.getDirections(places.get(i), places.get(i + 1), new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    try {
+                        Route rt = Route.routeFromJson(response);
+                        mMap.addPolyline(new PolylineOptions().addAll(rt.latLongArray));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    }
 }
-
-
-/**
- * Created by ericar on 7/11/17.
- *
- */
-
