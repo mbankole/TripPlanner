@@ -110,8 +110,6 @@ public class Location implements Parcelable {
         dest.writeString(this.googleId);
         dest.writeString(this.photoRef);
         dest.writeString(this.photoUrl);
-        dest.writeString(this.photoUrl);
-        dest.writeParcelable(this.photo, flags);
         dest.writeDouble(this.rating);
         dest.writeTypedList(this.people);
     }
@@ -126,8 +124,6 @@ public class Location implements Parcelable {
         this.desc = in.readString();
         this.googleId = in.readString();
         this.photoRef = in.readString();
-        this.photoUrl = in.readString();
-        this.photo = in.readParcelable(Bitmap.class.getClassLoader());
         this.photoUrl = in.readString();
         this.rating = in.readDouble();
         this.people = in.createTypedArrayList(User.CREATOR);
