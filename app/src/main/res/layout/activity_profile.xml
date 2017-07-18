@@ -6,4 +6,52 @@
     android:layout_height="match_parent"
     tools:context="com.example.mbankole.tripplanner.ProfileActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@color/black" />
+
+    <ImageView
+        android:id="@+id/ivProfileImage"
+        android:layout_width="86dp"
+        android:layout_height="82dp"
+        app:srcCompat="@color/black"
+        tools:layout_editor_absoluteX="149dp"
+        tools:layout_editor_absoluteY="84dp" />
+
+    <TextView
+        android:id="@+id/tvUsernameProfiles"
+        android:layout_width="161dp"
+        android:layout_height="172dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="44dp"
+        tools:layout_editor_absoluteY="277dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="147dp"
+        tools:layout_editor_absoluteY="501dp" />
+
+    <EditText
+        android:id="@+id/editText7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteX="-105dp"
+        tools:layout_editor_absoluteY="-57dp" />
+
+    <TextView
+        android:id="@+id/tvInterests"
+        android:layout_width="145dp"
+        android:layout_height="172dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="220dp"
+        tools:layout_editor_absoluteY="280dp" />
+
 </android.support.constraint.ConstraintLayout>
