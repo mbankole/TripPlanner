@@ -22,9 +22,9 @@ public class User implements Parcelable {
         User user = new User();
         user.name = "Adam";
         user.uid = 1;
-        user.friends = new ArrayList<Integer>();
+        user.friends = new ArrayList<>();
         user.friends.add(2);
-        user.interests = new ArrayList<Location>();
+        user.interests = new ArrayList<>();
         user.interests.add(Location.generateEiffelTower());
         user.interests.add(Location.generateTajMahal());
         return user;
