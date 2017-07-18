@@ -5,13 +5,13 @@
     android:layout_height="wrap_content">
 
     <com.example.mbankole.tripplanner.utility.RalewayLightTextView
-        android:id="@+id/tvUsername"
+        android:id="@+id/tvName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name"
-        android:textAppearance="@android:style/TextAppearance.Large"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/ivImage" />
+        android:layout_toEndOf="@+id/ivImage"
+        android:text="Transportation"
+        android:textAppearance="@android:style/TextAppearance.Large" />
 
     <ImageView
         android:id="@+id/ivImage"
@@ -21,4 +21,5 @@
         android:layout_alignParentTop="true"
         android:layout_margin="8dp"
         app:srcCompat="@android:color/black" />
+
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.example.mbankole.tripplanner;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -8,14 +9,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.adapters.ExploreFragmentPagerAdapter;
-import com.example.mbankole.tripplanner.fragments.LocationDetailFragment;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -34,11 +33,14 @@ public class ExploreActivity extends AppCompatActivity {
     ArrayList<User> people;
     ArrayList<Location> places;
     ViewPager viewPager;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
+
+        context = this;
 
         people = new ArrayList<>();
         places = new ArrayList<>();
@@ -106,6 +108,8 @@ public class ExploreActivity extends AppCompatActivity {
         miProfile.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                Intent intent = new Intent(context, ProfileActivity.class);
+                startActivity(intent);
                 return false;
             }
         });

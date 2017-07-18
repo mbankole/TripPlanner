@@ -17,9 +17,9 @@
         android:visible="true"
         app:showAsAction="ifRoom"/>
     <item
-        android:id="@+id/miPlan"
-        android:icon="@android:drawable/ic_menu_edit"
+        android:id="@+id/miExplore"
+        android:icon="@android:drawable/ic_menu_mapmode"
         android:title="Plan"
         android:visible="true"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 </menu>

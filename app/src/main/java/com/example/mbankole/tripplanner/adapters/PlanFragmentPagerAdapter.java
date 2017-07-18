@@ -9,6 +9,7 @@ import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.fragments.PlanListFragment;
 import com.example.mbankole.tripplanner.fragments.PlanMapFragment;
 import com.example.mbankole.tripplanner.models.Location;
+import com.example.mbankole.tripplanner.models.TransportOption;
 import com.example.mbankole.tripplanner.models.User;
 
 import java.util.ArrayList;
@@ -39,7 +40,10 @@ public class PlanFragmentPagerAdapter  extends FragmentPagerAdapter {
         if (planListFragment == null) {
             planListFragment = PlanListFragment.newInstance();
             planListFragment.people = people;
-            planListFragment.places = places;
+            for (int i = 0 ; i < places.size(); i++) {
+                planListFragment.list_objects.add(places.get(i));
+                planListFragment.list_objects.add(new TransportOption("vroooom"));
+            }
             planListFragment.planActivity = planActivity;
             //planFragment.viewPager = this;
         }
