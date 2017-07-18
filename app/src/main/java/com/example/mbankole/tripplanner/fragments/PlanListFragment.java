@@ -20,8 +20,7 @@ import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
-import com.example.mbankole.tripplanner.adapters.PlanLocationsAdapter;
-import com.example.mbankole.tripplanner.models.Location;
+import com.example.mbankole.tripplanner.adapters.PlanListAdapter;
 import com.example.mbankole.tripplanner.models.User;
 
 import java.util.ArrayList;
@@ -33,10 +32,10 @@ import java.util.Collections;
 
 public class PlanListFragment extends Fragment{
 
-    public ArrayList <User> people;
-    public ArrayList<Location> places;
+    public ArrayList<User> people;
+    public ArrayList<Object> list_objects = new ArrayList<>();
     RecyclerView rvPlanList;
-    PlanLocationsAdapter locationAdapter;
+    PlanListAdapter listAdapter;
     android.app.FragmentManager fm;
     public PlanActivity planActivity;
 
@@ -59,13 +58,13 @@ public class PlanListFragment extends Fragment{
         // find RecyclerView
         rvPlanList = (RecyclerView) v.findViewById(R.id.rvPlanList);
         // construct the adapter from this data source
-        locationAdapter = new PlanLocationsAdapter(places);
-        locationAdapter.setFm(fm);
+        listAdapter = new PlanListAdapter(list_objects);
+        listAdapter.setFm(fm);
 //        locationAdapter.exploreActivity = exploreActivity;
         // RecyclerView setup (layout manager, use adapter)
         rvPlanList.setLayoutManager(new LinearLayoutManager(getContext()));
         // set the adapter
-        rvPlanList.setAdapter(locationAdapter);
+        rvPlanList.setAdapter(listAdapter);
 
         // Extend the Callback class
         ItemTouchHelper.Callback _ithCallback = new ItemTouchHelper.Callback() {
@@ -78,14 +77,14 @@ public class PlanListFragment extends Fragment{
             //and in your implementaion of
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 // get the viewHolder's and target's positions in your adapter data, swap them
-                Collections.swap(places, viewHolder.getAdapterPosition(), target.getAdapterPosition());
+                Collections.swap(list_objects, viewHolder.getAdapterPosition(), target.getAdapterPosition());
                 // and notify the adapter that its dataset has changed
-                locationAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
+                listAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
                 planActivity.refresh();
 
                 String ToastString = "";
-                for (int i=0; i<places.size(); i++) {
-                    ToastString += places.get(i).name;
+                for (int i=0; i<list_objects.size(); i++) {
+                    //ToastString += ((User)list_objects.get(i)).name;
                 }
                 Toast toast = Toast.makeText(getContext(), ToastString, Toast.LENGTH_LONG);
                 toast.show();
@@ -104,7 +103,7 @@ public class PlanListFragment extends Fragment{
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         setHasOptionsMenu(true);
 
-        locationAdapter.notifyItemInserted(places.size() - 1);
+        listAdapter.notifyItemInserted(list_objects.size() - 1);
         return v;
     }
 

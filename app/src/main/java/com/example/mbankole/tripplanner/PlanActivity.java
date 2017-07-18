@@ -85,11 +85,11 @@ public class PlanActivity extends AppCompatActivity {
                 return false;
             }
         });
-        MenuItem miPlan = menu.findItem(R.id.miPlan);
-        miPlan.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        MenuItem miExplore = menu.findItem(R.id.miExplore);
+        miExplore.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                //launchPlanActivity();
+                finish();
                 return false;
             }
         });
