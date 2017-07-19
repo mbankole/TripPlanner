@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -18,7 +18,9 @@
         android:layout_height="82dp"
         app:srcCompat="@color/black"
         tools:layout_editor_absoluteX="149dp"
-        tools:layout_editor_absoluteY="87dp" />
+        tools:layout_editor_absoluteY="87dp"
+        android:layout_below="@+id/button3"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/tvUsernameProfiles"
@@ -26,7 +28,9 @@
         android:layout_height="172dp"
         android:text="TextView"
         tools:layout_editor_absoluteX="44dp"
-        tools:layout_editor_absoluteY="277dp" />
+        tools:layout_editor_absoluteY="277dp"
+        android:layout_below="@+id/tvInterests"
+        android:layout_toEndOf="@+id/imageView" />
 
     <Button
         android:id="@+id/button3"
@@ -44,7 +48,11 @@
         android:inputType="textPersonName"
         android:text="Name"
         tools:layout_editor_absoluteX="-105dp"
-        tools:layout_editor_absoluteY="-57dp" />
+        tools:layout_editor_absoluteY="-57dp"
+        android:layout_below="@+id/button3"
+        android:layout_toEndOf="@+id/button3"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="87dp" />
 
     <TextView
         android:id="@+id/tvInterests"
@@ -52,6 +60,10 @@
         android:layout_height="172dp"
         android:text="TextView"
         tools:layout_editor_absoluteX="220dp"
-        tools:layout_editor_absoluteY="280dp" />
+        tools:layout_editor_absoluteY="280dp"
+        android:layout_below="@+id/ivProfileImage"
+        android:layout_toEndOf="@+id/tvUsernameProfiles"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="65dp" />
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
