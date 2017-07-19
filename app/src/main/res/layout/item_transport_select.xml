@@ -8,7 +8,8 @@
         android:id="@+id/tvName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
         android:layout_toEndOf="@+id/ivImage"
         android:text="Transportation"
         android:textAppearance="@android:style/TextAppearance.Large" />
@@ -21,5 +22,32 @@
         android:layout_alignParentTop="true"
         android:layout_margin="8dp"
         app:srcCompat="@android:color/black" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/ivImage"
+        android:layout_below="@id/ivImage"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rbWalk"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Walking" />
+
+        <RadioButton
+            android:id="@+id/rbDrive"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Driving" />
+
+        <RadioButton
+            android:id="@+id/rbTransit"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Transit" />
+
+    </RadioGroup>
 
 </RelativeLayout>

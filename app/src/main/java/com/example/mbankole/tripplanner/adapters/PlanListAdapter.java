@@ -2,12 +2,14 @@ package com.example.mbankole.tripplanner.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -31,6 +33,7 @@ public class PlanListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     Context context;
     public ExploreActivity exploreActivity;
     android.app.FragmentManager fm;
+    public static String TAG = "PLANLISTADAPTER";
 
     private final int LOCATION = 0, TRANSPORT = 1;
 
@@ -175,27 +178,50 @@ public class PlanListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    public class ViewHolderTransport extends RecyclerView.ViewHolder{
+    public class ViewHolderTransport extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView tvName;
         public ImageView ivImage;
+        public RadioButton rbWalk;
+        public RadioButton rbDrive;
+        public RadioButton rbTransit;
 
         public ViewHolderTransport(View itemView) {
             super(itemView);
             //itemView.setOnClickListener(this);
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
+
+            rbWalk = (RadioButton) itemView.findViewById(R.id.rbWalk);
+            rbDrive = (RadioButton) itemView.findViewById(R.id.rbDrive);
+            rbTransit = (RadioButton) itemView.findViewById(R.id.rbTransit);
+
+            rbWalk.setOnClickListener(this);
+            rbDrive.setOnClickListener(this);
+            rbTransit.setOnClickListener(this);
         }
-        /*
+
         @Override
         public void onClick(View view) {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
-                User user = (mObjects.get(position));
-                PeopleDetailsFragment frag = PeopleDetailsFragment.newInstance(user);
-                frag.exploreActivity = exploreActivity;
-                frag.show(fm, "name");
+                int id = view.getId();
+                if (id == rbWalk.getId()) {
+                    boolean checked = ((RadioButton) view).isChecked();
+                    Log.d(TAG, "onClick: rbWalk");
+                    if (checked) {
+                        Log.d(TAG, "onClick: rbWalk selected");
+                    }
+                } else if (id == rbDrive.getId()) {
+                    boolean checked = ((RadioButton) view).isChecked();
+                    Log.d(TAG, "onClick: rbDrive");
+
+
+                } else if (id == rbTransit.getId()) {
+                    boolean checked = ((RadioButton) view).isChecked();
+                    Log.d(TAG, "onClick: rbTransit");
+                }
             }
-        }*/
+        }
     }
 }

@@ -33,6 +33,7 @@ public class Location implements Parcelable {
     public String photoUrl;
     public double rating;
     public ArrayList<User> people;
+    public TransportOption transport;
 
     public Location() {}
 
@@ -112,6 +113,7 @@ public class Location implements Parcelable {
         dest.writeString(this.photoUrl);
         dest.writeDouble(this.rating);
         dest.writeTypedList(this.people);
+        dest.writeParcelable(this.transport, flags);
     }
 
     protected Location(Parcel in) {
@@ -127,6 +129,7 @@ public class Location implements Parcelable {
         this.photoUrl = in.readString();
         this.rating = in.readDouble();
         this.people = in.createTypedArrayList(User.CREATOR);
+        this.transport = in.readParcelable(TransportOption.class.getClassLoader());
     }
 
     public static final Creator<Location> CREATOR = new Creator<Location>() {
