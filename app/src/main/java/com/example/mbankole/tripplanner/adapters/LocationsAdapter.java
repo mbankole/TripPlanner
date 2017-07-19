@@ -1,4 +1,12 @@
 
+//
+//
+//
+//
+//
+//
+
+
 package com.example.mbankole.tripplanner.adapters;
 
 import android.content.Context;
@@ -80,3 +88,36 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.View
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+///
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
