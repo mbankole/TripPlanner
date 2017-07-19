@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.mbankole.tripplanner.fragments.RouteFragment">
+
+    <com.example.mbankole.tripplanner.utility.RalewayBoldTextView
+        android:id="@+id/tvDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:text="Duration"
+        android:layout_margin="8dp"
+        android:textAppearance="@android:style/TextAppearance.Large" />
+
+    <com.example.mbankole.tripplanner.utility.RalewayLightTextView
+        android:id="@+id/tvDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(distance)"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:layout_alignBaseline="@+id/tvDuration"
+        android:layout_alignBottom="@+id/tvDuration"
+        android:layout_toEndOf="@+id/tvDuration" />
+
+    <com.example.mbankole.tripplanner.utility.RalewayBoldTextView
+        android:id="@+id/tvStartAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvDuration"
+        android:text="Start Address"
+        android:layout_margin="8dp"
+        android:textAppearance="@android:style/TextAppearance.Medium" />
+
+    <com.example.mbankole.tripplanner.utility.RalewayBoldTextView
+        android:id="@+id/tvEndAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:text="End Address"
+        android:layout_margin="8dp"
+        android:textAppearance="@android:style/TextAppearance.Medium" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvSteps"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_above="@+id/tvEndAddress"
+        android:layout_alignStart="@+id/tvStartAddress"
+        android:layout_below="@+id/tvStartAddress" />
+
+</RelativeLayout>

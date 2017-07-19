@@ -77,3 +77,6 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.View
         }
     }
 }
+//
+//
+//

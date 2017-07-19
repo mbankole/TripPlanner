@@ -83,3 +83,8 @@ public class ProfileActivity extends AppCompatActivity {
     //User username = new User(Double startingProfile,
 //            String fName, String lName, String userName, String passWord);
 // 61a625493d6169fd2b2fcfa2ac4033143ad20d06
+
+
+//Profile Activity giving the user that ability to build
+// a profile of information of what he/she/they
+// are interesting in doing for an event
