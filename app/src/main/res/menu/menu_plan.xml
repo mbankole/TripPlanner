@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_search"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/ic_search"
         android:orderInCategory="5"
         android:title="Search"
         android:visible="true"
@@ -12,14 +12,14 @@
         app:showAsAction="always|collapseActionView" />
     <item
         android:id="@+id/miProfile"
-        android:icon="@android:drawable/ic_menu_myplaces"
+        android:icon="@drawable/ic_user"
         android:title="Profile"
         android:visible="true"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/miExplore"
-        android:icon="@android:drawable/ic_menu_mapmode"
-        android:title="Explore"
+        android:icon="@drawable/ic_plan"
+        android:title="Plan"
         android:visible="true"
         app:showAsAction="ifRoom" />
 </menu>

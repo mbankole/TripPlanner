@@ -18,10 +18,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.PlanListAdapter;
-import com.example.mbankole.tripplanner.models.User;
+import com.example.mbankole.tripplanner.models.Location;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,12 +33,13 @@ import java.util.Collections;
 
 public class PlanListFragment extends Fragment{
 
-    public ArrayList<User> people;
+    public ArrayList<Location> locations;
     public ArrayList<Object> list_objects = new ArrayList<>();
     RecyclerView rvPlanList;
-    PlanListAdapter listAdapter;
+    public PlanListAdapter listAdapter;
     android.app.FragmentManager fm;
     public PlanActivity planActivity;
+    public ExploreActivity exploreActivity;
 
 
     public static PlanListFragment newInstance() {
@@ -144,7 +146,7 @@ public class PlanListFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {}
 
     public void refresh() {
- //       locations.clear();
+
  //       addItems(places);
     }
 }

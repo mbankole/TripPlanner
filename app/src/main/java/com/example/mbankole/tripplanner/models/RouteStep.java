@@ -33,11 +33,18 @@ public class RouteStep implements Parcelable {
         step.distance = obj.getJSONObject("distance").getString("text");
         step.duration = obj.getJSONObject("duration").getString("text");
         step.htmlInstructions = obj.getString("html_instructions").replaceAll("\\<.*?>","");
-        step.maneuver = obj.optString("maneuver", null);
+        if (obj.has("maneuver")) {
+            step.maneuver = obj.getString("maneuver");
+        } else {
+            step.maneuver = null;
+        }
         step.startLoc = new LatLng(obj.getJSONObject("start_location").getDouble("lat"), obj.getJSONObject("start_location").getDouble("lng"));
         step.endLoc = new LatLng(obj.getJSONObject("end_location").getDouble("lat"), obj.getJSONObject("end_location").getDouble("lng"));
         step.travelMode = obj.getString("travel_mode");
         step.polyline = obj.getJSONObject("polyline").getString("points");
+    }
+
+    public RouteStep() {
     }
 
     @Override
@@ -57,9 +64,6 @@ public class RouteStep implements Parcelable {
         dest.writeString(this.polyline);
     }
 
-    public RouteStep() {
-    }
-
     protected RouteStep(Parcel in) {
         this.distance = in.readString();
         this.duration = in.readString();
@@ -71,7 +75,7 @@ public class RouteStep implements Parcelable {
         this.polyline = in.readString();
     }
 
-    public static final Parcelable.Creator<RouteStep> CREATOR = new Parcelable.Creator<RouteStep>() {
+    public static final Creator<RouteStep> CREATOR = new Creator<RouteStep>() {
         @Override
         public RouteStep createFromParcel(Parcel source) {
             return new RouteStep(source);

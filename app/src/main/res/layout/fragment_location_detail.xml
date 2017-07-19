@@ -48,10 +48,10 @@
         android:id="@+id/btAdd"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@android:drawable/ic_menu_add"
-        android:layout_alignParentEnd="true"
+        android:background="@drawable/ic_plus"
+        android:layout_margin="8dp"
         android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"/>
+        android:layout_alignParentEnd="true" />
 
     <com.example.mbankole.tripplanner.utility.RalewayLightTextView
         android:id="@+id/tvLocationDescription"
@@ -65,5 +65,17 @@
         android:text="This is a description of the location."
         android:textAppearance="@android:style/TextAppearance.Medium"
         android:textColor="@color/white" />
+
+    <ImageButton
+        android:id="@+id/ibRemove"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/btAdd"
+        android:layout_margin="8dp"
+        android:background="@android:color/transparent"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_trash" />
 
 </RelativeLayout>

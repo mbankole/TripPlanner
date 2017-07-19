@@ -1,6 +1,7 @@
 package com.example.mbankole.tripplanner;
 //
 import android.content.Context;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -11,6 +12,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.adapters.PlanFragmentPagerAdapter;
 import com.example.mbankole.tripplanner.models.Location;
@@ -24,6 +26,7 @@ public class PlanActivity extends AppCompatActivity {
     ArrayList<User> people;
     ArrayList<Location> places;
     ViewPager viewPager;
+    public ExploreActivity exploreActivity;
     Context context;
 
 //
@@ -42,9 +45,11 @@ public class PlanActivity extends AppCompatActivity {
         fragmentPager = new PlanFragmentPagerAdapter(getSupportFragmentManager(),
                 PlanActivity.this);
         fragmentPager.planActivity = this;
+        fragmentPager.exploreActivity = exploreActivity;
         viewPager.setAdapter(fragmentPager);
         fragmentPager.people = people;
         fragmentPager.places = places;
+
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
@@ -103,6 +108,17 @@ public class PlanActivity extends AppCompatActivity {
     public void refresh() {
         fragmentPager.getPlanListFragment().refresh();
         fragmentPager.getPlanMapFragment().refresh();
+    }
+
+    public void removeLocation(Location location) {
+        places.remove(location);
+        String ToastString = "";
+        for (int i=0; i<places.size(); i++) {
+            ToastString += places.get(i).name;
+        }
+        Toast toast = Toast.makeText(this, ToastString, Toast.LENGTH_LONG);
+        toast.show();
+        fragmentPager.getPlanListFragment().refresh();
     }
 }
 //

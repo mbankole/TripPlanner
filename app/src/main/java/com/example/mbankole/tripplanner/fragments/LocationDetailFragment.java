@@ -1,5 +1,6 @@
 package com.example.mbankole.tripplanner.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -8,10 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mbankole.tripplanner.ExploreActivity;
+import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.utility.gradient;
@@ -27,7 +30,10 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
     TextView tvAddress;
     ImageView ivPhoto;
     Button btAdd;
+    ImageButton btRemove;
+
     ExploreActivity exploreActivity;
+    PlanActivity planActivity;
 
     private final String TAG = "POIDETAILFRAGMENT";
 
@@ -62,6 +68,13 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
                 exploreActivity.addLocation(loc);
             }
         });
+        btRemove = (ImageButton) view.findViewById(R.id.ibRemove);
+        btRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                planActivity.removeLocation(loc);
+            }
+        });
         ivPhoto = (ImageView)view.findViewById(R.id.ivPhoto);
         tvName.setText(loc.name);
         tvAddress.setText(loc.address);
@@ -75,6 +88,7 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
         Boolean plan = getArguments().getBoolean("plan");
         if (plan) {
             btAdd.setVisibility(View.GONE);
+            btRemove.setVisibility(View.VISIBLE);
         }
     }
 

@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
+import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.models.Location;
@@ -35,6 +36,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.ui.IconGenerator;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -54,9 +56,11 @@ import static com.example.mbankole.tripplanner.R.id.map;
  */
 
 public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback, GoogleMap.OnMarkerClickListener {
+        ActivityCompat.OnRequestPermissionsResultCallback, GoogleMap.OnMarkerClickListener,
+        GoogleMap.OnPolylineClickListener {
 
     public PlanActivity planActivity;
+    public ExploreActivity exploreActivity;
     public ArrayList<User> people;
     public ArrayList<Location> places;
     FragmentManager fm;
@@ -143,6 +147,7 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         mMap = map;
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         map.setOnMarkerClickListener(this);
+        map.setOnPolylineClickListener(this);
 //        enableMyLocation();
         if (places.size() != 0) {
             addPins(map);
@@ -171,9 +176,6 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         for (int i = 0; i < places.size(); i++) {
             addIcon(iconFactory, alphabet.charAt(i) + ": " + places.get(i).name, places.get(i), map);
-//            map.addMarker(new MarkerOptions()
-//                    .position(places.get(i).latLng)
-//                    .title(places.get(i).name));
             builder.include(places.get(i).latLng);
         }
         LatLngBounds bounds = builder.build();
@@ -229,24 +231,35 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     public boolean onMarkerClick(Marker marker) {
         Location location = (Location) marker.getTag();
         LocationDetailFragment frag = LocationDetailFragment.newInstance(location, true);
+        frag.exploreActivity = exploreActivity;
         frag.show(fm, "name");
         return false;
     }
 
     private void showRoutes(ArrayList<Location> places) {
         for (int i = 0; i < places.size() - 1; i++) {
-            GmapClient.getDirections(places.get(i), places.get(i + 1), new JsonHttpResponseHandler() {
+            GmapClient.getDirections(places.get(i), places.get(i + 1), "driving", new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     try {
                         Route rt = Route.routeFromJson(response);
-                        mMap.addPolyline(new PolylineOptions().addAll(rt.latLongArray));
+                        mMap.addPolyline(new PolylineOptions()
+//                                .color(R.color.colorPrimaryDark)
+                                .addAll(rt.latLongArray)
+                                .clickable(true))
+                                .setTag(rt);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
             });
         }
+    }
+
+    @Override
+    public void onPolylineClick(Polyline polyline) {
+        RouteFragment frag = RouteFragment.newInstance((Route) polyline.getTag());
+        frag.show(fm, "name");
     }
 }
 ////
