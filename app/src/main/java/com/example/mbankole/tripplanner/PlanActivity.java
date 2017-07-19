@@ -1,5 +1,5 @@
 package com.example.mbankole.tripplanner;
-
+//
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +26,7 @@ public class PlanActivity extends AppCompatActivity {
     ViewPager viewPager;
     Context context;
 
-
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,3 +105,7 @@ public class PlanActivity extends AppCompatActivity {
         fragmentPager.getPlanMapFragment().refresh();
     }
 }
+//
+//
+//
+//

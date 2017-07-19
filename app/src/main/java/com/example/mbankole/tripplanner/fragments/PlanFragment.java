@@ -40,3 +40,4 @@ public class PlanFragment  extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     }
 }
+//organizing planning arrangments
