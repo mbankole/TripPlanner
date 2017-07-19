@@ -121,3 +121,10 @@ public class LocationsFragment extends Fragment implements View.OnClickListener 
         }
     }
 }
+
+
+
+//
+//made the locations fragment
+
+

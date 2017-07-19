@@ -4,6 +4,8 @@
 //
 //
 //
+//created by ericar
+//7-18-2017
 package com.example.mbankole.tripplanner;
 
 import android.os.Bundle;
@@ -36,9 +38,11 @@ public class ProfileActivity extends AppCompatActivity {
         tvUsername.setText(",");
         tvInterests.setText(",");
     }
-
+//
     private static int count = 0;
 
+    //
+    //
     // number of objects in memory
 
     // initialize user, add 1 to static count and
