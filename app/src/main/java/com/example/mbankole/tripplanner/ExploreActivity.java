@@ -34,6 +34,7 @@ public class ExploreActivity extends AppCompatActivity {
     ArrayList<Location> places;
     ViewPager viewPager;
     Context context;
+    PlanActivity planActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,8 @@ public class ExploreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_explore);
 
         context = this;
+        planActivity = new PlanActivity();
+        planActivity.exploreActivity = this;
 
         people = new ArrayList<>();
         places = new ArrayList<>();
@@ -135,10 +138,6 @@ public class ExploreActivity extends AppCompatActivity {
         toast.show();
     }
 
-    public void populateLocations() {
-
-    }
-
     public void addLocation(Location location) {
         places.add(location);
         String ToastString = "";
@@ -150,10 +149,26 @@ public class ExploreActivity extends AppCompatActivity {
         fragmentPager.getLocationsFragment().addItem(location);
     }
 
+    public void removeLocation(Location location) {
+        places.remove(location);
+        String ToastString = "";
+        for (int i=0; i<places.size(); i++) {
+            ToastString += places.get(i).name;
+        }
+        Toast toast = Toast.makeText(this, ToastString, Toast.LENGTH_LONG);
+        toast.show();
+        fragmentPager.getLocationsFragment().removeItem(location);
+    }
+
     public void launchPlanActivity() {
         Intent i = new Intent(this, PlanActivity.class);
         i.putParcelableArrayListExtra("people", people);
         i.putParcelableArrayListExtra("places", places);
-        startActivity(i);
+        startActivityForResult(i, 10);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

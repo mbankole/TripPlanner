@@ -53,13 +53,15 @@ public class GmapClient {
         client.get(absoluteUrl, params, responseHandler);
     }
 
-    public static void getDirections(Location origin, Location destination, AsyncHttpResponseHandler responseHandler) {
+    public static void getDirections(Location origin, Location destination, String travelMode, AsyncHttpResponseHandler responseHandler) {
         String relativeUrl = "directions/json";
         String absoluteUrl = getAbsoluteUrl(relativeUrl);
         RequestParams params = new RequestParams();
         params.put("key", API_KEY );
         params.put("origin", "place_id:" + origin.googleId);
         params.put("destination", "place_id:" + destination.googleId);
+        params.put("mode", travelMode);
+
         client.get(absoluteUrl, params, responseHandler);
     }
 

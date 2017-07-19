@@ -48,7 +48,8 @@
 
         <activity android:name=".ExploreActivity" />
         <activity android:name=".PlanActivity" />
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".fragments.RouteFragment"></activity>
     </application>
 
 </manifest>

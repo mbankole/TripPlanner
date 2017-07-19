@@ -99,6 +99,11 @@ public class LocationsFragment extends Fragment implements View.OnClickListener 
         locationsAdapter.notifyItemInserted(locations.size() - 1);
     }
 
+    public void removeItem(Location loc) {
+        locations.remove(loc);
+        locationsAdapter.notifyItemRemoved(locations.size() - 1);
+    }
+
     public void addSearchResult(Location loc) {
         searchResults.add(loc);
         showSearchResults();

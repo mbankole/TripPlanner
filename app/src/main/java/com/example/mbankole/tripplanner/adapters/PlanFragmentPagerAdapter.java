@@ -5,11 +5,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.fragments.PlanListFragment;
 import com.example.mbankole.tripplanner.fragments.PlanMapFragment;
 import com.example.mbankole.tripplanner.models.Location;
-import com.example.mbankole.tripplanner.models.TransportOption;
 import com.example.mbankole.tripplanner.models.User;
 
 import java.util.ArrayList;
@@ -25,6 +25,7 @@ public class PlanFragmentPagerAdapter  extends FragmentPagerAdapter {
     private Context context;
     FragmentManager fragmentManager;
     public PlanActivity planActivity;
+    public ExploreActivity exploreActivity;
     PlanListFragment planListFragment;
     PlanMapFragment planMapFragment;
     public ArrayList<User> people;
@@ -39,12 +40,10 @@ public class PlanFragmentPagerAdapter  extends FragmentPagerAdapter {
     public PlanListFragment getPlanListFragment() {
         if (planListFragment == null) {
             planListFragment = PlanListFragment.newInstance();
-            planListFragment.people = people;
-            for (int i = 0 ; i < places.size(); i++) {
-                planListFragment.list_objects.add(places.get(i));
-                planListFragment.list_objects.add(new TransportOption("vroooom"));
-            }
+            planListFragment.locations = places;
+            planListFragment.refresh();
             planListFragment.planActivity = planActivity;
+            planListFragment.exploreActivity = exploreActivity;
             //planFragment.viewPager = this;
         }
         return planListFragment;
@@ -56,6 +55,7 @@ public class PlanFragmentPagerAdapter  extends FragmentPagerAdapter {
             planMapFragment.people = people;
             planMapFragment.places = places;
             planMapFragment.planActivity = planActivity;
+            planMapFragment.exploreActivity = exploreActivity;
             planMapFragment.setFm(fragmentManager);
             //planMapFragment.viewPager = this;
         }
@@ -83,6 +83,8 @@ public class PlanFragmentPagerAdapter  extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         return tabTitles[position];
     }
+
+
 }
 
 
