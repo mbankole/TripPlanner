@@ -56,9 +56,9 @@ public class Location implements Parcelable {
         loc.address = result.optString("formatted_address", "No Address");
         loc.phoneNumber = result.optString("formatted_phone_number", "No Phone Number");
         loc.iconUrl = result.optString("icon", null);
-        JSONArray photoData = result.getJSONArray("photos");
-        loc.photoRef = photoData.getJSONObject(0).optString("photo_reference", null);
-        loc.photoUrl = GmapClient.generateImageUrl(loc.photoRef);
+        JSONArray photoData = result.optJSONArray("photos");
+        if (photoData != null) loc.photoRef = photoData.getJSONObject(0).optString("photo_reference", null);
+        if (loc.photoRef != null) loc.photoUrl = GmapClient.generateImageUrl(loc.photoRef);
         JSONObject latlngObj = result.getJSONObject("geometry").getJSONObject("location");
         loc.latLng = new LatLng(latlngObj.getDouble("lat"), latlngObj.getDouble("lng"));
         loc.people = new ArrayList<>();

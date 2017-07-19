@@ -16,7 +16,7 @@ import com.squareup.picasso.Transformation;
 public class gradient implements Transformation {
 
     int startColor = Color.TRANSPARENT;
-    int endColor = Color.argb(140,0,0,0);
+    int endColor = Color.argb(155,0,0,0);
 
     @Override public Bitmap transform(Bitmap source) {
 
@@ -27,7 +27,7 @@ public class gradient implements Transformation {
         Canvas canvas = new Canvas(grandientBitmap);
         //left-top == (0,0) , right-bottom(x,y);
         LinearGradient grad =
-                new LinearGradient(x/8, y, x/8, y/8, startColor, endColor, Shader.TileMode.CLAMP);
+                new LinearGradient(x/2, y/2, x/2, 0, startColor, endColor, Shader.TileMode.CLAMP);
         Paint p = new Paint(Paint.DITHER_FLAG);
         p.setShader(null);
         p.setDither(true);

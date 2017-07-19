@@ -19,7 +19,7 @@
     <item
         android:id="@+id/miExplore"
         android:icon="@android:drawable/ic_menu_mapmode"
-        android:title="Plan"
+        android:title="Explore"
         android:visible="true"
         app:showAsAction="ifRoom" />
 </menu>
