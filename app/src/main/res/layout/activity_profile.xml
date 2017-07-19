@@ -29,8 +29,9 @@
         android:text="TextView"
         tools:layout_editor_absoluteX="44dp"
         tools:layout_editor_absoluteY="277dp"
-        android:layout_below="@+id/tvInterests"
-        android:layout_toEndOf="@+id/imageView" />
+        android:layout_alignBottom="@+id/tvInterests"
+        android:layout_toEndOf="@+id/tvInterests"
+        android:layout_marginStart="21dp" />
 
     <Button
         android:id="@+id/button3"
@@ -61,18 +62,18 @@
         android:text="TextView"
         tools:layout_editor_absoluteX="220dp"
         tools:layout_editor_absoluteY="280dp"
-        android:layout_below="@+id/ivProfileImage"
-        android:layout_toEndOf="@+id/tvUsernameProfiles"
-        android:layout_marginStart="26dp"
-        android:layout_marginTop="65dp" />
+        android:layout_below="@+id/editText7"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="51dp" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/tvInterests"
-        android:layout_marginTop="54dp"
-        android:layout_toEndOf="@+id/button3"
-        android:text="TextView" />
+        android:text="TextView"
+        android:layout_alignTop="@+id/tvUsernameProfiles"
+        android:layout_alignStart="@+id/tvUsernameProfiles"
+        android:layout_marginTop="21dp" />
 
 </RelativeLayout>

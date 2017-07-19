@@ -151,3 +151,6 @@ public class PlanListFragment extends Fragment{
     }
 }
 
+//created fragment of the planning list
+//
+//
