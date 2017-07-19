@@ -67,4 +67,13 @@
         android:layout_marginStart="31dp"
         android:layout_marginTop="51dp" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignTop="@+id/tvUsernameProfiles"
+        android:layout_alignStart="@+id/tvUsernameProfiles"
+        android:layout_marginTop="21dp" />
+
 </RelativeLayout>
