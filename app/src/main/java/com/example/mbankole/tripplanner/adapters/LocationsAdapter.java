@@ -10,6 +10,7 @@
 package com.example.mbankole.tripplanner.adapters;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
+import com.example.mbankole.tripplanner.fragments.LocationDetailFragment;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.utility.gradient;
 import com.squareup.picasso.Picasso;
@@ -34,13 +36,13 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.View
     List<Location> mLocations;
     Context context;
     public ExploreActivity exploreActivity;
-    android.app.FragmentManager fm;
+    FragmentManager fm;
 
     public LocationsAdapter(List<Location> locations) {
         mLocations = locations;
     }
 
-    public void setFm(android.app.FragmentManager fm) {
+    public void setFm(FragmentManager fm) {
         this.fm = fm;
     }
 
@@ -73,18 +75,37 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.View
     public int getItemCount() {return mLocations.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView tvLocationname;
         public ImageView ivLocationImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             tvLocationname = (TextView) itemView.findViewById(R.id.tvLocationname);
             ivLocationImage = (ImageView) itemView.findViewById(R.id.ivLocationImage);
         }
+
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Location location= mLocations.get(position);
+                LocationDetailFragment frag = LocationDetailFragment.newInstance(location, false);
+                frag.exploreActivity = exploreActivity;
+                frag.show(fm, "name");
+            }
+        }
     }
 }
+
+
+
+
+
+
+
 ///
 //
 //

@@ -3,6 +3,7 @@ package com.example.mbankole.tripplanner.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -35,6 +36,7 @@ public class LocationsFragment extends Fragment implements View.OnClickListener 
     ArrayList<Location> searchResults;
     RecyclerView rvSearches;
     public ExploreActivity exploreActivity;
+    FragmentManager fm;
 
     Button btClose;
     RelativeLayout rlSearches;
@@ -52,6 +54,7 @@ public class LocationsFragment extends Fragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // inflate the layout
         View v = inflater.inflate(R.layout.fragment_locations, container, false);
+        fm = getActivity().getSupportFragmentManager();
         // find RecyclerView
         rvLocations = (RecyclerView) v.findViewById(R.id.rvLocations);
         rvSearches = (RecyclerView) v.findViewById(R.id.rvSearches);
@@ -65,6 +68,7 @@ public class LocationsFragment extends Fragment implements View.OnClickListener 
         searchResults = new ArrayList<>();
         // construct the adapter from this data source
         locationsAdapter = new LocationsAdapter(locations);
+        locationsAdapter.setFm(fm);
         searchesAdapter = new LocationsAdapter(searchResults);
         // RecyclerView setup (layout manager, use adapter)
         rvLocations.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
@@ -131,5 +135,4 @@ public class LocationsFragment extends Fragment implements View.OnClickListener 
 
 //
 //made the locations fragment
-
-
+//created onclicklistenerforlocations

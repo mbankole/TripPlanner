@@ -1,5 +1,6 @@
 package com.example.mbankole.tripplanner;
 //
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,12 +35,15 @@ public class PlanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         context = this;
 
         Intent getI = getIntent();
         people = getI.getParcelableArrayListExtra("people");
         places = getI.getParcelableArrayListExtra("places");
-        
+
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         fragmentPager = new PlanFragmentPagerAdapter(getSupportFragmentManager(),
                 PlanActivity.this);
@@ -59,10 +63,13 @@ public class PlanActivity extends AppCompatActivity {
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             tabLayout.getTabAt(i).setIcon(icons[i]);
         }
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         //Intent i = new Intent(MainActivity.this, MapDemoActivity.class);
         //startActivity(i);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -99,7 +106,7 @@ public class PlanActivity extends AppCompatActivity {
                 return false;
             }
         });
-        MenuItem miExplore = menu.findItem(R.id.miExplore);
+        MenuItem miExplore = menu.findItem(R.id.miPlan);
         miExplore.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
