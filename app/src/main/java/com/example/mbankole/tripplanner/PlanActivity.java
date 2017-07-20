@@ -62,8 +62,6 @@ public class PlanActivity extends AppCompatActivity {
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             tabLayout.getTabAt(i).setIcon(icons[i]);
         }
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         //Intent i = new Intent(MainActivity.this, MapDemoActivity.class);
         //startActivity(i);
     }
