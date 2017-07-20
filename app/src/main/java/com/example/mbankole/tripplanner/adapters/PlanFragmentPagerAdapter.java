@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class PlanFragmentPagerAdapter  extends FragmentPagerAdapter {
     final int PAGE_COUNT = 2;
-    private String tabTitles[] = new String[]{"Map", "List"};
+    private String tabTitles[] = new String[]{"", ""};
     private Context context;
     FragmentManager fragmentManager;
     public PlanActivity planActivity;
