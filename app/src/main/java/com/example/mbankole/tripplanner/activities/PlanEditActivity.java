@@ -17,6 +17,7 @@ import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.PlanEditPagerAdapter;
 import com.example.mbankole.tripplanner.models.Location;
+import com.example.mbankole.tripplanner.models.Plan;
 import com.example.mbankole.tripplanner.models.User;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class PlanEditActivity extends AppCompatActivity {
     ViewPager viewPager;
     public ExploreActivity exploreActivity;
     Context context;
+    Plan plan;
 
     //
     @Override
@@ -42,6 +44,8 @@ public class PlanEditActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        plan = getIntent().getParcelableExtra("plan");
 
         context = this;
 
