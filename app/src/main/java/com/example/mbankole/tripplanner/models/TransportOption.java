@@ -17,6 +17,7 @@ public class TransportOption implements Parcelable {
     public LatLng endLatLong;
     public String startId;
     public String endId;
+    public String encodedPolyLine;
 
     public enum Mode {
         DRIVING,
