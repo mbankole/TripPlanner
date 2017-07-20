@@ -11,57 +11,78 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-import com.example.mbankole.tripplanner.ProfileActivity;
+import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
-import com.example.mbankole.tripplanner.adapters.NewExploreFragmentPagerAdapter;
+import com.example.mbankole.tripplanner.adapters.PlanEditPagerAdapter;
+import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Plan;
+import com.example.mbankole.tripplanner.models.User;
 
 import java.util.ArrayList;
 
-public class NewExploreActivity extends AppCompatActivity {
+/**
+ * Created by mbankole on 7/20/17.
+ */
 
-    Context context;
-    ArrayList<Plan> plans;
+public class PlanEditActivity extends AppCompatActivity {
+
+    PlanEditPagerAdapter fragmentPager;
+    ArrayList<User> people;
+    ArrayList<Location> places;
     ViewPager viewPager;
-    NewExploreFragmentPagerAdapter fragmentPager;
+    public ExploreActivity exploreActivity;
+    Context context;
+    Plan plan;
 
-
+    //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_explore_plans);
+        setContentView(R.layout.activity_plan);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        plan = getIntent().getParcelableExtra("plan");
 
         context = this;
-        plans = new ArrayList<>();
+
+        Intent getI = getIntent();
+        people = getI.getParcelableArrayListExtra("people");
+        places = getI.getParcelableArrayListExtra("places");
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        fragmentPager = new NewExploreFragmentPagerAdapter(getSupportFragmentManager(), plans);
+        fragmentPager = new PlanEditPagerAdapter(getSupportFragmentManager(), people, places);
         viewPager.setAdapter(fragmentPager);
-
+        fragmentPager.people = people;
+        fragmentPager.places = places;
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
         int[] icons = {
-                R.drawable.ic_globe,
                 R.drawable.ic_marker_black,
-                R.drawable.ic_user_black
+                R.drawable.ic_list,
         };
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             tabLayout.getTabAt(i).setIcon(icons[i]);
         }
-        //viewPager.setCurrentItem(0);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        supportInvalidateOptionsMenu();
+        //Intent i = new Intent(MainActivity.this, MapDemoActivity.class);
+        //startActivity(i);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         menu.clear();
-        getMenuInflater().inflate(R.menu.menu_new_explore, menu);
+        getMenuInflater().inflate(R.menu.menu_plan, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         //searchView.setVisibility(View.GONE);
@@ -79,7 +100,6 @@ public class NewExploreActivity extends AppCompatActivity {
                 }
                 return true;
             }
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 return false;
@@ -89,12 +109,34 @@ public class NewExploreActivity extends AppCompatActivity {
         miProfile.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Intent intent = new Intent(context, ProfileActivity.class);
-                startActivity(intent);
+                return false;
+            }
+        });
+        MenuItem miExplore = menu.findItem(R.id.miPlan);
+        miExplore.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                finish();
                 return false;
             }
         });
 
         return true;
+    }
+
+    public void refresh() {
+        fragmentPager.getPlanListFragment().refresh();
+        fragmentPager.getPlanMapFragment().refresh();
+    }
+
+    public void removeLocation(Location location) {
+        places.remove(location);
+        String ToastString = "";
+        for (int i=0; i<places.size(); i++) {
+            ToastString += places.get(i).name;
+        }
+        Toast toast = Toast.makeText(this, ToastString, Toast.LENGTH_LONG);
+        toast.show();
+        fragmentPager.getPlanListFragment().refresh();
     }
 }
