@@ -57,6 +57,15 @@ public class ExploreActivity extends AppCompatActivity {
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
+        int[] icons = {
+                R.drawable.ic_globe,
+                R.drawable.ic_marker_black,
+                R.drawable.ic_user_black
+        };
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            tabLayout.getTabAt(i).setIcon(icons[i]);
+        }
         //viewPager.setCurrentItem(0);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
