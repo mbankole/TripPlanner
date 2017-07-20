@@ -1,7 +1,6 @@
 package com.example.mbankole.tripplanner;
 //
 import android.content.Context;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -53,6 +52,13 @@ public class PlanActivity extends AppCompatActivity {
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+        int[] icons = {
+                R.drawable.ic_marker_black,
+                R.drawable.ic_list,
+        };
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            tabLayout.getTabAt(i).setIcon(icons[i]);
+        }
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //Intent i = new Intent(MainActivity.this, MapDemoActivity.class);
@@ -121,7 +127,3 @@ public class PlanActivity extends AppCompatActivity {
         fragmentPager.getPlanListFragment().refresh();
     }
 }
-//
-//
-//
-//
