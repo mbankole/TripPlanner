@@ -100,7 +100,7 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.View
     }
 }
 
-
+//added on click listener
 
 
 
