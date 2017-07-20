@@ -144,8 +144,8 @@ public class ExploreActivity extends AppCompatActivity {
         for (int i=0; i<places.size(); i++) {
             ToastString += places.get(i).name;
         }
-        Toast toast = Toast.makeText(this, ToastString, Toast.LENGTH_LONG);
-        toast.show();
+        //Toast toast = Toast.makeText(this, ToastString, Toast.LENGTH_LONG);
+        //toast.show();
         fragmentPager.getLocationsFragment().addItem(location);
     }
 

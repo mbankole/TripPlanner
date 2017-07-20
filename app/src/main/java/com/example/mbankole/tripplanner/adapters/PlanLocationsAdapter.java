@@ -14,7 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.mbankole.tripplanner.ExploreActivity;
+import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.TransportOption;
@@ -32,7 +32,7 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
 
     List<Location> mLocations;
     Context context;
-    public ExploreActivity exploreActivity;
+    public PlanActivity planActivity;
     android.app.FragmentManager fm;
 
     public PlanLocationsAdapter(List<Location> locations) {
@@ -149,12 +149,6 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
 
             final String TAG = "VIEWHOLDERTANSPORT";
 
-            TextView tvName;
-            ImageView ivImage;
-
-            tvName = (TextView) itemView.findViewById(R.id.tvName);
-            ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
-
             final RadioButton rbWalk = (RadioButton) itemView.findViewById(R.id.rbWalk);
             final RadioButton rbDrive = (RadioButton) itemView.findViewById(R.id.rbDrive);
             final RadioButton rbTransit = (RadioButton) itemView.findViewById(R.id.rbTransit);
@@ -188,6 +182,7 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
                                 transportOption.mode = TransportOption.Mode.TRANSIT;
                             }
                         }
+                        update();
                     }
                 }
             };
@@ -202,5 +197,9 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
         public void onClick(View view) {
 
         }
+    }
+
+    public void update() {
+        planActivity.refresh();
     }
 }

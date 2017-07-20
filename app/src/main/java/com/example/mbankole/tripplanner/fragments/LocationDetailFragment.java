@@ -5,6 +5,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -65,6 +66,7 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Get field from view
+        final View viewref = view;
         final Location loc = getArguments().getParcelable("location");
         tvName = (TextView) view.findViewById(R.id.tvName);
         tvAddress = (TextView) view.findViewById(R.id.tvAddress);
@@ -80,6 +82,7 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
             @Override
             public void onClick(View v) {
                 exploreActivity.addLocation(loc);
+                Snackbar.make(viewref, "Added!", Snackbar.LENGTH_SHORT).show();
             }
         });
         btRemove = (ImageButton) view.findViewById(R.id.ibRemove);

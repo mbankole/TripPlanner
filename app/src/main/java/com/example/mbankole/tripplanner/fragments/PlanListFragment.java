@@ -61,6 +61,7 @@ public class PlanListFragment extends Fragment{
         rvPlanList = (RecyclerView) v.findViewById(R.id.rvPlanList);
         // construct the adapter from this data source
         listAdapter = new PlanLocationsAdapter(locations);
+        listAdapter.planActivity = planActivity;
         listAdapter.setFm(fm);
 //        locationAdapter.exploreActivity = exploreActivity;
         // RecyclerView setup (layout manager, use adapter)
@@ -146,14 +147,16 @@ public class PlanListFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {}
 
     public void refresh() {
-        for (int i = 0; i < locations.size() - 1; i++) {
-            Location loc1 = locations.get(i);
-            Location loc2 = locations.get(i + 1);
-            if (loc1.transport == null || loc1.transport.endId != loc2.googleId) {
-                loc1.transport = new TransportOption(loc1, loc2);
+        if (locations != null && locations.size() > 1) {
+            for (int i = 0; i < locations.size() - 1; i++) {
+                Location loc1 = locations.get(i);
+                Location loc2 = locations.get(i + 1);
+                if (loc1.transport == null || loc1.transport.endId != loc2.googleId) {
+                    loc1.transport = new TransportOption(loc1, loc2);
+                }
             }
+            locations.get(locations.size() - 1).transport = null;
         }
-        locations.get(locations.size() - 1).transport = null;
     }
 }
 
