@@ -55,6 +55,17 @@ public class PlanActivity extends AppCompatActivity {
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+        int[] icons = {
+                R.drawable.ic_marker_black,
+                R.drawable.ic_list,
+        };
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            tabLayout.getTabAt(i).setIcon(icons[i]);
+        }
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        //Intent i = new Intent(MainActivity.this, MapDemoActivity.class);
+        //startActivity(i);
     }
 
     @Override
@@ -119,7 +130,3 @@ public class PlanActivity extends AppCompatActivity {
         fragmentPager.getPlanListFragment().refresh();
     }
 }
-//
-//
-//
-//
