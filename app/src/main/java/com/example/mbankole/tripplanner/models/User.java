@@ -25,8 +25,8 @@ public class User implements Parcelable {
         user.friends = new ArrayList<>();
         user.friends.add(2);
         user.interests = new ArrayList<>();
-        user.interests.add(Location.generateEiffelTower());
-        user.interests.add(Location.generateTajMahal());
+        user.interests.add(Location.generatePopCulture());
+        user.interests.add(Location.generateNeedle());
         return user;
     }
 

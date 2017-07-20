@@ -6,12 +6,15 @@ import android.os.Parcelable;
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PointOfInterest;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ericar on 7/11/17.
@@ -100,6 +103,81 @@ public class Location implements Parcelable {
         Location location = new Location();
         location.name = "TajMahal";
         location.uid = 3;
+        return location;
+    }
+
+    public static Location generatePopCulture() {
+        final Location location = new Location();
+        GmapClient.getDetailFromId("ChIJAAAAAAAAAAAREthJEc0p6dE", new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    Location.locationFromJson(response, location);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return location;
+    }
+
+    public static Location generateNeedle() {
+        final Location location = new Location();
+        GmapClient.getDetailFromId("ChIJAAAAAAAAAAARDZLQnmioK9s", new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    Location.locationFromJson(response, location);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return location;
+    }
+
+    public static Location generateArtMuseum() {
+        final Location location = new Location();
+        GmapClient.getDetailFromId("ChIJAAAAAAAAAAARxI1KoO7oZHs", new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    Location.locationFromJson(response, location);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return location;
+    }
+
+    public static Location generateWheel() {
+        final Location location = new Location();
+        GmapClient.getDetailFromId("ChIJAAAAAAAAAAARxtrx3nOQIKU", new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    Location.locationFromJson(response, location);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return location;
+    }
+
+    public static Location generateArboretum() {
+        final Location location = new Location();
+        GmapClient.getDetailFromId("ChIJAAAAAAAAAAARin5kehZcTqI", new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    Location.locationFromJson(response, location);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         return location;
     }
 

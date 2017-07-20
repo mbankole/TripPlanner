@@ -1,5 +1,6 @@
 package com.example.mbankole.tripplanner;
 //
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -42,7 +43,7 @@ public class PlanActivity extends AppCompatActivity {
         Intent getI = getIntent();
         people = getI.getParcelableArrayListExtra("people");
         places = getI.getParcelableArrayListExtra("places");
-        
+
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         fragmentPager = new PlanFragmentPagerAdapter(getSupportFragmentManager(),
                 PlanActivity.this);
@@ -67,10 +68,15 @@ public class PlanActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         menu.clear();
-        getMenuInflater().inflate(R.menu.menu_plan, menu);
+        getMenuInflater().inflate(R.menu.menu_explore, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         //searchView.setVisibility(View.GONE);

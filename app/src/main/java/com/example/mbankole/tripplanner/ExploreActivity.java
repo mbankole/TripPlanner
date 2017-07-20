@@ -170,7 +170,7 @@ public class ExploreActivity extends AppCompatActivity {
     }
 
     public void launchPlanActivity() {
-        Intent i = new Intent(this, PlanActivity.class);
+        Intent i = new Intent(ExploreActivity.this, PlanActivity.class);
         i.putParcelableArrayListExtra("people", people);
         i.putParcelableArrayListExtra("places", places);
         startActivityForResult(i, 10);
