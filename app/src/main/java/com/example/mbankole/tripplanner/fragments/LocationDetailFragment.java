@@ -1,5 +1,6 @@
 package com.example.mbankole.tripplanner.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -31,7 +32,7 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
     Button btAdd;
     ImageButton btRemove;
 
-    public ExploreActivity exploreActivity;
+    ExploreActivity exploreActivity;
     PlanActivity planActivity;
 
     private final String TAG = "POIDETAILFRAGMENT";

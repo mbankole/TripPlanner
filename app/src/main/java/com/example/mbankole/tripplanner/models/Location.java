@@ -6,12 +6,15 @@ import android.os.Parcelable;
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PointOfInterest;
+import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ericar on 7/11/17.
@@ -25,14 +28,18 @@ public class Location implements Parcelable {
     public String name;
     public String address;
     public String phoneNumber;
+    public Boolean openNow;
+    public String hours;
+    public int price;
     public String iconUrl;
     public LatLng latLng;
     public String desc;
     public String googleId;
     public String photoRef;
     public String photoUrl;
-    public double rating;
+    public float rating;
     public ArrayList<User> people;
+    public TransportOption transport;
 
     public Location() {}
 
@@ -53,8 +60,21 @@ public class Location implements Parcelable {
         JSONObject result = obj;
         if (obj.has("result")) result = obj.getJSONObject("result");
         loc.name = result.getString("name");
-        loc.address = result.optString("formatted_address", "No Address");
-        loc.phoneNumber = result.optString("formatted_phone_number", "No Phone Number");
+        loc.address = result.optString("formatted_address");
+        loc.phoneNumber = result.optString("formatted_phone_number");
+        if (result.has("opening_hours")) {
+            JSONObject openingHours = result.optJSONObject("opening_hours");
+            if (openingHours.has("open_now")) {
+                loc.openNow = openingHours.getBoolean("open_now");
+            }
+            JSONArray hours = openingHours.optJSONArray("weekday_text");
+            loc.hours = "";
+            for (int i = 0; i < hours.length(); i++) {
+                loc.hours += hours.getString(i) + "\n";
+            }
+        }
+        loc.price = result.optInt("price_level");
+        loc.rating = (float)result.optDouble("rating", -1);
         loc.iconUrl = result.optString("icon", null);
         JSONArray photoData = result.optJSONArray("photos");
         if (photoData != null) loc.photoRef = photoData.getJSONObject(0).optString("photo_reference", null);
@@ -86,6 +106,81 @@ public class Location implements Parcelable {
         return location;
     }
 
+    public static Location generatePopCulture() {
+        final Location location = new Location();
+        GmapClient.getDetailFromId("ChIJAAAAAAAAAAAREthJEc0p6dE", new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    Location.locationFromJson(response, location);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return location;
+    }
+
+    public static Location generateNeedle() {
+        final Location location = new Location();
+        GmapClient.getDetailFromId("ChIJAAAAAAAAAAARDZLQnmioK9s", new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    Location.locationFromJson(response, location);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return location;
+    }
+
+    public static Location generateArtMuseum() {
+        final Location location = new Location();
+        GmapClient.getDetailFromId("ChIJAAAAAAAAAAARxI1KoO7oZHs", new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    Location.locationFromJson(response, location);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return location;
+    }
+
+    public static Location generateWheel() {
+        final Location location = new Location();
+        GmapClient.getDetailFromId("ChIJAAAAAAAAAAARxtrx3nOQIKU", new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    Location.locationFromJson(response, location);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return location;
+    }
+
+    public static Location generateArboretum() {
+        final Location location = new Location();
+        GmapClient.getDetailFromId("ChIJAAAAAAAAAAARin5kehZcTqI", new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    Location.locationFromJson(response, location);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        return location;
+    }
+
     //some placeIds
     // museum of pop culture - ChIJAAAAAAAAAAAREthJEc0p6dE
     // space needle - ChIJAAAAAAAAAAARDZLQnmioK9s
@@ -104,14 +199,18 @@ public class Location implements Parcelable {
         dest.writeString(this.name);
         dest.writeString(this.address);
         dest.writeString(this.phoneNumber);
+        dest.writeValue(this.openNow);
+        dest.writeString(this.hours);
+        dest.writeInt(this.price);
         dest.writeString(this.iconUrl);
         dest.writeParcelable(this.latLng, flags);
         dest.writeString(this.desc);
         dest.writeString(this.googleId);
         dest.writeString(this.photoRef);
         dest.writeString(this.photoUrl);
-        dest.writeDouble(this.rating);
+        dest.writeFloat(this.rating);
         dest.writeTypedList(this.people);
+        dest.writeParcelable(this.transport, flags);
     }
 
     protected Location(Parcel in) {
@@ -119,14 +218,18 @@ public class Location implements Parcelable {
         this.name = in.readString();
         this.address = in.readString();
         this.phoneNumber = in.readString();
+        this.openNow = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.hours = in.readString();
+        this.price = in.readInt();
         this.iconUrl = in.readString();
         this.latLng = in.readParcelable(LatLng.class.getClassLoader());
         this.desc = in.readString();
         this.googleId = in.readString();
         this.photoRef = in.readString();
         this.photoUrl = in.readString();
-        this.rating = in.readDouble();
+        this.rating = in.readFloat();
         this.people = in.createTypedArrayList(User.CREATOR);
+        this.transport = in.readParcelable(TransportOption.class.getClassLoader());
     }
 
     public static final Creator<Location> CREATOR = new Creator<Location>() {

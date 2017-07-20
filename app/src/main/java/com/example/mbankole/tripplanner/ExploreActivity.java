@@ -57,6 +57,15 @@ public class ExploreActivity extends AppCompatActivity {
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
+        int[] icons = {
+                R.drawable.ic_globe,
+                R.drawable.ic_marker_black,
+                R.drawable.ic_user_black
+        };
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            tabLayout.getTabAt(i).setIcon(icons[i]);
+        }
         //viewPager.setCurrentItem(0);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -144,8 +153,8 @@ public class ExploreActivity extends AppCompatActivity {
         for (int i=0; i<places.size(); i++) {
             ToastString += places.get(i).name;
         }
-        Toast toast = Toast.makeText(this, ToastString, Toast.LENGTH_LONG);
-        toast.show();
+        //Toast toast = Toast.makeText(this, ToastString, Toast.LENGTH_LONG);
+        //toast.show();
         fragmentPager.getLocationsFragment().addItem(location);
     }
 
@@ -161,7 +170,7 @@ public class ExploreActivity extends AppCompatActivity {
     }
 
     public void launchPlanActivity() {
-        Intent i = new Intent(this, PlanActivity.class);
+        Intent i = new Intent(ExploreActivity.this, PlanActivity.class);
         i.putParcelableArrayListExtra("people", people);
         i.putParcelableArrayListExtra("places", places);
         startActivityForResult(i, 10);

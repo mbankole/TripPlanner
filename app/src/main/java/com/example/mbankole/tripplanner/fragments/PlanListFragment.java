@@ -21,8 +21,9 @@ import android.widget.Toast;
 import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
-import com.example.mbankole.tripplanner.adapters.PlanListAdapter;
+import com.example.mbankole.tripplanner.adapters.PlanLocationsAdapter;
 import com.example.mbankole.tripplanner.models.Location;
+import com.example.mbankole.tripplanner.models.TransportOption;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,9 +35,8 @@ import java.util.Collections;
 public class PlanListFragment extends Fragment{
 
     public ArrayList<Location> locations;
-    public ArrayList<Object> list_objects = new ArrayList<>();
     RecyclerView rvPlanList;
-    public PlanListAdapter listAdapter;
+    public PlanLocationsAdapter listAdapter;
     android.app.FragmentManager fm;
     public PlanActivity planActivity;
     public ExploreActivity exploreActivity;
@@ -60,7 +60,8 @@ public class PlanListFragment extends Fragment{
         // find RecyclerView
         rvPlanList = (RecyclerView) v.findViewById(R.id.rvPlanList);
         // construct the adapter from this data source
-        listAdapter = new PlanListAdapter(list_objects);
+        listAdapter = new PlanLocationsAdapter(locations);
+        listAdapter.planActivity = planActivity;
         listAdapter.setFm(fm);
 //        locationAdapter.exploreActivity = exploreActivity;
         // RecyclerView setup (layout manager, use adapter)
@@ -73,19 +74,19 @@ public class PlanListFragment extends Fragment{
             @Override
             public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
                 return makeFlag(ItemTouchHelper.ACTION_STATE_DRAG,
-                        ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.START | ItemTouchHelper.END);
+                        ItemTouchHelper.DOWN | ItemTouchHelper.UP );
             }
 
             //and in your implementaion of
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                 // get the viewHolder's and target's positions in your adapter data, swap them
-                Collections.swap(list_objects, viewHolder.getAdapterPosition(), target.getAdapterPosition());
+                Collections.swap(locations, viewHolder.getAdapterPosition(), target.getAdapterPosition());
                 // and notify the adapter that its dataset has changed
                 listAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
                 planActivity.refresh();
 
                 String ToastString = "";
-                for (int i=0; i<list_objects.size(); i++) {
+                for (int i=0; i<locations.size(); i++) {
                     //ToastString += ((User)list_objects.get(i)).name;
                 }
                 Toast toast = Toast.makeText(getContext(), ToastString, Toast.LENGTH_LONG);
@@ -105,7 +106,7 @@ public class PlanListFragment extends Fragment{
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         setHasOptionsMenu(true);
 
-        listAdapter.notifyItemInserted(list_objects.size() - 1);
+        listAdapter.notifyItemInserted(locations.size() - 1);
         return v;
     }
 
@@ -146,8 +147,16 @@ public class PlanListFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {}
 
     public void refresh() {
-
- //       addItems(places);
+        if (locations != null && locations.size() > 1) {
+            for (int i = 0; i < locations.size() - 1; i++) {
+                Location loc1 = locations.get(i);
+                Location loc2 = locations.get(i + 1);
+                if (loc1.transport == null || loc1.transport.endId != loc2.googleId) {
+                    loc1.transport = new TransportOption(loc1, loc2);
+                }
+            }
+            locations.get(locations.size() - 1).transport = null;
+        }
     }
 }
 

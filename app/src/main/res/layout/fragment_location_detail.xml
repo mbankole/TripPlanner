@@ -9,21 +9,19 @@
         android:id="@+id/ivPhoto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
         android:visibility="visible"
-        app:srcCompat="@android:color/background_dark" />
+        app:srcCompat="@android:color/background_dark"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
     <com.example.mbankole.tripplanner.utility.RalewayBlackTextView
         android:id="@+id/tvName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
         android:layout_toStartOf="@+id/btAdd"
         android:shadowColor="@color/black"
@@ -37,12 +35,13 @@
         android:id="@+id/tvAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvName"
-        android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:shadowColor="@color/black"
-        android:text="Address Goes here"
-        android:textColor="@color/white" />
+        android:text="Address goes here \n ZIP\n Country"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:textColor="@color/white"
+        android:layout_below="@+id/tvPrice"
+        android:layout_toEndOf="@+id/ivMarker" />
 
     <Button
         android:id="@+id/btAdd"
@@ -54,17 +53,16 @@
         android:layout_alignParentEnd="true" />
 
     <com.example.mbankole.tripplanner.utility.RalewayLightTextView
-        android:id="@+id/tvLocationDescription"
+        android:id="@+id/tvPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvAddress"
-        android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:shadowColor="@color/black"
-        android:text="This is a description of the location."
+        android:text="###-####"
         android:textAppearance="@android:style/TextAppearance.Medium"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:layout_above="@+id/ivClock"
+        android:layout_alignStart="@+id/tvAddress" />
 
     <ImageButton
         android:id="@+id/ibRemove"
@@ -76,6 +74,82 @@
         android:layout_margin="8dp"
         android:background="@android:color/transparent"
         android:visibility="gone"
+        android:scaleType="fitCenter"
         app:srcCompat="@drawable/ic_trash" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize=".1"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_below="@+id/tvName"
+        android:layout_alignStart="@+id/tvName" />
+
+    <ImageView
+        android:id="@+id/ivMarker"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/ic_marker"
+        android:layout_alignTop="@+id/tvAddress"
+        android:layout_alignStart="@+id/ratingBar" />
+
+    <ImageView
+        android:id="@+id/ivPhone"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:tint="@color/white"
+        app:srcCompat="@drawable/ic_phone"
+        android:layout_marginLeft="8dp"
+        android:layout_below="@+id/tvAddress"
+        android:layout_alignStart="@+id/ivMarker" />
+
+    <ImageView
+        android:id="@+id/ivClock"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:tint="@color/white"
+        app:srcCompat="@drawable/ic_clock"
+        android:layout_below="@+id/ivPhone"
+        android:layout_marginTop="8dp"
+        android:layout_alignEnd="@+id/ivPhone" />
+
+    <com.example.mbankole.tripplanner.utility.RalewayMedTextView
+        android:id="@+id/tvNowOpen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open Now"
+        android:textColor="@color/white"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:shadowColor="@color/black"
+        android:layout_above="@+id/tvHours"
+        android:layout_alignStart="@+id/tvPhone" />
+
+    <com.example.mbankole.tripplanner.utility.RalewayMedTextView
+        android:id="@+id/tvHours"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvNowOpen"
+        android:layout_below="@+id/ivClock"
+        android:layout_marginTop="8dp"
+        android:shadowColor="@color/black"
+        android:textColor="@color/white"
+        android:text="Hours"
+        android:textAppearance="@android:style/TextAppearance.Small" />
+
+    <com.example.mbankole.tripplanner.utility.RalewayBoldTextView
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tvName"
+        android:layout_below="@+id/tvName"
+        android:textColor="@color/white"
+        android:layout_marginBottom="8dp"
+        android:text="$$$"
+        android:textAppearance="@android:style/TextAppearance.Medium" />
 
 </RelativeLayout>

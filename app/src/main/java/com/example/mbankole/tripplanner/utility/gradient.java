@@ -27,7 +27,7 @@ public class gradient implements Transformation {
         Canvas canvas = new Canvas(grandientBitmap);
         //left-top == (0,0) , right-bottom(x,y);
         LinearGradient grad =
-                new LinearGradient(x/2, y/2, x/2, 0, startColor, endColor, Shader.TileMode.CLAMP);
+                new LinearGradient(x/2, (y * 3) / 4, x/2, 0, startColor, endColor, Shader.TileMode.CLAMP);
         Paint p = new Paint(Paint.DITHER_FLAG);
         p.setShader(null);
         p.setDither(true);

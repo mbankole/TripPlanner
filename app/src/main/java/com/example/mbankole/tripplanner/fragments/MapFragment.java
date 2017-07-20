@@ -9,11 +9,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.ExploreActivity;
@@ -127,16 +125,17 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onPoiClick(PointOfInterest poi) {
-        Toast.makeText(getContext(), "Clicked: " +
+        /*Toast.makeText(getContext(), "Clicked: " +
                         poi.name + "\nPlace ID:" + poi.placeId +
                         "\nLatitude:" + poi.latLng.latitude +
                         " Longitude:" + poi.latLng.longitude,
                 Toast.LENGTH_SHORT).show();
+                */
         //Log.d(TAG, poi.toString());
         GmapClient.getDetailFromId(poi.placeId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                Log.d(TAG, response.toString());
+                //Log.d(TAG, response.toString());
                 Location loc = null;
                 try {
                     loc = Location.locationFromJson(response);
