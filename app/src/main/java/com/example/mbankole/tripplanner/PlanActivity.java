@@ -69,7 +69,7 @@ public class PlanActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         menu.clear();
-        getMenuInflater().inflate(R.menu.menu_explore, menu);
+        getMenuInflater().inflate(R.menu.menu_plan, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         //searchView.setVisibility(View.GONE);
