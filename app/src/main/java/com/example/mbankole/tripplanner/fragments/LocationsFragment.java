@@ -36,7 +36,7 @@ public class LocationsFragment extends Fragment implements View.OnClickListener 
     ArrayList<Location> searchResults;
     RecyclerView rvSearches;
     public ExploreActivity exploreActivity;
-    android.app.FragmentManager fm;
+    FragmentManager fm;
 
     Button btClose;
     RelativeLayout rlSearches;
@@ -54,7 +54,7 @@ public class LocationsFragment extends Fragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // inflate the layout
         View v = inflater.inflate(R.layout.fragment_locations, container, false);
-        fm = getActivity().getFragmentManager();
+        fm = getActivity().getSupportFragmentManager();
         // find RecyclerView
         rvLocations = (RecyclerView) v.findViewById(R.id.rvLocations);
         rvSearches = (RecyclerView) v.findViewById(R.id.rvSearches);
