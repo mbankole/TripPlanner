@@ -1,7 +1,6 @@
 package com.example.mbankole.tripplanner;
 //
 import android.content.Context;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -35,6 +34,9 @@ public class PlanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         context = this;
 
         Intent getI = getIntent();
@@ -53,17 +55,13 @@ public class PlanActivity extends AppCompatActivity {
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        //Intent i = new Intent(MainActivity.this, MapDemoActivity.class);
-        //startActivity(i);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         menu.clear();
-        getMenuInflater().inflate(R.menu.menu_explore, menu);
+        getMenuInflater().inflate(R.menu.menu_plan, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         //searchView.setVisibility(View.GONE);
@@ -93,7 +91,7 @@ public class PlanActivity extends AppCompatActivity {
                 return false;
             }
         });
-        MenuItem miExplore = menu.findItem(R.id.miExplore);
+        MenuItem miExplore = menu.findItem(R.id.miPlan);
         miExplore.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
