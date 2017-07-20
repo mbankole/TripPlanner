@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.mbankole.tripplanner.fragments.ExplorePlansListFragment;
 import com.example.mbankole.tripplanner.fragments.ExploreUsersListFragment;
-import com.example.mbankole.tripplanner.fragments.PlaceholderFragment;
 import com.example.mbankole.tripplanner.models.Plan;
 
 import java.util.ArrayList;
@@ -33,7 +32,7 @@ public class NewExploreFragmentPagerAdapter extends FragmentPagerAdapter {
 
     public ExplorePlansListFragment getExplorePlansListFragment() {
         if (explorePlansListFragment == null) {
-            //explorePlansListFragment = ExplorePlansListFragment.newInstance();
+            explorePlansListFragment = ExplorePlansListFragment.newInstance();
         }
         return explorePlansListFragment;
     }
@@ -50,8 +49,8 @@ public class NewExploreFragmentPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new PlaceholderFragment();
-                //return getExploreUsersListFragment();
+               // return new PlaceholderFragment();
+                return getExplorePlansListFragment();
             case 1:
                 return getExploreUsersListFragment();
             default:
