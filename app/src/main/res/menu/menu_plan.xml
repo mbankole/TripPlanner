@@ -15,8 +15,7 @@
         android:id="@+id/miProfile"
         android:icon="@drawable/ic_user"
         android:title="Profile"
-        android:visible="true"
-        app:showAsAction="ifRoom" />
+        android:visible="true" />
     <item
         android:id="@+id/miExplore"
         android:icon="@drawable/ic_plan"
