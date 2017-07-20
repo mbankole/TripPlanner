@@ -1,6 +1,5 @@
 package com.example.mbankole.tripplanner.adapters;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -19,16 +18,15 @@ import java.util.ArrayList;
 public class NewExploreFragmentPagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 2;
     private String tabTitles[] = new String[]{"plans", "people"};
-    private Context context;
     FragmentManager fragmentManager;
     ExplorePlansListFragment explorePlansListFragment;
     ExploreUsersListFragment exploreUsersListFragment;
     ArrayList<Plan> plans;
 
-    public NewExploreFragmentPagerAdapter(FragmentManager fm, Context context) {
+    public NewExploreFragmentPagerAdapter(FragmentManager fm, ArrayList<Plan> plans) {
         super(fm);
         fragmentManager = fm;
-        this.context = context;
+        this.plans = plans;
     }
 
     public ExplorePlansListFragment getExplorePlansListFragment() {
