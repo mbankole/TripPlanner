@@ -1,7 +1,6 @@
 package com.example.mbankole.tripplanner.activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.MenuItemCompat;
@@ -49,15 +48,15 @@ public class PlanEditActivity extends AppCompatActivity {
 
         context = this;
 
-        Intent getI = getIntent();
-        people = getI.getParcelableArrayListExtra("people");
-        places = getI.getParcelableArrayListExtra("places");
+        //Intent getI = getIntent();
+        people = plan.people;
+        places = plan.places;
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        fragmentPager = new PlanEditPagerAdapter(getSupportFragmentManager(), people, places);
+        fragmentPager = new PlanEditPagerAdapter(getSupportFragmentManager(), plan.people, plan.places);
         viewPager.setAdapter(fragmentPager);
-        fragmentPager.people = people;
-        fragmentPager.places = places;
+        fragmentPager.people = plan.people;
+        fragmentPager.places = plan.places;
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);

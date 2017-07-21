@@ -57,6 +57,7 @@ public class TransportOption implements Parcelable {
         dest.writeParcelable(this.endLatLong, flags);
         dest.writeString(this.startId);
         dest.writeString(this.endId);
+        dest.writeString(this.encodedPolyLine);
         dest.writeInt(this.mode == null ? -1 : this.mode.ordinal());
     }
 
@@ -68,11 +69,12 @@ public class TransportOption implements Parcelable {
         this.endLatLong = in.readParcelable(LatLng.class.getClassLoader());
         this.startId = in.readString();
         this.endId = in.readString();
+        this.encodedPolyLine = in.readString();
         int tmpMode = in.readInt();
         this.mode = tmpMode == -1 ? null : Mode.values()[tmpMode];
     }
 
-    public static final Parcelable.Creator<TransportOption> CREATOR = new Parcelable.Creator<TransportOption>() {
+    public static final Creator<TransportOption> CREATOR = new Creator<TransportOption>() {
         @Override
         public TransportOption createFromParcel(Parcel source) {
             return new TransportOption(source);

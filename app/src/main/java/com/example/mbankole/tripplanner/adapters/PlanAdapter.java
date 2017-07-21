@@ -1,6 +1,7 @@
 package com.example.mbankole.tripplanner.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
+import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Plan;
 
 import java.util.List;
@@ -53,13 +55,27 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         return mPlans.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView tvPlanTitle;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvPlanTitle = (TextView) itemView.findViewById(R.id.tvPlanTitle);
+
+            itemView.setOnClickListener(this);
+        }
+
+
+        @Override
+        public void onClick(View v) {
+            final Integer position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                final Plan plan = mPlans.get(position);
+                Intent i = new Intent(context, PlanEditActivity.class);
+                i.putExtra("plan", plan);
+                context.startActivity(i);
+            }
         }
     }
 }

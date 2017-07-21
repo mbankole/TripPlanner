@@ -49,6 +49,7 @@
         <activity android:name=".ExploreActivity" />
         <activity android:name=".PlanActivity" />
         <activity android:name=".ProfileActivity" />
+        <activity android:name=".activities.PlanEditActivity"/>
     </application>
 
 </manifest>
