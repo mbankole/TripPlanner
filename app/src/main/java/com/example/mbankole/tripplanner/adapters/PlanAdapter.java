@@ -15,6 +15,7 @@ import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Plan;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -88,6 +89,12 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
             View v = LayoutInflater.from(context).inflate(R.layout.item_location, llLocations, false);
             final TextView tvLocationName = (TextView)v.findViewById(R.id.tvLocationname);
             final ImageView ivLocationImage = (ImageView)v.findViewById(R.id.ivLocationImage);
+            if (location.photoUrl != null) {
+                Picasso.with(context)
+                        .load(location.photoUrl)
+                        //.memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
+                        .into(ivLocationImage);
+            }
             tvLocationName.setText(location.name);
             llLocations.addView(v);
         }
