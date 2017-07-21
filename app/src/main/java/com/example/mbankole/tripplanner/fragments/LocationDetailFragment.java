@@ -27,6 +27,11 @@ import com.squareup.picasso.Picasso;
  * Created by mbankole on 7/12/17.
  *
  */
+//make a close button
+//make on click listener
+    //
+
+
 
 public class LocationDetailFragment extends DialogFragment implements  View.OnClickListener{
     TextView tvName;
@@ -38,6 +43,8 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
     ImageView ivPhoto;
     Button btAdd;
     ImageButton btRemove;
+    Button btClose;
+
 
     public PlanMapFragment planMapFragment;
     PlanEditActivity planEditActivity;
@@ -54,6 +61,7 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
         frag.setArguments(args);
         return frag;
     }
+    //
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,6 +100,23 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
                 planEditActivity.removeLocation(loc);
             }
         });
+
+
+        btClose = (Button) view.findViewById(R.id.btClose);
+        btClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                planMapFragment.addLocation(loc);
+                Button btClose = (Button) v.findViewById(R.id.btClose);
+                btClose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dismiss();
+                    }
+                });
+            }
+        });
+
         ivPhoto = (ImageView)view.findViewById(R.id.ivPhoto);
         tvName.setText(loc.name);
         tvAddress.setText(loc.address);
@@ -103,11 +128,15 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
         } else {
             tvNowOpen.setText("Now closed");
         }
+
+        //
         tvHours.setText(loc.hours);
         String priceString = "";
         for (int i = 0; i < loc.price; i++) {
             priceString += "$";
         }
+
+       //
         tvprice.setText(priceString);
         if (loc.rating != -1) {
             ratingBar.setRating(loc.rating);
@@ -131,7 +160,7 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
     public void debug(String message) {
         Log.d(TAG, message);
     }
-
+    //
     @Override
     public void onClick(View v) {
         if (v.getId() == btAdd.getId()) {
@@ -143,3 +172,5 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
         dismiss();
     }
 }
+//make a close button
+//make on click listener
