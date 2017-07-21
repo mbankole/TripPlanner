@@ -156,6 +156,11 @@ public class PlanListFragment extends Fragment{
             locations.get(locations.size() - 1).transport = null;
         }
     }
+
+    public void addItem() {
+        listAdapter.notifyItemInserted(locations.size() - 1);
+        refresh();
+    }
 }
 
 //created fragment of the planning list

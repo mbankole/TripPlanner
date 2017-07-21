@@ -17,8 +17,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
+import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.utility.gradient;
 import com.squareup.picasso.Picasso;
@@ -40,7 +40,7 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
     ImageButton btRemove;
 
     public PlanMapFragment planMapFragment;
-    PlanActivity planActivity;
+    PlanEditActivity planEditActivity;
 
     private final String TAG = "POIDETAILFRAGMENT";
 
@@ -82,14 +82,14 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
             public void onClick(View v) {
                 planMapFragment.addLocation(loc);
                 Snackbar.make(viewref, "Added!", Snackbar.LENGTH_SHORT).show();
-                planMapFragment.refresh();
+                planEditActivity.refreshAdd();
             }
         });
         btRemove = (ImageButton) view.findViewById(R.id.ibRemove);
         btRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                planActivity.removeLocation(loc);
+                planEditActivity.removeLocation(loc);
             }
         });
         ivPhoto = (ImageView)view.findViewById(R.id.ivPhoto);

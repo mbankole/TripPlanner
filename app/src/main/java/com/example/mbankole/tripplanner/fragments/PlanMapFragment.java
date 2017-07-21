@@ -23,8 +23,8 @@ import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.ExploreActivity;
-import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
+import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Route;
 import com.example.mbankole.tripplanner.models.User;
@@ -61,7 +61,7 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback, GoogleMap.OnMarkerClickListener,
         GoogleMap.OnPolylineClickListener, GoogleMap.OnPoiClickListener {
 
-    public PlanActivity planActivity;
+    public PlanEditActivity planEditActivity;
     public ExploreActivity exploreActivity;
     public ArrayList<User> people;
     public ArrayList<Location> places;
@@ -236,6 +236,7 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     public boolean onMarkerClick(Marker marker) {
         Location location = (Location) marker.getTag();
         LocationDetailFragment frag = LocationDetailFragment.newInstance(location, true);
+        frag.planEditActivity = planEditActivity;
         frag.planMapFragment = this;
         frag.show(fm, "name");
         return false;
@@ -306,6 +307,7 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
                 }
                 LocationDetailFragment frag = LocationDetailFragment.newInstance(loc, false);
                 frag.planMapFragment = self;
+                frag.planEditActivity = planEditActivity;
                 frag.show(fm, "detail");
             }
         });

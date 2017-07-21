@@ -129,6 +129,11 @@ public class PlanEditActivity extends AppCompatActivity {
         fragmentPager.getPlanMapFragment().refresh();
     }
 
+    public void refreshAdd() {
+        fragmentPager.getPlanListFragment().addItem();
+        fragmentPager.getPlanMapFragment().refresh();
+    }
+
     public void removeLocation(Location location) {
         places.remove(location);
         String ToastString = "";
