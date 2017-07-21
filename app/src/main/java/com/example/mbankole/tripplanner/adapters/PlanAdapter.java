@@ -6,11 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
+import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Plan;
 
 import java.util.List;
@@ -48,6 +51,9 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         Plan plan = mPlans.get(position);
         // populate the views according to this data
         holder.tvPlanTitle.setText(plan.title);
+        for (int i = 0; i < plan.places.size(); i++) {
+            holder.addLocation(plan.places.get(i));
+        }
     }
 
     @Override
@@ -58,14 +64,14 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView tvPlanTitle;
+        public LinearLayout llLocations;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvPlanTitle = (TextView) itemView.findViewById(R.id.tvPlanTitle);
-
+            llLocations = (LinearLayout) itemView.findViewById(R.id.llLocations);
             itemView.setOnClickListener(this);
         }
-
 
         @Override
         public void onClick(View v) {
@@ -76,6 +82,14 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
                 i.putExtra("plan", plan);
                 context.startActivity(i);
             }
+        }
+
+        void addLocation(Location location) {
+            View v = LayoutInflater.from(context).inflate(R.layout.item_location, llLocations, false);
+            final TextView tvLocationName = (TextView)v.findViewById(R.id.tvLocationname);
+            final ImageView ivLocationImage = (ImageView)v.findViewById(R.id.ivLocationImage);
+            tvLocationName.setText(location.name);
+            llLocations.addView(v);
         }
     }
 }

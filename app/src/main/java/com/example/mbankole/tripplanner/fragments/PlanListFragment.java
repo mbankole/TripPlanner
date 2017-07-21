@@ -162,7 +162,3 @@ public class PlanListFragment extends Fragment{
         refresh();
     }
 }
-
-//created fragment of the planning list
-//
-//
