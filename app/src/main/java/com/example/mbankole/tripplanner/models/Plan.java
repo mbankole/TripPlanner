@@ -23,9 +23,9 @@ public class Plan implements Parcelable {
         plan.people.add(User.generatePhilp());
         plan.people.add(User.generateTom());
         plan.places.add(Location.generateArboretum());
-        plan.places.add(Location.generateArtMuseum());
+        //plan.places.add(Location.generateArtMuseum());
         plan.places.add(Location.generateNeedle());
-        plan.places.add(Location.generatePopCulture());
+        //plan.places.add(Location.generatePopCulture());
         plan.places.add(Location.generateWheel());
         return plan;
     }

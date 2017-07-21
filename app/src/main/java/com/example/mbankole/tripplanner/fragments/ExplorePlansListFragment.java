@@ -45,7 +45,7 @@ public class ExplorePlansListFragment extends Fragment {
         rvPlans = (RecyclerView) v.findViewById(R.id.rvPlans);
         // init the arraylist (data source)
         plans = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 3; i++) {
             Plan plan = new Plan();
             plans.add(plan.generateSeattlePlan());
         }

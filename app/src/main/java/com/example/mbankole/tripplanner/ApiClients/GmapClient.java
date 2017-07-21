@@ -11,7 +11,10 @@ import com.loopj.android.http.RequestParams;
 
 public class GmapClient {
     private static final String BASE_URL = "https://maps.googleapis.com/maps/api/";
-    private static final String API_KEY = "AIzaSyAu4LnwwfQl6FQhWvl2K_mtjAj844rMyGU";
+    //private static final String API_KEY = "AIzaSyAu4LnwwfQl6FQhWvl2K_mtjAj844rMyGU";
+    //private static final String API_KEY = "AIzaSyAIxBmOYjuG-dGC86LhChPsoR619GCcAOM";
+    private static final String API_KEY = "AIzaSyAAP5pDzemIFGVPdgDxhI9xxCNBShO1yM8";
+    //private static final String API_KEY = "AIzaSyA6Ps9FNXuKi4jY7w5usQoaad7vm-15m-Q";
     //pls no stealing
 
     private static AsyncHttpClient client = new AsyncHttpClient();

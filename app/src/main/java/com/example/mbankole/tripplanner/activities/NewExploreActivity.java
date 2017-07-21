@@ -54,7 +54,9 @@ public class NewExploreActivity extends AppCompatActivity {
         //viewPager.setCurrentItem(0);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        supportInvalidateOptionsMenu();
+
+        Menu menu = toolbar.getMenu();
+        onCreateOptionsMenu(menu);
     }
 
     @Override

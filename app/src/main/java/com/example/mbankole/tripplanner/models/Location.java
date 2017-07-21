@@ -2,6 +2,7 @@ package com.example.mbankole.tripplanner.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.google.android.gms.maps.model.LatLng;
@@ -58,6 +59,7 @@ public class Location implements Parcelable {
 
     public static void locationFromJson(JSONObject obj, Location loc) throws JSONException{
         JSONObject result = obj;
+        Log.d(TAG, "locationFromJson: " + result.toString());
         if (obj.has("result")) result = obj.getJSONObject("result");
         loc.name = result.getString("name");
         loc.address = result.optString("formatted_address");
