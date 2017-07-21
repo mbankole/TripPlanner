@@ -14,8 +14,8 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
+import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.TransportOption;
 import com.example.mbankole.tripplanner.models.User;
@@ -32,7 +32,7 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
 
     List<Location> mLocations;
     Context context;
-    public PlanActivity planActivity;
+    public PlanEditActivity planEditActivity;
     android.app.FragmentManager fm;
 
     public PlanLocationsAdapter(List<Location> locations) {
@@ -200,6 +200,6 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
     }
 
     public void update() {
-        planActivity.refresh();
+        planEditActivity.refresh();
     }
 }

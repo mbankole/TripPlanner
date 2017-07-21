@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.fragments.PlanListFragment;
 import com.example.mbankole.tripplanner.fragments.PlanMapFragment;
 import com.example.mbankole.tripplanner.models.Location;
@@ -23,6 +24,7 @@ public class PlanEditPagerAdapter extends FragmentPagerAdapter {
     PlanMapFragment planMapFragment;
     public ArrayList<User> people;
     public ArrayList<Location> places;
+    public PlanEditActivity planEditActivity;
 
     public PlanEditPagerAdapter(FragmentManager fm, ArrayList<User> people, ArrayList<Location> places) {
         super(fm);
@@ -35,6 +37,7 @@ public class PlanEditPagerAdapter extends FragmentPagerAdapter {
         if (planListFragment == null) {
             planListFragment = PlanListFragment.newInstance();
             planListFragment.locations = places;
+            planListFragment.planEditActivity = planEditActivity;
             planListFragment.refresh();
             //planFragment.viewPager = this;
         }

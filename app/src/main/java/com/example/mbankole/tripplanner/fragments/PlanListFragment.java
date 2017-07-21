@@ -17,8 +17,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.ExploreActivity;
-import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
+import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.adapters.PlanLocationsAdapter;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.TransportOption;
@@ -36,7 +36,7 @@ public class PlanListFragment extends Fragment{
     RecyclerView rvPlanList;
     public PlanLocationsAdapter listAdapter;
     android.app.FragmentManager fm;
-    public PlanActivity planActivity;
+    public PlanEditActivity planEditActivity;
     public ExploreActivity exploreActivity;
 
 
@@ -59,7 +59,7 @@ public class PlanListFragment extends Fragment{
         rvPlanList = (RecyclerView) v.findViewById(R.id.rvPlanList);
         // construct the adapter from this data source
         listAdapter = new PlanLocationsAdapter(locations);
-        listAdapter.planActivity = planActivity;
+        listAdapter.planEditActivity = planEditActivity;
         listAdapter.setFm(fm);
 //        locationAdapter.exploreActivity = exploreActivity;
         // RecyclerView setup (layout manager, use adapter)
@@ -81,7 +81,7 @@ public class PlanListFragment extends Fragment{
                 Collections.swap(locations, viewHolder.getAdapterPosition(), target.getAdapterPosition());
                 // and notify the adapter that its dataset has changed
                 listAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
-                planActivity.refresh();
+                planEditActivity.refresh();
 
                 String ToastString = "";
                 for (int i=0; i<locations.size(); i++) {

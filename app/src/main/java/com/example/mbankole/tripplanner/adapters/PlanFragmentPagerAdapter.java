@@ -42,7 +42,6 @@ public class PlanFragmentPagerAdapter  extends FragmentPagerAdapter {
             planListFragment = PlanListFragment.newInstance();
             planListFragment.locations = places;
             planListFragment.refresh();
-            planListFragment.planActivity = planActivity;
             planListFragment.exploreActivity = exploreActivity;
             //planFragment.viewPager = this;
         }

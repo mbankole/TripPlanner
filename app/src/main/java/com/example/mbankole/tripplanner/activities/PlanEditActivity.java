@@ -55,6 +55,7 @@ public class PlanEditActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         fragmentPager = new PlanEditPagerAdapter(getSupportFragmentManager(), plan.people, plan.places);
         viewPager.setAdapter(fragmentPager);
+        fragmentPager.planEditActivity = this;
         fragmentPager.people = plan.people;
         fragmentPager.places = plan.places;
 
