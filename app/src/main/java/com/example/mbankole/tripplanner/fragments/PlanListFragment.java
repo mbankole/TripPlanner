@@ -52,7 +52,6 @@ public class PlanListFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // inflate the layout
-        locations = new ArrayList<>();
         View v = inflater.inflate(R.layout.fragment_listsview, container, false);
 
         fm = getActivity().getFragmentManager();
