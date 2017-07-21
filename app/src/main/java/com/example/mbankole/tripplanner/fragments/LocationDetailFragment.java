@@ -17,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.models.Location;
@@ -40,7 +39,7 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
     Button btAdd;
     ImageButton btRemove;
 
-    public ExploreActivity exploreActivity;
+    public PlanMapFragment planMapFragment;
     PlanActivity planActivity;
 
     private final String TAG = "POIDETAILFRAGMENT";
@@ -81,8 +80,9 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
         btAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                exploreActivity.addLocation(loc);
+                planMapFragment.addLocation(loc);
                 Snackbar.make(viewref, "Added!", Snackbar.LENGTH_SHORT).show();
+                planMapFragment.refresh();
             }
         });
         btRemove = (ImageButton) view.findViewById(R.id.ibRemove);
