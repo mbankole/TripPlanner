@@ -27,16 +27,16 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        tvUsername = (TextView) findViewById(R.id.tvUsernameProfiles);
-        tvInterests = (TextView) findViewById(R.id.tvInterests);
+        //tvUsername = (TextView) findViewById(R.id.tvUsername);
+        //tvInterests = (TextView) findViewById(R.id.tvInterests);
         self = User.generateAdam();
-        tvUsername.setText(self.name);
+        //tvUsername.setText(self.name);
         String interestString = "";
         for (int i=0; i<self.interests.size(); i++) {
             interestString += self.interests.get(i) + ", ";
         }
-        tvUsername.setText(",");
-        tvInterests.setText(",");
+        //tvUsername.setText(",");
+        //tvInterests.setText(",");
     }
 //
     private static int count = 0;

@@ -15,18 +15,22 @@ public class User implements Parcelable {
     public String name;
     public int uid;
     public String imageUrl;
-    public ArrayList<Integer> friends;
+    public ArrayList<User> friends;
     public ArrayList<Location> interests;
+    public ArrayList<Plan> plans;
 
     public static User generateAdam() {
         User user = new User();
         user.name = "Adam";
         user.uid = 1;
         user.friends = new ArrayList<>();
-        user.friends.add(2);
+        user.friends.add(generateTom());
+        user.friends.add(generatePhilp());
         user.interests = new ArrayList<>();
         user.interests.add(Location.generatePopCulture());
         user.interests.add(Location.generateNeedle());
+        user.plans = new ArrayList<>();
+        user.plans.add(Plan.generateSeattlePlan());
         return user;
     }
 
@@ -34,8 +38,8 @@ public class User implements Parcelable {
         User user = new User();
         user.name = "Tom";
         user.uid = 2;
-        user.friends = new ArrayList<Integer>();
-        user.friends.add(1);
+        user.friends = new ArrayList<>();
+        //user.friends.add(1);
         return user;
     }
 
@@ -43,8 +47,8 @@ public class User implements Parcelable {
         User user = new User();
         user.name = "Philp";
         user.uid = 3;
-        user.friends = new ArrayList<Integer>();
-        user.friends.add(2);
+        user.friends = new ArrayList<>();
+        //user.friends.add(2);
         return user;
     }
 
@@ -61,7 +65,7 @@ public class User implements Parcelable {
         dest.writeString(this.name);
         dest.writeInt(this.uid);
         dest.writeString(this.imageUrl);
-        dest.writeList(this.friends);
+        dest.writeTypedList(this.friends);
         dest.writeTypedList(this.interests);
     }
 
@@ -69,8 +73,7 @@ public class User implements Parcelable {
         this.name = in.readString();
         this.uid = in.readInt();
         this.imageUrl = in.readString();
-        this.friends = new ArrayList<Integer>();
-        in.readList(this.friends, Integer.class.getClassLoader());
+        this.friends = in.createTypedArrayList(User.CREATOR);
         this.interests = in.createTypedArrayList(Location.CREATOR);
     }
 

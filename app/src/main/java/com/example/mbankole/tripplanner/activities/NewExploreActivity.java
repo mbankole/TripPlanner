@@ -12,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.mbankole.tripplanner.ProfileActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.NewExploreFragmentPagerAdapter;
 import com.example.mbankole.tripplanner.models.Plan;
@@ -91,7 +90,7 @@ public class NewExploreActivity extends AppCompatActivity {
         miProfile.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                Intent intent = new Intent(context, ProfileActivity.class);
+                Intent intent = new Intent(context, com.example.mbankole.tripplanner.activities.ProfileActivity.class);
                 startActivity(intent);
                 return false;
             }
