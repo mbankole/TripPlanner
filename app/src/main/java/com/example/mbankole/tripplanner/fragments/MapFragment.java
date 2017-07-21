@@ -143,7 +143,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
                     e.printStackTrace();
                 }
                 LocationDetailFragment frag = LocationDetailFragment.newInstance(loc, false);
-                frag.exploreActivity = exploreActivity;
                 frag.show(fm, "detail");
             }
         });

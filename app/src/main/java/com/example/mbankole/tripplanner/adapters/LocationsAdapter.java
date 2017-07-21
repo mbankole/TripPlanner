@@ -93,52 +93,8 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.View
             if (position != RecyclerView.NO_POSITION) {
                 Location location= mLocations.get(position);
                 LocationDetailFragment frag = LocationDetailFragment.newInstance(location, false);
-                frag.exploreActivity = exploreActivity;
                 frag.show(fm, "name");
             }
         }
     }
 }
-
-//added on click listener
-
-
-
-
-
-///
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-///
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-

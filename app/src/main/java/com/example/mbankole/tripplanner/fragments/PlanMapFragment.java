@@ -19,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.ExploreActivity;
@@ -66,6 +67,8 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     public ArrayList<Location> places;
     FragmentManager fm;
     private GoogleMap mMap;
+
+    final PlanMapFragment self = this;
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private boolean mPermissionDenied = false;
@@ -233,7 +236,7 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     public boolean onMarkerClick(Marker marker) {
         Location location = (Location) marker.getTag();
         LocationDetailFragment frag = LocationDetailFragment.newInstance(location, true);
-        frag.exploreActivity = exploreActivity;
+        frag.planMapFragment = this;
         frag.show(fm, "name");
         return false;
     }
@@ -302,9 +305,19 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
                     e.printStackTrace();
                 }
                 LocationDetailFragment frag = LocationDetailFragment.newInstance(loc, false);
-                frag.exploreActivity = exploreActivity;
+                frag.planMapFragment = self;
                 frag.show(fm, "detail");
             }
         });
+    }
+
+    public void addLocation(Location location) {
+        places.add(location);
+        String ToastString = "";
+        for (int i=0; i<places.size(); i++) {
+            ToastString += places.get(i).name;
+        }
+        Toast toast = Toast.makeText(getContext(), ToastString, Toast.LENGTH_LONG);
+        toast.show();
     }
 }
