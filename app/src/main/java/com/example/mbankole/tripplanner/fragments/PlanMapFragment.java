@@ -36,6 +36,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PointOfInterest;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.ui.IconGenerator;
@@ -57,7 +58,7 @@ import static com.example.mbankole.tripplanner.R.id.map;
 
 public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback, GoogleMap.OnMarkerClickListener,
-        GoogleMap.OnPolylineClickListener {
+        GoogleMap.OnPolylineClickListener, GoogleMap.OnPoiClickListener {
 
     public PlanActivity planActivity;
     public ExploreActivity exploreActivity;
@@ -148,7 +149,8 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         map.setOnMarkerClickListener(this);
         map.setOnPolylineClickListener(this);
-//        enableMyLocation();
+        map.setOnPoiClickListener(this);
+        enableMyLocation();
         if (places.size() != 0) {
             addPins(map);
         }
@@ -279,7 +281,30 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         RouteFragment frag = RouteFragment.newInstance((Route) polyline.getTag());
         frag.show(fm, "name");
     }
+
+    @Override
+    public void onPoiClick(PointOfInterest poi) {
+                /*Toast.makeText(getContext(), "Clicked: " +
+                        poi.name + "\nPlace ID:" + poi.placeId +
+                        "\nLatitude:" + poi.latLng.latitude +
+                        " Longitude:" + poi.latLng.longitude,
+                Toast.LENGTH_SHORT).show();
+                */
+        //Log.d(TAG, poi.toString());
+        GmapClient.getDetailFromId(poi.placeId, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                //Log.d(TAG, response.toString());
+                Location loc = null;
+                try {
+                    loc = Location.locationFromJson(response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                LocationDetailFragment frag = LocationDetailFragment.newInstance(loc, false);
+                frag.exploreActivity = exploreActivity;
+                frag.show(fm, "detail");
+            }
+        });
+    }
 }
-////
-//
-//
