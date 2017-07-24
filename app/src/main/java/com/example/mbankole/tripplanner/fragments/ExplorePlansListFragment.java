@@ -32,6 +32,8 @@ public class ExplorePlansListFragment extends Fragment {
     RecyclerView rvPlans;
     FloatingActionButton fabAdd;
 
+    public static final int PLAN_REQUEST_CODE = 20;
+
     public static ExplorePlansListFragment newInstance() {
         Bundle args = new Bundle();
         ExplorePlansListFragment fragment = new ExplorePlansListFragment();
@@ -50,6 +52,7 @@ public class ExplorePlansListFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), PlanEditActivity.class);
+                getActivity().startActivityForResult(i, PLAN_REQUEST_CODE);
                 getContext().startActivity(i);
             }
         });
@@ -73,42 +76,6 @@ public class ExplorePlansListFragment extends Fragment {
         planAdapter.notifyItemInserted(plans.size() - 1);
         return v;
     }
-
-    /**
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_map, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                // perform query here
-                return true;
-            }
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });
-        MenuItem miProfile = menu.findItem(R.id.miProfile);
-        miProfile.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                return false;
-            }
-        });
-        MenuItem miPlan = menu.findItem(R.id.miPlan);
-        miPlan.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                exploreActivity.launchPlanActivity();
-                return false;
-            }
-        });
-    }
-     **/
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {}
