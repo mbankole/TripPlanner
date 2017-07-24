@@ -52,7 +52,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_above="@+id/tvEndAddress"
-        android:layout_alignStart="@+id/tvStartAddress"
-        android:layout_below="@+id/tvStartAddress" />
+        android:layout_below="@+id/tvStartAddress"
+        android:layout_alignStart="@+id/tvStartAddress" />
 
 </RelativeLayout>
