@@ -11,8 +11,8 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class TransportOption implements Parcelable {
     public String name;
-    public Location start;
-    public Location end;
+    //public Location start;
+    //public Location end;
     public LatLng startLatLong;
     public LatLng endLatLong;
     public String startId;
@@ -30,9 +30,16 @@ public class TransportOption implements Parcelable {
 
     public TransportOption() {}
 
+    public static TransportOption newInstance() {
+        TransportOption transportOption = new TransportOption();
+        transportOption.name = "";
+        transportOption.mode = Mode.BLANK;
+        return transportOption;
+    }
+
     public TransportOption(Location start, Location end) {
-        this.start = start;
-        this.end = end;
+        //this.start = start;
+        //this.end = end;
         this.startLatLong = start.latLng;
         this.endLatLong = end.latLng;
         this.startId = start.googleId;
@@ -51,8 +58,6 @@ public class TransportOption implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.name);
-        dest.writeParcelable(this.start, flags);
-        dest.writeParcelable(this.end, flags);
         dest.writeParcelable(this.startLatLong, flags);
         dest.writeParcelable(this.endLatLong, flags);
         dest.writeString(this.startId);
@@ -63,8 +68,6 @@ public class TransportOption implements Parcelable {
 
     protected TransportOption(Parcel in) {
         this.name = in.readString();
-        this.start = in.readParcelable(Location.class.getClassLoader());
-        this.end = in.readParcelable(Location.class.getClassLoader());
         this.startLatLong = in.readParcelable(LatLng.class.getClassLoader());
         this.endLatLong = in.readParcelable(LatLng.class.getClassLoader());
         this.startId = in.readString();

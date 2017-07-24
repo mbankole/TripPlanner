@@ -53,5 +53,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         tvUsername.setText(user.name);
 
+
     }
 }

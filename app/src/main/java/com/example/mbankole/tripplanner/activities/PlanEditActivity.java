@@ -85,18 +85,15 @@ public class PlanEditActivity extends AppCompatActivity {
         });
         //Intent i = new Intent(MainActivity.this, MapDemoActivity.class);
         //startActivity(i);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        return super.onPrepareOptionsMenu(menu);
+        Menu menu = toolbar.getMenu();
+        onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         menu.clear();
-        getMenuInflater().inflate(R.menu.menu_plan, menu);
+        getMenuInflater().inflate(R.menu.menu_plan_edit, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         //searchView.setVisibility(View.GONE);
@@ -126,10 +123,13 @@ public class PlanEditActivity extends AppCompatActivity {
                 return false;
             }
         });
-        MenuItem miExplore = menu.findItem(R.id.miPlan);
-        miExplore.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        MenuItem miSave = menu.findItem(R.id.miSave);
+        miSave.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                Intent data = new Intent();
+                data.putExtra("plan", plan);
+                setResult(RESULT_OK, data);
                 finish();
                 return false;
             }

@@ -1,14 +1,15 @@
 package com.example.mbankole.tripplanner.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.mbankole.tripplanner.ProfileActivity;
 import com.example.mbankole.tripplanner.R;
-import com.example.mbankole.tripplanner.fragments.PeopleDetailsFragment;
 import com.example.mbankole.tripplanner.models.User;
 
 import java.util.List;
@@ -68,8 +69,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
                 User user = mUsers.get(position);
-                PeopleDetailsFragment frag = PeopleDetailsFragment.newInstance(user);
-                frag.show(fm, "name");
+                Intent intent = new Intent(context, ProfileActivity.class);
+                intent.putExtra("user", user);
+                context.startActivity(intent);
             }
         }
     }
