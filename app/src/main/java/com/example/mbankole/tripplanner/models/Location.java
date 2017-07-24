@@ -203,3 +203,8 @@ public class Location implements Parcelable {
         }
     };
 }
+
+
+
+
+//allows user to pick destination location

@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Created by danahe97 on 7/11/17.
  */
 
-
+//
 public class User implements Parcelable {
 
     public String name;
@@ -90,3 +90,5 @@ public class User implements Parcelable {
         }
     };
 }
+//list friend names
+//enter and show profile with list of interests
