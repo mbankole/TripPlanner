@@ -53,6 +53,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         Plan plan = mPlans.get(position);
         // populate the views according to this data
         holder.tvPlanTitle.setText(plan.title);
+        holder.clearLocations();
         for (int i = 0; i < plan.places.size(); i++) {
             holder.addLocation(plan.places.get(i));
         }
@@ -108,6 +109,11 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
             }
             tvLocationName.setText(location.name);
             llLocations.addView(v);
+        }
+
+        void clearLocations() {
+            if((llLocations).getChildCount() > 0)
+                (llLocations).removeAllViews();
         }
     }
 }
