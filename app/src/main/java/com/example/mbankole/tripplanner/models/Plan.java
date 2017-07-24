@@ -23,9 +23,9 @@ public class Plan implements Parcelable {
         plan.places = new ArrayList<>();
         plan.people = new ArrayList<>();
         plan.title = "Trip to Seattle";
-        //plan.people.add(User.generateAdam());
-        plan.people.add(User.generatePhilp());
-        plan.people.add(User.generateTom());
+        //plan.people.add(User.generateChandler());
+        plan.people.add(User.generateRachel());
+        plan.people.add(User.generatePhoebe());
         plan.places.add(Location.generateArboretum(context));
         //plan.places.add(Location.generateArtMuseum());
         plan.places.add(Location.generateNeedle(context));

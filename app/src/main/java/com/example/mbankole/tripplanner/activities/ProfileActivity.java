@@ -12,6 +12,7 @@ import com.example.mbankole.tripplanner.adapters.ProfileFragmentPagerAdapter;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Plan;
 import com.example.mbankole.tripplanner.models.User;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -34,7 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         user = getIntent().getParcelableExtra("user");
         if (user == null) {
-            user = User.generateAdam(getApplicationContext());
+            user = User.generateChandler(getApplicationContext());
         }
 
         friends = user.friends;
@@ -52,7 +53,11 @@ public class ProfileActivity extends AppCompatActivity {
         ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
 
         tvUsername.setText(user.name);
-
-
+        if (user.imageUrl != null) {
+            Picasso.with(this)
+                    .load(user.imageUrl)
+                    //.memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
+                    .into(ivProfileImage);
+        }
     }
 }

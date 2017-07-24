@@ -27,11 +27,6 @@ import com.squareup.picasso.Picasso;
  * Created by mbankole on 7/12/17.
  *
  */
-//make a close button
-//make on click listener
-    //
-
-
 
 public class LocationDetailFragment extends DialogFragment implements  View.OnClickListener{
     TextView tvName;
@@ -61,7 +56,6 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
         frag.setArguments(args);
         return frag;
     }
-    //
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -165,5 +159,3 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
         dismiss();
     }
 }
-//make a close button
-//make on click listener

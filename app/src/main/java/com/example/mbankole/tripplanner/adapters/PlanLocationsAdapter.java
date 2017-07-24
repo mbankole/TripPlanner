@@ -123,7 +123,7 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
             add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    addUser(User.generateAdam(context));
+                    addUser(User.generateChandler(context));
                 }
             });
         }

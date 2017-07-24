@@ -11,10 +11,10 @@
         android:text="Name"
         android:textAppearance="@android:style/TextAppearance.Large"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/ivImage" />
+        android:layout_toEndOf="@+id/ivUserImage" />
 
     <ImageView
-        android:id="@+id/ivImage"
+        android:id="@+id/ivUserImage"
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:layout_alignParentStart="true"

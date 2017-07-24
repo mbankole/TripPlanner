@@ -6,11 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.mbankole.tripplanner.ProfileActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.models.User;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -47,6 +48,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         User user = mUsers.get(position);
         // populate the views according to this data
         holder.tvUsername.setText(user.name);
+        if (user.imageUrl != null) {
+            Picasso.with(context)
+                    .load(user.imageUrl)
+                    //.memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
+                    .into(holder.ivUserImage);
+        }
     }
 
     @Override
@@ -57,19 +64,21 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView tvUsername;
+        public ImageView ivUserImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
+            ivUserImage = (ImageView) itemView.findViewById(R.id.ivUserImage);
         }
 
         @Override
         public void onClick(View view) {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
-                User user = mUsers.get(position);
-                Intent intent = new Intent(context, ProfileActivity.class);
+                User user =  mUsers.get(position);
+                Intent intent = new Intent(context, com.example.mbankole.tripplanner.activities.ProfileActivity.class);
                 intent.putExtra("user", user);
                 context.startActivity(intent);
             }
