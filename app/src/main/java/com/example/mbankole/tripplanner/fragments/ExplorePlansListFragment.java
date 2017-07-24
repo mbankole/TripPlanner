@@ -53,7 +53,6 @@ public class ExplorePlansListFragment extends Fragment {
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), PlanEditActivity.class);
                 getActivity().startActivityForResult(i, PLAN_REQUEST_CODE);
-                getContext().startActivity(i);
             }
         });
 
@@ -75,6 +74,11 @@ public class ExplorePlansListFragment extends Fragment {
 //        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         planAdapter.notifyItemInserted(plans.size() - 1);
         return v;
+    }
+
+
+    public void refresh() {
+        planAdapter.notifyDataSetChanged();
     }
 
     @Override

@@ -27,8 +27,6 @@ import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Route;
 import com.example.mbankole.tripplanner.models.User;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -92,8 +90,6 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         // inflate and return the layout
-        //setHasOptionsMenu(true);
-
         if (v == null) {
             v = inflater.inflate(R.layout.fragment_map, container, false);
         }
@@ -183,8 +179,8 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         }
         LatLngBounds bounds = builder.build();
         int padding = 240; // offset from edges of the map in pixels
-        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-        map.moveCamera(cu);
+        //CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+        //map.moveCamera(cu);
     }
 
 

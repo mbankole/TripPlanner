@@ -65,4 +65,9 @@ public class NewExploreFragmentPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         return tabTitles[position];
     }
+
+    public void refresh() {
+        getExploreUsersListFragment().refresh();
+        getExplorePlansListFragment().refresh();
+    }
 }

@@ -101,9 +101,10 @@ public class NewExploreActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode ==RESULT_OK && requestCode == ExplorePlansListFragment.PLAN_REQUEST_CODE){
+        if (resultCode == RESULT_OK && requestCode == ExplorePlansListFragment.PLAN_REQUEST_CODE){
             Plan newPlan = data.getExtras().getParcelable("plan");
             plans.add(newPlan);
+            fragmentPager.refresh();
         }
     }
 }

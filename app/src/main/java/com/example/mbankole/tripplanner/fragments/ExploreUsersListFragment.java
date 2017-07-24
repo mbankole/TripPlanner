@@ -69,6 +69,10 @@ public class ExploreUsersListFragment extends Fragment {
         return v;
     }
 
+    public void refresh() {
+        userAdapter.notifyDataSetChanged();
+    }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {}
 
