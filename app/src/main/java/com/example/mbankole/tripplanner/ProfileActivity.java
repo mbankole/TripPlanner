@@ -29,7 +29,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         //tvUsername = (TextView) findViewById(R.id.tvUsername);
         //tvInterests = (TextView) findViewById(R.id.tvInterests);
-        self = User.generateAdam();
+        self = User.generateAdam(getApplicationContext());
         //tvUsername.setText(self.name);
         String interestString = "";
         for (int i=0; i<self.interests.size(); i++) {

@@ -13,7 +13,6 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.TransportOption;
@@ -31,7 +30,6 @@ public class PlanListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     List<Object> mObjects;
     Context context;
-    public ExploreActivity exploreActivity;
     android.app.FragmentManager fm;
     public static String TAG = "PLANLISTADAPTER";
 
@@ -166,7 +164,7 @@ public class PlanListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    addUser(User.generateAdam());
+                    addUser(User.generateAdam(context));
                 }
             });
         }

@@ -22,7 +22,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
-import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Location;
@@ -62,7 +61,6 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         GoogleMap.OnPolylineClickListener, GoogleMap.OnPoiClickListener {
 
     public PlanEditActivity planEditActivity;
-    public ExploreActivity exploreActivity;
     public ArrayList<User> people;
     public ArrayList<Location> places;
     FragmentManager fm;

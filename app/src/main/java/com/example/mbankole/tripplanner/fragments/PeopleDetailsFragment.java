@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.User;
@@ -24,7 +23,6 @@ public class PeopleDetailsFragment extends DialogFragment {
     TextView tvInterests;
     ImageButton ibAddUser;
     String interestsString;
-    public ExploreActivity exploreActivity;
 
 
     public static PeopleDetailsFragment newInstance(User user) {
@@ -49,14 +47,14 @@ public class PeopleDetailsFragment extends DialogFragment {
         tvUsername = (TextView) view.findViewById(R.id.tvUserDetailsName);
         tvInterests = (TextView) view.findViewById(R.id.tvInterests);
         ibAddUser = (ImageButton) view.findViewById(R.id.ibAddUser);
-        ibAddUser.setOnClickListener(new View.OnClickListener() {
+        /*ibAddUser.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 exploreActivity.addUser(user);
 
             }
-        });
+        });*/
         if (user.interests != null) {
             interestsString = "";
             for (int i = 0; i < user.interests.size(); i++) {

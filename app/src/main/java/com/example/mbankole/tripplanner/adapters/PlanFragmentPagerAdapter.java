@@ -5,8 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.mbankole.tripplanner.ExploreActivity;
-import com.example.mbankole.tripplanner.PlanActivity;
 import com.example.mbankole.tripplanner.fragments.PlanListFragment;
 import com.example.mbankole.tripplanner.fragments.PlanMapFragment;
 import com.example.mbankole.tripplanner.models.Location;
@@ -24,8 +22,6 @@ public class PlanFragmentPagerAdapter  extends FragmentPagerAdapter {
     private String tabTitles[] = new String[]{"", ""};
     private Context context;
     FragmentManager fragmentManager;
-    public PlanActivity planActivity;
-    public ExploreActivity exploreActivity;
     PlanListFragment planListFragment;
     PlanMapFragment planMapFragment;
     public ArrayList<User> people;
@@ -42,7 +38,6 @@ public class PlanFragmentPagerAdapter  extends FragmentPagerAdapter {
             planListFragment = PlanListFragment.newInstance();
             planListFragment.locations = places;
             planListFragment.refresh();
-            planListFragment.exploreActivity = exploreActivity;
             //planFragment.viewPager = this;
         }
         return planListFragment;
@@ -53,7 +48,6 @@ public class PlanFragmentPagerAdapter  extends FragmentPagerAdapter {
             planMapFragment = PlanMapFragment.newInstance();
             planMapFragment.people = people;
             planMapFragment.places = places;
-            planMapFragment.exploreActivity = exploreActivity;
             planMapFragment.setFm(fragmentManager);
             //planMapFragment.viewPager = this;
         }

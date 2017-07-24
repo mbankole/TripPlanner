@@ -34,7 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         user = getIntent().getParcelableExtra("user");
         if (user == null) {
-            user = User.generateAdam();
+            user = User.generateAdam(getApplicationContext());
         }
 
         friends = user.friends;

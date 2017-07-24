@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
-import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.models.Location;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,7 +34,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
 
     FragmentManager fm;
     private GoogleMap mMap;
-    public ExploreActivity exploreActivity;
 
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private boolean mPermissionDenied = false;

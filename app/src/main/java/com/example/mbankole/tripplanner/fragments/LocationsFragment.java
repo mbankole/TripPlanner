@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.LocationsAdapter;
 import com.example.mbankole.tripplanner.models.Location;
@@ -35,7 +34,6 @@ public class LocationsFragment extends Fragment implements View.OnClickListener 
     LocationsAdapter searchesAdapter;
     ArrayList<Location> searchResults;
     RecyclerView rvSearches;
-    public ExploreActivity exploreActivity;
     FragmentManager fm;
 
     Button btClose;
@@ -76,8 +74,6 @@ public class LocationsFragment extends Fragment implements View.OnClickListener 
         // set the adapter
         rvLocations.setAdapter(locationsAdapter);
         rvSearches.setAdapter(searchesAdapter);
-        locationsAdapter.exploreActivity = exploreActivity;
-        searchesAdapter.exploreActivity = exploreActivity;
 
         //Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
         //((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);

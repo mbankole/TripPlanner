@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.fragments.LocationsFragment;
 import com.example.mbankole.tripplanner.fragments.MapFragment;
 import com.example.mbankole.tripplanner.fragments.PeopleFragment;
@@ -25,7 +24,6 @@ public class ExploreFragmentPagerAdapter extends FragmentPagerAdapter {
     MapFragment mapFragment;
     PeopleFragment peopleFragment;
     PlanFragment planFragment;
-    public ExploreActivity exploreActivity;
 
     public ExploreFragmentPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
@@ -36,7 +34,6 @@ public class ExploreFragmentPagerAdapter extends FragmentPagerAdapter {
     public LocationsFragment getLocationsFragment() {
         if (locationsFragment == null) {
             locationsFragment = LocationsFragment.newInstance();
-            locationsFragment.exploreActivity = exploreActivity;
         }
         return locationsFragment;
     }
@@ -44,7 +41,6 @@ public class ExploreFragmentPagerAdapter extends FragmentPagerAdapter {
     public MapFragment getMapFragment() {
         if (mapFragment == null) {
             mapFragment = new MapFragment();
-            mapFragment.exploreActivity = exploreActivity;
             mapFragment.setFm(fragmentManager);
         }
         return mapFragment;
@@ -53,7 +49,6 @@ public class ExploreFragmentPagerAdapter extends FragmentPagerAdapter {
     public PeopleFragment getPeopleFragment() {
         if (peopleFragment == null) {
             peopleFragment = PeopleFragment.newInstance();
-            peopleFragment.exploreActivity = exploreActivity;
         }
         return peopleFragment;
     }

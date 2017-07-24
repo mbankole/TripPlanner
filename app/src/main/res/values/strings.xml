@@ -1,4 +1,1453 @@
 <resources>
     <string name="app_name">TripPlanner</string>
     <string name="google_maps_api_key">AIzaSyAu4LnwwfQl6FQhWvl2K_mtjAj844rMyGU</string>
+    <string name="popCultureJson">{
+html_attributions: [ ],
+result: {
+address_components: [
+{
+long_name: \"325\",
+short_name: \"325\",
+types: [
+\"street_number\"
+]
+},
+{
+long_name: \"5th Avenue North\",
+short_name: \"5th Ave N\",
+types: [
+\"route\"
+]
+},
+{
+long_name: \"Seattle\",
+short_name: \"Seattle\",
+types: [
+\"locality\",
+\"political\"
+]
+},
+{
+long_name: \"Washington\",
+short_name: \"WA\",
+types: [
+\"administrative_area_level_1\",
+\"political\"
+]
+},
+{
+long_name: \"United States\",
+short_name: \"US\",
+types: [
+\"country\",
+\"political\"
+]
+},
+{
+long_name: \"98109\",
+short_name: \"98109\",
+types: [
+\"postal_code\"
+]
+}
+],
+formatted_address: \"325 5th Ave N, Seattle, WA 98109, United States\",
+formatted_phone_number: \"(206) 770-2700\",
+geometry: {
+location: {
+lat: 47.6214824,
+lng: -122.3481245
+},
+viewport: {
+northeast: {
+lat: 47.6229841302915,
+lng: -122.3468217697085
+},
+southwest: {
+lat: 47.6202861697085,
+lng: -122.3495197302915
+}
+}
+},
+icon: \"https://maps.gstatic.com/mapfiles/place_api/icons/museum-71.png\",
+id: \"5f02331b606bdcab19e4fd2f306989a4b01ff2a7\",
+international_phone_number: \"+1 206-770-2700\",
+name: \"Museum of Pop Culture\",
+opening_hours: {
+open_now: true,
+periods: [
+{
+close: {
+day: 0,
+time: \"1900\"
+},
+open: {
+day: 0,
+time: \"1000\"
+}
+},
+{
+close: {
+day: 1,
+time: \"1900\"
+},
+open: {
+day: 1,
+time: \"1000\"
+}
+},
+{
+close: {
+day: 2,
+time: \"1900\"
+},
+open: {
+day: 2,
+time: \"1000\"
+}
+},
+{
+close: {
+day: 3,
+time: \"1900\"
+},
+open: {
+day: 3,
+time: \"1000\"
+}
+},
+{
+close: {
+day: 4,
+time: \"1900\"
+},
+open: {
+day: 4,
+time: \"1000\"
+}
+},
+{
+close: {
+day: 5,
+time: \"1900\"
+},
+open: {
+day: 5,
+time: \"1000\"
+}
+},
+{
+close: {
+day: 6,
+time: \"1900\"
+},
+open: {
+day: 6,
+time: \"1000\"
+}
+}
+],
+weekday_text: [
+\"Monday: 10:00 AM – 7:00 PM\",
+\"Tuesday: 10:00 AM – 7:00 PM\",
+\"Wednesday: 10:00 AM – 7:00 PM\",
+\"Thursday: 10:00 AM – 7:00 PM\",
+\"Friday: 10:00 AM – 7:00 PM\",
+\"Saturday: 10:00 AM – 7:00 PM\",
+\"Sunday: 10:00 AM – 7:00 PM\"
+]
+},
+photos: [
+{
+height: 1282,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAstv8X_vZqUlGYalsEE6uC2YDNQCKupI2cPOKl8uT7e0iRbqgqRgSLrqt0BW8A4A9p54hwbh-V7YQ9S7Bo21mrpXx3t3DCuQ3MzbmsVVPt-DFohEMbFvo2GtTuKm7RQaZEhCg4JtremhISW-Z8nIldYzMGhR26XWDe5hrYwtPGvv-Cpqh6bPRmA\",
+width: 1920
+},
+{
+height: 1944,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAA4o65CKQjkQ2Om_wcbJVbcmdTCqa4ixzA-_q7Kf4uwv6Tk-JrjiaF7VtWQW-4hEXPiF7I0-dJpV7u33ZtvXhW4wdo0LVYnXmSpQJyULlM5KtnwI7cyWDc3WUwTIBGqGRQEhAmKDVw2x_81scjpWisDRdmGhS5x_DS9gKWbjDZtxLaD0Vd1-9H1A\",
+width: 2896
+},
+{
+height: 2322,
+html_attributions: [
+],
+photo_reference: \"CmRZAAAAIThG-gdiGlactPLX_hdTBzgWmWJZyw_j_-6mUVTTJ02lPPDtFvaO_qqE8IVbi_S16wx_0gZd-2bNdMKrxnPmSS0S1JO9ijVwWXBHQceubyNDUedO1loYeNdR0CjsbcMDEhAqU6n_bxciKqSZ09cEyaAtGhTU9Vy7FP6IJw65Pg-jmpCzN3LIcA\",
+width: 4128
+},
+{
+height: 3024,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAS0PVx8Qzh6ZYABBBaTspjDbx_t6NzUyvY3Ivxam24XQjM1nvZvaFyS8uOG29AwDcK9YetmtWhYfHKqXcFSx2Z7PDsm6WC2xfBI43lJF6DVcyjUrjm497X3aDx17B5IkwEhAyz7eUakhWXLfIcpZWJSddGhSYofUUbduTvAS8Rdxnjen6igeINA\",
+width: 4032
+},
+{
+height: 2340,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAA-hczWHy_DiNoWZKvEG43zTD9T4LnH9rEfzJyt2BNiUpMxnrTLt-9qvnlCdOYGv8CGLENcOMGR-gf6vod8LKyJ20bNpE8lHmP4XIQ6llCpfP41TmfyOB5HXxLAJmInU_UEhBOuxxl6A4elRGXhET-ofCqGhQzKffLEoGtZ6NTs2u_pzEeGl1AEw\",
+width: 4160
+},
+{
+height: 1520,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAveQNDiaR431YEEigI3TJhZgbmJZ0NvZ5-VpeTvRUIsnYfcQEjoSsnggXZ8WmLbi-x0AXwDttQUgEtf3WYUB2h0hCYj14ETKbHdT-s_Jisu5rSL_sAouWrBBixCVxpJtpEhCA1ek5kj2oaEFjangXmFLhGhT5zNKassYzFQiacBndflg0ebLlRw\",
+width: 2688
+},
+{
+height: 2848,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAc_-TcBUFefxfK4Z7j4HPHhWChSPdaNCXDTGaiwELFGkX_1AaMZriXQhR4KQpyIg0PPfqKQwHCuKoqJH08mv4PNwORw7tPivM1LgBdUkDo_V5cEUUUqSlhZoP84a5lbWMEhD9HKyODRx5CzqYgVxWmW5aGhQk0lUx94OC0f2rdSmFtvwEBDedrw\",
+width: 4288
+},
+{
+height: 1080,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAm9nmKbQo7NA06auvgQo-g7toVbt1ZrBh43axzcxopdIgIoKtSS7hABi9lj35lSksPjR7OKx2My9Cd4h-UrJNvvNfLt3rVo2dZ7yx7l0f-FR2aFkrhvMzSXQZblMfQrnREhBRtLzm7nuVuAFrTVgiKk0fGhQq6O8TvHnARnpfMViuqpAdSVXbXw\",
+width: 1920
+},
+{
+height: 2322,
+html_attributions: [
+],
+photo_reference: \"CmRZAAAAPaeXdtRCjz8nmmpi1mcHnmxCYLwVQplgd_kpHqxP76pu0B0PzJxD7mjA-uWYTLVls-I2xd4rV6RdsYobk2FnW0Kun3kYT4bi2COvI1zNbxBSJwqidEk_9nNViJ0J1vBmEhDHmsQgdWGuEVymzBo4KScmGhTUo2fWRgzjUh6YjaqNN5WX4CG5zw\",
+width: 4128
+},
+{
+height: 2160,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAGcIHf9HI0q_wLBD2JYDVGBZQZey244z1Le3FfQ7rkR7qvd1Jc28TDjSqGt98-ancWmhOMZPx8JUchxCOMj_7Opdan41dZgO9eL6IGF67skPwCo4zm9IQuAz0WgVv5E2WEhCJSvEcBZ42Xu-3XePFHs03GhQJvo015RfbWplekKyR6B4fFdXXoA\",
+width: 3840
+}
+],
+place_id: \"ChIJY8p6-EYVkFQREthJEc0p6dE\",
+rating: 4.2,
+reference: \"CmRSAAAAIAlqI7Fx6NvHIlXJ5v1cd6Xk-ApVIXTR8hWiHwxa5NJft1L8fVKRzov5CNYtO2G1H391gU9IbvZ9dwJjPLP8ZFURhDearXF65OO_NBIqseiml8M9X7h-MNZeELfWl2p9EhARtAcB_lK_OaDrcTYNpyXhGhSHkJNCT0GHqUTno4bqO0L1sjF4rw\",
+reviews: [
+{
+author_name: \"Jill A\",
+author_url: \"https://www.google.com/maps/contrib/100427263598756281177/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh4.googleusercontent.com/-cW5GZi6yi3E/AAAAAAAAAAI/AAAAAAAAATg/6M45J710Yik/s128-c0x00000000-cc-rp-mo/photo.jpg\",
+rating: 5,
+relative_time_description: \"in the last week\",
+text: \"Fun for the entire family. We were there for 6 hours exploring. The Jim Henson exhibit was awesome and worth the extra $. The ticket is a sticker you wear and gives you access to the museum for the entire day. We walked across the street and had a sandwich at the McDonald\'s about half way through our day (great way to save a little money). Great photo opportunities throughout the museum.\",
+time: 1500756247
+},
+{
+author_name: \"Grant Brott\",
+author_url: \"https://www.google.com/maps/contrib/113341238185959931482/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh4.googleusercontent.com/-cdopjzEASd8/AAAAAAAAAAI/AAAAAAAAA5s/Du1RBNkKXM8/s128-c0x00000000-cc-rp-mo-ba4/photo.jpg\",
+rating: 5,
+relative_time_description: \"a month ago\",
+text: \"What a great experience. The horror exhibit was great. Lots of classics. The Star Trek exhibit was fun, lots of artifacts from the show and several interactive aspects like making a transporter video scene. Great staff, everyone was very helpful and friendly. The fantasy exhibit was amazing too with props from movies like Lord of the Rings and Princess Bride.\",
+time: 1497476441
+},
+{
+author_name: \"Tom Wooding\",
+author_url: \"https://www.google.com/maps/contrib/110755656318760447546/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh4.googleusercontent.com/-45w_g1yQ_-I/AAAAAAAAAAI/AAAAAAAAABY/4GVhgH5noR0/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg\",
+rating: 5,
+relative_time_description: \"a month ago\",
+text: \"What a fantastic museum! From Nirvana and The Foo Fighters, to Jimi Hendrix, and everything else in between. This is an awesome experience and a must see if you are visiting Seattle. I especially enjoyed the History of Guitars section, along with the fully playable/interactive instrument and recording studio area. Pricey, but definitely worth the money. Would 100% recommend.\",
+time: 1498065565
+},
+{
+author_name: \"Mark Banks\",
+author_url: \"https://www.google.com/maps/contrib/111612672186535605520/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh4.googleusercontent.com/-p8zGY4wGxJs/AAAAAAAAAAI/AAAAAAAAAKk/rnlXVK_x2Kc/s128-c0x00000000-cc-rp-mo/photo.jpg\",
+rating: 1,
+relative_time_description: \"in the last week\",
+text: \"The biggest disappointment of our otherwise amazing trip to Seattle. If you\'re looking for a music museum that truly pays homage to the greats, look elsewhere. If you want a movie theatre with a football game playing in it, a room full of nintendos and 3 floors dedicated to Star Trek memorabilia then maybe you will love this place. To be fair there is one small room with some amazing guitars in it.\",
+time: 1500301220
+},
+{
+author_name: \"Rama R\",
+author_url: \"https://www.google.com/maps/contrib/102689509948505119645/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh5.googleusercontent.com/-EetcoZSNgAs/AAAAAAAAAAI/AAAAAAAAAqs/x4A6MN_h5Hg/s128-c0x00000000-cc-rp-mo/photo.jpg\",
+rating: 5,
+relative_time_description: \"in the last week\",
+text: \"Best museum I\'ve ever been to. Out of all the places I\'ve been to in my two week trip to Seattle this museum is the most memorable. Not only that in my top recommended locations to visit this is definitely in the top 3. This is paradise for typical sci-fi nerds like me.\",
+time: 1500318007
+}
+],
+scope: \"GOOGLE\",
+types: [
+\"museum\",
+\"point_of_interest\",
+\"establishment\"
+],
+url: \"https://maps.google.com/?cid=15125666784235608082\",
+utc_offset: -420,
+vicinity: \"325 5th Avenue North, Seattle\",
+website: \"http://www.mopop.org/\"
+},
+status: \"OK\"
+}</string>
+    <string name="spaceNeedleJson">{
+html_attributions: [ ],
+result: {
+address_components: [
+{
+long_name: \"400\",
+short_name: \"400\",
+types: [
+\"street_number\"
+]
+},
+{
+long_name: \"Broad Street\",
+short_name: \"Broad St\",
+types: [
+\"route\"
+]
+},
+{
+long_name: \"Seattle\",
+short_name: \"Seattle\",
+types: [
+\"locality\",
+\"political\"
+]
+},
+{
+long_name: \"Washington\",
+short_name: \"WA\",
+types: [
+\"administrative_area_level_1\",
+\"political\"
+]
+},
+{
+long_name: \"United States\",
+short_name: \"US\",
+types: [
+\"country\",
+\"political\"
+]
+},
+{
+long_name: \"98109\",
+short_name: \"98109\",
+types: [
+\"postal_code\"
+]
+}
+],
+formatted_address: \"400 Broad St, Seattle, WA 98109, United States\",
+formatted_phone_number: \"(206) 905-2100\",
+geometry: {
+location: {
+lat: 47.6205063,
+lng: -122.3492774
+},
+viewport: {
+northeast: {
+lat: 47.6218186802915,
+lng: -122.3479511197085
+},
+southwest: {
+lat: 47.6191207197085,
+lng: -122.3506490802915
+}
+}
+},
+icon: \"https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png\",
+id: \"2d3d3592254d212ad01ce51620be345b480df9bb\",
+international_phone_number: \"+1 206-905-2100\",
+name: \"Space Needle\",
+opening_hours: {
+open_now: true,
+periods: [
+{
+close: {
+day: 1,
+time: \"0000\"
+},
+open: {
+day: 0,
+time: \"0800\"
+}
+},
+{
+close: {
+day: 2,
+time: \"0000\"
+},
+open: {
+day: 1,
+time: \"0800\"
+}
+},
+{
+close: {
+day: 3,
+time: \"0000\"
+},
+open: {
+day: 2,
+time: \"0800\"
+}
+},
+{
+close: {
+day: 4,
+time: \"0000\"
+},
+open: {
+day: 3,
+time: \"0800\"
+}
+},
+{
+close: {
+day: 5,
+time: \"0000\"
+},
+open: {
+day: 4,
+time: \"0800\"
+}
+},
+{
+close: {
+day: 6,
+time: \"0000\"
+},
+open: {
+day: 5,
+time: \"0800\"
+}
+},
+{
+close: {
+day: 0,
+time: \"0000\"
+},
+open: {
+day: 6,
+time: \"0800\"
+}
+}
+],
+weekday_text: [
+\"Monday: 8:00 AM – 12:00 AM\",
+\"Tuesday: 8:00 AM – 12:00 AM\",
+\"Wednesday: 8:00 AM – 12:00 AM\",
+\"Thursday: 8:00 AM – 12:00 AM\",
+\"Friday: 8:00 AM – 12:00 AM\",
+\"Saturday: 8:00 AM – 12:00 AM\",
+\"Sunday: 8:00 AM – 12:00 AM\"
+]
+},
+photos: [
+{
+height: 1177,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAeRmhTCtylqYnRHY8-JNZCUudFxYGtKJJLzAO1opFsqdYJn5Tt41OEC4JcqhdFAIDBKh1u64uf0MjCA_laP4k8Wb0JFhA7CldABReCSKSxJ_3_OjACXKMrwwXVg3QTzleEhDSBslI7GczDV8Vc3N8J6ZWGhRdShan1tjqDB0veFkpd9DkwcHQYQ\",
+width: 1176
+},
+{
+height: 3933,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAxyKOh6E03UsZFOvkLCONlaDEkbFSUDr1IA70yKnx7jdNu0vXJiRNgMvAplTjtCCqd4Kubr5Fq25AVuykEX3WKjt_WbuwiPBygevFa9a1YX1mpADzOVmDuZJjw6InwRRPEhDM6a_OVX-NpEoPHkbyAhj9GhQl5r6k7pyrzVgJpGcLPbVXiJi9eg\",
+width: 5899
+},
+{
+height: 2988,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAEhMpJWX425FvfCR8fF62s7Iy8e3_Qmju9tWX2FxNuBMiLZXNtHd62HYuoO_8cG3v8CnYhlK9RwPkB_uvOuOQ_WhTClu_L92i971nra5CwDbT68GOwkYz4r-HnFBX9zrXEhCvGhb5SgwZS4pRD26-L98pGhSdnfrlLHUVTWuyXIV5zwbn89YdYA\",
+width: 5312
+},
+{
+height: 2988,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAq0gRQ_7Vtw9t_LSITxoVE_oKvmoDM77ux01KoVDPc_EzoYjfrtPWmHTP1uXExoyCA4LKd2AWjWkYa1ai7c19AcKUM8AldPDNHqfJDi8Zuln9CLvLVbz4xy7qyQITpQQ3EhCKf2M4J8T3vEziP5Z3AeIFGhSXXijPtDK5S98f9otTsko2hMswBQ\",
+width: 5312
+},
+{
+height: 1152,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAwxRY46kV_732MkjpP1yhI0_Q6qPkRFw_F3lTSSpQNV5x9zB1HqensWm9C9J62DxGdDvbsa1UVVMR9rJFPPEfhJv4DW9W0rhLhIV8LEx-lQhSreCPReLNCYjj7VcBOuxnEhBCmtHdIHRT_RVneocxK87HGhQT5wC_rDSr7b4HqwbCqaY4L99rfQ\",
+width: 2048
+},
+{
+height: 2988,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAaejuhIiGKQbEcCQQlt_YXp3wMRrzPZJLej1dppA8giXdsjeA3TYI-vVFEB7OM7-ZHtVmH4Bm0zUNB5YQozWIL37byKVB-xRYiDPqWbgw7ADRp4fVnmxxrQmltDoGQwOWEhAEDxpkrQcA-LF29nVIP1G6GhRt75TEZdpYI0n7mSagW41wCg-PtQ\",
+width: 5312
+},
+{
+height: 3000,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAEFI0GPhzrvSpAQ1eJVnjS8CyrgqlPshkQbvwWWnyEeqGWLX6qp8hFa5tYhcMofVW88oETbJbgwJ1ZJChvWarXzF2LwWDraEmtS9GCA1KgW3fcfbyCU8OA-WpU0QkEQD6EhD7NPNaNd0U4TMQufrDPufdGhS02PiLyq476a6VMq1PqRs06eshSg\",
+width: 4000
+},
+{
+height: 3072,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAk5nb8H8LktLR8fd1fM5Qc5CVEKEKlXZthR9HA3Uq5kJ2o7adi7X5r3pAQCBf2n8JWV3Ir2_JlUEl8BHwzqrqgGFOU0Z8F14wqyVtbwmmowQjMb_MVvJPRENNeA3n4Z3YEhAAvvDFhzw418JwivBYOIW9GhQJORhGXHZgphnb7iUh26ljXX3ZBw\",
+width: 4608
+},
+{
+height: 2322,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAmAJ6c1GXcc3qDWoFZuMtTWnlaiYCfEbrSGj2NdjlklyMV4LPrKZDmUxN77JTOC2nv5OsC8PVSbgKymudYJ_yiJWtqjz0boecjuCXW3aQ95GC7fHl6lOOgAfCyPRFjKr1EhCu2HLnom1YPCxfaZ4spjc7GhTidVElw2Xg09-jy76mfHgzjTtcbg\",
+width: 4128
+},
+{
+height: 1080,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAvE3wDZTU93xfnmpEfGThJtQditJ7u3scmlbmRVrZs8syAXhYV9yuyL8730G5QWePHjP1e0k8-SmUYDftQSbANhqqJu-nZkIWVygySglrg0piFn5pxEB_aVWlTusZYn6lEhBwQzwh3IkKrlYc5BeuSnIoGhR88RkV0fWDUOWXshYPU5r6putDXg\",
+width: 1620
+}
+],
+place_id: \"ChIJ-bfVTh8VkFQRDZLQnmioK9s\",
+price_level: 3,
+rating: 4.3,
+reference: \"CmRSAAAAIrsTGCTM1Z4eT3rRwke2uyvZsPUneBcw5q7iwI87t3noTcud0OZMvSRLoNu3ZA6Rq-FVxVfWgJWFZkb1k4nFNJ5HVZMvvrLK9bm7W9KfMVs7xUl6Bd69LkJNsEbwusapEhAjAqD2PmItZwlx_FlFOR9kGhQz0XTT_8DvsSWznjVWsV1SsMfSeQ\",
+reviews: [
+{
+author_name: \"Sergey Blashkov\",
+author_url: \"https://www.google.com/maps/contrib/102466173091403682821/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh6.googleusercontent.com/-_KWxGrUM-3M/AAAAAAAAAAI/AAAAAAAAAAA/AMp5VUpuJbDXCWh1Y4IaO2V35pdJkVS90Q/s128-c0x00000000-cc-rp-mo-ba5/photo.jpg\",
+rating: 5,
+relative_time_description: \"a week ago\",
+text: \"Wonderful place to get visited in sunny days. It has spectacular views of Seattle, Puget sound, and Mt. Rainier (if you are lucky enough). While you are in line to get up there you will be able to read a lot of related historical information. Very interesting. The panoramic view is stunning. If you want they will make a photo before you enter the elevator and you can see it up there on special terminals and share it. Be aware the lines for going down are not shorter than ones to go up. After visit you will go down right to the gift shop that is not bad actually.\",
+time: 1500091938
+},
+{
+author_name: \"Kennedy Singleton\",
+author_url: \"https://www.google.com/maps/contrib/111661203776508272268/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh5.googleusercontent.com/-nxbNJVl0RU8/AAAAAAAAAAI/AAAAAAAAAAA/AMp5VUoIq4fIhZyDkp0h7jP3iQO4x8dtEA/s128-c0x00000000-cc-rp-mo/photo.jpg\",
+rating: 5,
+relative_time_description: \"in the last week\",
+text: \"Best experience yet. TC was the best server I have had at the Sky City restaurant and I have eaten there quite a few times. Definitely will go back but unfortunately now I will only want TC as my server. He made the whole experience extra special for my nephew who is visiting and had a sprained ankle. Thanks again.\",
+time: 1500356992
+},
+{
+author_name: \"Natasha Ware\",
+author_url: \"https://www.google.com/maps/contrib/114500873274484930426/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh5.googleusercontent.com/-8GtdncqYX6g/AAAAAAAAAAI/AAAAAAAAJ-0/H4I0MzS5toI/s128-c0x00000000-cc-rp-mo/photo.jpg\",
+rating: 3,
+relative_time_description: \"a week ago\",
+text: \"I thought the Space Needle was a neat experience, with good history to read. The views of the city were fine, but the best view was always crowded and hard to take pictures from. It\'s a place to try once, or twice if you get the combo ticket. I would encourage downloading the app and taking pictures with the 4-D towers that pop up; that was pretty cool.\",
+time: 1499802855
+}
+],
+scope: \"GOOGLE\",
+types: [
+\"point_of_interest\",
+\"establishment\"
+],
+url: \"https://maps.google.com/?cid=15792901685599310349\",
+utc_offset: -420,
+vicinity: \"400 Broad Street, Seattle\",
+website: \"http://www.spaceneedle.com/\"
+},
+status: \"OK\"
+}</string>
+    <string name="artMuseumJson">{
+html_attributions: [ ],
+result: {
+address_components: [
+{
+long_name: \"1300\",
+short_name: \"1300\",
+types: [
+\"street_number\"
+]
+},
+{
+long_name: \"1st Ave\",
+short_name: \"1st Ave\",
+types: [
+\"route\"
+]
+},
+{
+long_name: \"Seattle\",
+short_name: \"Seattle\",
+types: [
+\"locality\",
+\"political\"
+]
+},
+{
+long_name: \"Washington\",
+short_name: \"WA\",
+types: [
+\"administrative_area_level_1\",
+\"political\"
+]
+},
+{
+long_name: \"United States\",
+short_name: \"US\",
+types: [
+\"country\",
+\"political\"
+]
+},
+{
+long_name: \"98101\",
+short_name: \"98101\",
+types: [
+\"postal_code\"
+]
+}
+],
+formatted_address: \"1300 1st Ave, Seattle, WA 98101, United States\",
+formatted_phone_number: \"(206) 654-3100\",
+geometry: {
+location: {
+lat: 47.60730900000001,
+lng: -122.3381331
+},
+viewport: {
+northeast: {
+lat: 47.6088812302915,
+lng: -122.3372958197085
+},
+southwest: {
+lat: 47.6061832697085,
+lng: -122.3399937802915
+}
+}
+},
+icon: \"https://maps.gstatic.com/mapfiles/place_api/icons/museum-71.png\",
+id: \"6c68dba8bb72b20c7336c2915db9be8b94111f77\",
+international_phone_number: \"+1 206-654-3100\",
+name: \"Seattle Art Museum\",
+opening_hours: {
+open_now: true,
+periods: [
+{
+close: {
+day: 0,
+time: \"1700\"
+},
+open: {
+day: 0,
+time: \"1000\"
+}
+},
+{
+close: {
+day: 1,
+time: \"1700\"
+},
+open: {
+day: 1,
+time: \"1000\"
+}
+},
+{
+close: {
+day: 3,
+time: \"1700\"
+},
+open: {
+day: 3,
+time: \"1000\"
+}
+},
+{
+close: {
+day: 4,
+time: \"2100\"
+},
+open: {
+day: 4,
+time: \"1000\"
+}
+},
+{
+close: {
+day: 5,
+time: \"1700\"
+},
+open: {
+day: 5,
+time: \"1000\"
+}
+},
+{
+close: {
+day: 6,
+time: \"1700\"
+},
+open: {
+day: 6,
+time: \"1000\"
+}
+}
+],
+weekday_text: [
+\"Monday: 10:00 AM – 5:00 PM\",
+\"Tuesday: Closed\",
+\"Wednesday: 10:00 AM – 5:00 PM\",
+\"Thursday: 10:00 AM – 9:00 PM\",
+\"Friday: 10:00 AM – 5:00 PM\",
+\"Saturday: 10:00 AM – 5:00 PM\",
+\"Sunday: 10:00 AM – 5:00 PM\"
+]
+},
+photos: [
+{
+height: 1200,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAV5u6W_QsSl4KaymS-dF32xBilbNIJfoWLmWD8uAddxiL7b0S82LDtHR3gKO5jbVMDR3BZdfg2b4qjdgy9WJw_H2d7iq6fae7wRFhULszqnGUdJCPkccqN9l91i6LJeOMEhDeBDfKKaOf1MwzRLlglvQkGhTnOn58_00_v7CwFaU810h7BRugKQ\",
+width: 1600
+},
+{
+height: 4140,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAh6uvnopOmPIYtYyQnb7elqW_i_rdTWOMYPET2G4ZqYWJ5trnWn0LWJNmsjlGXSqJ4vUMnN0nUh3uuBHvdOnEmJCxr-5DhAIDInXYazvG3IZPB4aqSq84pADQjMHOgL6DEhBg2HbHvwgDF_hClC5IY0SrGhTImkkUvRtOnU-7pNEFoMGrRGVdCg\",
+width: 5520
+},
+{
+height: 5184,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAXYk2NU4RQEH_YZYiogwolMHL-EXxUoag82_SkTtY62kTlALhEvZhuK9ZaWkSC-GwVd-cDLN0xJt9b8t6gfjECKnGExZvVEJQNrzH8dGQVYEraT9A_9QyPMSW0MB2nM9rEhClHgzoNo5HOTO_5tFwhTBbGhRkkgntbio5TaKUA9dz8p-6fuYkEw\",
+width: 3888
+},
+{
+height: 2160,
+html_attributions: [
+],
+photo_reference: \"CmRZAAAAd2shO299jGcGD8TXARxS_WXDNsVEksYomtI0vWlIJ5JxSe72-Ts22tE0lNmKb6nOm4hxLV-oKlHfupaVCUbiyVYxx38RRRDVXcFfDzMVybyGe4W30VYcgvBTV8QILLRTEhC-2x8vbnaJD0N74mnhg6PSGhQDjMrpCXeSJiDFfltMZOXSzFxP6A\",
+width: 2880
+},
+{
+height: 2268,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAMvB0Bs0q4kr9kCZz5ab3g5KBQTv4Jd8b2KuQfGjuZLsqgHRkfqD9HteNBKLb9qtYWqqnZlaG7xysMp8nAqfNVHLKfn_MriNlsPNU5AxYzkp2SBG9XfxYb2-tpxQYm6PFEhAczxszVUUUZ-nXkDgrZkOTGhS5569UeamyRYx51X8EOUoMDIc5dA\",
+width: 4032
+},
+{
+height: 3088,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAarLSs0YBDQHVQ1Th0zEZSTNA_Fn1dq--qhxddx7hqb48r35PTC8gieJwD6Ru4pfs_JeCHyP2tnFCBNh8tdC8vlsxyeUU3Nzrgpf-YWINswcQYSub84MwTh8oF_Z2SGSeEhDKYiY9q4R8nDq_PgZF4SMwGhTq8CF7taMtRI6jhdIDKk7ZlB95kQ\",
+width: 4160
+},
+{
+height: 3024,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAA-T4Zo8dH_OvKwufQZgvwOdTPh0Aka0xk28HO4GKsPjuBUyIfpII0KCqxUKiqV3Vxsz9xw6cGz_qYGj1ccNbf5d4usptuq8zT2WPykkGErjfv1Vj0-X7gPE3MYpX7dr_YEhDu2oJ1ElAi3R2-xZR6D_mIGhTZAjbWk8E4pyLb7SOLg-4r7pcl5w\",
+width: 4032
+},
+{
+height: 2448,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAtNFN2UKCqTrd4_tyzRNEBVOaWucELhvMNhpFmPD4a4q8RylXmqsnGiDN5d9XOkv8_fJKXX_5lX9nqA-c-jQMw6WANmJfq3RdjH_m9gJGtAiN0OXE6EBE5ffdYEs2U6yqEhB8jCHzDQInYLofhee_AaL6GhQC7fWoHqlRG371_rer6kkLPs-jHg\",
+width: 3264
+},
+{
+height: 1945,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAALlg0FMMLu7_IUoSKL17oDFIIh_m8dYPG-oXtjcWoYNStpmy6b11g_E9UFqVbNNNO7slWHdxeIHXfD9dHDqBOP5STlep5012sWVt2bnMVwxJcCCfJCuNGgdbUhjv2m2miEhB8wbECgmjry9-qnOHSj4qGGhTIz5lQ9grFEHIMUB1ov7yoodTbJA\",
+width: 3461
+},
+{
+height: 2448,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAd2bsEz6IGEuRyFmzuo5dBbdIvGGa_RsMm2juhZACCjrjb1U0pr6Wabf2fOrsWDrLb8P3dnwtrzPzVYb13EHVobouJyaHlRhiE2c6lVxtk1xXG3ISkFV6P63au9YSzSN1EhAnUXTsn7_PCIxbAA4P6trrGhSeDsXjRjOvmLiLoKH6ZsFjjbM0fQ\",
+width: 3264
+}
+],
+place_id: \"ChIJSxh5JbJqkFQRxI1KoO7oZHs\",
+rating: 4.4,
+reference: \"CmRRAAAA3h1ZZ2JQfQl-vbYZHXDZhmO7UqKjPQDnJnis2LhsAOa9g9LTCPvTdLLDm3sI9jnYDCjO_Bpgg6fGi_qKbIVhNbSv8uicqMjT8aWyeF3XG7_dhuXTzEWH9r3Z6zqNz00CEhBigkUB1RvmWPWT8eScD599GhTR5hzaLGQZFhOw-WL4IJEmT1PAbA\",
+reviews: [
+{
+author_name: \"Jill A\",
+author_url: \"https://www.google.com/maps/contrib/100427263598756281177/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh4.googleusercontent.com/-cW5GZi6yi3E/AAAAAAAAAAI/AAAAAAAAATg/6M45J710Yik/s128-c0x00000000-cc-rp-mo/photo.jpg\",
+rating: 4,
+relative_time_description: \"in the last week\",
+text: \"Entertained the family for about 1 1/2 hours. A very nice collection. Best thing about SAM is that while the suggested price for tickets is around $20 a person it is all donation based. We paid $10 for our family of 4 as our cashier suggested. Great way to add some culture and history to your vacation without breaking the bank.\",
+time: 1500757982
+},
+{
+author_name: \"patrick gabaldon\",
+author_url: \"https://www.google.com/maps/contrib/104533975080649381135/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh6.googleusercontent.com/-JaTMo-QXfJA/AAAAAAAAAAI/AAAAAAABpy8/IHTd5jw7OLM/s128-c0x00000000-cc-rp-mo-ba4/photo.jpg\",
+rating: 4,
+relative_time_description: \"2 weeks ago\",
+text: \"Great selection of work and beautiful building. Plenty of great places to eat around too. I would recommend taking public trans to get down there. Parking is not an issue if you are willing to spend the $$ at the garage. The Museum is also near the market and the perfect place to get some quiet away from the market/downtown hustle.\",
+time: 1499286886
+},
+{
+author_name: \"JoAnn Welch\",
+author_url: \"https://www.google.com/maps/contrib/110965508507802465484/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh6.googleusercontent.com/-6e5D9cVAfNo/AAAAAAAAAAI/AAAAAAAAb_A/9WUwW2VJIkE/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg\",
+rating: 5,
+relative_time_description: \"4 weeks ago\",
+text: \"Great small art museum that you can get through in one go. Admission is optional--you can make a suggested donation of any amount for a ticket. The exhibits change regularly so there\'s always something new to see and they have a great permanent exhibition about northwest and Australian native art. \",
+time: 1498332165
+},
+{
+author_name: \"Rebecca Burkhalter\",
+author_url: \"https://www.google.com/maps/contrib/107351690522541767416/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh6.googleusercontent.com/-qwthUJeQ6ms/AAAAAAAAAAI/AAAAAAAAAAA/AMp5VUr1ZlRUgtEs1Ii-cRP-0vlfapPK6A/s128-c0x00000000-cc-rp-mo-ba2/photo.jpg\",
+rating: 5,
+relative_time_description: \"a week ago\",
+text: \"This museum was really cool! The first Thursday of the month general admission is free! We happened to get lucky and go on that day. There are all different types of pieces here. We wanted to go see the infinity mirrors special exhibit that they have going on now, but it was sold out. So that was a bummer! Book ahead of time if you want to see this. \",
+time: 1499635323
+},
+{
+author_name: \"Hannah Blue\",
+author_url: \"https://www.google.com/maps/contrib/118287872252460555327/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh6.googleusercontent.com/-Xz8jnTztWUU/AAAAAAAAAAI/AAAAAAAAAAA/AMp5VUqYaQ7bSImquzllJ-8FtrN5DutxQQ/s128-c0x00000000-cc-rp-mo-ba2/photo.jpg\",
+rating: 4,
+relative_time_description: \"3 months ago\",
+text: \"The SAM is always a wonderful way to spend an afternoon or evening. It isn\'t the largest museum ever, but they do have quite a broad collection that would interest anyone who visits. Everything from ancient Aztec and Roman artifacts, to impressionist and modern/abstract paintings are set out to take you through a journey of historical events. They even offer tour guides to show you around and give you deeper insight into the artists/era/piece specifically. Fun fact: the first Thursday of the month is free admission! \",
+time: 1491665029
+}
+],
+scope: \"GOOGLE\",
+types: [
+\"museum\",
+\"point_of_interest\",
+\"establishment\"
+],
+url: \"https://maps.google.com/?cid=8891487675925302724\",
+utc_offset: -420,
+vicinity: \"1300 1st Ave, Seattle\",
+website: \"http://www.seattleartmuseum.org/\"
+},
+status: \"OK\"
+}</string>
+    <string name="wheelJson">{
+html_attributions: [ ],
+result: {
+address_components: [
+{
+long_name: \"1301\",
+short_name: \"1301\",
+types: [
+\"street_number\"
+]
+},
+{
+long_name: \"Alaskan Way\",
+short_name: \"Alaskan Way\",
+types: [
+\"route\"
+]
+},
+{
+long_name: \"Seattle\",
+short_name: \"Seattle\",
+types: [
+\"locality\",
+\"political\"
+]
+},
+{
+long_name: \"Washington\",
+short_name: \"WA\",
+types: [
+\"administrative_area_level_1\",
+\"political\"
+]
+},
+{
+long_name: \"United States\",
+short_name: \"US\",
+types: [
+\"country\",
+\"political\"
+]
+},
+{
+long_name: \"98101\",
+short_name: \"98101\",
+types: [
+\"postal_code\"
+]
+}
+],
+formatted_address: \"1301 Alaskan Way, Seattle, WA 98101, United States\",
+formatted_phone_number: \"(206) 623-8607\",
+geometry: {
+location: {
+lat: 47.60622069999999,
+lng: -122.3425685
+},
+viewport: {
+northeast: {
+lat: 47.60782733029149,
+lng: -122.3404808
+},
+southwest: {
+lat: 47.60512936970849,
+lng: -122.3432644
+}
+}
+},
+icon: \"https://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png\",
+id: \"ce92f6761ca67b40f9f98fb3314c3e65dd9e7854\",
+international_phone_number: \"+1 206-623-8607\",
+name: \"Seattle Great Wheel\",
+opening_hours: {
+open_now: true,
+periods: [
+{
+close: {
+day: 0,
+time: \"2300\"
+},
+open: {
+day: 0,
+time: \"1000\"
+}
+},
+{
+close: {
+day: 1,
+time: \"2300\"
+},
+open: {
+day: 1,
+time: \"1000\"
+}
+},
+{
+close: {
+day: 2,
+time: \"2300\"
+},
+open: {
+day: 2,
+time: \"1000\"
+}
+},
+{
+close: {
+day: 3,
+time: \"2300\"
+},
+open: {
+day: 3,
+time: \"1000\"
+}
+},
+{
+close: {
+day: 4,
+time: \"2300\"
+},
+open: {
+day: 4,
+time: \"1000\"
+}
+},
+{
+close: {
+day: 6,
+time: \"0000\"
+},
+open: {
+day: 5,
+time: \"1000\"
+}
+},
+{
+close: {
+day: 0,
+time: \"0000\"
+},
+open: {
+day: 6,
+time: \"1000\"
+}
+}
+],
+weekday_text: [
+\"Monday: 10:00 AM – 11:00 PM\",
+\"Tuesday: 10:00 AM – 11:00 PM\",
+\"Wednesday: 10:00 AM – 11:00 PM\",
+\"Thursday: 10:00 AM – 11:00 PM\",
+\"Friday: 10:00 AM – 12:00 AM\",
+\"Saturday: 10:00 AM – 12:00 AM\",
+\"Sunday: 10:00 AM – 11:00 PM\"
+]
+},
+photos: [
+{
+height: 540,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAgVDQiuWm6frg6e97hLWJMeXFEYS2Oke88WhQkYc3MIoBYcYqSSdk8pANp77gxYe_auqiauLoxJiXcTIlpuqXce8sYBQqMO6u-2INVH4KPaOQxqI-6O8IOnt5iHbVxd1MEhAn7ljekoUT1vK4vqDIlXspGhRKYRneS9kXhB3TSTr3HEorHBK5Vg\",
+width: 541
+},
+{
+height: 2784,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAChnSUHo93anfkkC_kIoBXcBlATP64rYoktwJZ7CcjjfFH3SYui2S4AdVx9hHn94iTsIn8xKfSTkO1eOna7xTBRr9CHoacQt0WPsV4WA_Ayw4KCR2X5eTHXcUTgPiT1m7EhCO553QLOSxroiGappP57nvGhSXNk7wPAxV1hjKblmoF7RR9yOuAw\",
+width: 5280
+},
+{
+height: 1836,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAiD-JbEenYwq_M8l-dr3ycxPhC-VHnIis2pJ-eVnuzYkpzufeF-YEzJ4KoapOlomc3z6jwfp6TT1nGkxwJu2a43yk88t5m4rSo79OaXYjuj6WGxNg3c3ARKR8ExVFLNEkEhCtUrWovzZl8YZYFyMkG1MHGhS09VqNAbGxdffR7wQMqnGhiQsjRg\",
+width: 3264
+},
+{
+height: 2988,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAA_cOU35uwLFVndAxtLO5QomC2Irb5Y9_1DDmSNt-po-iJyaz51zfWOCWK4F4i47j8hnuWjeg9PsrvC45SeekpvNmSNB7eWMdBSyo2D0S9Wj1-gAIqxkirSnk4paO1ZlETEhDHX2TRx4zqHTIQ87PSLPllGhSViolrdva4YPgA61qIBAkGAeKHJA\",
+width: 5312
+},
+{
+height: 1836,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAdSkxNEwlFuiPLWk2i4pByMafeXi5HEf-aJ427j2j_QzCULCs0vQJTSgubiXdzvqccSRESZq_1JLLHXRW6YfWVFc0HxYywZgu2-LVaNRvkXRFdScGUo6jEpfOaCk1stthEhCbaV2tdnQyi0mW4HOxWlNCGhTvBKKBJdyzS8BsOF2ksxhXvqZcMg\",
+width: 3264
+},
+{
+height: 2952,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAA_caLWBtqKAk9A50USpl5DvJF8aqEyod2-LxjDDkeAPaN7ijtgo_kBQJCuhqA2jX_OxmbhR0Xxr0HavmS2RQZrdCxTsF1jd5n0yO8uH3EI3eGY6k051sebiuIOhujWFGAEhCIB2Br2qXXwAH2ohqD_Y4zGhTVOmXA9kjMn07DRNJ3an4YqAnVGA\",
+width: 5248
+},
+{
+height: 3036,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAE5jDQy8pNhwArF74HeSoEkpsdiaWf_P0-ClScddzSUr6Pzd8QxshcP33DjIc9VnxUkJckjhh0VHwaqeB66tN5KW4PQqfHs-MEIX9Y56SVFPqTeTJcY_RurS8qVqsLVrvEhD4NAikLv1wUtrbkZzUU-vMGhRGWq4QSsJrIZgquVSz-6BOsOGNEg\",
+width: 4048
+},
+{
+height: 2952,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAEGcujZocEQ-5dP1sGDNhrZRwUx29nq1KrKcjJaSnDaTxQn3ARFWToBfhMkq0sZm5F8AEbgB7im39QBl-4kmy_-1psIAwvPS9X1byUjFD9SY6Pm6zk1KhCesD9GxTRz4GEhDcqlq_7fpAyw7RLuSMkx2UGhTM1pntncAqTckatndhW2hD8FZhlQ\",
+width: 5248
+},
+{
+height: 2988,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAQZJ0rcbMxRYlPv60Q9xhzbX1zeDMOj00jCmWqxfCCL0uhd12BXdxYI56EgTtUOAUG4mYagNJWD2cM5x_4i6c6cUZ8epwpAaM3hgPWH_rzz4g-8KreAiwjNceOHsfLSUtEhC3ZIwV_aHKOgUsliRk6WUMGhTg0Es3tjN1Zx8UmUj3Rdod9T6QYg\",
+width: 5312
+},
+{
+height: 3024,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAA1gd5nXUFS9FRCeFphh-v0cNY_KxtHRZiynvsx0hi8vngcpW3qRaBqu3f90ZNoWADcQLL0pr9w3_6q7wMaggXjJQIQaQ54bSxXql4Q-Er68z61R4m63nSKgMiJbINET7fEhDjBMlymcwFIFMHCdL23ZO-GhSzsEXfl67xV_pgdm3sHczxsgRG7w\",
+width: 4032
+}
+],
+place_id: \"ChIJUX-M-a1qkFQRxtrx3nOQIKU\",
+rating: 4.4,
+reference: \"CmRSAAAAPQtxjW0yo6h-9OWugwMM3UaRkOpGq6VvXDgAkQirpEsGEh9QMIyKPSqB-2NHnye1SodbgD8oZieq4UNopLutq9zlemNk6XZZsY54Ds_imedn_jSH7M3ntO3FpL_eayaSEhBBTU7LYUhOOxCcuEWXLYqAGhQkQcfdEZE24hKeowuJIcdVAwE1zw\",
+reviews: [
+{
+author_name: \"Kaitlyn Parker-Lee\",
+author_url: \"https://www.google.com/maps/contrib/100447596246870512377/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh3.googleusercontent.com/-7xeNnx2tQCQ/AAAAAAAAAAI/AAAAAAAAAI4/eOCt2-A6k0Q/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg\",
+rating: 4,
+relative_time_description: \"3 weeks ago\",
+text: \"Of course as a tourist, one must stop at the great wheel on the Puget Sound in Seattle. The boardwalk is really cute, with shops and eateries along it. There is another attraction on the pier called which is a lot like a California Adventure ride BUT to do both things, it costs an arm and a leg. If you have money to blow, it\'s worth it but otherwise I\'d choose the Great Wheel. As you crest the top, you can see far out over the sound, while the wind gently rocks your carriage. Fully enclosed, comfortable and air conditioned. We only waited 10 minutes in lounge but we were there on a Monday, mid afternoon. I\'ve heard that waiting for sunset is the time to go because of the colors in the water. Definitely worth checking out.\",
+time: 1498699061
+},
+{
+author_name: \"Haley Junks\",
+author_url: \"https://www.google.com/maps/contrib/102084375809993443820/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh5.googleusercontent.com/-eUfMNZCP0SY/AAAAAAAAAAI/AAAAAAAABwE/wtGOpWghYlk/s128-c0x00000000-cc-rp-mo/photo.jpg\",
+rating: 5,
+relative_time_description: \"a month ago\",
+text: \"We were visiting from Vancouver Island, BC and rode the Great Wheel Sunday evening. I left my cell phone on the ride. I noticed a block away and my husband phoned my phone and one of the young men working answered explaining that I left it and had it waiting for me. I was so relieved. The young men working were ALL super friendly and most helpful with returning my phone to me. Great experience- we will return time and time again!\",
+time: 1497312884
+},
+{
+author_name: \"Erick Tu\",
+author_url: \"https://www.google.com/maps/contrib/114072144468855953151/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh3.googleusercontent.com/-cetq5Ph46ag/AAAAAAAAAAI/AAAAAAAAAAA/AMp5VUoyjRBNYHacW5eZk6gu2Pw4ZpsLow/s128-c0x00000000-cc-rp-mo/photo.jpg\",
+rating: 5,
+relative_time_description: \"in the last week\",
+text: \"Great views of Seattle and surrounding ports! When you are at the very top it\'s a beautiful site of sail boats, ferries and birds flying around. The wait time to get on was about 5 minutes. The ride was calm and great photo opportunity. We really enjoyed our experience!\",
+time: 1500759389
+},
+{
+author_name: \"brianna bull\",
+author_url: \"https://www.google.com/maps/contrib/118391955592432084656/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh4.googleusercontent.com/-yfiBCPHzkZw/AAAAAAAAAAI/AAAAAAAAAKA/hkSxnANrOOM/s128-c0x00000000-cc-rp-mo/photo.jpg\",
+rating: 5,
+relative_time_description: \"in the last week\",
+text: \"It was a neat experience! Wasn\'t a lot of people when we went. The staff were fun and professional. Best part? You can enjoy an adult beverage while soaking up the views of Seattle.\",
+time: 1500619298
+},
+{
+author_name: \"Jessica Howard\",
+author_url: \"https://www.google.com/maps/contrib/114047906102801015830/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh6.googleusercontent.com/-j4uVSf_EZbA/AAAAAAAAAAI/AAAAAAAAabs/Er-f4RpXzxw/s128-c0x00000000-cc-rp-mo-ba4/photo.jpg\",
+rating: 4,
+relative_time_description: \"a week ago\",
+text: \"Spectacular view of Seattle\'s waterfront. We didn\'t have any line when we got on, but there was a bit of a backup when we got off. Your money gets you three loops around plus another loop for loading and unloading. I could have done with some handlebars to cling to for dear life, but in a weenie. Kids enjoyed it. Too expensive, in my opinion, but hey. When playing tourist...\",
+time: 1499895604
+}
+],
+scope: \"GOOGLE\",
+types: [
+\"point_of_interest\",
+\"establishment\"
+],
+url: \"https://maps.google.com/?cid=11898669042848881350\",
+utc_offset: -420,
+vicinity: \"1301 Alaskan Way, Seattle\",
+website: \"http://seattlegreatwheel.com/\"
+},
+status: \"OK\"
+}</string>
+    <string name="arboretumJson">{
+html_attributions: [ ],
+result: {
+address_components: [
+{
+long_name: \"2300\",
+short_name: \"2300\",
+types: [
+\"street_number\"
+]
+},
+{
+long_name: \"Arboretum Drive East\",
+short_name: \"Arboretum Dr E\",
+types: [
+\"route\"
+]
+},
+{
+long_name: \"Seattle\",
+short_name: \"Seattle\",
+types: [
+\"locality\",
+\"political\"
+]
+},
+{
+long_name: \"Washington\",
+short_name: \"WA\",
+types: [
+\"administrative_area_level_1\",
+\"political\"
+]
+},
+{
+long_name: \"United States\",
+short_name: \"US\",
+types: [
+\"country\",
+\"political\"
+]
+},
+{
+long_name: \"98112\",
+short_name: \"98112\",
+types: [
+\"postal_code\"
+]
+}
+],
+formatted_address: \"2300 Arboretum Dr E, Seattle, WA 98112, United States\",
+formatted_phone_number: \"(206) 543-8800\",
+geometry: {
+location: {
+lat: 47.63979529999999,
+lng: -122.2944705
+},
+viewport: {
+northeast: {
+lat: 47.6416138802915,
+lng: -122.2931614697085
+},
+southwest: {
+lat: 47.6389159197085,
+lng: -122.2958594302915
+}
+}
+},
+icon: \"https://maps.gstatic.com/mapfiles/place_api/icons/generic_recreational-71.png\",
+id: \"087879e48fb4220fcc6b88b99a8c2968cfffa99c\",
+international_phone_number: \"+1 206-543-8800\",
+name: \"Washington Park Arboretum - UW Botanic Gardens\",
+opening_hours: {
+open_now: true,
+periods: [
+{
+close: {
+day: 0,
+time: \"1700\"
+},
+open: {
+day: 0,
+time: \"0900\"
+}
+},
+{
+close: {
+day: 1,
+time: \"1700\"
+},
+open: {
+day: 1,
+time: \"0900\"
+}
+},
+{
+close: {
+day: 2,
+time: \"1700\"
+},
+open: {
+day: 2,
+time: \"0900\"
+}
+},
+{
+close: {
+day: 3,
+time: \"1700\"
+},
+open: {
+day: 3,
+time: \"0900\"
+}
+},
+{
+close: {
+day: 4,
+time: \"1700\"
+},
+open: {
+day: 4,
+time: \"0900\"
+}
+},
+{
+close: {
+day: 5,
+time: \"1700\"
+},
+open: {
+day: 5,
+time: \"0900\"
+}
+},
+{
+close: {
+day: 6,
+time: \"1700\"
+},
+open: {
+day: 6,
+time: \"0900\"
+}
+}
+],
+weekday_text: [
+\"Monday: 9:00 AM – 5:00 PM\",
+\"Tuesday: 9:00 AM – 5:00 PM\",
+\"Wednesday: 9:00 AM – 5:00 PM\",
+\"Thursday: 9:00 AM – 5:00 PM\",
+\"Friday: 9:00 AM – 5:00 PM\",
+\"Saturday: 9:00 AM – 5:00 PM\",
+\"Sunday: 9:00 AM – 5:00 PM\"
+]
+},
+photos: [
+{
+height: 250,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAFjzxig-V3JDjE5ZHbS0Z9zvFbj16739_Baw0tsvXLWwMvSvRR4nnEqDnYKsDzQ0KGsVWJZ4dkDTyZZDwEUqw1ox4Kd_ymvC7bMZqcDUxLR62GpUkC7C3NfKcGxdmYujbEhA6GJCT3bjXVClaGhyvB5O-GhSupA9su_eFN6fatmlBT6_H2CJ22A\",
+width: 250
+},
+{
+height: 1365,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAn8vidQjPHxanGTyUOx-WLXmW6yhMbjBfJR8nBQpPmVRtzplb3AkecKyEGTLlIiH8W0E7gp1ZZbuSzzBx7R_yeY2jeMlpI3ybdiBGuKvU8Dz4e4-131ot_NLTSV87RoD7EhC9NBOsoNRnwypnj_qZZDbdGhSfle65WMz5GlfeU0As4azTZizadQ\",
+width: 2048
+},
+{
+height: 2988,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAWYVl8L5Hz_QjPy6cBxxal2lDR4e3qq6Entkw2mk-zAPBjDj-d6D1tNn1zpgNncNpnUgQyg0Lx1LZ-pYkq5Jw8A09oAslqkWmP43p7kLRb8fadP9tX_UY9eQj6bWf6I5nEhAWwHPzaGZ08aQZkhh07382GhTcu5ylem7qIfa5yT75_TaZZK5HSw\",
+width: 5312
+},
+{
+height: 2848,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAApcmmVax4YUMNIEtNBc1yudPis9hqnd6BFHGCFOWjforrvRFb2GldQ6Z7Irwr2P0ErIYtXEs0KvvCsYR4Ey1AO-KGEWbMZbepJZNzvAp5nJHiokAHlWGDnB7KdGEYCFp4EhCEHkeW3hg4Ltzg0hPVDpYCGhRVOGsJy-qtyyNMCib3ZePT2uV1DA\",
+width: 4288
+},
+{
+height: 1836,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAbtU2GiFLYsNDbH9fRuIas78iA1ktIr8MkP5fftwg-z9yo46zyiZj9ezadaW0cQBbEDRA_ckr09amuB5VOqT29tBH2OH5Dii3AOedXsBZIcQT9TeabWSHdjcm7qm75KVaEhBOhrqyduA09FR0thDUXytyGhS2ZOvzaS9Y4N7GqhL_-xPADXm3MQ\",
+width: 3264
+},
+{
+height: 2988,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAA-1ENbR0xqxYCs-UeHL7zdsETY7EC5MZoN_3Iz9qoUWFXD88BALoFau2DnA0BaRajHwb-xb-4smIlhcA8tqHjwUYPS_fKYBhPz3ykU-9c2typVutHQkmnAvWmo2Ql9CjcEhBGoBehb6ffkMY4eMsc7E-CGhQ1QwJLqRMkJGaItqBpLbSbGeTEEw\",
+width: 5312
+},
+{
+height: 2988,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAebtcX3pzmqroyjOHfPkyxwVQLuF8QDjXesTOtvCwTPt92F4aeYZyT8O0X2cBK1nquNHMG-ibzfS7EJFKAGEizAVhJ4LZCEYjveg2mTvtezNqDihaG7s50RzxgyWF1_idEhB3LqCTOyFWagXpmQRJqHVoGhScDgCtFKjMZOaP73xami_UjCGmNw\",
+width: 5312
+},
+{
+height: 2869,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAARkUsVS8DDawo-u0EwQLM3BcDDE5OvfBzNVCPM8QOZFxxa0GFPJOqqbprmQQ0SHOrNL0_zQemPz6axc35ZEtJLL9t1gHWYnH7nbTK9SjOsNHRmu6PPTf4deQn_Xvn7JqFEhCWt1RL3aBu7zrSjCJJGeYjGhRtbhzavPrx6TrjSu7Ez1stojLHGw\",
+width: 4303
+},
+{
+height: 1152,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAzFRp_Yko1omXLZhzxJlPkEi0fVh07VTAz5g_BfqfO6maiIE1zPluuLOOLlMpaYk6gcyvOUYuIo9bYyKv5JH_0FZxbmsJB2W0LVC_pvQHAAEc9oc_sO96IRpsp-9snUK8EhD8Sa-oyp_51NcoWW_wv6f1GhQ0ThL6xKJTIa_kj5aAV953cffBuA\",
+width: 2048
+},
+{
+height: 2988,
+html_attributions: [
+],
+photo_reference: \"CmRaAAAAXLHCjCaNrJJg4es1JbTY0wxYFVho3249Tn2b_03cKhXRJzEzm2Kp4fT8HG_JdY7eaqKuGQQnf20NH3u9BI_BbgTVVCwdm-RvdeSJYNDR-cCUEk5eiMX0-Ax7stBxxyz6EhDqnsAtOLtvH3Pdtuturx4QGhQP7-o5QZLbU_eHS_Egn-PW7mY6xA\",
+width: 3984
+}
+],
+place_id: \"ChIJgTy59sYUkFQRin5kehZcTqI\",
+rating: 4.7,
+reference: \"CmRSAAAAmp4PR81krjUWqUUWmtJt7oqaFw2cutkGX--veO05HelC7zHuoVF9yCpfXRzDOH66iSrRnO4TeGLmFiwqp_AeK2u5KYgr5i_U3ezXaTdvFs-4HHHWzz0wl4vEUFwTz9oPEhBYaENbCTkOTsWDyROGkp04GhRoXc5QvTn8alqOeZwcvV0NIzxiFQ\",
+reviews: [
+{
+author_name: \"Carol Sturzenberger\",
+author_url: \"https://www.google.com/maps/contrib/118372447677958586659/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh6.googleusercontent.com/-czZajp0kC8U/AAAAAAAAAAI/AAAAAAAAAAA/AMp5VUrY_JjjHhtfoomflBC7kLqFhNnwBA/s128-c0x00000000-cc-rp-mo/photo.jpg\",
+rating: 4,
+relative_time_description: \"2 weeks ago\",
+text: \"A nice place to walk and enjoy nature. However, the lack of directional signage within the arboretum can make it difficult for first-time visitors to find their way around and enjoy all the park has to offer. You\'re left squinting at your cell phone, trying to determine where you are and where to go. Room for improvement!\",
+time: 1499626405
+},
+{
+author_name: \"François Côté\",
+author_url: \"https://www.google.com/maps/contrib/103949455037059396420/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh3.googleusercontent.com/-fKyPA_v6ZY0/AAAAAAAAAAI/AAAAAAAAAFk/jchWioN8X1Y/s128-c0x00000000-cc-rp-mo-ba2/photo.jpg\",
+rating: 5,
+relative_time_description: \"a week ago\",
+text: \"Washington Park Arboretum is awesome. They have so many different species–over 5000–of tree, which is amazing. I spent part of two days there and only got around to see about half of the park. Great place if you are a tree lover or just want a green space to spent the afternoon.\",
+time: 1499960576
+},
+{
+author_name: \"Keesha Tucker\",
+author_url: \"https://www.google.com/maps/contrib/106333915639988901097/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh3.googleusercontent.com/-fyDrPP3SoDo/AAAAAAAAAAI/AAAAAAAAAAA/AMp5VUqvmLu5ajm_D3Yopsfx3vnMJh6sRg/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg\",
+rating: 5,
+relative_time_description: \"in the last week\",
+text: \"Oh my gosh! So pretty and so many trails to wander about. We decided to explore after going to the Seattle Japanese Garden and truly enjoyed the experience in the midst of the busy city\",
+time: 1500403799
+},
+{
+author_name: \"Jonathan Halldorson\",
+author_url: \"https://www.google.com/maps/contrib/116165164095488472139/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh5.googleusercontent.com/-oCg56Xcmupg/AAAAAAAAAAI/AAAAAAAABN4/pQ1y47tKIO4/s128-c0x00000000-cc-rp-mo-ba2/photo.jpg\",
+rating: 5,
+relative_time_description: \"a month ago\",
+text: \"Amazing place to visit, walk. There\'s currently a +1yr project to renovate a large portion of the park so not all of the paths are available. Several parking lots, kayak push off sites, main and side pathways for walking, covered and sunny paths, lots of flowers and green to see, botanical area too. A definite must visit area of Seattle.\",
+time: 1496898214
+},
+{
+author_name: \"Matt Roney\",
+author_url: \"https://www.google.com/maps/contrib/100408258573372298725/reviews\",
+language: \"en\",
+profile_photo_url: \"https://lh5.googleusercontent.com/-kHKlvBdbJDw/AAAAAAAAAAI/AAAAAAAAFD0/yjOc6GOAPGU/s128-c0x00000000-cc-rp-mo-ba3/photo.jpg\",
+rating: 5,
+relative_time_description: \"2 weeks ago\",
+text: \"Huge arboretum with a wide variety of plant life and landscapes. One of my favorite places to explore. Be sure to visit the islands in the northeast corner for some great views of Lake Washington.\",
+time: 1499273345
+}
+],
+scope: \"GOOGLE\",
+types: [
+\"park\",
+\"point_of_interest\",
+\"establishment\"
+],
+url: \"https://maps.google.com/?cid=11695386533940199050\",
+utc_offset: -420,
+vicinity: \"2300 Arboretum Drive East, Seattle\",
+website: \"https://botanicgardens.uw.edu/washington-park-arboretum/\"
+},
+status: \"OK\"
+}</string>
 </resources>

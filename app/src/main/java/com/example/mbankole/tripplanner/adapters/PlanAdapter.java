@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Location;
@@ -27,7 +26,6 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
     List<Plan> mPlans;
     Context context;
     android.app.FragmentManager fm;
-    public ExploreActivity exploreActivity;
 
     public PlanAdapter(List<Plan> plans) {
         mPlans = plans;

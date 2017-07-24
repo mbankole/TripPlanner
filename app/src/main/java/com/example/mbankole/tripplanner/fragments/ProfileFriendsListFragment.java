@@ -47,7 +47,7 @@ public class ProfileFriendsListFragment extends Fragment {
         // find RecyclerView
         rvUsers = (RecyclerView) v.findViewById(R.id.rvUsers);
         // init the arraylist (data source)
-        friends = new ArrayList<>();
+        //friends = new ArrayList<>();
         // construct the adapter from this data source
         userAdapter = new UserAdapter(friends);
         userAdapter.setFm(fm);

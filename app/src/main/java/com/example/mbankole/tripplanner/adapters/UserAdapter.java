@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.fragments.PeopleDetailsFragment;
 import com.example.mbankole.tripplanner.models.User;
@@ -23,7 +22,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     List<User> mUsers;
     Context context;
     android.app.FragmentManager fm;
-    public ExploreActivity exploreActivity;
 
     public UserAdapter(List<User> users) {
         mUsers = users;
@@ -71,7 +69,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             if (position != RecyclerView.NO_POSITION) {
                 User user = mUsers.get(position);
                 PeopleDetailsFragment frag = PeopleDetailsFragment.newInstance(user);
-                frag.exploreActivity = exploreActivity;
                 frag.show(fm, "name");
             }
         }

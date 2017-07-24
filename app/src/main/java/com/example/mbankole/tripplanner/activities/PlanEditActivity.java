@@ -12,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.PlanEditPagerAdapter;
 import com.example.mbankole.tripplanner.models.Location;
@@ -31,7 +30,6 @@ public class PlanEditActivity extends AppCompatActivity {
     ArrayList<User> people;
     ArrayList<Location> places;
     ViewPager viewPager;
-    public ExploreActivity exploreActivity;
     Context context;
     Plan plan;
 

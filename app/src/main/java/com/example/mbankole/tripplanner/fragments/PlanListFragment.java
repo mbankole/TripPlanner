@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.adapters.PlanLocationsAdapter;
@@ -37,8 +36,6 @@ public class PlanListFragment extends Fragment{
     public PlanLocationsAdapter listAdapter;
     android.app.FragmentManager fm;
     public PlanEditActivity planEditActivity;
-    public ExploreActivity exploreActivity;
-
 
     public static PlanListFragment newInstance() {
         Bundle args = new Bundle();

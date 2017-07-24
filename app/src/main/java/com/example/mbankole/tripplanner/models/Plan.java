@@ -1,5 +1,6 @@
 package com.example.mbankole.tripplanner.models;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -14,7 +15,7 @@ public class Plan implements Parcelable {
     public ArrayList<User> people;
     public String title;
 
-    public static Plan generateSeattlePlan() {
+    public static Plan generateSeattlePlan(Context context) {
         Plan plan = new Plan();
         plan.places = new ArrayList<>();
         plan.people = new ArrayList<>();
@@ -22,11 +23,11 @@ public class Plan implements Parcelable {
         //plan.people.add(User.generateAdam());
         plan.people.add(User.generatePhilp());
         plan.people.add(User.generateTom());
-        plan.places.add(Location.generateArboretum());
+        plan.places.add(Location.generateArboretum(context));
         //plan.places.add(Location.generateArtMuseum());
-        plan.places.add(Location.generateNeedle());
+        plan.places.add(Location.generateNeedle(context));
         //plan.places.add(Location.generatePopCulture());
-        plan.places.add(Location.generateWheel());
+        plan.places.add(Location.generateWheel(context));
         return plan;
     }
 

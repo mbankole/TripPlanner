@@ -47,7 +47,7 @@ public class ExplorePlansListFragment extends Fragment {
         plans = new ArrayList<>();
         for (int i = 0; i < 1; i++) {
             Plan plan = new Plan();
-            plans.add(plan.generateSeattlePlan());
+            plans.add(plan.generateSeattlePlan(getContext()));
         }
         // construct the adapter from this data source
         planAdapter = new PlanAdapter(plans);

@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.mbankole.tripplanner.ExploreActivity;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.fragments.LocationDetailFragment;
 import com.example.mbankole.tripplanner.models.Location;
@@ -35,7 +34,6 @@ public class LocationsAdapter extends RecyclerView.Adapter<LocationsAdapter.View
 
     List<Location> mLocations;
     Context context;
-    public ExploreActivity exploreActivity;
     FragmentManager fm;
 
     public LocationsAdapter(List<Location> locations) {
