@@ -12,6 +12,8 @@ import com.example.mbankole.tripplanner.adapters.ProfileFragmentPagerAdapter;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Plan;
 import com.example.mbankole.tripplanner.models.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ public class ProfileActivity extends AppCompatActivity {
     ArrayList<User> friends;
     ArrayList<Location> interests;
     ArrayList<Plan> plans;
+    private FirebaseAuth mAuth;
+    FirebaseUser currentUser;
 
 
     @Override
@@ -61,4 +65,3 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 }
-//
