@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by ericar on 7/11/17.
@@ -40,6 +41,9 @@ public class Location implements Parcelable {
     public float rating;
     public ArrayList<User> people;
     public TransportOption transport;
+    public Date startTime;
+    public long duration; // in seconds prob since idk
+    public Date endTime;
 
     public Location() {}
 
@@ -86,27 +90,6 @@ public class Location implements Parcelable {
         loc.googleId = result.getString("place_id");
     }
 
-    public static Location generateEiffelTower() {
-        Location location = new Location();
-        location.name = "EiffelTower";
-        location.uid = 1;
-        return location;
-    }
-
-    public static Location generateStatueOfLiberty() {
-        Location location = new Location();
-        location.name = "StauteOfLiberty";
-        location.uid = 2;
-        return location;
-    }
-
-    public static Location generateTajMahal() {
-        Location location = new Location();
-        location.name = "TajMahal";
-        location.uid = 3;
-        return location;
-    }
-
     public static Location generatePopCulture(Context context) {
         String jsonString = context.getString(R.string.popCultureJson);
         try {
@@ -115,19 +98,6 @@ public class Location implements Parcelable {
             Log.d(TAG, "generateArboretum: " + e.toString());
         }
         return null;
-        //return LocationDetailCache.getLocationDetail("ChIJAAAAAAAAAAAREthJEc0p6dE");
-        /*final Location location = new Location();
-        GmapClient.getDetailFromId("ChIJAAAAAAAAAAAREthJEc0p6dE", new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    Location.locationFromJson(response, location);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        return location;*/
     }
 
     public static Location generateNeedle(Context context) {
@@ -138,19 +108,6 @@ public class Location implements Parcelable {
             Log.d(TAG, "generateArboretum: " + e.toString());
         }
         return null;
-        //return LocationDetailCache.getLocationDetail("ChIJAAAAAAAAAAARDZLQnmioK9s");
-        /*final Location location = new Location();
-        GmapClient.getDetailFromId("ChIJAAAAAAAAAAARDZLQnmioK9s", new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    Location.locationFromJson(response, location);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        return location;*/
     }
 
     public static Location generateArtMuseum(Context context) {
@@ -161,19 +118,6 @@ public class Location implements Parcelable {
             Log.d(TAG, "generateArboretum: " + e.toString());
         }
         return null;
-        //return LocationDetailCache.getLocationDetail("ChIJAAAAAAAAAAARxI1KoO7oZHs");
-        /*final Location location = new Location();
-        GmapClient.getDetailFromId("ChIJAAAAAAAAAAARxI1KoO7oZHs", new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    Location.locationFromJson(response, location);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        return location;*/
     }
 
     public static Location generateWheel(Context context) {
@@ -184,19 +128,6 @@ public class Location implements Parcelable {
             Log.d(TAG, "generateArboretum: " + e.toString());
         }
         return null;
-        //return LocationDetailCache.getLocationDetail("ChIJAAAAAAAAAAARxtrx3nOQIKU");
-        /*final Location location = new Location();
-        GmapClient.getDetailFromId("ChIJAAAAAAAAAAARxtrx3nOQIKU", new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    Location.locationFromJson(response, location);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        return location;*/
     }
 
     public static Location generateArboretum(Context context) {
@@ -208,19 +139,6 @@ public class Location implements Parcelable {
             Log.d(TAG, "generateArboretum: " + e.toString());
         }
         return null;
-        //return LocationDetailCache.getLocationDetail("ChIJAAAAAAAAAAARin5kehZcTqI");
-        /*final Location location = new Location();
-        GmapClient.getDetailFromId("ChIJAAAAAAAAAAARin5kehZcTqI", new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    Location.locationFromJson(response, location);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        return location;*/
     }
 
     //some placeIds
