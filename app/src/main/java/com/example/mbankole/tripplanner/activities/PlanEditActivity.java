@@ -1,7 +1,9 @@
 package com.example.mbankole.tripplanner.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
@@ -10,6 +12,7 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.R;
@@ -32,6 +35,7 @@ public class PlanEditActivity extends AppCompatActivity {
     ViewPager viewPager;
     Context context;
     Plan plan;
+    FloatingActionButton fabDone;
 
     //
     @Override
@@ -42,11 +46,12 @@ public class PlanEditActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //if plan is null, make a new empty one
         plan = getIntent().getParcelableExtra("plan");
+        if (plan == null) plan = Plan.newPlan();
 
         context = this;
 
-        //Intent getI = getIntent();
         people = plan.people;
         places = plan.places;
 
@@ -67,6 +72,17 @@ public class PlanEditActivity extends AppCompatActivity {
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             tabLayout.getTabAt(i).setIcon(icons[i]);
         }
+
+        fabDone = (FloatingActionButton) findViewById(R.id.fabDone);
+        fabDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent();
+                i.putExtra("plan", plan);
+                setResult(RESULT_OK, i);
+                finish();
+            }
+        });
         //Intent i = new Intent(MainActivity.this, MapDemoActivity.class);
         //startActivity(i);
     }

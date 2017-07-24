@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.NewExploreFragmentPagerAdapter;
+import com.example.mbankole.tripplanner.fragments.ExplorePlansListFragment;
 import com.example.mbankole.tripplanner.models.Plan;
 
 import java.util.ArrayList;
@@ -38,18 +39,16 @@ public class NewExploreActivity extends AppCompatActivity {
         fragmentPager = new NewExploreFragmentPagerAdapter(getSupportFragmentManager(), plans);
         viewPager.setAdapter(fragmentPager);
 
-
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
-        int[] icons = {
+        /*int[] icons = {
                 R.drawable.ic_globe,
-                R.drawable.ic_marker_black,
                 R.drawable.ic_user_black
         };
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             tabLayout.getTabAt(i).setIcon(icons[i]);
-        }
+        }*/
         //viewPager.setCurrentItem(0);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -97,5 +96,14 @@ public class NewExploreActivity extends AppCompatActivity {
         });
 
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode ==RESULT_OK && requestCode == ExplorePlansListFragment.PLAN_REQUEST_CODE){
+            Plan newPlan = data.getExtras().getParcelable("plan");
+            plans.add(newPlan);
+        }
     }
 }
