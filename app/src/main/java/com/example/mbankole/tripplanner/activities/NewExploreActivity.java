@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.NewExploreFragmentPagerAdapter;
+import com.example.mbankole.tripplanner.fragments.ExplorePlansListFragment;
 import com.example.mbankole.tripplanner.models.Plan;
 
 import java.util.ArrayList;
@@ -37,7 +38,6 @@ public class NewExploreActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         fragmentPager = new NewExploreFragmentPagerAdapter(getSupportFragmentManager(), plans);
         viewPager.setAdapter(fragmentPager);
-
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
@@ -96,5 +96,14 @@ public class NewExploreActivity extends AppCompatActivity {
         });
 
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode ==RESULT_OK && requestCode == ExplorePlansListFragment.PLAN_REQUEST_CODE){
+            Plan newPlan = data.getExtras().getParcelable("plan");
+            plans.add(newPlan);
+        }
     }
 }
