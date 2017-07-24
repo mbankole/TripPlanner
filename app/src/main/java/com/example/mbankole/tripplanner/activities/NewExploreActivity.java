@@ -44,7 +44,6 @@ public class NewExploreActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         int[] icons = {
                 R.drawable.ic_globe,
-                R.drawable.ic_marker_black,
                 R.drawable.ic_user_black
         };
         for (int i = 0; i < tabLayout.getTabCount(); i++) {

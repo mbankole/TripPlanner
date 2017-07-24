@@ -5,6 +5,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by mbankole on 7/20/17.
@@ -14,6 +15,8 @@ public class Plan implements Parcelable {
     public ArrayList<Location> places;
     public ArrayList<User> people;
     public String title;
+    public Date startDate;
+    public Date endDate;
 
     public static Plan generateSeattlePlan(Context context) {
         Plan plan = new Plan();

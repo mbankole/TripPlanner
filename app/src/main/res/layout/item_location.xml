@@ -16,7 +16,7 @@
         android:scaleType="centerCrop"
         app:srcCompat="@color/black" />
 
-    <com.example.mbankole.tripplanner.utility.RalewayBoldTextView
+    <com.example.mbankole.tripplanner.utility.RalewayLightTextView
         android:id="@+id/tvLocationname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,8 +24,8 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_toEndOf="@+id/ivLocationImage"
         android:text="Location Name"
-        android:textAppearance="@android:style/TextAppearance.Medium"
-        android:layout_toEndOf="@+id/ivLocationImage" />
+        android:textAppearance="@android:style/TextAppearance.Medium" />
 
 </RelativeLayout>
