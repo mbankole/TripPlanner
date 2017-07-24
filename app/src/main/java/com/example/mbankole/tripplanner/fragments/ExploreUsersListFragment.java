@@ -58,11 +58,14 @@ public class ExploreUsersListFragment extends Fragment {
         rvUsers.setLayoutManager(new LinearLayoutManager(getContext()));
         // set the adapter
         rvUsers.setAdapter(userAdapter);
-        for (int i=0; i < 8; i++) {
+        for (int i=0; i < 5; i++) {
             //User friend = new User();
-            friends.add(User.generateAdam(getContext()));
-            friends.add(User.generatePhilp());
-            friends.add(User.generateTom());
+            friends.add(User.generateChandler(getContext()));
+            friends.add(User.generateJoey());
+            friends.add(User.generateMonica());
+            friends.add(User.generatePhoebe());
+            friends.add(User.generateRachel());
+            friends.add(User.generateRoss());
         }
 
         addItems(friends);
