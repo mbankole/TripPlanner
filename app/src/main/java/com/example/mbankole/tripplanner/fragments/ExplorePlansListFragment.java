@@ -28,7 +28,7 @@ public class ExplorePlansListFragment extends Fragment {
     }
 
     PlanAdapter planAdapter;
-    ArrayList<Plan> plans;
+    public ArrayList<Plan> plans;
     RecyclerView rvPlans;
     FloatingActionButton fabAdd;
 
@@ -59,7 +59,7 @@ public class ExplorePlansListFragment extends Fragment {
         // find RecyclerView
         rvPlans = (RecyclerView) v.findViewById(R.id.rvPlans);
         // init the arraylist (data source)
-        plans = new ArrayList<>();
+        //plans = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             Plan plan = new Plan();
             plans.add(plan.generateSeattlePlan(getContext()));
@@ -77,8 +77,9 @@ public class ExplorePlansListFragment extends Fragment {
     }
 
 
-    public void refresh() {
-        planAdapter.notifyDataSetChanged();
+    public void refreshAdd() {
+        planAdapter.notifyItemInserted(0);
+        rvPlans.smoothScrollToPosition(0);
     }
 
     @Override
