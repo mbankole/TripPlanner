@@ -98,6 +98,7 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
             @Override
             public void onClick(View v) {
                 planEditActivity.removeLocation(loc);
+                Snackbar.make(viewref, "Removed!", Snackbar.LENGTH_SHORT).show();
             }
         });
 
