@@ -28,4 +28,5 @@
         android:layout_below="@+id/tvDirections"
         android:layout_toEndOf="@+id/ivManuever"
         android:text="Distance" />
+
 </RelativeLayout>
