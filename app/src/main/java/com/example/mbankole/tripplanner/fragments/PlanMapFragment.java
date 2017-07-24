@@ -27,6 +27,8 @@ import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Route;
 import com.example.mbankole.tripplanner.models.User;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -149,7 +151,9 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         map.setOnPoiClickListener(this);
         enableMyLocation();
         if (places.size() != 0) {
-            addPins(map);
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            addPins(map, builder);
+            zoom(map, builder);
         }
         if (places.size() > 1) {
             showRoutes(places);
@@ -169,18 +173,20 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         }
     }
 
-    public void addPins(GoogleMap map) {
+    public void addPins(GoogleMap map, LatLngBounds.Builder builder) {
         IconGenerator iconFactory = new IconGenerator(getContext());
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         for (int i = 0; i < places.size(); i++) {
             addIcon(iconFactory, alphabet.charAt(i) + ": " + places.get(i).name, places.get(i), map);
             builder.include(places.get(i).latLng);
         }
+    }
+
+    public void zoom(GoogleMap map, LatLngBounds.Builder builder) {
         LatLngBounds bounds = builder.build();
         int padding = 240; // offset from edges of the map in pixels
-        //CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-        //map.moveCamera(cu);
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+        map.moveCamera(cu);
     }
 
 
@@ -222,7 +228,8 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
 
     public void refresh() {
         mMap.clear();
-        addPins(mMap);
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        addPins(mMap,builder);
         showRoutes(places);
     }
 
