@@ -14,7 +14,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
@@ -79,13 +78,6 @@ public class PlanListFragment extends Fragment{
                 // and notify the adapter that its dataset has changed
                 listAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), target.getAdapterPosition());
                 planEditActivity.refresh();
-
-                String ToastString = "";
-                for (int i=0; i<locations.size(); i++) {
-                    //ToastString += ((User)list_objects.get(i)).name;
-                }
-                Toast toast = Toast.makeText(getContext(), ToastString, Toast.LENGTH_LONG);
-                toast.show();
                 return true;
             }
 

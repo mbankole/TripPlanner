@@ -129,7 +129,6 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
             priceString += "$";
         }
 
-       //
         tvprice.setText(priceString);
         if (loc.rating != -1) {
             ratingBar.setRating(loc.rating);
@@ -153,7 +152,7 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
     public void debug(String message) {
         Log.d(TAG, message);
     }
-    //
+
     @Override
     public void onClick(View v) {
         if (v.getId() == btAdd.getId()) {
