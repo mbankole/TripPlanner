@@ -34,6 +34,14 @@ public class Plan implements Parcelable {
     public Plan() {
     }
 
+    public static Plan newPlan() {
+        Plan plan = new Plan();
+        plan.places = new ArrayList<>();
+        plan.people = new ArrayList<>();
+        plan.title = "New Plan";
+        return plan;
+    }
+
     @Override
     public int describeContents() {
         return 0;

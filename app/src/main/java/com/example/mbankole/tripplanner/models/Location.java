@@ -62,7 +62,7 @@ public class Location implements Parcelable {
 
     public static void locationFromJson(JSONObject obj, Location loc) throws JSONException{
         JSONObject result = obj;
-        Log.d(TAG, "locationFromJson: " + result.toString());
+        //Log.d(TAG, "locationFromJson: " + result.toString());
         if (obj.has("result")) result = obj.getJSONObject("result");
         loc.name = result.getString("name");
         loc.address = result.optString("formatted_address");
@@ -132,7 +132,6 @@ public class Location implements Parcelable {
 
     public static Location generateArboretum(Context context) {
         String jsonString = context.getString(R.string.arboretumJson);
-        //jsonString = jsonString.replace("'", "");
         try {
             return Location.locationFromJson(new JSONObject(jsonString));
         } catch (JSONException e) {
@@ -147,8 +146,6 @@ public class Location implements Parcelable {
     // seattle art museum - ChIJAAAAAAAAAAARxI1KoO7oZHs
     // wheel - ChIJAAAAAAAAAAARxtrx3nOQIKU
     // arboretum - ChIJAAAAAAAAAAARin5kehZcTqI
-
-
 
     @Override
     public int describeContents() {

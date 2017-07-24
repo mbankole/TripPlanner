@@ -1,7 +1,9 @@
 package com.example.mbankole.tripplanner.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mbankole.tripplanner.R;
+import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.adapters.PlanAdapter;
 import com.example.mbankole.tripplanner.models.Plan;
 
@@ -27,6 +30,7 @@ public class ExplorePlansListFragment extends Fragment {
     PlanAdapter planAdapter;
     ArrayList<Plan> plans;
     RecyclerView rvPlans;
+    FloatingActionButton fabAdd;
 
     public static ExplorePlansListFragment newInstance() {
         Bundle args = new Bundle();
@@ -41,11 +45,20 @@ public class ExplorePlansListFragment extends Fragment {
         // inflate the layout
         View v = inflater.inflate(R.layout.fragment_explore_plans_list, container, false);
 
+        fabAdd = (FloatingActionButton) v.findViewById(R.id.fabNew);
+        fabAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), PlanEditActivity.class);
+                getContext().startActivity(i);
+            }
+        });
+
         // find RecyclerView
         rvPlans = (RecyclerView) v.findViewById(R.id.rvPlans);
         // init the arraylist (data source)
         plans = new ArrayList<>();
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 5; i++) {
             Plan plan = new Plan();
             plans.add(plan.generateSeattlePlan(getContext()));
         }

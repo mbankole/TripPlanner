@@ -106,14 +106,7 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
         btClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                planMapFragment.addLocation(loc);
-                Button btClose = (Button) v.findViewById(R.id.btClose);
-                btClose.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dismiss();
-                    }
-                });
+                dismiss();
             }
         });
 

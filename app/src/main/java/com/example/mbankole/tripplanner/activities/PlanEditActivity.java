@@ -42,11 +42,12 @@ public class PlanEditActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //if plan is null, make a new empty one
         plan = getIntent().getParcelableExtra("plan");
+        if (plan == null) plan = Plan.newPlan();
 
         context = this;
 
-        //Intent getI = getIntent();
         people = plan.people;
         places = plan.places;
 
