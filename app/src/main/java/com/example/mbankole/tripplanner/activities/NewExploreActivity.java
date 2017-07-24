@@ -11,11 +11,14 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.NewExploreFragmentPagerAdapter;
 import com.example.mbankole.tripplanner.fragments.ExplorePlansListFragment;
 import com.example.mbankole.tripplanner.models.Plan;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -25,7 +28,8 @@ public class NewExploreActivity extends AppCompatActivity {
     ArrayList<Plan> plans;
     ViewPager viewPager;
     NewExploreFragmentPagerAdapter fragmentPager;
-
+    private FirebaseAuth mAuth;
+    FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,9 @@ public class NewExploreActivity extends AppCompatActivity {
 
         context = this;
         plans = new ArrayList<>();
+
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         fragmentPager = new NewExploreFragmentPagerAdapter(getSupportFragmentManager(), plans);
@@ -55,6 +62,9 @@ public class NewExploreActivity extends AppCompatActivity {
 
         Menu menu = toolbar.getMenu();
         onCreateOptionsMenu(menu);
+
+        Toast.makeText(context, "Signed in as " + currentUser.getDisplayName(),
+                Toast.LENGTH_LONG).show();
     }
 
     @Override
