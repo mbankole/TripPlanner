@@ -20,11 +20,11 @@
         android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ivProfileImage"
-        android:layout_marginTop="40dp"
-        android:layout_toEndOf="@+id/ivProfileImage"
         android:text="Username"
-        android:textAppearance="@android:style/TextAppearance.Large" />
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:layout_alignBottom="@+id/ivProfileImage"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        android:layout_marginBottom="33dp" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/sliding_tabs"

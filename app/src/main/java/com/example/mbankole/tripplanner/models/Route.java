@@ -20,7 +20,7 @@ import java.util.List;
 public class Route implements Parcelable {
 
     public String overviewPolyline;
-    public List<LatLng> latLongArray;
+    public List<DCLatLng> latLongArray;
     public ArrayList<RouteStep> steps;
     public String distance;
     public String duration;
@@ -39,7 +39,11 @@ public class Route implements Parcelable {
         route.steps = new ArrayList<>();
         JSONObject result = obj.getJSONArray("routes").getJSONObject(0);
         route.overviewPolyline = result.getJSONObject("overview_polyline").getString("points");
-        route.latLongArray = PolyUtil.decode(route.overviewPolyline);
+        ArrayList<LatLng> tempLatLngArray = (ArrayList) PolyUtil.decode(route.overviewPolyline);
+        route.latLongArray = new ArrayList<>();
+        for (int i = 0; i < tempLatLngArray.size(); i++) {
+            route.latLongArray.add(new DCLatLng(tempLatLngArray.get(i)));
+        }
         JSONObject legs = result.getJSONArray("legs").getJSONObject(0);
 
         JSONArray steps = legs.getJSONArray("steps");
@@ -61,48 +65,6 @@ public class Route implements Parcelable {
     public Route() {
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.overviewPolyline);
-        dest.writeTypedList(this.latLongArray);
-        dest.writeTypedList(this.steps);
-        dest.writeString(this.distance);
-        dest.writeString(this.duration);
-        dest.writeString(this.startAddress);
-        dest.writeString(this.endAddress);
-        dest.writeParcelable(this.startLoc, flags);
-        dest.writeParcelable(this.endLoc, flags);
-    }
-
-    protected Route(Parcel in) {
-        this.overviewPolyline = in.readString();
-        this.latLongArray = in.createTypedArrayList(LatLng.CREATOR);
-        this.steps = in.createTypedArrayList(RouteStep.CREATOR);
-        this.distance = in.readString();
-        this.duration = in.readString();
-        this.startAddress = in.readString();
-        this.endAddress = in.readString();
-        this.startLoc = in.readParcelable(LatLng.class.getClassLoader());
-        this.endLoc = in.readParcelable(LatLng.class.getClassLoader());
-    }
-
-    public static final Creator<Route> CREATOR = new Creator<Route>() {
-        @Override
-        public Route createFromParcel(Parcel source) {
-            return new Route(source);
-        }
-
-        @Override
-        public Route[] newArray(int size) {
-            return new Route[size];
-        }
-    };
-
     public String getOverviewPolyline() {
         return overviewPolyline;
     }
@@ -111,11 +73,11 @@ public class Route implements Parcelable {
         this.overviewPolyline = overviewPolyline;
     }
 
-    public List<LatLng> getLatLongArray() {
+    public List<DCLatLng> getLatLongArray() {
         return latLongArray;
     }
 
-    public void setLatLongArray(List<LatLng> latLongArray) {
+    public void setLatLongArray(List<DCLatLng> latLongArray) {
         this.latLongArray = latLongArray;
     }
 
@@ -174,4 +136,46 @@ public class Route implements Parcelable {
     public void setEndLoc(LatLng endLoc) {
         this.endLoc = endLoc;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.overviewPolyline);
+        dest.writeTypedList(this.latLongArray);
+        dest.writeTypedList(this.steps);
+        dest.writeString(this.distance);
+        dest.writeString(this.duration);
+        dest.writeString(this.startAddress);
+        dest.writeString(this.endAddress);
+        dest.writeParcelable(this.startLoc, flags);
+        dest.writeParcelable(this.endLoc, flags);
+    }
+
+    protected Route(Parcel in) {
+        this.overviewPolyline = in.readString();
+        this.latLongArray = in.createTypedArrayList(DCLatLng.CREATOR);
+        this.steps = in.createTypedArrayList(RouteStep.CREATOR);
+        this.distance = in.readString();
+        this.duration = in.readString();
+        this.startAddress = in.readString();
+        this.endAddress = in.readString();
+        this.startLoc = in.readParcelable(LatLng.class.getClassLoader());
+        this.endLoc = in.readParcelable(LatLng.class.getClassLoader());
+    }
+
+    public static final Creator<Route> CREATOR = new Creator<Route>() {
+        @Override
+        public Route createFromParcel(Parcel source) {
+            return new Route(source);
+        }
+
+        @Override
+        public Route[] newArray(int size) {
+            return new Route[size];
+        }
+    };
 }

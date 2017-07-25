@@ -158,4 +158,8 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
     void addToList() {
         dismiss();
     }
+
+   // Intent callIntent = new Intent(Intent.ACTION_CALL);
+   // callIntent.setData(Uri.parse("tel:123456789"));
+   // startActivity(callIntent);
 }
