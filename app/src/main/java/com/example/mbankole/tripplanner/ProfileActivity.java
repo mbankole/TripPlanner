@@ -29,6 +29,8 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         //tvUsername = (TextView) findViewById(R.id.tvUsername);
         //tvInterests = (TextView) findViewById(R.id.tvInterests);
+        //tvUsername = (TextView) findViewById(R.id.tvUsername);
+        //tvInterests = (TextView) findViewById(R.id.tvInterests);
         self = User.generateChandler(getApplicationContext());
         //tvUsername.setText(self.name);
         String interestString = "";
@@ -45,6 +47,8 @@ public class ProfileActivity extends AppCompatActivity {
     //
     // number of objects in memory
 
+    // initialize user, add 1 to static count and
+    // output String indicating that constructor was called
     // initialize user, add 1 to static count and
     // output String indicating that constructor was called
 
