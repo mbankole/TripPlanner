@@ -3,7 +3,7 @@ package com.example.mbankole.tripplanner.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,7 +55,7 @@ public class ExploreUsersListFragment extends Fragment {
         userAdapter = new UserAdapter(users);
         userAdapter.setFm(fm);
         // RecyclerView setup (layout manager, use adapter)
-        rvUsers.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvUsers.setLayoutManager(new GridLayoutManager(getContext(), 2));
         // set the adapter
         rvUsers.setAdapter(userAdapter);
         for (int i=0; i < 5; i++) {
