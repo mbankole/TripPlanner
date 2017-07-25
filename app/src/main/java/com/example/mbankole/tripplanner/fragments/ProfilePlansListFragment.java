@@ -54,6 +54,11 @@ public class ProfilePlansListFragment extends Fragment {
         rvPlans.setAdapter(planAdapter);
 //        Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
 //        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+//        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+//        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+
         planAdapter.notifyItemInserted(plans.size() - 1);
         return v;
     }

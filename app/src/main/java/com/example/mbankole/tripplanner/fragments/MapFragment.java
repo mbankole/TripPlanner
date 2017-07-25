@@ -152,6 +152,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,
         if (mPermissionDenied) {
             // Permission was not granted, display error dialog.
             //showMissingPermissionError();
+            // Permission was not granted, display error dialog.
+            //showMissingPermissionError();
             mPermissionDenied = false;
         }
     }
