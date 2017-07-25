@@ -17,8 +17,11 @@ import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.NewExploreFragmentPagerAdapter;
 import com.example.mbankole.tripplanner.fragments.ExplorePlansListFragment;
 import com.example.mbankole.tripplanner.models.Plan;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -29,6 +32,9 @@ public class NewExploreActivity extends AppCompatActivity {
     ViewPager viewPager;
     NewExploreFragmentPagerAdapter fragmentPager;
     private FirebaseAuth mAuth;
+    private FirebaseAnalytics mFirebaseAnalytics;
+    private DatabaseReference mDatabase;
+
     FirebaseUser currentUser;
 
     @Override
@@ -40,15 +46,29 @@ public class NewExploreActivity extends AppCompatActivity {
         plans = new ArrayList<>();
 
         mAuth = FirebaseAuth.getInstance();
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
         currentUser = mAuth.getCurrentUser();
+
+        mFirebaseAnalytics.setUserProperty("name", currentUser.getDisplayName());
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         fragmentPager = new NewExploreFragmentPagerAdapter(getSupportFragmentManager(), plans);
         viewPager.setAdapter(fragmentPager);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+
+        mDatabase.child("users").child(currentUser.getUid()).setValue(currentUser.getDisplayName());
+
+
+        //mDatabase.child("test").child(currentUser.getUid()).setValue(Plan.generateSeattlePlan(context));
+
+
+
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+
         /*int[] icons = {
                 R.drawable.ic_globe,
                 R.drawable.ic_user_black
@@ -56,6 +76,7 @@ public class NewExploreActivity extends AppCompatActivity {
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             tabLayout.getTabAt(i).setIcon(icons[i]);
         }*/
+
         //viewPager.setCurrentItem(0);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -64,6 +85,8 @@ public class NewExploreActivity extends AppCompatActivity {
         onCreateOptionsMenu(menu);
 
         Toast.makeText(context, "Signed in as " + currentUser.getDisplayName(),
+                Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "Signed in as " + currentUser.getUid(),
                 Toast.LENGTH_LONG).show();
     }
 

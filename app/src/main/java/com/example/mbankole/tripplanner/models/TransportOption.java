@@ -88,5 +88,60 @@ public class TransportOption implements Parcelable {
             return new TransportOption[size];
         }
     };
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LatLng getStartLatLong() {
+        return startLatLong;
+    }
+
+    public void setStartLatLong(LatLng startLatLong) {
+        this.startLatLong = startLatLong;
+    }
+
+    public LatLng getEndLatLong() {
+        return endLatLong;
+    }
+
+    public void setEndLatLong(LatLng endLatLong) {
+        this.endLatLong = endLatLong;
+    }
+
+    public String getStartId() {
+        return startId;
+    }
+
+    public void setStartId(String startId) {
+        this.startId = startId;
+    }
+
+    public String getEndId() {
+        return endId;
+    }
+
+    public void setEndId(String endId) {
+        this.endId = endId;
+    }
+
+    public String getEncodedPolyLine() {
+        return encodedPolyLine;
+    }
+
+    public void setEncodedPolyLine(String encodedPolyLine) {
+        this.encodedPolyLine = encodedPolyLine;
+    }
+
+    public Mode getMode() {
+        return mode;
+    }
+
+    public void setMode(Mode mode) {
+        this.mode = mode;
+    }
 }
-//
