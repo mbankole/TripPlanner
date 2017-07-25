@@ -3,8 +3,6 @@ package com.example.mbankole.tripplanner.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,8 +16,8 @@ public class RouteStep implements Parcelable {
     public String duration;
     public String htmlInstructions;
     public String maneuver;
-    public LatLng startLoc;
-    public LatLng endLoc;
+    public DCLatLng startLoc;
+    public DCLatLng endLoc;
     public String travelMode;
     public String polyline;
 
@@ -38,54 +36,14 @@ public class RouteStep implements Parcelable {
         } else {
             step.maneuver = null;
         }
-        step.startLoc = new LatLng(obj.getJSONObject("start_location").getDouble("lat"), obj.getJSONObject("start_location").getDouble("lng"));
-        step.endLoc = new LatLng(obj.getJSONObject("end_location").getDouble("lat"), obj.getJSONObject("end_location").getDouble("lng"));
+        step.startLoc = new DCLatLng(obj.getJSONObject("start_location").getDouble("lat"), obj.getJSONObject("start_location").getDouble("lng"));
+        step.endLoc = new DCLatLng(obj.getJSONObject("end_location").getDouble("lat"), obj.getJSONObject("end_location").getDouble("lng"));
         step.travelMode = obj.getString("travel_mode");
         step.polyline = obj.getJSONObject("polyline").getString("points");
     }
 
     public RouteStep() {
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.distance);
-        dest.writeString(this.duration);
-        dest.writeString(this.htmlInstructions);
-        dest.writeString(this.maneuver);
-        dest.writeParcelable(this.startLoc, flags);
-        dest.writeParcelable(this.endLoc, flags);
-        dest.writeString(this.travelMode);
-        dest.writeString(this.polyline);
-    }
-
-    protected RouteStep(Parcel in) {
-        this.distance = in.readString();
-        this.duration = in.readString();
-        this.htmlInstructions = in.readString();
-        this.maneuver = in.readString();
-        this.startLoc = in.readParcelable(LatLng.class.getClassLoader());
-        this.endLoc = in.readParcelable(LatLng.class.getClassLoader());
-        this.travelMode = in.readString();
-        this.polyline = in.readString();
-    }
-
-    public static final Creator<RouteStep> CREATOR = new Creator<RouteStep>() {
-        @Override
-        public RouteStep createFromParcel(Parcel source) {
-            return new RouteStep(source);
-        }
-
-        @Override
-        public RouteStep[] newArray(int size) {
-            return new RouteStep[size];
-        }
-    };
 
     public String getDistance() {
         return distance;
@@ -119,19 +77,19 @@ public class RouteStep implements Parcelable {
         this.maneuver = maneuver;
     }
 
-    public LatLng getStartLoc() {
+    public DCLatLng getStartLoc() {
         return startLoc;
     }
 
-    public void setStartLoc(LatLng startLoc) {
+    public void setStartLoc(DCLatLng startLoc) {
         this.startLoc = startLoc;
     }
 
-    public LatLng getEndLoc() {
+    public DCLatLng getEndLoc() {
         return endLoc;
     }
 
-    public void setEndLoc(LatLng endLoc) {
+    public void setEndLoc(DCLatLng endLoc) {
         this.endLoc = endLoc;
     }
 
@@ -150,4 +108,44 @@ public class RouteStep implements Parcelable {
     public void setPolyline(String polyline) {
         this.polyline = polyline;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.distance);
+        dest.writeString(this.duration);
+        dest.writeString(this.htmlInstructions);
+        dest.writeString(this.maneuver);
+        dest.writeParcelable(this.startLoc, flags);
+        dest.writeParcelable(this.endLoc, flags);
+        dest.writeString(this.travelMode);
+        dest.writeString(this.polyline);
+    }
+
+    protected RouteStep(Parcel in) {
+        this.distance = in.readString();
+        this.duration = in.readString();
+        this.htmlInstructions = in.readString();
+        this.maneuver = in.readString();
+        this.startLoc = in.readParcelable(DCLatLng.class.getClassLoader());
+        this.endLoc = in.readParcelable(DCLatLng.class.getClassLoader());
+        this.travelMode = in.readString();
+        this.polyline = in.readString();
+    }
+
+    public static final Creator<RouteStep> CREATOR = new Creator<RouteStep>() {
+        @Override
+        public RouteStep createFromParcel(Parcel source) {
+            return new RouteStep(source);
+        }
+
+        @Override
+        public RouteStep[] newArray(int size) {
+            return new RouteStep[size];
+        }
+    };
 }
