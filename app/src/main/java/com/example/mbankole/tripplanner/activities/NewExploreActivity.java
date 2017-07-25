@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -20,12 +21,18 @@ import com.example.mbankole.tripplanner.models.Plan;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class NewExploreActivity extends AppCompatActivity {
+
+    final static String TAG = "EXPLOREACTIVITY";
 
     Context context;
     ArrayList<Plan> plans;
@@ -34,6 +41,8 @@ public class NewExploreActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAnalytics mFirebaseAnalytics;
     private DatabaseReference mDatabase;
+    Plan testPlan;
+
 
     FirebaseUser currentUser;
 
@@ -63,6 +72,23 @@ public class NewExploreActivity extends AppCompatActivity {
 
         //mDatabase.child("test").child(currentUser.getUid()).setValue(Plan.generateSeattlePlan(context));
 
+        DatabaseReference ref = mDatabase.child("test");
+
+        Query planQuery = ref.orderByChild("title").equalTo("Trip to Seattle");
+
+        planQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
+                    testPlan = singleSnapshot.getValue(Plan.class);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled: shits fucked");
+            }
+        });
 
 
         // Give the TabLayout the ViewPager

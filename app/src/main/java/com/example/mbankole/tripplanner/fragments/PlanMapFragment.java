@@ -33,6 +33,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -178,7 +179,7 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         for (int i = 0; i < places.size(); i++) {
             addIcon(iconFactory, alphabet.charAt(i) + ": " + places.get(i).name, places.get(i), map);
-            builder.include(places.get(i).latLng);
+            builder.include(places.get(i).latLng.toGLatLng());
         }
     }
 
@@ -193,7 +194,7 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     private void addIcon(IconGenerator iconFactory, CharSequence text, Location location, GoogleMap map) {
         MarkerOptions markerOptions = new MarkerOptions().
                 icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(text))).
-                position(location.latLng).
+                position(location.latLng.toGLatLng()).
                 anchor(iconFactory.getAnchorU(), iconFactory.getAnchorV());
         Marker marker = map.addMarker(markerOptions);
         marker.setTag(location);
@@ -266,9 +267,13 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     try {
                         Route rt = Route.routeFromJson(response);
+                        ArrayList<LatLng> tempLatLngArray = new ArrayList<>();
+                        for (int i = 0; i < rt.latLongArray.size(); i++) {
+                            tempLatLngArray.add(rt.latLongArray.get(i).toGLatLng());
+                        }
                         mMap.addPolyline(new PolylineOptions()
 //                                .color(R.color.colorPrimaryDark)
-                                .addAll(rt.latLongArray)
+                                .addAll(tempLatLngArray)
                                 .clickable(true))
                                 .setTag(rt);
                     } catch (JSONException e) {

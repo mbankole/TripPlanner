@@ -33,7 +33,7 @@ public class Location implements Parcelable {
     public String hours;
     public int price;
     public String iconUrl;
-    public LatLng latLng;
+    public DCLatLng latLng;
     public String desc;
     public String googleId;
     public String photoRef;
@@ -50,7 +50,7 @@ public class Location implements Parcelable {
 
     public Location(PointOfInterest poi) {
         name = poi.name;
-        latLng = poi.latLng;
+        latLng = new DCLatLng(poi.latLng);
         googleId = poi.placeId;
     }
 
@@ -85,7 +85,7 @@ public class Location implements Parcelable {
         if (photoData != null) loc.photoRef = photoData.getJSONObject(0).optString("photo_reference", null);
         if (loc.photoRef != null) loc.photoUrl = GmapClient.generateImageUrl(loc.photoRef);
         JSONObject latlngObj = result.getJSONObject("geometry").getJSONObject("location");
-        loc.latLng = new LatLng(latlngObj.getDouble("lat"), latlngObj.getDouble("lng"));
+        loc.latLng = new DCLatLng(latlngObj.getDouble("lat"), latlngObj.getDouble("lng"));
         loc.people = new ArrayList<>();
         loc.googleId = result.getString("place_id");
     }
@@ -203,6 +203,10 @@ public class Location implements Parcelable {
         }
     };
 
+    public void setLatLng(DCLatLng latLng) {
+        this.latLng = latLng;
+    }
+
     public int getUid() {
         return uid;
     }
@@ -265,14 +269,6 @@ public class Location implements Parcelable {
 
     public void setIconUrl(String iconUrl) {
         this.iconUrl = iconUrl;
-    }
-
-    public LatLng getLatLng() {
-        return latLng;
-    }
-
-    public void setLatLng(LatLng latLng) {
-        this.latLng = latLng;
     }
 
     public String getDesc() {
@@ -355,8 +351,3 @@ public class Location implements Parcelable {
         this.endTime = endTime;
     }
 }
-
-
-
-
-//allows user to pick destination location

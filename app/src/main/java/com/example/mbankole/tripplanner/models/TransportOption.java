@@ -3,8 +3,6 @@ package com.example.mbankole.tripplanner.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.android.gms.maps.model.LatLng;
-
 /**
  * Created by mbankole on 7/18/17.
  */
@@ -13,8 +11,8 @@ public class TransportOption implements Parcelable {
     public String name;
     //public Location start;
     //public Location end;
-    public LatLng startLatLong;
-    public LatLng endLatLong;
+    public DCLatLng startLatLong;
+    public DCLatLng endLatLong;
     public String startId;
     public String endId;
     public String encodedPolyLine;
@@ -50,45 +48,6 @@ public class TransportOption implements Parcelable {
         this.name = name;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.name);
-        dest.writeParcelable(this.startLatLong, flags);
-        dest.writeParcelable(this.endLatLong, flags);
-        dest.writeString(this.startId);
-        dest.writeString(this.endId);
-        dest.writeString(this.encodedPolyLine);
-        dest.writeInt(this.mode == null ? -1 : this.mode.ordinal());
-    }
-
-    protected TransportOption(Parcel in) {
-        this.name = in.readString();
-        this.startLatLong = in.readParcelable(LatLng.class.getClassLoader());
-        this.endLatLong = in.readParcelable(LatLng.class.getClassLoader());
-        this.startId = in.readString();
-        this.endId = in.readString();
-        this.encodedPolyLine = in.readString();
-        int tmpMode = in.readInt();
-        this.mode = tmpMode == -1 ? null : Mode.values()[tmpMode];
-    }
-
-    public static final Creator<TransportOption> CREATOR = new Creator<TransportOption>() {
-        @Override
-        public TransportOption createFromParcel(Parcel source) {
-            return new TransportOption(source);
-        }
-
-        @Override
-        public TransportOption[] newArray(int size) {
-            return new TransportOption[size];
-        }
-    };
-
     public String getName() {
         return name;
     }
@@ -97,19 +56,19 @@ public class TransportOption implements Parcelable {
         this.name = name;
     }
 
-    public LatLng getStartLatLong() {
+    public DCLatLng getStartLatLong() {
         return startLatLong;
     }
 
-    public void setStartLatLong(LatLng startLatLong) {
+    public void setStartLatLong(DCLatLng startLatLong) {
         this.startLatLong = startLatLong;
     }
 
-    public LatLng getEndLatLong() {
+    public DCLatLng getEndLatLong() {
         return endLatLong;
     }
 
-    public void setEndLatLong(LatLng endLatLong) {
+    public void setEndLatLong(DCLatLng endLatLong) {
         this.endLatLong = endLatLong;
     }
 
@@ -144,4 +103,43 @@ public class TransportOption implements Parcelable {
     public void setMode(Mode mode) {
         this.mode = mode;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeParcelable(this.startLatLong, flags);
+        dest.writeParcelable(this.endLatLong, flags);
+        dest.writeString(this.startId);
+        dest.writeString(this.endId);
+        dest.writeString(this.encodedPolyLine);
+        dest.writeInt(this.mode == null ? -1 : this.mode.ordinal());
+    }
+
+    protected TransportOption(Parcel in) {
+        this.name = in.readString();
+        this.startLatLong = in.readParcelable(DCLatLng.class.getClassLoader());
+        this.endLatLong = in.readParcelable(DCLatLng.class.getClassLoader());
+        this.startId = in.readString();
+        this.endId = in.readString();
+        this.encodedPolyLine = in.readString();
+        int tmpMode = in.readInt();
+        this.mode = tmpMode == -1 ? null : Mode.values()[tmpMode];
+    }
+
+    public static final Creator<TransportOption> CREATOR = new Creator<TransportOption>() {
+        @Override
+        public TransportOption createFromParcel(Parcel source) {
+            return new TransportOption(source);
+        }
+
+        @Override
+        public TransportOption[] newArray(int size) {
+            return new TransportOption[size];
+        }
+    };
 }
