@@ -31,6 +31,7 @@ public class NewExploreFragmentPagerAdapter extends FragmentPagerAdapter {
     public ExplorePlansListFragment getExplorePlansListFragment() {
         if (explorePlansListFragment == null) {
             explorePlansListFragment = ExplorePlansListFragment.newInstance();
+            explorePlansListFragment.plans = plans;
         }
         return explorePlansListFragment;
     }
@@ -66,8 +67,8 @@ public class NewExploreFragmentPagerAdapter extends FragmentPagerAdapter {
         return tabTitles[position];
     }
 
-    public void refresh() {
+    public void refreshAdd() {
         getExploreUsersListFragment().refresh();
-        getExplorePlansListFragment().refresh();
+        getExplorePlansListFragment().refreshAdd();
     }
 }

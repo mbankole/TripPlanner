@@ -113,8 +113,8 @@ public class NewExploreActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == ExplorePlansListFragment.PLAN_REQUEST_CODE){
             Plan newPlan = data.getExtras().getParcelable("plan");
-            plans.add(newPlan);
-            fragmentPager.refresh();
+            plans.add(0, newPlan);
+            fragmentPager.refreshAdd();
         }
     }
 }
