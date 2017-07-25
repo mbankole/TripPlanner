@@ -17,6 +17,7 @@ import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.NewExploreFragmentPagerAdapter;
 import com.example.mbankole.tripplanner.fragments.ExplorePlansListFragment;
 import com.example.mbankole.tripplanner.models.Plan;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -29,6 +30,8 @@ public class NewExploreActivity extends AppCompatActivity {
     ViewPager viewPager;
     NewExploreFragmentPagerAdapter fragmentPager;
     private FirebaseAuth mAuth;
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     FirebaseUser currentUser;
 
     @Override
@@ -40,7 +43,10 @@ public class NewExploreActivity extends AppCompatActivity {
         plans = new ArrayList<>();
 
         mAuth = FirebaseAuth.getInstance();
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(context);
         currentUser = mAuth.getCurrentUser();
+
+        mFirebaseAnalytics.setUserProperty("name", currentUser.getDisplayName());
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         fragmentPager = new NewExploreFragmentPagerAdapter(getSupportFragmentManager(), plans);
@@ -64,6 +70,8 @@ public class NewExploreActivity extends AppCompatActivity {
         onCreateOptionsMenu(menu);
 
         Toast.makeText(context, "Signed in as " + currentUser.getDisplayName(),
+                Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "Signed in as " + currentUser.getUid(),
                 Toast.LENGTH_LONG).show();
     }
 
