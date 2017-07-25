@@ -74,4 +74,44 @@ public class Plan implements Parcelable {
             return new Plan[size];
         }
     };
+
+    public ArrayList<Location> getPlaces() {
+        return places;
+    }
+
+    public void setPlaces(ArrayList<Location> places) {
+        this.places = places;
+    }
+
+    public ArrayList<User> getPeople() {
+        return people;
+    }
+
+    public void setPeople(ArrayList<User> people) {
+        this.people = people;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 }

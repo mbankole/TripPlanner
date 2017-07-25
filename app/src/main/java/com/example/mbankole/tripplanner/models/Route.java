@@ -102,4 +102,76 @@ public class Route implements Parcelable {
             return new Route[size];
         }
     };
+
+    public String getOverviewPolyline() {
+        return overviewPolyline;
+    }
+
+    public void setOverviewPolyline(String overviewPolyline) {
+        this.overviewPolyline = overviewPolyline;
+    }
+
+    public List<LatLng> getLatLongArray() {
+        return latLongArray;
+    }
+
+    public void setLatLongArray(List<LatLng> latLongArray) {
+        this.latLongArray = latLongArray;
+    }
+
+    public ArrayList<RouteStep> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(ArrayList<RouteStep> steps) {
+        this.steps = steps;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getStartAddress() {
+        return startAddress;
+    }
+
+    public void setStartAddress(String startAddress) {
+        this.startAddress = startAddress;
+    }
+
+    public String getEndAddress() {
+        return endAddress;
+    }
+
+    public void setEndAddress(String endAddress) {
+        this.endAddress = endAddress;
+    }
+
+    public LatLng getStartLoc() {
+        return startLoc;
+    }
+
+    public void setStartLoc(LatLng startLoc) {
+        this.startLoc = startLoc;
+    }
+
+    public LatLng getEndLoc() {
+        return endLoc;
+    }
+
+    public void setEndLoc(LatLng endLoc) {
+        this.endLoc = endLoc;
+    }
 }

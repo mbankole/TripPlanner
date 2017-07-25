@@ -134,6 +134,52 @@ public class User implements Parcelable {
             return new User[size];
         }
     };
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public ArrayList<User> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(ArrayList<User> friends) {
+        this.friends = friends;
+    }
+
+    public ArrayList<Location> getInterests() {
+        return interests;
+    }
+
+    public void setInterests(ArrayList<Location> interests) {
+        this.interests = interests;
+    }
+
+    public ArrayList<Plan> getPlans() {
+        return plans;
+    }
+
+    public void setPlans(ArrayList<Plan> plans) {
+        this.plans = plans;
+    }
 }
-//list friend names
-//enter and show profile with list of interests

@@ -86,4 +86,68 @@ public class RouteStep implements Parcelable {
             return new RouteStep[size];
         }
     };
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getHtmlInstructions() {
+        return htmlInstructions;
+    }
+
+    public void setHtmlInstructions(String htmlInstructions) {
+        this.htmlInstructions = htmlInstructions;
+    }
+
+    public String getManeuver() {
+        return maneuver;
+    }
+
+    public void setManeuver(String maneuver) {
+        this.maneuver = maneuver;
+    }
+
+    public LatLng getStartLoc() {
+        return startLoc;
+    }
+
+    public void setStartLoc(LatLng startLoc) {
+        this.startLoc = startLoc;
+    }
+
+    public LatLng getEndLoc() {
+        return endLoc;
+    }
+
+    public void setEndLoc(LatLng endLoc) {
+        this.endLoc = endLoc;
+    }
+
+    public String getTravelMode() {
+        return travelMode;
+    }
+
+    public void setTravelMode(String travelMode) {
+        this.travelMode = travelMode;
+    }
+
+    public String getPolyline() {
+        return polyline;
+    }
+
+    public void setPolyline(String polyline) {
+        this.polyline = polyline;
+    }
 }
