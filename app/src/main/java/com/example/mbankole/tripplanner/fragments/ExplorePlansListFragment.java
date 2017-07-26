@@ -15,6 +15,8 @@ import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.adapters.PlanAdapter;
 import com.example.mbankole.tripplanner.models.Plan;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -32,6 +34,9 @@ public class ExplorePlansListFragment extends Fragment {
     RecyclerView rvPlans;
     FloatingActionButton fabAdd;
 
+    FirebaseUser currentUser;
+    private FirebaseAuth mAuth;
+
     public static final int PLAN_REQUEST_CODE = 20;
 
     public static ExplorePlansListFragment newInstance() {
@@ -47,11 +52,15 @@ public class ExplorePlansListFragment extends Fragment {
         // inflate the layout
         View v = inflater.inflate(R.layout.fragment_explore_plans_list, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+
         fabAdd = (FloatingActionButton) v.findViewById(R.id.fabNew);
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), PlanEditActivity.class);
+                i.putExtra("creatorUID", currentUser.getUid());
                 getActivity().startActivityForResult(i, PLAN_REQUEST_CODE);
             }
         });
@@ -62,7 +71,7 @@ public class ExplorePlansListFragment extends Fragment {
         //plans = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             Plan plan = new Plan();
-            plans.add(plan.generateSeattlePlan(getContext()));
+            plans.add(Plan.generateSeattlePlan(getContext()));
         }
         // construct the adapter from this data source
         planAdapter = new PlanAdapter(plans);
