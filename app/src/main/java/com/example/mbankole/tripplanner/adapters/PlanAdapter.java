@@ -1,5 +1,6 @@
 package com.example.mbankole.tripplanner.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
@@ -29,6 +30,8 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
     List<Plan> mPlans;
     Context context;
     android.app.FragmentManager fm;
+
+    public static final int EDIT_PLAN_REQUEST_CODE = 30;
 
     public PlanAdapter(List<Plan> plans) {
         mPlans = plans;
@@ -70,7 +73,6 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         public LinearLayout llLocations;
         public ImageButton ibAdd;
 
-
         public ViewHolder(View itemView) {
             super(itemView);
             tvPlanTitle = (TextView) itemView.findViewById(R.id.tvPlanTitle);
@@ -92,7 +94,8 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
                 if (position != RecyclerView.NO_POSITION) {
                     Intent i = new Intent(context, PlanEditActivity.class);
                     i.putExtra("plan", plan);
-                    context.startActivity(i);
+                    i.putExtra("position", position);
+                    ((Activity)context).startActivityForResult(i, EDIT_PLAN_REQUEST_CODE);
                 }
             }
         }

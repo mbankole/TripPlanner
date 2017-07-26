@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.NewExploreFragmentPagerAdapter;
+import com.example.mbankole.tripplanner.adapters.PlanAdapter;
 import com.example.mbankole.tripplanner.fragments.ExplorePlansListFragment;
 import com.example.mbankole.tripplanner.models.Plan;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -164,6 +165,12 @@ public class NewExploreActivity extends AppCompatActivity {
             Plan newPlan = data.getExtras().getParcelable("plan");
             plans.add(0, newPlan);
             fragmentPager.refreshAdd();
+        }
+        if (resultCode == RESULT_OK && requestCode == PlanAdapter.EDIT_PLAN_REQUEST_CODE){
+            Plan newPlan = data.getExtras().getParcelable("plan");
+            int position = data.getExtras().getInt("position");
+            plans.set(position, newPlan);
+            fragmentPager.refresh();
         }
     }
 }

@@ -91,6 +91,10 @@ public class ExplorePlansListFragment extends Fragment {
         rvPlans.smoothScrollToPosition(0);
     }
 
+    public void refresh() {
+        planAdapter.notifyDataSetChanged();
+    }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {}
 }

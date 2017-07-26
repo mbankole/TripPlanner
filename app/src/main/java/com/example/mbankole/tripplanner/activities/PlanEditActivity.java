@@ -38,6 +38,7 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
     ViewPager viewPager;
     Context context;
     Plan plan;
+    int position;
     FloatingActionButton fabDone;
 
     private static final String TAG = "PLANEDITACTIVITY";
@@ -52,6 +53,7 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
 
         //if plan is null, make a new empty one
         plan = getIntent().getParcelableExtra("plan");
+        position = getIntent().getIntExtra("position", -1);
         if (plan == null) {
             String creatorUid = getIntent().getStringExtra("creatorUid");
             plan = Plan.newPlan(creatorUid);
@@ -92,6 +94,7 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
             public void onClick(View v) {
                 Intent i = new Intent();
                 i.putExtra("plan", plan);
+                i.putExtra("position", position);
                 setResult(RESULT_OK, i);
                 finish();
             }
