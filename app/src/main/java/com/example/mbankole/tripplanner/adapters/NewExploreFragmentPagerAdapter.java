@@ -71,4 +71,9 @@ public class NewExploreFragmentPagerAdapter extends FragmentPagerAdapter {
         getExploreUsersListFragment().refresh();
         getExplorePlansListFragment().refreshAdd();
     }
+
+    public void refresh() {
+        getExploreUsersListFragment().refresh();
+        getExplorePlansListFragment().refresh();
+    }
 }

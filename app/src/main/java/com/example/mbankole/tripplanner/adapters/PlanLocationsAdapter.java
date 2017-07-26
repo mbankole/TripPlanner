@@ -63,16 +63,20 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
                 //.memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
                 .transform(new gradient())
                 .into(holder.ivLocationImage);
+        holder.removeTransport();
+        holder.clearUsers();
+        for (int i = 0; i < location.people.size(); i++) {
+            holder.addUser(location.people.get(i));
+        }
         if (location.transport != null) holder.addTransport(location.transport);
         else holder.removeTransport();
-
     }
 
     @Override
     public int getItemCount() {return mLocations.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView tvLocationname;
         public ImageView ivLocationImage;
@@ -137,11 +141,28 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
         void addTransport(TransportOption transportOption) {
             View v = LayoutInflater.from(context).inflate(R.layout.item_transport_select, llTransport, false);
             viewHolderTransportSetup(v);
+            switch (transportOption.mode) {
+                case WALKING:
+                    ((RadioButton)v.findViewById(R.id.rbWalk)).setChecked(true);
+                    break;
+                case DRIVING:
+                    ((RadioButton)v.findViewById(R.id.rbDrive)).setChecked(true);
+                    break;
+                case TRANSIT:
+                    ((RadioButton)v.findViewById(R.id.rbTransit)).setChecked(true);
+                    break;
+                case BLANK:
+                default:
+            }
             llTransport.addView(v);
         }
 
         void removeTransport() {
+            if (llTransport.getChildCount() > 0) llTransport.removeAllViews();
+        }
 
+        void clearUsers() {
+            if (llPeople.getChildCount() > 0) llPeople.removeAllViews();
         }
 
         public void viewHolderTransportSetup(View itemView) {
@@ -173,8 +194,6 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
                             if (checked) {
                                 transportOption.mode = TransportOption.Mode.DRIVING;
                             }
-
-
                         } else if (id == rbTransit.getId()) {
                             boolean checked = ((RadioButton) view).isChecked();
                             Log.d(TAG, "onClick: rbTransit");
@@ -186,16 +205,9 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
                     }
                 }
             };
-
             rbWalk.setOnClickListener(radioClick);
             rbDrive.setOnClickListener(radioClick);
             rbTransit.setOnClickListener(radioClick);
-
-        }
-
-        @Override
-        public void onClick(View view) {
-
         }
     }
 

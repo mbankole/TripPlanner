@@ -15,6 +15,8 @@ public class Plan implements Parcelable {
     public ArrayList<Location> places;
     public ArrayList<User> people;
     public String title;
+    public String description;
+    public String creatorUid;
     public Date startDate;
     public Date endDate;
 
@@ -23,6 +25,7 @@ public class Plan implements Parcelable {
         plan.places = new ArrayList<>();
         plan.people = new ArrayList<>();
         plan.title = "Trip to Seattle";
+        plan.description = "Looking at a couple of landmarks";
         //plan.people.add(User.generateChandler());
         plan.people.add(User.generateRachel());
         plan.people.add(User.generatePhoebe());
@@ -45,35 +48,30 @@ public class Plan implements Parcelable {
         return plan;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public static Plan newPlan(String creatorUid) {
+        Plan plan = new Plan();
+        plan.places = new ArrayList<>();
+        plan.people = new ArrayList<>();
+        plan.title = "New Plan";
+        plan.creatorUid = creatorUid;
+        return plan;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeTypedList(this.places);
-        dest.writeTypedList(this.people);
-        dest.writeString(this.title);
+    public String getDescription() {
+        return description;
     }
 
-    protected Plan(Parcel in) {
-        this.places = in.createTypedArrayList(Location.CREATOR);
-        this.people = in.createTypedArrayList(User.CREATOR);
-        this.title = in.readString();
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public static final Creator<Plan> CREATOR = new Creator<Plan>() {
-        @Override
-        public Plan createFromParcel(Parcel source) {
-            return new Plan(source);
-        }
+    public String getCreatorUid() {
+        return creatorUid;
+    }
 
-        @Override
-        public Plan[] newArray(int size) {
-            return new Plan[size];
-        }
-    };
+    public void setCreatorUid(String creatorUid) {
+        this.creatorUid = creatorUid;
+    }
 
     public ArrayList<Location> getPlaces() {
         return places;
@@ -114,4 +112,44 @@ public class Plan implements Parcelable {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(this.places);
+        dest.writeTypedList(this.people);
+        dest.writeString(this.title);
+        dest.writeString(this.description);
+        dest.writeString(this.creatorUid);
+        dest.writeLong(this.startDate != null ? this.startDate.getTime() : -1);
+        dest.writeLong(this.endDate != null ? this.endDate.getTime() : -1);
+    }
+
+    protected Plan(Parcel in) {
+        this.places = in.createTypedArrayList(Location.CREATOR);
+        this.people = in.createTypedArrayList(User.CREATOR);
+        this.title = in.readString();
+        this.description = in.readString();
+        this.creatorUid = in.readString();
+        long tmpStartDate = in.readLong();
+        this.startDate = tmpStartDate == -1 ? null : new Date(tmpStartDate);
+        long tmpEndDate = in.readLong();
+        this.endDate = tmpEndDate == -1 ? null : new Date(tmpEndDate);
+    }
+
+    public static final Creator<Plan> CREATOR = new Creator<Plan>() {
+        @Override
+        public Plan createFromParcel(Parcel source) {
+            return new Plan(source);
+        }
+
+        @Override
+        public Plan[] newArray(int size) {
+            return new Plan[size];
+        }
+    };
 }

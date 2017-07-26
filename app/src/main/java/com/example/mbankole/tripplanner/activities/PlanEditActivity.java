@@ -7,9 +7,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.PlanEditPagerAdapter;
+import com.example.mbankole.tripplanner.fragments.PlanEditTextFragment;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Plan;
 import com.example.mbankole.tripplanner.models.User;
@@ -27,7 +30,7 @@ import java.util.ArrayList;
  * Created by mbankole on 7/20/17.
  */
 
-public class PlanEditActivity extends AppCompatActivity {
+public class PlanEditActivity extends AppCompatActivity implements PlanEditTextFragment.PlanEditTextListener {
 
     PlanEditPagerAdapter fragmentPager;
     ArrayList<User> people;
@@ -35,7 +38,10 @@ public class PlanEditActivity extends AppCompatActivity {
     ViewPager viewPager;
     Context context;
     Plan plan;
+    int position;
     FloatingActionButton fabDone;
+
+    private static final String TAG = "PLANEDITACTIVITY";
 
     //
     @Override
@@ -43,12 +49,15 @@ public class PlanEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
         //if plan is null, make a new empty one
         plan = getIntent().getParcelableExtra("plan");
-        if (plan == null) plan = Plan.newPlan();
+        position = getIntent().getIntExtra("position", -1);
+        if (plan == null) {
+            String creatorUid = getIntent().getStringExtra("creatorUid");
+            plan = Plan.newPlan(creatorUid);
+        }
 
         context = this;
 
@@ -61,6 +70,12 @@ public class PlanEditActivity extends AppCompatActivity {
         fragmentPager.planEditActivity = this;
         fragmentPager.people = plan.people;
         fragmentPager.places = plan.places;
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(plan.title);
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
@@ -79,6 +94,7 @@ public class PlanEditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent();
                 i.putExtra("plan", plan);
+                i.putExtra("position", position);
                 setResult(RESULT_OK, i);
                 finish();
             }
@@ -116,14 +132,16 @@ public class PlanEditActivity extends AppCompatActivity {
                 return false;
             }
         });
-        MenuItem miProfile = menu.findItem(R.id.miProfile);
-        miProfile.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+        MenuItem miEditText = menu.findItem(R.id.miEditText);
+        miEditText.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
+                PlanEditTextFragment frag = PlanEditTextFragment.newInstance(plan.title, plan.description);
+                frag.show(getSupportFragmentManager(), "edit");
                 return false;
             }
         });
-        MenuItem miSave = menu.findItem(R.id.miSave);
+        /*MenuItem miSave = menu.findItem(R.id.miSave);
         miSave.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -133,9 +151,22 @@ public class PlanEditActivity extends AppCompatActivity {
                 finish();
                 return false;
             }
-        });
+        });*/
 
         return true;
+    }
+
+    @Override
+    public void onFinishEditText(Plan plan) {
+        this.plan.title = plan.title;
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        try {
+            getSupportActionBar().setTitle(plan.title);
+        } catch (NullPointerException e) {
+            Log.e(TAG, "onFinishEditText: ", e);
+        }
+        this.plan.description = plan.description;
     }
 
     public void refresh() {
@@ -156,6 +187,6 @@ public class PlanEditActivity extends AppCompatActivity {
         }
         Toast toast = Toast.makeText(this, ToastString, Toast.LENGTH_LONG);
         toast.show();
-        fragmentPager.getPlanListFragment().refresh();
+        refresh();
     }
 }
