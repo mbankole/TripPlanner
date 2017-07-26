@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Created by ericar on 7/13/17.
+ * Created by mbankole on 7/13/17.
  */
 
 public class PlanListFragment extends Fragment{
@@ -85,6 +85,9 @@ public class PlanListFragment extends Fragment{
         ith.attachToRecyclerView(rvPlanList);
 
         listAdapter.notifyItemInserted(locations.size() - 1);
+
+        refresh();
+
         return v;
     }
 
@@ -98,10 +101,12 @@ public class PlanListFragment extends Fragment{
                 Location loc2 = locations.get(i + 1);
                 if (loc1.transport == null || loc1.transport.endId != loc2.googleId) {
                     loc1.transport = new TransportOption(loc1, loc2);
+                    loc1.transport.mode = TransportOption.Mode.BLANK;
                 }
             }
             locations.get(locations.size() - 1).transport = null;
         }
+        listAdapter.notifyDataSetChanged();
     }
 
     public void addItem() {

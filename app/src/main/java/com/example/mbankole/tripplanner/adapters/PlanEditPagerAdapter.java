@@ -38,7 +38,6 @@ public class PlanEditPagerAdapter extends FragmentPagerAdapter {
             planListFragment = PlanListFragment.newInstance();
             planListFragment.locations = places;
             planListFragment.planEditActivity = planEditActivity;
-            planListFragment.refresh();
             //planFragment.viewPager = this;
         }
         return planListFragment;

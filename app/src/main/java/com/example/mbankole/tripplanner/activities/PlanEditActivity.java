@@ -7,9 +7,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +39,8 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
     Context context;
     Plan plan;
     FloatingActionButton fabDone;
+
+    private static final String TAG = "PLANEDITACTIVITY";
 
     //
     @Override
@@ -67,7 +71,9 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(plan.title);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(plan.title);
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
@@ -152,7 +158,11 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
         this.plan.title = plan.title;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(plan.title);
+        try {
+            getSupportActionBar().setTitle(plan.title);
+        } catch (NullPointerException e) {
+            Log.e(TAG, "onFinishEditText: ", e);
+        }
         this.plan.description = plan.description;
     }
 
@@ -174,6 +184,6 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
         }
         Toast toast = Toast.makeText(this, ToastString, Toast.LENGTH_LONG);
         toast.show();
-        fragmentPager.getPlanListFragment().refresh();
+        refresh();
     }
 }
