@@ -60,6 +60,10 @@ public class ExplorePlansListFragment extends Fragment {
         rvPlans = (RecyclerView) v.findViewById(R.id.rvPlans);
         // init the arraylist (data source)
         //plans = new ArrayList<>();
+        // init the arraylist (data source)
+        //plans = new ArrayList<>();
+        // init the arraylist (data source)
+        //plans = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             Plan plan = new Plan();
             plans.add(plan.generateSeattlePlan(getContext()));
@@ -71,6 +75,8 @@ public class ExplorePlansListFragment extends Fragment {
         // set the adapter
         rvPlans.setAdapter(planAdapter);
 //        Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+//        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        //        Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
 //        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         planAdapter.notifyItemInserted(plans.size() - 1);
         return v;
