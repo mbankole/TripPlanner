@@ -19,6 +19,7 @@ import com.example.mbankole.tripplanner.adapters.NewExploreFragmentPagerAdapter;
 import com.example.mbankole.tripplanner.adapters.PlanAdapter;
 import com.example.mbankole.tripplanner.fragments.ExplorePlansListFragment;
 import com.example.mbankole.tripplanner.models.Plan;
+import com.example.mbankole.tripplanner.models.User;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -67,13 +68,29 @@ public class NewExploreActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        DatabaseReference ref = mDatabase.child("users");
 
-        mDatabase.child("users").child(currentUser.getUid()).setValue(currentUser.getDisplayName());
+        Query planQuery = ref.orderByChild("uid").equalTo("U8fK3i1lwBYW7ojgtvmaRrk7Eut2");
 
+        planQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
+                    User tpUser = singleSnapshot.getValue(User.class);
+                    //recievedUser = true;
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled: shits fucked");
+                //recievedUser = true;
+            }
+        });
 
         //mDatabase.child("test").child(currentUser.getUid()).setValue(Plan.generateSeattlePlan(context));
 
-        DatabaseReference ref = mDatabase.child("test");
+        /*DatabaseReference ref = mDatabase.child("test");
 
         Query planQuery = ref.orderByChild("title").equalTo("Trip to Seattle");
 
@@ -81,7 +98,7 @@ public class NewExploreActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
-                    testPlan = singleSnapshot.getValue(Plan.class);
+                    //testPlan = singleSnapshot.getValue(Plan.class);
                 }
             }
 
@@ -89,7 +106,7 @@ public class NewExploreActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(TAG, "onCancelled: shits fucked");
             }
-        });
+        });*/
 
 
         // Give the TabLayout the ViewPager
