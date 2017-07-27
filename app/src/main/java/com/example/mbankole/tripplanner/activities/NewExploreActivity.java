@@ -43,6 +43,8 @@ public class NewExploreActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAnalytics mFirebaseAnalytics;
     private DatabaseReference mDatabase;
+    User user;
+    boolean recievedUser;
     Plan testPlan;
 
 
@@ -70,21 +72,22 @@ public class NewExploreActivity extends AppCompatActivity {
 
         DatabaseReference ref = mDatabase.child("users");
 
-        Query planQuery = ref.orderByChild("uid").equalTo("U8fK3i1lwBYW7ojgtvmaRrk7Eut2");
+        Query userQuery = ref.orderByChild("uid").equalTo(currentUser.getUid());
 
-        planQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+        userQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
-                    User tpUser = singleSnapshot.getValue(User.class);
-                    //recievedUser = true;
+                    user = singleSnapshot.getValue(User.class);
+                    fixUser(user);
                 }
+                recievedUser = true;
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(TAG, "onCancelled: shits fucked");
-                //recievedUser = true;
+                recievedUser = true;
             }
         });
 
@@ -134,6 +137,12 @@ public class NewExploreActivity extends AppCompatActivity {
                 Toast.LENGTH_LONG).show();
     }
 
+    void fixUser(User user) {
+        if (user.interests == null) user.interests = new ArrayList<>();
+        if (user.friends == null) user.friends = new ArrayList<>();
+        if (user.plans == null) user.plans = new ArrayList<>();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -167,6 +176,7 @@ public class NewExploreActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 Intent intent = new Intent(context, com.example.mbankole.tripplanner.activities.ProfileActivity.class);
+                intent.putExtra("user", user);
                 startActivity(intent);
                 return false;
             }
