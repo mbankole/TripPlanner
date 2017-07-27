@@ -133,8 +133,7 @@ public class NewExploreActivity extends AppCompatActivity {
 
         Toast.makeText(context, "Signed in as " + currentUser.getDisplayName(),
                 Toast.LENGTH_LONG).show();
-        Toast.makeText(context, "Signed in as " + currentUser.getUid(),
-                Toast.LENGTH_LONG).show();
+        loadPlans();
     }
 
     void fixUser(User user) {
@@ -185,18 +184,40 @@ public class NewExploreActivity extends AppCompatActivity {
         return true;
     }
 
+    public void loadPlans() {
+        DatabaseReference ref = mDatabase.child("plans");
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
+                    Plan plan = singleSnapshot.getValue(Plan.class);
+                    plans.add(0, plan);
+                    fragmentPager.refreshAdd();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled: shits fucked");
+            }
+        });
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == ExplorePlansListFragment.PLAN_REQUEST_CODE){
             Plan newPlan = data.getExtras().getParcelable("plan");
             plans.add(0, newPlan);
+            mDatabase.child("plans").child(newPlan.uid).setValue(newPlan);
             fragmentPager.refreshAdd();
         }
         if (resultCode == RESULT_OK && requestCode == PlanAdapter.EDIT_PLAN_REQUEST_CODE){
             Plan newPlan = data.getExtras().getParcelable("plan");
             int position = data.getExtras().getInt("position");
             plans.set(position, newPlan);
+            mDatabase.child("plans").child(newPlan.uid).setValue(newPlan);
             fragmentPager.refresh();
         }
     }
