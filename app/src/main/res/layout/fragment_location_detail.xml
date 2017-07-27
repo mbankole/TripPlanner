@@ -48,9 +48,11 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@drawable/ic_plus"
-        android:layout_margin="8dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp" />
 
     <Button
         android:id="@+id/btClose"
@@ -60,9 +62,9 @@
         android:background="@android:drawable/ic_menu_close_clear_cancel"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
         android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/tvHours" />
+        android:layout_toStartOf="@+id/tvHours"
+        android:layout_alignTop="@+id/btAdd" />
 
     <com.example.mbankole.tripplanner.utility.RalewayLightTextView
         android:id="@+id/tvPhone"
