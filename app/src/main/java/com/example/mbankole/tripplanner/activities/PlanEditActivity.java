@@ -55,7 +55,7 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
         plan = getIntent().getParcelableExtra("plan");
         position = getIntent().getIntExtra("position", -1);
         if (plan == null) {
-            String creatorUid = getIntent().getStringExtra("creatorUid");
+            String creatorUid = getIntent().getStringExtra("creatorUID");
             plan = Plan.newPlan(creatorUid);
         }
 

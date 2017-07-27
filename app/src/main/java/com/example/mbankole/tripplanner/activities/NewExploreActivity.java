@@ -146,6 +146,11 @@ public class NewExploreActivity extends AppCompatActivity {
         if (user.plans == null) user.plans = new ArrayList<>();
     }
 
+    void fixPlan(Plan plan) {
+        if (plan.people == null) plan.people = new ArrayList<>();
+        if (plan.places == null) plan.places = new ArrayList<>();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -196,6 +201,7 @@ public class NewExploreActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
                     Plan plan = singleSnapshot.getValue(Plan.class);
+                    fixPlan(plan);
                     plans.add(0, plan);
                     fragmentPager.refreshAdd();
                 }
