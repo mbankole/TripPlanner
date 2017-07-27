@@ -3,6 +3,7 @@ package com.example.mbankole.tripplanner.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,9 +19,12 @@ import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Plan;
 import com.example.mbankole.tripplanner.models.User;
+import com.example.mbankole.tripplanner.utility.gradient;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import jp.wasabeef.picasso.transformations.Blur;
 
 /**
  * Created by danahe97 on 7/20/17.
@@ -60,6 +64,12 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         for (int i = 0; i < plan.places.size(); i++) {
             holder.addLocation(plan.places.get(i));
         }
+        holder.ivBackground.setColorFilter(Color.argb(0, 0, 0, 0));
+        Picasso.with(context)
+                .load(plan.places.get(0).photoUrl)
+                .transform(new gradient())
+                .transform(new Blur(context))
+                .into(holder.ivBackground);
     }
 
     @Override
@@ -72,12 +82,14 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         public TextView tvPlanTitle;
         public LinearLayout llLocations;
         public ImageButton ibAdd;
+        public ImageView ivBackground;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvPlanTitle = (TextView) itemView.findViewById(R.id.tvPlanTitle);
             llLocations = (LinearLayout) itemView.findViewById(R.id.llLocations);
             ibAdd = (ImageButton) itemView.findViewById(R.id.ibAdd);
+            ivBackground = (ImageView) itemView.findViewById(R.id.ivPlanBackground);
             itemView.setOnClickListener(this);
             ibAdd.setOnClickListener(this);
         }
