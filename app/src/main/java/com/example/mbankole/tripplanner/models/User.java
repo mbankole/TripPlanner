@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class User implements Parcelable {
 
     public String name;
-    public int uid;
+    public String uid;
     public String imageUrl;
     public ArrayList<User> friends;
     public ArrayList<Location> interests;
@@ -23,7 +23,7 @@ public class User implements Parcelable {
     public static User generateChandler(Context context) {
         User user = new User();
         user.name = "Chandler Bing";
-        user.uid = 1;
+        user.uid = "1";
         user.imageUrl = "https://vignette4.wikia.nocookie.net/friends/images/c/cc/Square_Chandler.jpg/revision/latest?cb=20111216200026";
         user.friends = new ArrayList<>();
         user.friends.add(generateJoey());
@@ -43,7 +43,7 @@ public class User implements Parcelable {
         User user = new User();
         user.name = "Phoebe Buffay";
         user.imageUrl = "https://vignette2.wikia.nocookie.net/friends/images/f/f5/Square_Phoebe.jpg/revision/latest?cb=20111216200026";
-        user.uid = 2;
+        user.uid = "2";
         user.friends = new ArrayList<>();
         user.interests = new ArrayList<>();
         user.plans = new ArrayList<>();
@@ -54,7 +54,7 @@ public class User implements Parcelable {
     public static User generateRachel() {
         User user = new User();
         user.name = "Rachel Green";
-        user.uid = 3;
+        user.uid = "3";
         user.imageUrl = "http://cdn.playbuzz.com/cdn/08267c4e-1034-4f96-8a76-47e3be15f1dc/7bf6d62a-46b7-49d1-a179-f065b935e364.png";
         user.friends = new ArrayList<>();
         user.interests = new ArrayList<>();
@@ -66,7 +66,7 @@ public class User implements Parcelable {
     public static User generateJoey() {
         User user = new User();
         user.name = "Joey Tribbiani";
-        user.uid = 4;
+        user.uid = "4";
         user.imageUrl = "https://vignette1.wikia.nocookie.net/friends/images/f/f5/JoeyTribbiani.jpg/revision/latest?cb=20070426103739";
         user.friends = new ArrayList<>();
         user.interests = new ArrayList<>();
@@ -77,7 +77,7 @@ public class User implements Parcelable {
     public static User generateRoss() {
         User user = new User();
         user.name = "Ross Geller";
-        user.uid = 5;
+        user.uid = "5";
         user.imageUrl = "http://images4.fanpop.com/image/photos/16400000/Ross-Geller-ross-and-monica-geller-16406304-2115-2560.jpg";
         user.friends = new ArrayList<>();
         user.interests = new ArrayList<>();
@@ -88,7 +88,7 @@ public class User implements Parcelable {
     public static User generateMonica() {
         User user = new User();
         user.name = "Monica Geller";
-        user.uid = 6;
+        user.uid = "6";
         user.imageUrl = "https://s-media-cache-ak0.pinimg.com/originals/52/36/4a/52364a297b8f265af554b4c810889236.jpg";
         user.friends = new ArrayList<>();
         user.interests = new ArrayList<>();
@@ -107,7 +107,7 @@ public class User implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.name);
-        dest.writeInt(this.uid);
+        dest.writeString(this.uid);
         dest.writeString(this.imageUrl);
         dest.writeTypedList(this.friends);
         dest.writeTypedList(this.interests);
@@ -116,7 +116,7 @@ public class User implements Parcelable {
 
     protected User(Parcel in) {
         this.name = in.readString();
-        this.uid = in.readInt();
+        this.uid = in.readString();
         this.imageUrl = in.readString();
         this.friends = in.createTypedArrayList(User.CREATOR);
         this.interests = in.createTypedArrayList(Location.CREATOR);
@@ -143,11 +143,11 @@ public class User implements Parcelable {
         this.name = name;
     }
 
-    public int getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 
