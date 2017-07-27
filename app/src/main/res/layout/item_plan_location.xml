@@ -6,6 +6,14 @@
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true">
 
+    <com.example.mbankole.tripplanner.utility.CircleImageView
+        android:id="@+id/ivCircle"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignStart="@+id/ivLocationImage"
+        android:layout_alignTop="@+id/ivLocationImage"
+        app:srcCompat="@color/colorAccent" />
+
     <ImageView
         android:id="@+id/ivLocationImage"
         android:layout_width="56dp"

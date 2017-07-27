@@ -66,7 +66,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         holder.ivBackground.setColorFilter(Color.argb(65, 0, 0, 0));
         Picasso.with(context)
                 .load(plan.places.get(0).photoUrl)
-                .fit()
+             //   .fit()
                 .transform(new Blur(context))
                 .into(holder.ivBackground);
     }
@@ -118,7 +118,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
             if (location.photoUrl != null) {
                 Picasso.with(context)
                         .load(location.photoUrl)
-                        .fit()
+                       // .fit()
                         .into(ivLocationImage);
             }
             tvLocationName.setText(location.name);
