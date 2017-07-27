@@ -5,18 +5,25 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * Created by mbankole on 7/13/17.
  */
 
 public class GmapClient {
     public static final String BASE_URL = "https://maps.googleapis.com/maps/api/";
-    //private static final String API_KEY = "AIzaSyAu4LnwwfQl6FQhWvl2K_mtjAj844rMyGU"; // good
+
+    static String[] Keys = {"AIzaSyAu4LnwwfQl6FQhWvl2K_mtjAj844rMyGU", "AIzaSyAAP5pDzemIFGVPdgDxhI9xxCNBShO1yM8"};
+
+    private static final String API_KEY = Keys[ThreadLocalRandom.current().nextInt(0, 2)];
+            //"AIzaSyAu4LnwwfQl6FQhWvl2K_mtjAj844rMyGU"; // good
     //private static final String API_KEY = "AIzaSyAIxBmOYjuG-dGC86LhChPsoR619GCcAOM";
     //private static final String API_KEY = "AIzaSyAAP5pDzemIFGVPdgDxhI9xxCNBShO1yM8"; // good
     //private static final String API_KEY = "AIzaSyA6Ps9FNXuKi4jY7w5usQoaad7vm-15m-Q";
-    public static final String API_KEY = "AIzaSyAJ0ziieskALR-hFcJrO727DIUnIYcTPes";
+    //public static final String API_KEY = "AIzaSyAJ0ziieskALR-hFcJrO727DIUnIYcTPes";
     //pls no stealing
+
 
     private static AsyncHttpClient client = new AsyncHttpClient();
 

@@ -49,8 +49,6 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan);
 
-
-
         //if plan is null, make a new empty one
         plan = getIntent().getParcelableExtra("plan");
         position = getIntent().getIntExtra("position", -1);

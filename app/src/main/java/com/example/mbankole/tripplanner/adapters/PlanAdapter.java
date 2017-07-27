@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Location;
@@ -64,11 +65,15 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
             holder.addLocation(plan.places.get(i));
         }
         holder.ivBackground.setColorFilter(Color.argb(65, 0, 0, 0));
-        Picasso.with(context)
-                .load(plan.places.get(0).photoUrl)
-                .fit()
-                .transform(new Blur(context))
-                .into(holder.ivBackground);
+        if (plan.places.size() > 0) {
+            Location loc = plan.places.get(0);
+            loc.photoUrl = GmapClient.generateImageUrl(loc.photoRef);
+            Picasso.with(context)
+                    .load(loc.photoUrl)
+                    .fit()
+                    .transform(new Blur(context))
+                    .into(holder.ivBackground);
+        }
     }
 
     @Override
@@ -116,6 +121,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
             final TextView tvLocationName = (TextView)v.findViewById(R.id.tvLocationname);
             final ImageView ivLocationImage = (ImageView)v.findViewById(R.id.ivLocationImage);
             if (location.photoUrl != null) {
+                location.photoUrl = GmapClient.generateImageUrl(location.photoRef);
                 Picasso.with(context)
                         .load(location.photoUrl)
                         .fit()
