@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private LoginButton loginButton;
     private TextView skipLoginButton;
+    private ImageView ivBackground;
     private SkipLoginCallback skipLoginCallback;
     private CallbackManager callbackManager;
     private boolean recievedUser;
