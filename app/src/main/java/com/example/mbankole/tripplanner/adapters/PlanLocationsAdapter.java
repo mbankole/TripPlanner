@@ -65,9 +65,9 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
                 .into(holder.ivLocationImage);
         holder.removeTransport();
         holder.clearUsers();
-        for (int i = 0; i < location.people.size(); i++) {
+        /*for (int i = 0; i < location.people.size(); i++) {
             holder.addUser(location.people.get(i));
-        }
+        }*/
         if (location.transport != null) holder.addTransport(location.transport);
         else holder.removeTransport();
     }

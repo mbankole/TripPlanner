@@ -46,9 +46,7 @@ public class NewExploreActivity extends AppCompatActivity {
     private FirebaseAnalytics mFirebaseAnalytics;
     private DatabaseReference mDatabase;
     User user;
-    boolean recievedUser;
-    Plan testPlan;
-
+    boolean receivedUser;
 
     FirebaseUser currentUser;
 
@@ -83,13 +81,13 @@ public class NewExploreActivity extends AppCompatActivity {
                     user = singleSnapshot.getValue(User.class);
                     fixUser(user);
                 }
-                recievedUser = true;
+                receivedUser = true;
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(TAG, "onCancelled: shits fucked");
-                recievedUser = true;
+                receivedUser = true;
             }
         });
 

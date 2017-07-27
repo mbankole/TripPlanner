@@ -63,4 +63,8 @@ public class ProfilePlansListFragment extends Fragment {
         return v;
     }
 
+    public void refreshAdd() {
+        planAdapter.notifyItemInserted(0);
+        rvPlans.smoothScrollToPosition(0);
+    }
 }
