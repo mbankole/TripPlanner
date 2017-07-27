@@ -3,6 +3,7 @@ package com.example.mbankole.tripplanner.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.R;
+import com.example.mbankole.tripplanner.models.User;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -24,6 +26,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -31,8 +41,11 @@ public class LoginActivity extends AppCompatActivity {
     private TextView skipLoginButton;
     private SkipLoginCallback skipLoginCallback;
     private CallbackManager callbackManager;
+    private boolean recievedUser;
     Context context;
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+    User tpUser;
 
     public static final String TAG = "FBLOGINGACTIVITY";
 
@@ -47,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+        toExploreActivity(currentUser);
     }
 
     @Override
@@ -66,7 +79,6 @@ public class LoginActivity extends AppCompatActivity {
                 // Initialize Firebase Auth
                 mAuth = FirebaseAuth.getInstance();
                 handleFacebookAccessToken(loginResult.getAccessToken());
-
             }
 
             @Override
@@ -81,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void handleFacebookAccessToken(AccessToken token) {
+    private void handleFacebookAccessToken(final AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
@@ -93,22 +105,76 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
+                            //mDatabase = FirebaseDatabase.getInstance().getReference();
+                            //generateUser(user, token);
+                            updateUI(user, token);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+                            updateUI(null, null);
                         }
 
                     }
                 });
     }
 
-    public void updateUI(FirebaseUser user) {
+    public void updateUI(final FirebaseUser user, final AccessToken token) {
         if (user == null) return;
+        recievedUser = false;
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        DatabaseReference ref = mDatabase.child("users");
+
+        Query planQuery = ref.orderByChild("uid").equalTo(user.getUid());
+
+        planQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
+                    tpUser = singleSnapshot.getValue(User.class);
+                }
+                recievedUser = true;
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled: shits fucked");
+                recievedUser = true;
+            }
+        });
+
+        final Handler handler = new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (recievedUser) {
+                    if (tpUser == null) {
+                        generateUser(user, token);
+                    }
+                    toExploreActivity(user);
+                }
+                else {
+                    handler.postDelayed(this, 500);
+                }
+            }
+        });
+    }
+
+    public void generateUser(FirebaseUser user, AccessToken token) {
+        User newUser = new User();
+        newUser.name = user.getDisplayName();
+        newUser.uid = user.getUid();
+        newUser.imageUrl = "https://graph.facebook.com/" + token.getUserId() + "/picture?type=large";
+        newUser.plans = new ArrayList<>();
+        newUser.friends = new ArrayList<>();
+        newUser.interests = new ArrayList<>();
+        mDatabase.child("users").child(newUser.getUid()).setValue(newUser);
+    }
+
+    public void toExploreActivity(FirebaseUser user) {
+        if (user == null) return;
         Intent i = new Intent(LoginActivity.this, NewExploreActivity.class);
         startActivity(i);
     }
