@@ -32,6 +32,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import static com.example.mbankole.tripplanner.R.drawable.logo_white;
+
 public class NewExploreActivity extends AppCompatActivity {
 
     final static String TAG = "EXPLOREACTIVITY";
@@ -126,6 +128,8 @@ public class NewExploreActivity extends AppCompatActivity {
 
         //viewPager.setCurrentItem(0);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setLogo(logo_white);
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
         Menu menu = toolbar.getMenu();
