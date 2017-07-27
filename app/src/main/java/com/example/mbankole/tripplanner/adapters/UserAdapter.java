@@ -51,6 +51,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         if (user.imageUrl != null) {
             Picasso.with(context)
                     .load(user.imageUrl)
+                    .fit()
                     //.memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
                     .into(holder.ivUserImage);
         }

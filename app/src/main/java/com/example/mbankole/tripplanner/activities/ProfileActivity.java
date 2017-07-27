@@ -72,9 +72,11 @@ public class ProfileActivity extends AppCompatActivity {
         if (user.imageUrl != null) {
             Picasso.with(this)
                     .load(user.imageUrl)
-                    //.memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
+                    .fit()
                     .into(ivProfileImage);
         }
+
+        loadPlans();
     }
 
     public void loadPlans() {
@@ -82,7 +84,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         Query planQuery = ref.orderByChild("creatorUid").equalTo(user.getUid());
 
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        planQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {

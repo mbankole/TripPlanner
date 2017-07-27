@@ -19,7 +19,6 @@ import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Plan;
 import com.example.mbankole.tripplanner.models.User;
-import com.example.mbankole.tripplanner.utility.gradient;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -64,10 +63,10 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         for (int i = 0; i < plan.places.size(); i++) {
             holder.addLocation(plan.places.get(i));
         }
-        holder.ivBackground.setColorFilter(Color.argb(0, 0, 0, 0));
+        holder.ivBackground.setColorFilter(Color.argb(65, 0, 0, 0));
         Picasso.with(context)
                 .load(plan.places.get(0).photoUrl)
-                .transform(new gradient())
+                .fit()
                 .transform(new Blur(context))
                 .into(holder.ivBackground);
     }
@@ -119,7 +118,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
             if (location.photoUrl != null) {
                 Picasso.with(context)
                         .load(location.photoUrl)
-                        //.memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
+                        .fit()
                         .into(ivLocationImage);
             }
             tvLocationName.setText(location.name);

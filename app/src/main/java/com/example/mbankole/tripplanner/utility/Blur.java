@@ -28,7 +28,7 @@ import jp.wasabeef.picasso.transformations.internal.RSBlur;
 
 public class Blur implements Transformation {
 
-    private static int MAX_RADIUS = 10;
+    private static int MAX_RADIUS = 13;
     private static int DEFAULT_DOWN_SAMPLING = 1;
 
     private Context mContext;
