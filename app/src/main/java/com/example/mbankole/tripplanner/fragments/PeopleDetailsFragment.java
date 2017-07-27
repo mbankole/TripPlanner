@@ -69,3 +69,4 @@ public class PeopleDetailsFragment extends DialogFragment {
 
     }
 }
+//people details
