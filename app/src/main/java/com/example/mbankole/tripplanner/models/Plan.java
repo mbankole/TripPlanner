@@ -29,11 +29,11 @@ public class Plan implements Parcelable {
         //plan.people.add(User.generateChandler());
         plan.people.add(User.generateRachel());
         plan.people.add(User.generatePhoebe());
+        plan.places.add(Location.generateWheel(context));
         plan.places.add(Location.generateArboretum(context));
         //plan.places.add(Location.generateArtMuseum());
         plan.places.add(Location.generateNeedle(context));
         //plan.places.add(Location.generatePopCulture());
-        plan.places.add(Location.generateWheel(context));
         return plan;
     }
 
