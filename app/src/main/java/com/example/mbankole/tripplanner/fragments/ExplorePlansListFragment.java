@@ -67,16 +67,6 @@ public class ExplorePlansListFragment extends Fragment {
 
         // find RecyclerView
         rvPlans = (RecyclerView) v.findViewById(R.id.rvPlans);
-        // init the arraylist (data source)
-        //plans = new ArrayList<>();
-        // init the arraylist (data source)
-        //plans = new ArrayList<>();
-        // init the arraylist (data source)
-        //plans = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            Plan plan = new Plan();
-            plans.add(Plan.generateSeattlePlan(getContext()));
-        }
         // construct the adapter from this data source
         planAdapter = new PlanAdapter(plans);
         // RecyclerView setup (layout manager, use adapter)

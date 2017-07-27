@@ -6,6 +6,7 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Created by mbankole on 7/20/17.
@@ -14,6 +15,7 @@ import java.util.Date;
 public class Plan implements Parcelable {
     public ArrayList<Location> places;
     public ArrayList<User> people;
+    public String uid;
     public String title;
     public String description;
     public String creatorUid;
@@ -23,21 +25,27 @@ public class Plan implements Parcelable {
     public static Plan generateSeattlePlan(Context context) {
         Plan plan = new Plan();
         plan.places = new ArrayList<>();
+        plan.uid = "392747234327fancy_uid";
         plan.people = new ArrayList<>();
         plan.title = "Trip to Seattle";
         plan.description = "Looking at a couple of landmarks";
         //plan.people.add(User.generateChandler());
         plan.people.add(User.generateRachel());
         plan.people.add(User.generatePhoebe());
+        plan.places.add(Location.generateWheel(context));
         plan.places.add(Location.generateArboretum(context));
         //plan.places.add(Location.generateArtMuseum());
         plan.places.add(Location.generateNeedle(context));
         //plan.places.add(Location.generatePopCulture());
-        plan.places.add(Location.generateWheel(context));
         return plan;
     }
 
     public Plan() {
+    }
+
+    public static String generateUid() {
+        String uuid = UUID.randomUUID().toString();
+        return uuid.replace("-", "");
     }
 
     public static Plan newPlan() {
@@ -45,6 +53,7 @@ public class Plan implements Parcelable {
         plan.places = new ArrayList<>();
         plan.people = new ArrayList<>();
         plan.title = "New Plan";
+        plan.uid = generateUid();
         return plan;
     }
 
@@ -54,6 +63,7 @@ public class Plan implements Parcelable {
         plan.people = new ArrayList<>();
         plan.title = "New Plan";
         plan.creatorUid = creatorUid;
+        plan.uid = generateUid();
         return plan;
     }
 
@@ -122,6 +132,7 @@ public class Plan implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(this.places);
         dest.writeTypedList(this.people);
+        dest.writeString(this.uid);
         dest.writeString(this.title);
         dest.writeString(this.description);
         dest.writeString(this.creatorUid);
@@ -132,6 +143,7 @@ public class Plan implements Parcelable {
     protected Plan(Parcel in) {
         this.places = in.createTypedArrayList(Location.CREATOR);
         this.people = in.createTypedArrayList(User.CREATOR);
+        this.uid = in.readString();
         this.title = in.readString();
         this.description = in.readString();
         this.creatorUid = in.readString();
