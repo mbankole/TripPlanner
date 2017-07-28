@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
+import com.example.mbankole.tripplanner.fragments.PlaceholderFragment;
 import com.example.mbankole.tripplanner.fragments.PlanListFragment;
 import com.example.mbankole.tripplanner.fragments.PlanMapFragment;
 import com.example.mbankole.tripplanner.models.Location;
@@ -17,8 +18,8 @@ import java.util.ArrayList;
  */
 
 public class PlanEditPagerAdapter extends FragmentPagerAdapter {
-    final int PAGE_COUNT = 2;
-    private String tabTitles[] = new String[]{"", ""};
+    final int PAGE_COUNT = 3;
+    private String tabTitles[] = new String[]{"", "", "Messages"};
     FragmentManager fragmentManager;
     PlanListFragment planListFragment;
     PlanMapFragment planMapFragment;
@@ -62,6 +63,8 @@ public class PlanEditPagerAdapter extends FragmentPagerAdapter {
                 return getPlanMapFragment();
             case 1:
                 return getPlanListFragment();
+            case 2:
+                return new PlaceholderFragment();
             default:
                 return null;
         }

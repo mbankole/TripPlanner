@@ -61,6 +61,7 @@ public class ExplorePlansListFragment extends Fragment {
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), PlanEditActivity.class);
                 i.putExtra("creatorUID", currentUser.getUid());
+                i.putExtra("creatorUserName", currentUser.getDisplayName());
                 getActivity().startActivityForResult(i, PLAN_REQUEST_CODE);
             }
         });

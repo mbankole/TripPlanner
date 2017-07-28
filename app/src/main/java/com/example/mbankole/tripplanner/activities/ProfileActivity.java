@@ -5,6 +5,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,9 +37,11 @@ public class ProfileActivity extends AppCompatActivity {
     ArrayList<User> friends;
     ArrayList<Location> interests;
     ArrayList<Plan> plans;
+    Button btFriend;
     private FirebaseAuth mAuth;
     FirebaseUser currentUser;
     private DatabaseReference mDatabase;
+    boolean isCurrentUser = false;
     final static String TAG = "PROFILEACTIVITY";
 
 
@@ -61,12 +65,22 @@ public class ProfileActivity extends AppCompatActivity {
         viewPager.setAdapter(fragmentPager);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+
+        if (currentUser.getUid().equals(user.getUid())) isCurrentUser = true;
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
         tvUsername = (TextView) findViewById(R.id.tvUsername);
         ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
+        btFriend = (Button) findViewById(R.id.btFriend);
+
+        if (isCurrentUser) btFriend.setVisibility(View.GONE);
+        else {
+            btFriend.setVisibility(View.VISIBLE);
+        }
 
         tvUsername.setText(user.name);
         if (user.imageUrl != null) {

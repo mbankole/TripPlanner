@@ -19,6 +19,7 @@ public class Plan implements Parcelable {
     public String title;
     public String description;
     public String creatorUid;
+    public String creatorUserName;
     public Date startDate;
     public Date endDate;
 
@@ -57,14 +58,31 @@ public class Plan implements Parcelable {
         return plan;
     }
 
-    public static Plan newPlan(String creatorUid) {
+    public static Plan newPlan(String creatorUid, String creatorUserName) {
         Plan plan = new Plan();
         plan.places = new ArrayList<>();
         plan.people = new ArrayList<>();
         plan.title = "New Plan";
         plan.creatorUid = creatorUid;
         plan.uid = generateUid();
+        plan.creatorUserName = creatorUserName;
         return plan;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getCreatorUserName() {
+        return creatorUserName;
+    }
+
+    public void setCreatorUserName(String creatorUserName) {
+        this.creatorUserName = creatorUserName;
     }
 
     public String getDescription() {
@@ -136,6 +154,7 @@ public class Plan implements Parcelable {
         dest.writeString(this.title);
         dest.writeString(this.description);
         dest.writeString(this.creatorUid);
+        dest.writeString(this.creatorUserName);
         dest.writeLong(this.startDate != null ? this.startDate.getTime() : -1);
         dest.writeLong(this.endDate != null ? this.endDate.getTime() : -1);
     }
@@ -147,6 +166,7 @@ public class Plan implements Parcelable {
         this.title = in.readString();
         this.description = in.readString();
         this.creatorUid = in.readString();
+        this.creatorUserName = in.readString();
         long tmpStartDate = in.readLong();
         this.startDate = tmpStartDate == -1 ? null : new Date(tmpStartDate);
         long tmpEndDate = in.readLong();

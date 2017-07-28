@@ -54,7 +54,8 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
         position = getIntent().getIntExtra("position", -1);
         if (plan == null) {
             String creatorUid = getIntent().getStringExtra("creatorUID");
-            plan = Plan.newPlan(creatorUid);
+            String creatorUserName = getIntent().getStringExtra("creatorUserName");
+            plan = Plan.newPlan(creatorUid, creatorUserName);
         }
 
         context = this;
@@ -82,6 +83,7 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
                 R.drawable.ic_marker_black,
                 R.drawable.ic_list,
         };
+
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             tabLayout.getTabAt(i).setIcon(icons[i]);
         }
@@ -97,8 +99,7 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
                 finish();
             }
         });
-        //Intent i = new Intent(MainActivity.this, MapDemoActivity.class);
-        //startActivity(i);
+
         Menu menu = toolbar.getMenu();
         onCreateOptionsMenu(menu);
     }
@@ -110,7 +111,7 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
         getMenuInflater().inflate(R.menu.menu_plan_edit, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        //searchView.setVisibility(View.GONE);
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -139,18 +140,6 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
                 return false;
             }
         });
-        /*MenuItem miSave = menu.findItem(R.id.miSave);
-        miSave.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                Intent data = new Intent();
-                data.putExtra("plan", plan);
-                setResult(RESULT_OK, data);
-                finish();
-                return false;
-            }
-        });*/
-
         return true;
     }
 

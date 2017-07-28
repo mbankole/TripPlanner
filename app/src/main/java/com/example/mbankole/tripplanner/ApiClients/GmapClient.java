@@ -14,14 +14,14 @@ import java.util.concurrent.ThreadLocalRandom;
 public class GmapClient {
     public static final String BASE_URL = "https://maps.googleapis.com/maps/api/";
 
-    static String[] Keys = {"AIzaSyAu4LnwwfQl6FQhWvl2K_mtjAj844rMyGU", "AIzaSyAAP5pDzemIFGVPdgDxhI9xxCNBShO1yM8"};
+    static String[] Keys = {"AIzaSyAu4LnwwfQl6FQhWvl2K_mtjAj844rMyGU", "AIzaSyAAP5pDzemIFGVPdgDxhI9xxCNBShO1yM8", "AIzaSyAJ0ziieskALR-hFcJrO727DIUnIYcTPes"};
 
-    private static final String API_KEY = Keys[ThreadLocalRandom.current().nextInt(0, 2)];
+    private static final String API_KEY = Keys[ThreadLocalRandom.current().nextInt(0, 3)];
             //"AIzaSyAu4LnwwfQl6FQhWvl2K_mtjAj844rMyGU"; // good
     //private static final String API_KEY = "AIzaSyAIxBmOYjuG-dGC86LhChPsoR619GCcAOM";
     //private static final String API_KEY = "AIzaSyAAP5pDzemIFGVPdgDxhI9xxCNBShO1yM8"; // good
     //private static final String API_KEY = "AIzaSyA6Ps9FNXuKi4jY7w5usQoaad7vm-15m-Q";
-    //public static final String API_KEY = "AIzaSyAJ0ziieskALR-hFcJrO727DIUnIYcTPes";
+    //public static final String API_KEY = "AIzaSyAJ0ziieskALR-hFcJrO727DIUnIYcTPes"; // good
     //pls no stealing
 
 
@@ -72,7 +72,6 @@ public class GmapClient {
         params.put("origin", "place_id:" + origin.googleId);
         params.put("destination", "place_id:" + destination.googleId);
         params.put("mode", travelMode);
-
         client.get(absoluteUrl, params, responseHandler);
     }
 
