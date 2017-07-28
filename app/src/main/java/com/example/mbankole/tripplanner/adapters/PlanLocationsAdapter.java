@@ -18,7 +18,6 @@ import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.TransportOption;
-import com.example.mbankole.tripplanner.models.User;
 import com.example.mbankole.tripplanner.utility.Circle;
 import com.squareup.picasso.Picasso;
 
@@ -65,7 +64,7 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
                 .transform(new Circle())
                 .into(holder.ivLocationImage);
         holder.removeTransport();
-        holder.clearUsers();
+//        holder.clearUsers();
         /*for (int i = 0; i < location.people.size(); i++) {
             holder.addUser(location.people.get(i));
         }*/
@@ -94,15 +93,16 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
             super(itemView);
             tvLocationname = (TextView) itemView.findViewById(R.id.tvLocationname);
             ivLocationImage = (ImageView) itemView.findViewById(R.id.ivLocationImage);
-            llPeople = (LinearLayout) itemView.findViewById(R.id.llPeople);
+            //llPeople = (LinearLayout) itemView.findViewById(R.id.llPeople);
             llTransport = (LinearLayout) itemView.findViewById(R.id.llTransport);
-            rlInfo = (RelativeLayout) itemView.findViewById(R.id.rlInfo);
-            expand = (Button) itemView.findViewById(R.id.btExpand);
-            add = (Button) itemView.findViewById(R.id.btAdd);
-            close = (Button) itemView.findViewById(R.id.btClose);
+            //rlInfo = (RelativeLayout) itemView.findViewById(R.id.rlInfo);
+            //expand = (Button) itemView.findViewById(R.id.btExpand);
+            //add = (Button) itemView.findViewById(R.id.btAdd);
+            //close = (Button) itemView.findViewById(R.id.btClose);
 
-            rlInfo.setVisibility(View.GONE);
+            //rlInfo.setVisibility(View.GONE);
 
+            /**
             expand.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -137,7 +137,9 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
             View v = LayoutInflater.from(context).inflate(R.layout.item_user_slim, llPeople, false);
             ((TextView)v.findViewById(R.id.tvUsername)).setText(user.name);
             llPeople.addView(v);
+             **/
         }
+
 
         void addTransport(TransportOption transportOption) {
             View v = LayoutInflater.from(context).inflate(R.layout.item_transport_select, llTransport, false);
@@ -162,9 +164,11 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
             if (llTransport.getChildCount() > 0) llTransport.removeAllViews();
         }
 
+        /**
         void clearUsers() {
             if (llPeople.getChildCount() > 0) llPeople.removeAllViews();
         }
+         **/
 
         public void viewHolderTransportSetup(View itemView) {
             //itemView.setOnClickListener(this);

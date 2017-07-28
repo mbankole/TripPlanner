@@ -67,6 +67,7 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
         fragmentPager = new PlanEditPagerAdapter(getSupportFragmentManager(), plan.people, plan.places);
         viewPager.setAdapter(fragmentPager);
         fragmentPager.planEditActivity = this;
+        fragmentPager.plan = plan;
         fragmentPager.people = plan.people;
         fragmentPager.places = plan.places;
 

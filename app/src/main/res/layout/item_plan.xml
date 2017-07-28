@@ -70,6 +70,7 @@
                 android:layout_alignStart="@+id/tvPlanTitle"
                 android:layout_below="@+id/tvDate"
                 android:text="Created by"
+                android:layout_marginBottom="8dp"
                 android:textColor="@color/white"
                 android:textAppearance="@android:style/TextAppearance.Small" />
 
