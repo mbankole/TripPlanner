@@ -11,7 +11,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -72,10 +71,12 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
         fragmentPager.places = plan.places;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setLogo(R.drawable.logo_white);
         setSupportActionBar(toolbar);
 
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(plan.title);
+        actionBar.setLogo(R.drawable.logo_white);
+        actionBar.setTitle("");
 
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
@@ -150,11 +151,8 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
         this.plan.title = plan.title;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        try {
-            getSupportActionBar().setTitle(plan.title);
-        } catch (NullPointerException e) {
-            Log.e(TAG, "onFinishEditText: ", e);
-        }
+        toolbar.setLogo(R.drawable.logo_white);
+        getSupportActionBar().setTitle("");
         this.plan.description = plan.description;
     }
 

@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="8dp">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/rvOverview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        android:layout_marginBottom="8dp">
+
+        <ImageView
+            android:id="@+id/ivPlanBackground"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop"
+            app:srcCompat="@color/black" />
 
         <com.example.mbankole.tripplanner.utility.RalewayBlackTextView
             android:id="@+id/tvPlanName"
@@ -17,6 +26,8 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:text="Plan Name"
+            android:textColor="@color/white"
+            android:layout_margin="8dp"
             android:textAppearance="@android:style/TextAppearance.Large"
             android:textSize="30sp" />
 
@@ -27,8 +38,9 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/tvPlanName"
             android:text="Date"
+            android:layout_marginLeft="8dp"
             android:textAppearance="@android:style/TextAppearance.Large"
-            android:textColor="@color/darkGrey" />
+            android:textColor="@color/white" />
 
         <com.example.mbankole.tripplanner.utility.RalewayLightTextView
             android:id="@+id/tvPlanCreator"
@@ -37,8 +49,9 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/tvPlanDate"
             android:text="Created by"
+            android:layout_marginLeft="8dp"
             android:textAppearance="@android:style/TextAppearance.Large"
-            android:textColor="@color/darkGrey" />
+            android:textColor="@color/white" />
 
         <com.example.mbankole.tripplanner.utility.RalewayBlackTextView
             android:id="@+id/tvOverview"

@@ -1,5 +1,6 @@
 package com.example.mbankole.tripplanner.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,16 +10,21 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.adapters.PlanLocationsAdapter;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Plan;
 import com.example.mbankole.tripplanner.models.TransportOption;
+import com.squareup.picasso.Picasso;
 
 import java.util.Collections;
+
+import jp.wasabeef.picasso.transformations.Blur;
 
 /**
  * Created by mbankole on 7/13/17.
@@ -30,6 +36,7 @@ public class PlanListFragment extends Fragment{
     TextView tvTitle;
     TextView tvDate;
     TextView tvCreator;
+    ImageView ivBackground;
     RecyclerView rvPlanList;
     public PlanLocationsAdapter listAdapter;
     android.app.FragmentManager fm;
@@ -54,10 +61,21 @@ public class PlanListFragment extends Fragment{
         tvTitle = (TextView) v.findViewById(R.id.tvPlanName);
         tvDate = (TextView) v.findViewById(R.id.tvPlanDate);
         tvCreator = (TextView) v.findViewById(R.id.tvPlanCreator);
+        ivBackground = (ImageView) v.findViewById(R.id.ivPlanBackground);
         rvPlanList = (RecyclerView) v.findViewById(R.id.rvPlanList);
 
         tvTitle.setText(plan.title);
         tvCreator.setText("Created by " + plan.creatorUserName);
+        ivBackground.setColorFilter(Color.argb(65, 0, 0, 0));
+        if (plan.places.size() > 0) {
+            Location loc = plan.places.get(0);
+            loc.photoUrl = GmapClient.generateImageUrl(loc.photoRef);
+            Picasso.with(getContext())
+                    .load(loc.photoUrl)
+                    .fit()
+                    .transform(new Blur(getContext()))
+                    .into(ivBackground);
+        }
 
         // construct the adapter from this data source
         listAdapter = new PlanLocationsAdapter(plan.places);
