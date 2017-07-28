@@ -85,6 +85,8 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
                 planMapFragment.addLocation(loc);
                 Snackbar.make(viewref, "Added!", Snackbar.LENGTH_SHORT).show();
                 planEditActivity.refreshAdd();
+                btAdd.setVisibility(View.GONE);
+                btRemove.setVisibility(View.VISIBLE);
             }
         });
         btRemove = (ImageButton) view.findViewById(R.id.ibRemove);
@@ -93,6 +95,8 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
             public void onClick(View v) {
                 planEditActivity.removeLocation(loc);
                 Snackbar.make(viewref, "Removed!", Snackbar.LENGTH_SHORT).show();
+                btAdd.setVisibility(View.VISIBLE);
+                btRemove.setVisibility(View.GONE);
             }
         });
 
@@ -152,6 +156,8 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
     public void onClick(View v) {
         if (v.getId() == btAdd.getId()) {
             addToList();
+            btAdd.setVisibility(View.GONE);
+            btRemove.setVisibility(View.VISIBLE);
         }
     }
 

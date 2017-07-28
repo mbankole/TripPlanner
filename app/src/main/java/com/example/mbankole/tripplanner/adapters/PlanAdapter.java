@@ -100,6 +100,11 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         }
     }
 
+    public void clear() {
+        mPlans.clear();
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getItemCount() {
         return mPlans.size();
