@@ -87,7 +87,7 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
         int[] icons = {
                 R.drawable.ic_marker_black,
                 R.drawable.ic_list,
-                R.drawable.messenger_bubble_small_blue,
+                R.drawable.ic_chat,
         };
 
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
