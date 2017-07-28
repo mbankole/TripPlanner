@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class PlanEditPagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 3;
-    private String tabTitles[] = new String[]{"", "", "Messages"};
+    private String tabTitles[] = new String[]{"", "", ""};
     FragmentManager fragmentManager;
     PlanListFragment planListFragment;
     PlanMapFragment planMapFragment;

@@ -64,9 +64,9 @@ public class Location implements Parcelable {
         JSONObject result = obj;
         //Log.d(TAG, "locationFromJson: " + result.toString());
         if (obj.has("result")) result = obj.getJSONObject("result");
-        loc.name = result.getString("name");
-        loc.address = result.optString("formatted_address");
-        loc.phoneNumber = result.optString("formatted_phone_number");
+        loc.name = result.optString("name", "Name not found");
+        loc.address = result.optString("formatted_address", "Address not found");
+        loc.phoneNumber = result.optString("formatted_phone_number", "phone number not found");
         if (result.has("opening_hours")) {
             JSONObject openingHours = result.optJSONObject("opening_hours");
             if (openingHours.has("open_now")) {
@@ -84,10 +84,11 @@ public class Location implements Parcelable {
         JSONArray photoData = result.optJSONArray("photos");
         if (photoData != null) loc.photoRef = photoData.getJSONObject(0).optString("photo_reference", null);
         if (loc.photoRef != null) loc.photoUrl = GmapClient.generateImageUrl(loc.photoRef);
-        JSONObject latlngObj = result.getJSONObject("geometry").getJSONObject("location");
-        loc.latLng = new DCLatLng(latlngObj.getDouble("lat"), latlngObj.getDouble("lng"));
+        JSONObject latlngObj = result.optJSONObject("geometry");
+        if (latlngObj != null) latlngObj = latlngObj.optJSONObject("location");
+        if (latlngObj != null) loc.latLng = new DCLatLng(latlngObj.getDouble("lat"), latlngObj.getDouble("lng"));
         loc.people = new ArrayList<>();
-        loc.googleId = result.getString("place_id");
+        loc.googleId = result.optString("place_id");
     }
 
     public static Location generatePopCulture(Context context) {
