@@ -47,6 +47,7 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan);
+        boolean newPlan = false;
 
         //if plan is null, make a new empty one
         plan = getIntent().getParcelableExtra("plan");
@@ -55,6 +56,8 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
             String creatorUid = getIntent().getStringExtra("creatorUID");
             String creatorUserName = getIntent().getStringExtra("creatorUserName");
             plan = Plan.newPlan(creatorUid, creatorUserName);
+            newPlan = true;
+
         }
 
         context = this;
@@ -105,6 +108,10 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
 
         Menu menu = toolbar.getMenu();
         onCreateOptionsMenu(menu);
+
+        if (!newPlan) {
+            viewPager.setCurrentItem(1);
+        }
     }
 
     @Override
