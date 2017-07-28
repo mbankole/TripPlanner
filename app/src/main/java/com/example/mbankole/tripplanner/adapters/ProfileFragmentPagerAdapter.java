@@ -8,11 +8,7 @@ import com.example.mbankole.tripplanner.fragments.PlaceholderFragment;
 import com.example.mbankole.tripplanner.fragments.ProfileFriendsListFragment;
 import com.example.mbankole.tripplanner.fragments.ProfileLocationsListFragment;
 import com.example.mbankole.tripplanner.fragments.ProfilePlansListFragment;
-import com.example.mbankole.tripplanner.models.Location;
-import com.example.mbankole.tripplanner.models.Plan;
 import com.example.mbankole.tripplanner.models.User;
-
-import java.util.ArrayList;
 
 /**
  * Created by mbankole on 7/21/17.
@@ -25,22 +21,18 @@ public class ProfileFragmentPagerAdapter extends FragmentPagerAdapter {
     ProfilePlansListFragment profilePlansListFragment;
     ProfileFriendsListFragment profileFriendsListFragment;
     ProfileLocationsListFragment profileLocationsListFragment;
-    ArrayList<Plan> plans;
-    ArrayList<User> friends;
-    ArrayList<Location> interests;
+    User user;
 
-    public ProfileFragmentPagerAdapter(FragmentManager fm, ArrayList<Plan> plans, ArrayList<User> friends, ArrayList<Location> interests) {
+    public ProfileFragmentPagerAdapter(FragmentManager fm, User user) {
         super(fm);
         fragmentManager = fm;
-        this.plans = plans;
-        this.friends = friends;
-        this.interests = interests;
+        this.user = user;
     }
 
     public ProfilePlansListFragment getProfilePlansListFragment() {
         if (profilePlansListFragment == null) {
             profilePlansListFragment = ProfilePlansListFragment.newInstance();
-            profilePlansListFragment.plans = plans;
+            profilePlansListFragment.user = user;
         }
         return profilePlansListFragment;
     }
@@ -48,7 +40,7 @@ public class ProfileFragmentPagerAdapter extends FragmentPagerAdapter {
     public ProfileFriendsListFragment getProfileFriendsListFragment() {
         if (profileFriendsListFragment == null) {
             profileFriendsListFragment = ProfileFriendsListFragment.newInstance();
-            profileFriendsListFragment.friends = friends;
+            profileFriendsListFragment.user = user;
         }
         return profileFriendsListFragment;
     }

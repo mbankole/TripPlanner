@@ -131,7 +131,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
             final Integer position = getAdapterPosition();
             final Plan plan = mPlans.get(position);
             if (v.getId() == R.id.ibAdd) {
-                User.generateChandler(context).plans.add(plan);
+                User.generateChandler(context).plans.add(plan.getUid());
                 Snackbar.make(v, "Added!", Snackbar.LENGTH_SHORT).show();
                 ibAdd.setVisibility(View.GONE);
             } else {

@@ -16,9 +16,9 @@ public class User implements Parcelable {
     public String name;
     public String uid;
     public String imageUrl;
-    public ArrayList<User> friends;
+    public ArrayList<String> friends;
     public ArrayList<Location> interests;
-    public ArrayList<Plan> plans;
+    public ArrayList<String> plans;
 
     public static User generateChandler(Context context) {
         User user = new User();
@@ -26,16 +26,16 @@ public class User implements Parcelable {
         user.uid = "1";
         user.imageUrl = "https://vignette4.wikia.nocookie.net/friends/images/c/cc/Square_Chandler.jpg/revision/latest?cb=20111216200026";
         user.friends = new ArrayList<>();
-        user.friends.add(generateJoey());
+        /*user.friends.add(generateJoey());
         user.friends.add(generateMonica());
         user.friends.add(generatePhoebe());
         user.friends.add(generateRachel());
-        user.friends.add(generateRoss());
+        user.friends.add(generateRoss());*/
         user.interests = new ArrayList<>();
         user.interests.add(Location.generatePopCulture(context));
         user.interests.add(Location.generateNeedle(context));
         user.plans = new ArrayList<>();
-        user.plans.add(Plan.generateSeattlePlan(context));
+        //user.plans.add(Plan.generateSeattlePlan(context));
         return user;
     }
 
@@ -99,42 +99,6 @@ public class User implements Parcelable {
     public User() {
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.name);
-        dest.writeString(this.uid);
-        dest.writeString(this.imageUrl);
-        dest.writeTypedList(this.friends);
-        dest.writeTypedList(this.interests);
-        dest.writeTypedList(this.plans);
-    }
-
-    protected User(Parcel in) {
-        this.name = in.readString();
-        this.uid = in.readString();
-        this.imageUrl = in.readString();
-        this.friends = in.createTypedArrayList(User.CREATOR);
-        this.interests = in.createTypedArrayList(Location.CREATOR);
-        this.plans = in.createTypedArrayList(Plan.CREATOR);
-    }
-
-    public static final Creator<User> CREATOR = new Creator<User>() {
-        @Override
-        public User createFromParcel(Parcel source) {
-            return new User(source);
-        }
-
-        @Override
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };
-
     public String getName() {
         return name;
     }
@@ -159,14 +123,6 @@ public class User implements Parcelable {
         this.imageUrl = imageUrl;
     }
 
-    public ArrayList<User> getFriends() {
-        return friends;
-    }
-
-    public void setFriends(ArrayList<User> friends) {
-        this.friends = friends;
-    }
-
     public ArrayList<Location> getInterests() {
         return interests;
     }
@@ -175,11 +131,55 @@ public class User implements Parcelable {
         this.interests = interests;
     }
 
-    public ArrayList<Plan> getPlans() {
+    public ArrayList<String> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(ArrayList<String> friends) {
+        this.friends = friends;
+    }
+
+    public ArrayList<String> getPlans() {
         return plans;
     }
 
-    public void setPlans(ArrayList<Plan> plans) {
+    public void setPlans(ArrayList<String> plans) {
         this.plans = plans;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeString(this.uid);
+        dest.writeString(this.imageUrl);
+        dest.writeStringList(this.friends);
+        dest.writeTypedList(this.interests);
+        dest.writeStringList(this.plans);
+    }
+
+    protected User(Parcel in) {
+        this.name = in.readString();
+        this.uid = in.readString();
+        this.imageUrl = in.readString();
+        this.friends = in.createStringArrayList();
+        this.interests = in.createTypedArrayList(Location.CREATOR);
+        this.plans = in.createStringArrayList();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }

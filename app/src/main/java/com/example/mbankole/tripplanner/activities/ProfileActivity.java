@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,12 +16,8 @@ import com.example.mbankole.tripplanner.models.Plan;
 import com.example.mbankole.tripplanner.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -34,9 +29,9 @@ public class ProfileActivity extends AppCompatActivity {
     User user;
     ProfileFragmentPagerAdapter fragmentPager;
     ViewPager viewPager;
-    ArrayList<User> friends;
+    ArrayList<String> friends;
     ArrayList<Location> interests;
-    ArrayList<Plan> plans;
+    ArrayList<String> plans;
     Button btFriend;
     private FirebaseAuth mAuth;
     FirebaseUser currentUser;
@@ -61,7 +56,7 @@ public class ProfileActivity extends AppCompatActivity {
         plans = user.plans;
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        fragmentPager = new ProfileFragmentPagerAdapter(getSupportFragmentManager(), plans, friends, interests);
+        fragmentPager = new ProfileFragmentPagerAdapter(getSupportFragmentManager(), user);
         viewPager.setAdapter(fragmentPager);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -90,10 +85,10 @@ public class ProfileActivity extends AppCompatActivity {
                     .into(ivProfileImage);
         }
 
-        loadPlans();
+        //loadPlans();
     }
 
-    public void loadPlans() {
+    /*public void loadPlans() {
         DatabaseReference ref = mDatabase.child("plans");
 
         Query planQuery = ref.orderByChild("creatorUid").equalTo(user.getUid());
@@ -114,7 +109,7 @@ public class ProfileActivity extends AppCompatActivity {
                 Log.e(TAG, "onCancelled: shits fucked");
             }
         });
-    }
+    }*/
 
     void fixPlan(Plan plan) {
         if (plan.people == null) plan.people = new ArrayList<>();
