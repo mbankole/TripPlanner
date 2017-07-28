@@ -25,7 +25,6 @@ public class ExploreUsersListFragment extends Fragment {
     }
 
     UserAdapter userAdapter;
-    ArrayList<User> users;
     RecyclerView rvUsers;
     ArrayList<User> friends;
     android.app.FragmentManager fm;
@@ -49,10 +48,9 @@ public class ExploreUsersListFragment extends Fragment {
         // find RecyclerView
         rvUsers = (RecyclerView) v.findViewById(R.id.rvUsers);
         // init the arraylist (data source)
-        users = new ArrayList<>();
         friends = new ArrayList<>();
         // construct the adapter from this data source
-        userAdapter = new UserAdapter(users);
+        userAdapter = new UserAdapter(friends);
         userAdapter.setFm(fm);
         // RecyclerView setup (layout manager, use adapter)
         rvUsers.setLayoutManager(new GridLayoutManager(getContext(), 2));
@@ -67,8 +65,7 @@ public class ExploreUsersListFragment extends Fragment {
             friends.add(User.generateRachel());
             friends.add(User.generateRoss());
         }
-
-        addItems(friends);
+        userAdapter.notifyItemInserted(friends.size() - 1);
         return v;
     }
 
@@ -78,12 +75,4 @@ public class ExploreUsersListFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {}
-
-    public void addItems(ArrayList<User> response) {
-        for (int i = 0; i < response.size(); i++) {
-            User user = response.get(i);
-            users.add(user);
-            userAdapter.notifyItemInserted(users.size() - 1);
-        }
-    }
 }
