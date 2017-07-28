@@ -35,14 +35,14 @@
                 android:id="@+id/tvPlanTitle"
                 android:layout_width="317dp"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Plan Title"
-                android:textColor="@color/white"
                 android:textAppearance="@android:style/TextAppearance.Large"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true" />
+                android:textColor="@color/white" />
 
             <ImageButton
                 android:id="@+id/ibAdd"
@@ -53,11 +53,31 @@
                 android:background="@android:color/transparent"
                 app:srcCompat="@android:drawable/ic_input_add" />
 
+            <com.example.mbankole.tripplanner.utility.RalewayLightTextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvPlanTitle"
+                android:layout_below="@+id/tvPlanTitle"
+                android:text="Date Range"
+                android:textColor="@color/white"
+                android:textAppearance="@android:style/TextAppearance.Small" />
+
+            <com.example.mbankole.tripplanner.utility.RalewayLightTextView
+                android:id="@+id/tvCreator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/tvPlanTitle"
+                android:layout_below="@+id/tvDate"
+                android:text="Created by"
+                android:textColor="@color/white"
+                android:textAppearance="@android:style/TextAppearance.Small" />
+
             <LinearLayout
                 android:id="@+id/llLocations"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvPlanTitle"
+                android:layout_below="@+id/tvCreator"
                 android:orientation="vertical" />
 
         </RelativeLayout>

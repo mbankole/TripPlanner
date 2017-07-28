@@ -14,12 +14,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.mbankole.tripplanner.ApiClients.FirebaseClient;
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Plan;
 import com.example.mbankole.tripplanner.models.User;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -34,6 +37,9 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
     List<Plan> mPlans;
     Context context;
     android.app.FragmentManager fm;
+    FirebaseClient client;
+    DatabaseReference mDatabase;
+    //User user;
 
     public static final int EDIT_PLAN_REQUEST_CODE = 30;
 
@@ -55,11 +61,29 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(PlanAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final PlanAdapter.ViewHolder holder, int position) {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        client = new FirebaseClient(mDatabase);
         // get the data according to position
         Plan plan = mPlans.get(position);
         // populate the views according to this data
         holder.tvPlanTitle.setText(plan.title);
+        /**
+        user = client.getUserByUid(plan.creatorUid);
+        final Handler handler = new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (user != null) {
+                    holder.tvCreator.setText(user.name);
+                }
+                else {
+                    handler.postDelayed(this, 250);
+                }
+            }
+        });
+         **/
+        holder.tvCreator.setText("Created by " + plan.creatorUserName);
         holder.clearLocations();
         for (int i = 0; i < plan.places.size(); i++) {
             holder.addLocation(plan.places.get(i));
@@ -84,6 +108,8 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView tvPlanTitle;
+        public TextView tvDate;
+        public TextView tvCreator;
         public LinearLayout llLocations;
         public ImageButton ibAdd;
         public ImageView ivBackground;
@@ -91,6 +117,8 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
             tvPlanTitle = (TextView) itemView.findViewById(R.id.tvPlanTitle);
+            tvDate = (TextView) itemView.findViewById(R.id.tvDate);
+            tvCreator = (TextView) itemView.findViewById(R.id.tvCreator);
             llLocations = (LinearLayout) itemView.findViewById(R.id.llLocations);
             ibAdd = (ImageButton) itemView.findViewById(R.id.ibAdd);
             ivBackground = (ImageView) itemView.findViewById(R.id.ivPlanBackground);
