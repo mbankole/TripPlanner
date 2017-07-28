@@ -19,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
@@ -66,6 +67,8 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     public ArrayList<Location> places;
     FragmentManager fm;
     private GoogleMap mMap;
+    boolean loading = false;
+    ProgressBar pbLoading;
 
     final PlanMapFragment self = this;
 
@@ -106,6 +109,8 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(map);
         mapFragment.getMapAsync(this);
+        pbLoading = (ProgressBar) view.findViewById(R.id.pbLoading);
+        pbLoading.setVisibility(View.GONE);
     }
 
     @Override
@@ -294,29 +299,28 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onPoiClick(PointOfInterest poi) {
-                /*Toast.makeText(getContext(), "Clicked: " +
-                        poi.name + "\nPlace ID:" + poi.placeId +
-                        "\nLatitude:" + poi.latLng.latitude +
-                        " Longitude:" + poi.latLng.longitude,
-                Toast.LENGTH_SHORT).show();
-                */
-        //Log.d(TAG, poi.toString());
-        GmapClient.getDetailFromId(poi.placeId, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                //Log.d(TAG, response.toString());
-                Location loc = null;
-                try {
-                    loc = Location.locationFromJson(response);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+        if (!loading) {
+            loading = true;
+            pbLoading.setVisibility(View.VISIBLE);
+            GmapClient.getDetailFromId(poi.placeId, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    //Log.d(TAG, response.toString());
+                    loading = false;
+                    pbLoading.setVisibility(View.GONE);
+                    Location loc = null;
+                    try {
+                        loc = Location.locationFromJson(response);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    LocationDetailFragment frag = LocationDetailFragment.newInstance(loc, false);
+                    frag.planMapFragment = self;
+                    frag.planEditActivity = planEditActivity;
+                    frag.show(fm, "detail");
                 }
-                LocationDetailFragment frag = LocationDetailFragment.newInstance(loc, false);
-                frag.planMapFragment = self;
-                frag.planEditActivity = planEditActivity;
-                frag.show(fm, "detail");
-            }
-        });
+            });
+        }
     }
 
     public void addLocation(Location location) {
