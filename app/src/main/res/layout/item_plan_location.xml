@@ -49,4 +49,12 @@
 
     </LinearLayout>
 
+    <com.example.mbankole.tripplanner.utility.RalewayMedTextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time"
+        android:layout_below="@+id/tvLocationname"
+        android:layout_alignStart="@+id/tvLocationname" />
+
 </RelativeLayout>

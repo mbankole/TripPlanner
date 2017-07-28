@@ -32,11 +32,11 @@
         android:id="@+id/btSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
-        android:layout_marginBottom="10dp"
-        android:textColor="@android:color/primary_text_dark"
-        android:background="@color/colorPrimary"
         android:layout_below="@+id/etDescription"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorPrimary"
+        android:text="OK"
+        android:textColor="@android:color/primary_text_dark" />
 
 </RelativeLayout>

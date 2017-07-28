@@ -5,8 +5,6 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import java.util.concurrent.ThreadLocalRandom;
-
 /**
  * Created by mbankole on 7/13/17.
  */
@@ -14,9 +12,9 @@ import java.util.concurrent.ThreadLocalRandom;
 public class GmapClient {
     public static final String BASE_URL = "https://maps.googleapis.com/maps/api/";
 
-    static String[] Keys = {"AIzaSyAu4LnwwfQl6FQhWvl2K_mtjAj844rMyGU", "AIzaSyAAP5pDzemIFGVPdgDxhI9xxCNBShO1yM8", "AIzaSyAJ0ziieskALR-hFcJrO727DIUnIYcTPes"};
+    static String[] Keys = {"AIzaSyAu4LnwwfQl6FQhWvl2K_mtjAj844rMyGU"};
 
-    private static final String API_KEY = Keys[ThreadLocalRandom.current().nextInt(0, 3)];
+    private static final String API_KEY = "AIzaSyAu4LnwwfQl6FQhWvl2K_mtjAj844rMyGU";
             //"AIzaSyAu4LnwwfQl6FQhWvl2K_mtjAj844rMyGU"; // good
     //private static final String API_KEY = "AIzaSyAIxBmOYjuG-dGC86LhChPsoR619GCcAOM";
     //private static final String API_KEY = "AIzaSyAAP5pDzemIFGVPdgDxhI9xxCNBShO1yM8"; // good
