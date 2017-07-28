@@ -19,7 +19,7 @@ import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.TransportOption;
 import com.example.mbankole.tripplanner.models.User;
-import com.example.mbankole.tripplanner.utility.gradient;
+import com.example.mbankole.tripplanner.utility.Circle;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -61,7 +61,8 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
         Picasso.with(context)
                 .load(location.photoUrl)
                 //.memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
-                .transform(new gradient())
+                //.transform(new gradient())
+                .transform(new Circle())
                 .into(holder.ivLocationImage);
         holder.removeTransport();
         holder.clearUsers();
