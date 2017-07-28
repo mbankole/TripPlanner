@@ -168,7 +168,7 @@ public class LoginActivity extends AppCompatActivity {
         User newUser = new User();
         newUser.name = user.getDisplayName();
         newUser.uid = user.getUid();
-        newUser.imageUrl = "https://graph.facebook.com/" + token.getUserId() + "/picture?type=square";
+        newUser.imageUrl = "https://graph.facebook.com/" + token.getUserId() + "/picture?type=large";
         newUser.plans = new ArrayList<>();
         newUser.friends = new ArrayList<>();
         newUser.interests = new ArrayList<>();

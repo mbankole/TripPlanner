@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,12 +13,15 @@ import android.widget.TextView;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.ProfileFragmentPagerAdapter;
 import com.example.mbankole.tripplanner.models.Location;
-import com.example.mbankole.tripplanner.models.Plan;
 import com.example.mbankole.tripplanner.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -35,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
     Button btFriend;
     private FirebaseAuth mAuth;
     FirebaseUser currentUser;
+    User vUser;
     private DatabaseReference mDatabase;
     boolean isCurrentUser = false;
     final static String TAG = "PROFILEACTIVITY";
@@ -75,6 +80,33 @@ public class ProfileActivity extends AppCompatActivity {
         if (isCurrentUser) btFriend.setVisibility(View.GONE);
         else {
             btFriend.setVisibility(View.VISIBLE);
+            if (user.friends.contains(currentUser.getUid())) {
+                btFriend.setText("unfriend");
+            }
+            else {
+                btFriend.setText("friend");
+            }
+            btFriend.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (user.friends.contains(currentUser.getUid())) {
+                        //unfriend them
+                        vUser.friends.remove(user.getUid());
+                        user.friends.remove(vUser.getUid());
+                        mDatabase.child("users").child(vUser.getUid()).setValue(vUser);
+                        mDatabase.child("users").child(user.getUid()).setValue(user);
+                        btFriend.setText("friend");
+                    }
+                    else {
+                        //friend them
+                        vUser.friends.add(user.getUid());
+                        user.friends.add(vUser.getUid());
+                        mDatabase.child("users").child(vUser.getUid()).setValue(vUser);
+                        mDatabase.child("users").child(user.getUid()).setValue(user);
+                        btFriend.setText("unfriend");
+                    }
+                }
+            });
         }
 
         tvUsername.setText(user.name);
@@ -85,22 +117,16 @@ public class ProfileActivity extends AppCompatActivity {
                     .into(ivProfileImage);
         }
 
-        //loadPlans();
-    }
+        DatabaseReference ref = mDatabase.child("users");
 
-    /*public void loadPlans() {
-        DatabaseReference ref = mDatabase.child("plans");
+        Query userQuery = ref.orderByChild("uid").equalTo(currentUser.getUid());
 
-        Query planQuery = ref.orderByChild("creatorUid").equalTo(user.getUid());
-
-        planQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+        userQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
-                    Plan plan = singleSnapshot.getValue(Plan.class);
-                    fixPlan(plan);
-                    plans.add(0, plan);
-                    fragmentPager.getProfilePlansListFragment().refreshAdd();
+                    vUser = singleSnapshot.getValue(User.class);
+                    fixUser(vUser);
                 }
             }
 
@@ -109,10 +135,11 @@ public class ProfileActivity extends AppCompatActivity {
                 Log.e(TAG, "onCancelled: shits fucked");
             }
         });
-    }*/
+    }
 
-    void fixPlan(Plan plan) {
-        if (plan.people == null) plan.people = new ArrayList<>();
-        if (plan.places == null) plan.places = new ArrayList<>();
+    void fixUser(User user) {
+        if (user.interests == null) user.interests = new ArrayList<>();
+        if (user.friends == null) user.friends = new ArrayList<>();
+        if (user.plans == null) user.plans = new ArrayList<>();
     }
 }
