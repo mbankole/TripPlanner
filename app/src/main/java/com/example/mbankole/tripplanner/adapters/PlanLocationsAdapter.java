@@ -8,11 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.mbankole.tripplanner.R;
@@ -20,7 +18,6 @@ import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.fragments.TimePickerFragment;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.TransportOption;
-import com.example.mbankole.tripplanner.utility.Circle;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
@@ -75,15 +72,8 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
         }
         Picasso.with(context)
                 .load(location.photoUrl)
-                //.memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
-                //.transform(new gradient())
-                .transform(new Circle())
                 .into(holder.ivLocationImage);
         holder.removeTransport();
-//        holder.clearUsers();
-        /*for (int i = 0; i < location.people.size(); i++) {
-            holder.addUser(location.people.get(i));
-        }*/
         if (location.transport != null) holder.addTransport(location.transport);
         else holder.removeTransport();
     }
@@ -97,14 +87,7 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
         public TextView tvLocationname;
         public TextView tvTime;
         public ImageView ivLocationImage;
-        public LinearLayout llPeople;
         public LinearLayout llTransport;
-        public RelativeLayout rlInfo;
-        public Button expand;
-        public Button add;
-        public Button close;
-
-        public boolean expanded = false;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -112,51 +95,7 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
             tvLocationname = (TextView) itemView.findViewById(R.id.tvLocationname);
             tvTime = (TextView) itemView.findViewById(R.id.tvTime);
             ivLocationImage = (ImageView) itemView.findViewById(R.id.ivLocationImage);
-            //llPeople = (LinearLayout) itemView.findViewById(R.id.llPeople);
             llTransport = (LinearLayout) itemView.findViewById(R.id.llTransport);
-            //rlInfo = (RelativeLayout) itemView.findViewById(R.id.rlInfo);
-            //expand = (Button) itemView.findViewById(R.id.btExpand);
-            //add = (Button) itemView.findViewById(R.id.btAdd);
-            //close = (Button) itemView.findViewById(R.id.btClose);
-
-            //rlInfo.setVisibility(View.GONE);
-
-            /**
-            expand.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (expanded) {
-                        rlInfo.setVisibility(View.GONE);
-                        expanded = false;
-                    }
-                    else {
-                        rlInfo.setVisibility(View.VISIBLE);
-                        expanded = true;
-                    }
-                }
-            });
-
-            close.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    rlInfo.setVisibility(View.GONE);
-                    expanded = false;
-                }
-            });
-
-            add.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    addUser(User.generateChandler(context));
-                }
-            });
-        }
-
-        void addUser(User user) {
-            View v = LayoutInflater.from(context).inflate(R.layout.item_user_slim, llPeople, false);
-            ((TextView)v.findViewById(R.id.tvUsername)).setText(user.name);
-            llPeople.addView(v);
-             **/
         }
 
 
@@ -182,12 +121,6 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
         void removeTransport() {
             if (llTransport.getChildCount() > 0) llTransport.removeAllViews();
         }
-
-        /**
-        void clearUsers() {
-            if (llPeople.getChildCount() > 0) llPeople.removeAllViews();
-        }
-         **/
 
         public void viewHolderTransportSetup(View itemView) {
             //itemView.setOnClickListener(this);
