@@ -3,6 +3,7 @@ package com.example.mbankole.tripplanner.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.MenuItemCompat;
@@ -56,7 +57,6 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
             String creatorUserName = getIntent().getStringExtra("creatorUserName");
             plan = Plan.newPlan(creatorUid, creatorUserName);
             newPlan = true;
-
         }
 
         context = this;
@@ -99,6 +99,21 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
                 i.putExtra("position", position);
                 setResult(RESULT_OK, i);
                 finish();
+            }
+        });
+
+        final Handler handler = new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (viewPager.getCurrentItem() == 2) {
+                    fabDone.setVisibility(View.GONE);
+                    handler.postDelayed(this, 200);
+                }
+                else {
+                    fabDone.setVisibility(View.VISIBLE);
+                    handler.postDelayed(this, 200);
+                }
             }
         });
 
