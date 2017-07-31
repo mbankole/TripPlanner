@@ -10,7 +10,6 @@ import com.example.mbankole.tripplanner.fragments.PlanListFragment;
 import com.example.mbankole.tripplanner.fragments.PlanMapFragment;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Plan;
-import com.example.mbankole.tripplanner.models.User;
 
 import java.util.ArrayList;
 
@@ -25,16 +24,16 @@ public class PlanEditPagerAdapter extends FragmentPagerAdapter {
     PlanListFragment planListFragment;
     PlanMapFragment planMapFragment;
     public Plan plan;
-    public ArrayList<User> people;
+    public ArrayList<String> people;
     public ArrayList<Location> places;
     public PlanEditActivity planEditActivity;
 
-    public PlanEditPagerAdapter(FragmentManager fm, ArrayList<User> people, ArrayList<Location> places) {
+    public PlanEditPagerAdapter(FragmentManager fm, Plan plan) {
         super(fm);
         fragmentManager = fm;
         this.plan = plan;
-        this.people = people;
-        this.places = places;
+        this.people = plan.people;
+        this.places = plan.places;
     }
 
     public PlanListFragment getPlanListFragment() {
@@ -50,8 +49,7 @@ public class PlanEditPagerAdapter extends FragmentPagerAdapter {
     public PlanMapFragment getPlanMapFragment() {
         if (planMapFragment == null) {
             planMapFragment = PlanMapFragment.newInstance();
-            planMapFragment.people = people;
-            planMapFragment.places = places;
+            planMapFragment.plan = plan;
             planMapFragment.planEditActivity = planEditActivity;
             planMapFragment.setFm(fragmentManager);
             //planMapFragment.viewPager = this;

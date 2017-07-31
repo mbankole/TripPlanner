@@ -14,7 +14,7 @@ import java.util.UUID;
 
 public class Plan implements Parcelable {
     public ArrayList<Location> places;
-    public ArrayList<User> people;
+    public ArrayList<String> people;
     public String uid;
     public String title;
     public String description;
@@ -31,8 +31,6 @@ public class Plan implements Parcelable {
         plan.title = "Trip to Seattle";
         plan.description = "Looking at a couple of landmarks";
         //plan.people.add(User.generateChandler());
-        plan.people.add(User.generateRachel());
-        plan.people.add(User.generatePhoebe());
         plan.places.add(Location.generateWheel(context));
         plan.places.add(Location.generateArboretum(context));
         //plan.places.add(Location.generateArtMuseum());
@@ -64,6 +62,7 @@ public class Plan implements Parcelable {
         plan.people = new ArrayList<>();
         plan.title = "New Plan";
         plan.creatorUid = creatorUid;
+        plan.people.add(creatorUid);
         plan.uid = generateUid();
         plan.creatorUserName = creatorUserName;
         return plan;
@@ -109,11 +108,11 @@ public class Plan implements Parcelable {
         this.places = places;
     }
 
-    public ArrayList<User> getPeople() {
+    public ArrayList<String> getPeople() {
         return people;
     }
 
-    public void setPeople(ArrayList<User> people) {
+    public void setPeople(ArrayList<String> people) {
         this.people = people;
     }
 
@@ -149,7 +148,7 @@ public class Plan implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(this.places);
-        dest.writeTypedList(this.people);
+        dest.writeStringList(this.people);
         dest.writeString(this.uid);
         dest.writeString(this.title);
         dest.writeString(this.description);
@@ -161,7 +160,7 @@ public class Plan implements Parcelable {
 
     protected Plan(Parcel in) {
         this.places = in.createTypedArrayList(Location.CREATOR);
-        this.people = in.createTypedArrayList(User.CREATOR);
+        this.people = in.createStringArrayList();
         this.uid = in.readString();
         this.title = in.readString();
         this.description = in.readString();

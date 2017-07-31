@@ -21,7 +21,6 @@ import com.example.mbankole.tripplanner.adapters.PlanEditPagerAdapter;
 import com.example.mbankole.tripplanner.fragments.PlanEditTextFragment;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Plan;
-import com.example.mbankole.tripplanner.models.User;
 
 import java.util.ArrayList;
 
@@ -32,7 +31,7 @@ import java.util.ArrayList;
 public class PlanEditActivity extends AppCompatActivity implements PlanEditTextFragment.PlanEditTextListener {
 
     PlanEditPagerAdapter fragmentPager;
-    ArrayList<User> people;
+    ArrayList<String> people;
     ArrayList<Location> places;
     ViewPager viewPager;
     Context context;
@@ -66,12 +65,9 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
         places = plan.places;
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        fragmentPager = new PlanEditPagerAdapter(getSupportFragmentManager(), plan.people, plan.places);
+        fragmentPager = new PlanEditPagerAdapter(getSupportFragmentManager(), plan);
         viewPager.setAdapter(fragmentPager);
         fragmentPager.planEditActivity = this;
-        fragmentPager.plan = plan;
-        fragmentPager.people = plan.people;
-        fragmentPager.places = plan.places;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setLogo(R.drawable.logo_white);

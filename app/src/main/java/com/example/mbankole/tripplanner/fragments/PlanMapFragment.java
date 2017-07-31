@@ -26,6 +26,7 @@ import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Location;
+import com.example.mbankole.tripplanner.models.Plan;
 import com.example.mbankole.tripplanner.models.Route;
 import com.example.mbankole.tripplanner.models.User;
 import com.google.android.gms.maps.CameraUpdate;
@@ -65,6 +66,7 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     public PlanEditActivity planEditActivity;
     public ArrayList<User> people;
     public ArrayList<Location> places;
+    public Plan plan;
     FragmentManager fm;
     private GoogleMap mMap;
     boolean loading = false;
@@ -150,6 +152,7 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
 
     @Override
     public void onMapReady(GoogleMap map) {
+        places = plan.places;
         mMap = map;
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         map.setOnMarkerClickListener(this);

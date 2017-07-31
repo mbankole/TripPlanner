@@ -102,7 +102,7 @@ public class ExplorePlansListFragment extends Fragment {
         });
 
         planAdapter.notifyItemInserted(plans.size() - 1);
-        loadPlans();
+        //loadPlans();
         return v;
     }
 
@@ -133,6 +133,7 @@ public class ExplorePlansListFragment extends Fragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(TAG, "onCancelled: shits fucked");
+                swipeContainer.setRefreshing(false);
             }
         });
     }
