@@ -155,6 +155,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
                     i.putExtra("plan", plan);
                     i.putExtra("position", position);
                     ((Activity)context).startActivityForResult(i, EDIT_PLAN_REQUEST_CODE);
+                    ((Activity)context).overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
                 }
             }
         }
