@@ -17,10 +17,11 @@
         android:id="@+id/tvBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_margin="8sp"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/ivProfileImage"
         android:layout_toEndOf="@+id/ivProfileImage"
-        android:text="Message Body goes here" />
+        android:text="Message Body goes here"
+        android:textSize="16sp" />
 
 </RelativeLayout>
