@@ -2,6 +2,7 @@
 package com.example.mbankole.tripplanner.adapters;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,11 +17,14 @@ import android.widget.TextView;
 
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
+import com.example.mbankole.tripplanner.fragments.TimePickerFragment;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.TransportOption;
 import com.example.mbankole.tripplanner.utility.Circle;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -32,18 +36,20 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
     List<Location> mLocations;
     Context context;
     public PlanEditActivity planEditActivity;
-    android.app.FragmentManager fm;
+    PlanLocationsAdapter adapter;
+    FragmentManager fm;
 
     public PlanLocationsAdapter(List<Location> locations) {
         mLocations = locations;
     }
 
-    public void setFm(android.app.FragmentManager fm) {
+    public void setFm(FragmentManager fm) {
         this.fm = fm;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        adapter = this;
         context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         View locationView = inflater.inflate(R.layout.item_plan_location, parent, false);
@@ -57,6 +63,16 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
         Location location = mLocations.get(position);
         // populate the views according to this data
         holder.tvLocationname.setText(location.name);
+        if (location.startTime != null) {
+            // Create an instance of SimpleDateFormat used for formatting the string representation of date (month/day/year)
+            DateFormat df = new SimpleDateFormat("hh:mm a");
+            // Using DateFormat format method we can create a string representation of a date with the defined format.
+            String reportTime = df.format(location.startTime);
+            holder.tvTime.setText(reportTime);
+            holder.tvTime.setVisibility(View.VISIBLE);
+        } else {
+            holder.tvTime.setVisibility(View.GONE);
+        }
         Picasso.with(context)
                 .load(location.photoUrl)
                 //.memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
@@ -76,9 +92,10 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
     public int getItemCount() {return mLocations.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView tvLocationname;
+        public TextView tvTime;
         public ImageView ivLocationImage;
         public LinearLayout llPeople;
         public LinearLayout llTransport;
@@ -91,7 +108,9 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
 
         public ViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             tvLocationname = (TextView) itemView.findViewById(R.id.tvLocationname);
+            tvTime = (TextView) itemView.findViewById(R.id.tvTime);
             ivLocationImage = (ImageView) itemView.findViewById(R.id.ivLocationImage);
             //llPeople = (LinearLayout) itemView.findViewById(R.id.llPeople);
             llTransport = (LinearLayout) itemView.findViewById(R.id.llTransport);
@@ -213,6 +232,18 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
             rbWalk.setOnClickListener(radioClick);
             rbDrive.setOnClickListener(radioClick);
             rbTransit.setOnClickListener(radioClick);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Location location =  mLocations.get(position);
+                TimePickerFragment frag = new TimePickerFragment();
+                frag.location = location;
+                frag.adapter = adapter;
+                frag.show(fm, "name");
+            }
         }
     }
 

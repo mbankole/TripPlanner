@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -39,7 +40,7 @@ public class PlanListFragment extends Fragment{
     ImageView ivBackground;
     RecyclerView rvPlanList;
     public PlanLocationsAdapter listAdapter;
-    android.app.FragmentManager fm;
+    FragmentManager fm;
     public PlanEditActivity planEditActivity;
 
     public static PlanListFragment newInstance() {
@@ -56,7 +57,7 @@ public class PlanListFragment extends Fragment{
         // inflate the layout
         View v = inflater.inflate(R.layout.fragment_listsview, container, false);
 
-        fm = getActivity().getFragmentManager();
+        fm = getActivity().getSupportFragmentManager();
         // find RecyclerView
         tvTitle = (TextView) v.findViewById(R.id.tvPlanName);
         tvDate = (TextView) v.findViewById(R.id.tvPlanDate);
