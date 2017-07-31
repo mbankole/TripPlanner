@@ -91,27 +91,6 @@ public class NewExploreActivity extends AppCompatActivity {
             }
         });
 
-        //mDatabase.child("test").child(currentUser.getUid()).setValue(Plan.generateSeattlePlan(context));
-
-        /*DatabaseReference ref = mDatabase.child("test");
-
-        Query planQuery = ref.orderByChild("title").equalTo("Trip to Seattle");
-
-        planQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
-                    //testPlan = singleSnapshot.getValue(Plan.class);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAG, "onCancelled: shits fucked");
-            }
-        });*/
-
-
         // Give the TabLayout the ViewPager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);

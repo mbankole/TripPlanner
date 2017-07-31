@@ -5,9 +5,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
-import com.example.mbankole.tripplanner.fragments.PlaceholderFragment;
 import com.example.mbankole.tripplanner.fragments.PlanListFragment;
 import com.example.mbankole.tripplanner.fragments.PlanMapFragment;
+import com.example.mbankole.tripplanner.fragments.PlanMessagesFragment;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Plan;
 
@@ -23,6 +23,7 @@ public class PlanEditPagerAdapter extends FragmentPagerAdapter {
     FragmentManager fragmentManager;
     PlanListFragment planListFragment;
     PlanMapFragment planMapFragment;
+    PlanMessagesFragment planMessagesFragment;
     public Plan plan;
     public ArrayList<String> people;
     public ArrayList<Location> places;
@@ -57,6 +58,13 @@ public class PlanEditPagerAdapter extends FragmentPagerAdapter {
         return planMapFragment;
     }
 
+    public PlanMessagesFragment getPlanMessagesFragment() {
+        if (planMessagesFragment == null) {
+            planMessagesFragment = PlanMessagesFragment.newInstance(plan.getUid());
+        }
+        return planMessagesFragment;
+    }
+
     @Override
     public Fragment getItem(int position) {
         switch (position) {
@@ -65,7 +73,7 @@ public class PlanEditPagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return getPlanListFragment();
             case 2:
-                return new PlaceholderFragment();
+                return getPlanMessagesFragment();
             default:
                 return null;
         }
