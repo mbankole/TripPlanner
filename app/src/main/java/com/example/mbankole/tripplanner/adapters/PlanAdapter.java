@@ -26,6 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import jp.wasabeef.picasso.transformations.Blur;
@@ -73,6 +75,29 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         currentUser = mAuth.getCurrentUser();
         // populate the views according to this data
         holder.tvPlanTitle.setText(plan.title);
+        if (plan.startDate != null) {
+            DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            String reportDate = df.format(plan.startDate);
+            holder.tvDate.setText(reportDate);
+            holder.tvDate.setVisibility(View.VISIBLE);
+        } else {
+            holder.tvDate.setVisibility(View.GONE);
+        }
+        /**
+        user = client.getUserByUid(plan.creatorUid);
+        final Handler handler = new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (user != null) {
+                    holder.tvCreator.setText(user.name);
+                }
+                else {
+                    handler.postDelayed(this, 250);
+                }
+            }
+        });
+         **/
         holder.tvCreator.setText("Created by " + plan.creatorUserName);
         holder.clearLocations();
         for (int i = 0; i < plan.places.size(); i++) {
