@@ -20,7 +20,8 @@ import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Plan;
-import com.example.mbankole.tripplanner.models.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -40,6 +41,8 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
     Context context;
     android.app.FragmentManager fm;
     FirebaseClient client;
+    FirebaseUser currentUser;
+    private FirebaseAuth mAuth;
     DatabaseReference mDatabase;
     //User user;
 
@@ -68,6 +71,8 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         client = new FirebaseClient(mDatabase);
         // get the data according to position
         Plan plan = mPlans.get(position);
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
         // populate the views according to this data
         holder.tvPlanTitle.setText(plan.title);
         if (plan.startDate != null) {
@@ -146,9 +151,10 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
             final Integer position = getAdapterPosition();
             final Plan plan = mPlans.get(position);
             if (v.getId() == R.id.ibAdd) {
-                User.generateChandler(context).plans.add(plan.getUid());
+                plan.people.add(currentUser.getUid());
                 Snackbar.make(v, "Added!", Snackbar.LENGTH_SHORT).show();
                 ibAdd.setVisibility(View.GONE);
+                mDatabase.child("plans").child(plan.uid).setValue(plan);
             } else {
                 if (position != RecyclerView.NO_POSITION) {
                     Intent i = new Intent(context, PlanEditActivity.class);
