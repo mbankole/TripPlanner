@@ -121,7 +121,6 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
             tvNowOpen.setText("Now closed");
         }
 
-        //
         tvHours.setText(loc.hours);
         String priceString = "";
         for (int i = 0; i < loc.price; i++) {
