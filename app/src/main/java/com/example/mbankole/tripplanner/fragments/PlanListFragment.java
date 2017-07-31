@@ -23,6 +23,8 @@ import com.example.mbankole.tripplanner.models.Plan;
 import com.example.mbankole.tripplanner.models.TransportOption;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 
 import jp.wasabeef.picasso.transformations.Blur;
@@ -42,6 +44,7 @@ public class PlanListFragment extends Fragment{
     public PlanLocationsAdapter listAdapter;
     FragmentManager fm;
     public PlanEditActivity planEditActivity;
+    PlanListFragment self;
 
     public static PlanListFragment newInstance() {
         Bundle args = new Bundle();
@@ -56,7 +59,7 @@ public class PlanListFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // inflate the layout
         View v = inflater.inflate(R.layout.fragment_listsview, container, false);
-
+        self = this;
         fm = getActivity().getSupportFragmentManager();
         // find RecyclerView
         tvTitle = (TextView) v.findViewById(R.id.tvPlanName);
@@ -66,6 +69,18 @@ public class PlanListFragment extends Fragment{
         rvPlanList = (RecyclerView) v.findViewById(R.id.rvPlanList);
 
         tvTitle.setText(plan.title);
+        if (plan.startDate != null) {
+            refreshDate();
+        }
+        tvDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerFragment frag = new DatePickerFragment();
+                frag.plan = plan;
+                frag.planListFragment = self;
+                frag.show(fm, "name");
+            }
+        });
         tvCreator.setText("Created by " + plan.creatorUserName);
         ivBackground.setColorFilter(Color.argb(65, 0, 0, 0));
         if (plan.places.size() > 0) {
@@ -137,6 +152,14 @@ public class PlanListFragment extends Fragment{
             plan.places.get(plan.places.size() - 1).transport = null;
         }
         listAdapter.notifyDataSetChanged();
+    }
+
+    public void refreshDate() {
+        // Create an instance of SimpleDateFormat used for formatting the string representation of date (month/day/year)
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        // Using DateFormat format method we can create a string representation of a date with the defined format.
+        String reportDate = df.format(plan.startDate);
+        tvDate.setText(reportDate);
     }
 
     public void addItem() {

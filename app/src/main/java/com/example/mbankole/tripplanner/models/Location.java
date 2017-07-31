@@ -7,7 +7,6 @@ import android.util.Log;
 
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.R;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PointOfInterest;
 
 import org.json.JSONArray;
@@ -147,62 +146,6 @@ public class Location implements Parcelable {
     // seattle art museum - ChIJAAAAAAAAAAARxI1KoO7oZHs
     // wheel - ChIJAAAAAAAAAAARxtrx3nOQIKU
     // arboretum - ChIJAAAAAAAAAAARin5kehZcTqI
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.uid);
-        dest.writeString(this.name);
-        dest.writeString(this.address);
-        dest.writeString(this.phoneNumber);
-        dest.writeValue(this.openNow);
-        dest.writeString(this.hours);
-        dest.writeInt(this.price);
-        dest.writeString(this.iconUrl);
-        dest.writeParcelable(this.latLng, flags);
-        dest.writeString(this.desc);
-        dest.writeString(this.googleId);
-        dest.writeString(this.photoRef);
-        dest.writeString(this.photoUrl);
-        dest.writeFloat(this.rating);
-        dest.writeTypedList(this.people);
-        dest.writeParcelable(this.transport, flags);
-    }
-
-    protected Location(Parcel in) {
-        this.uid = in.readInt();
-        this.name = in.readString();
-        this.address = in.readString();
-        this.phoneNumber = in.readString();
-        this.openNow = (Boolean) in.readValue(Boolean.class.getClassLoader());
-        this.hours = in.readString();
-        this.price = in.readInt();
-        this.iconUrl = in.readString();
-        this.latLng = in.readParcelable(LatLng.class.getClassLoader());
-        this.desc = in.readString();
-        this.googleId = in.readString();
-        this.photoRef = in.readString();
-        this.photoUrl = in.readString();
-        this.rating = in.readFloat();
-        this.people = in.createTypedArrayList(User.CREATOR);
-        this.transport = in.readParcelable(TransportOption.class.getClassLoader());
-    }
-
-    public static final Creator<Location> CREATOR = new Creator<Location>() {
-        @Override
-        public Location createFromParcel(Parcel source) {
-            return new Location(source);
-        }
-
-        @Override
-        public Location[] newArray(int size) {
-            return new Location[size];
-        }
-    };
 
     public void setLatLng(DCLatLng latLng) {
         this.latLng = latLng;
@@ -351,4 +294,68 @@ public class Location implements Parcelable {
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.uid);
+        dest.writeString(this.name);
+        dest.writeString(this.address);
+        dest.writeString(this.phoneNumber);
+        dest.writeValue(this.openNow);
+        dest.writeString(this.hours);
+        dest.writeInt(this.price);
+        dest.writeString(this.iconUrl);
+        dest.writeParcelable(this.latLng, flags);
+        dest.writeString(this.desc);
+        dest.writeString(this.googleId);
+        dest.writeString(this.photoRef);
+        dest.writeString(this.photoUrl);
+        dest.writeFloat(this.rating);
+        dest.writeTypedList(this.people);
+        dest.writeParcelable(this.transport, flags);
+        dest.writeLong(this.startTime != null ? this.startTime.getTime() : -1);
+        dest.writeLong(this.duration);
+        dest.writeLong(this.endTime != null ? this.endTime.getTime() : -1);
+    }
+
+    protected Location(Parcel in) {
+        this.uid = in.readInt();
+        this.name = in.readString();
+        this.address = in.readString();
+        this.phoneNumber = in.readString();
+        this.openNow = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.hours = in.readString();
+        this.price = in.readInt();
+        this.iconUrl = in.readString();
+        this.latLng = in.readParcelable(DCLatLng.class.getClassLoader());
+        this.desc = in.readString();
+        this.googleId = in.readString();
+        this.photoRef = in.readString();
+        this.photoUrl = in.readString();
+        this.rating = in.readFloat();
+        this.people = in.createTypedArrayList(User.CREATOR);
+        this.transport = in.readParcelable(TransportOption.class.getClassLoader());
+        long tmpStartTime = in.readLong();
+        this.startTime = tmpStartTime == -1 ? null : new Date(tmpStartTime);
+        this.duration = in.readLong();
+        long tmpEndTime = in.readLong();
+        this.endTime = tmpEndTime == -1 ? null : new Date(tmpEndTime);
+    }
+
+    public static final Creator<Location> CREATOR = new Creator<Location>() {
+        @Override
+        public Location createFromParcel(Parcel source) {
+            return new Location(source);
+        }
+
+        @Override
+        public Location[] newArray(int size) {
+            return new Location[size];
+        }
+    };
 }
