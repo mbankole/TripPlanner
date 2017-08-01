@@ -1,12 +1,14 @@
 package com.example.mbankole.tripplanner.activities;
 
+import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -36,7 +38,8 @@ public class ProfileActivity extends AppCompatActivity {
     ArrayList<String> friends;
     ArrayList<Location> interests;
     ArrayList<String> plans;
-    Button btFriend;
+    ImageButton btFriend;
+    Context context;
     private FirebaseAuth mAuth;
     FirebaseUser currentUser;
     User vUser;
@@ -48,6 +51,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        context = this;
 
         user = getIntent().getParcelableExtra("user");
         if (user == null) {
@@ -71,18 +75,28 @@ public class ProfileActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+        int[] icons = {
+                R.drawable.ic_globe,
+                R.drawable.ic_users
+        };
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            tabLayout.getTabAt(i).setIcon(icons[i]);
+        }
+
         tvUsername = (TextView) findViewById(R.id.tvUsername);
         ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
-        btFriend = (Button) findViewById(R.id.btFriend);
+        btFriend = (ImageButton) findViewById(R.id.btFriend);
 
         if (isCurrentUser) btFriend.setVisibility(View.GONE);
         else {
             btFriend.setVisibility(View.VISIBLE);
             if (user.friends.contains(currentUser.getUid())) {
-                btFriend.setText("unfriend");
+                btFriend.setBackground(this.getDrawable(R.drawable.ic_unfriend));
+                btFriend.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.darkGrey)));
             }
             else {
-                btFriend.setText("friend");
+                btFriend.setBackground(this.getDrawable(R.drawable.ic_add_friend));
+                btFriend.setBackgroundTintList(ColorStateList.valueOf(this.getResources().getColor(R.color.colorAccent)));
             }
             btFriend.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -93,7 +107,8 @@ public class ProfileActivity extends AppCompatActivity {
                         user.friends.remove(vUser.getUid());
                         mDatabase.child("users").child(vUser.getUid()).setValue(vUser);
                         mDatabase.child("users").child(user.getUid()).setValue(user);
-                        btFriend.setText("friend");
+                        btFriend.setBackground(context.getDrawable(R.drawable.ic_add_friend));
+                        btFriend.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.colorAccent)));
                     }
                     else {
                         //friend them
@@ -101,7 +116,8 @@ public class ProfileActivity extends AppCompatActivity {
                         user.friends.add(vUser.getUid());
                         mDatabase.child("users").child(vUser.getUid()).setValue(vUser);
                         mDatabase.child("users").child(user.getUid()).setValue(user);
-                        btFriend.setText("unfriend");
+                        btFriend.setBackground(context.getDrawable(R.drawable.ic_unfriend));
+                        btFriend.setBackgroundTintList(ColorStateList.valueOf(context.getResources().getColor(R.color.darkGrey)));
                     }
                 }
             });

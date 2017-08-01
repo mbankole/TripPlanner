@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class NewExploreFragmentPagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 2;
-    private String tabTitles[] = new String[]{"plans", "people"};
+    private String tabTitles[] = new String[]{"", ""};
     FragmentManager fragmentManager;
     ExplorePlansListFragment explorePlansListFragment;
     ExploreUsersListFragment exploreUsersListFragment;

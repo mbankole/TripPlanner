@@ -95,13 +95,13 @@ public class NewExploreActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        /*int[] icons = {
+        int[] icons = {
                 R.drawable.ic_globe,
-                R.drawable.ic_user_black
+                R.drawable.ic_users
         };
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             tabLayout.getTabAt(i).setIcon(icons[i]);
-        }*/
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setLogo(logo_white);
