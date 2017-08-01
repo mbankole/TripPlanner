@@ -61,6 +61,7 @@ public class PlanEditPagerAdapter extends FragmentPagerAdapter {
     public PlanMessagesFragment getPlanMessagesFragment() {
         if (planMessagesFragment == null) {
             planMessagesFragment = PlanMessagesFragment.newInstance(plan.getUid());
+            planMessagesFragment.plan = plan;
         }
         return planMessagesFragment;
     }

@@ -47,10 +47,10 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
     //User user;
 
     public static final int EDIT_PLAN_REQUEST_CODE = 30;
-
     public PlanAdapter(List<Plan> plans) {
         mPlans = plans;
     }
+
 
     public void setFm(android.app.FragmentManager fm) {
         this.fm = fm;

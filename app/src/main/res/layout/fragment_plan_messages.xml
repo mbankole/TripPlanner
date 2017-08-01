@@ -1,7 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/ivPlanBackground"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        app:srcCompat="@color/black" />
+
+    <com.example.mbankole.tripplanner.utility.RalewayBlackTextView
+        android:id="@+id/tvPlanName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Plan Name"
+        android:textColor="@color/white"
+        android:layout_margin="8dp"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:maxLines="1"
+        android:textSize="30sp" />
+
+    <com.example.mbankole.tripplanner.utility.RalewayLightTextView
+        android:id="@+id/tvNumberUsers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="n People:"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:textColor="@color/white"
+        android:layout_alignStart="@+id/tvPlanName"
+        android:layout_below="@+id/tvPlanName" />
 
     <Button
         android:id="@+id/btSend"
@@ -29,6 +62,15 @@
         android:layout_height="match_parent"
         android:layout_above="@id/etMessage"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_below="@+id/ivPlanBackground" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvChatUsers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rvMessages"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/tvPlanName"
+        android:layout_toEndOf="@+id/tvNumberUsers" />
 
 </RelativeLayout>

@@ -8,14 +8,12 @@
         android:id="@+id/card_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_gravity="center"
         card_view:cardBackgroundColor="@color/grey"
         card_view:cardCornerRadius="32dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginRight="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp">
+        card_view:cardUseCompatPadding="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -35,16 +33,16 @@
                 android:id="@+id/tvBody"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="24dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_toEndOf="@+id/ivProfileImage"
                 android:text="Message Body goes here"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:layout_marginLeft="8sp"
-                android:layout_marginRight="8sp"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/ivProfileImage"
-                android:layout_marginEnd="24dp"/>
+                android:textSize="16sp" />
 
-            </RelativeLayout>
+        </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 

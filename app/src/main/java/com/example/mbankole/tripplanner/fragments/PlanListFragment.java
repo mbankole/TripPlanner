@@ -63,7 +63,7 @@ public class PlanListFragment extends Fragment{
         fm = getActivity().getSupportFragmentManager();
         // find RecyclerView
         tvTitle = (TextView) v.findViewById(R.id.tvPlanName);
-        tvDate = (TextView) v.findViewById(R.id.tvPlanDate);
+        tvDate = (TextView) v.findViewById(R.id.tvNumberUsers);
         tvCreator = (TextView) v.findViewById(R.id.tvPlanCreator);
         ivBackground = (ImageView) v.findViewById(R.id.ivPlanBackground);
         rvPlanList = (RecyclerView) v.findViewById(R.id.rvPlanList);
@@ -82,8 +82,8 @@ public class PlanListFragment extends Fragment{
             }
         });
         tvCreator.setText("Created by " + plan.creatorUserName);
-        ivBackground.setColorFilter(Color.argb(65, 0, 0, 0));
         if (plan.places.size() > 0) {
+            ivBackground.setColorFilter(Color.argb(65, 0, 0, 0));
             Location loc = plan.places.get(0);
             loc.photoUrl = GmapClient.generateImageUrl(loc.photoRef);
             Picasso.with(getContext())

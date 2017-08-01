@@ -32,7 +32,7 @@
             android:textSize="30sp" />
 
         <com.example.mbankole.tripplanner.utility.RalewayLightTextView
-            android:id="@+id/tvPlanDate"
+            android:id="@+id/tvNumberUsers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/tvPlanDate"
+            android:layout_below="@+id/tvNumberUsers"
             android:text="Created by"
             android:layout_marginLeft="8dp"
             android:textAppearance="@android:style/TextAppearance.Large"

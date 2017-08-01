@@ -1,5 +1,6 @@
 package com.example.mbankole.tripplanner.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,10 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.mbankole.tripplanner.R;
+import com.example.mbankole.tripplanner.adapters.ChatUserAdapter;
 import com.example.mbankole.tripplanner.adapters.PlanMessagesAdapter;
 import com.example.mbankole.tripplanner.models.Message;
+import com.example.mbankole.tripplanner.models.Plan;
 import com.example.mbankole.tripplanner.models.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,8 +30,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import jp.wasabeef.picasso.transformations.Blur;
 
 /**
  * Created by mbankole on 7/31/17.
@@ -35,6 +43,12 @@ import java.util.ArrayList;
 public class PlanMessagesFragment extends Fragment{
 
     String planUid;
+    ArrayList<User> people;
+    public Plan plan;
+    TextView tvTitle;
+    TextView tvNumberUsers;
+    RecyclerView rvUsers;
+    ImageView ivBackground;
     RecyclerView rvMessages;
     EditText etBody;
     Button btSend;
@@ -45,6 +59,7 @@ public class PlanMessagesFragment extends Fragment{
     private DatabaseReference mDatabase;
     DatabaseReference messagesRef;
     User user;
+    ChatUserAdapter userAdapter;
 
     private static final String TAG = "PLANMESSAGESFRAGMENT";
 
@@ -69,6 +84,51 @@ public class PlanMessagesFragment extends Fragment{
         currentUser = mAuth.getCurrentUser();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        tvTitle = (TextView) v.findViewById(R.id.tvPlanName);
+        tvNumberUsers = (TextView) v.findViewById(R.id.tvNumberUsers);
+        rvUsers = (RecyclerView) v.findViewById(R.id.rvChatUsers);
+        ivBackground = (ImageView) v.findViewById(R.id.ivPlanBackground);
+
+        tvTitle.setText(plan.title + " Chatroom");
+        if (plan.people.size() == 1) {
+            tvNumberUsers.setText("1 Person:");
+        } else {
+            tvNumberUsers.setText((plan.people.size() + " People:"));
+        }
+        if (plan.places.size() > 0) {
+            ivBackground.setColorFilter(Color.argb(65, 0, 0, 0));
+            Picasso.with(getContext())
+                    .load(plan.places.get(0).photoUrl)
+                    .fit()
+                    .transform(new Blur(getContext()))
+                    .into(ivBackground);
+        }
+        // construct the adapter from this data source
+        people = new ArrayList<>();
+        for (int i = 0; i < plan.people.size(); i++) {
+            final Query userQuery = mDatabase.child("users").orderByChild("uid").equalTo(plan.people.get(i));
+            userQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
+                        user = singleSnapshot.getValue(User.class);
+                        fixUser(user);
+                        people.add(user);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.e(TAG, "shits fucked");
+                }
+            });
+        }
+        userAdapter = new ChatUserAdapter(people);
+        // RecyclerView setup (layout manager, use adapter)
+        rvUsers.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        // set the adapter
+        rvUsers.setAdapter(userAdapter);
 
         etBody = (EditText) v.findViewById(R.id.etMessage);
         btSend = (Button) v.findViewById(R.id.btSend);
