@@ -44,8 +44,6 @@ public class ProfileActivity extends AppCompatActivity {
     boolean isCurrentUser = false;
     final static String TAG = "PROFILEACTIVITY";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

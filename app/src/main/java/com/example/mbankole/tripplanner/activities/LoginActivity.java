@@ -158,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
                     toExploreActivity(user);
                 }
                 else {
-                    handler.postDelayed(this, 500);
+                    handler.postDelayed(this, 100);
                 }
             }
         });

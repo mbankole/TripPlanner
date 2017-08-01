@@ -83,21 +83,12 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         } else {
             holder.tvDate.setVisibility(View.GONE);
         }
-        /**
-        user = client.getUserByUid(plan.creatorUid);
-        final Handler handler = new Handler();
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (user != null) {
-                    holder.tvCreator.setText(user.name);
-                }
-                else {
-                    handler.postDelayed(this, 250);
-                }
-            }
-        });
-         **/
+
+        if (plan.people.contains(currentUser.getUid())) {
+            holder.ibAdd.setVisibility(View.GONE);
+        }
+        else holder.ibAdd.setVisibility(View.VISIBLE);
+
         holder.tvCreator.setText("Created by " + plan.creatorUserName);
         holder.clearLocations();
         for (int i = 0; i < plan.places.size(); i++) {

@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.mbankole.tripplanner.fragments.PlaceholderFragment;
 import com.example.mbankole.tripplanner.fragments.ProfileFriendsListFragment;
-import com.example.mbankole.tripplanner.fragments.ProfileLocationsListFragment;
 import com.example.mbankole.tripplanner.fragments.ProfilePlansListFragment;
 import com.example.mbankole.tripplanner.models.User;
 
@@ -15,12 +14,11 @@ import com.example.mbankole.tripplanner.models.User;
  */
 
 public class ProfileFragmentPagerAdapter extends FragmentPagerAdapter {
-    final int PAGE_COUNT = 3;
+    final int PAGE_COUNT = 2;
     private String tabTitles[] = new String[]{"plans", "friends", "interests"};
     FragmentManager fragmentManager;
     ProfilePlansListFragment profilePlansListFragment;
     ProfileFriendsListFragment profileFriendsListFragment;
-    ProfileLocationsListFragment profileLocationsListFragment;
     User user;
 
     public ProfileFragmentPagerAdapter(FragmentManager fm, User user) {
@@ -45,26 +43,15 @@ public class ProfileFragmentPagerAdapter extends FragmentPagerAdapter {
         return profileFriendsListFragment;
     }
 
-    public ProfileLocationsListFragment getProfileLocationsListFragment() {
-        if (profileLocationsListFragment == null) {
-            //profileLocationsListFragment = ProfileLocationsListFragment.newInstance();
-            //profileLocationsListFragment.locations = interests;
-        }
-        return profileLocationsListFragment;
-    }
-
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                //return new PlaceholderFragment();
                 return getProfilePlansListFragment();
             case 1:
-                //return new PlaceholderFragment();
                 return getProfileFriendsListFragment();
             case 2:
                 return new PlaceholderFragment();
-                //return getProfileLocationsListFragment();
             default:
                 return null;
         }

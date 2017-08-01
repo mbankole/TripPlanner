@@ -72,6 +72,7 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
         }
         Picasso.with(context)
                 .load(location.photoUrl)
+                .fit()
                 .into(holder.ivLocationImage);
         holder.removeTransport();
         if (location.transport != null) holder.addTransport(location.transport);

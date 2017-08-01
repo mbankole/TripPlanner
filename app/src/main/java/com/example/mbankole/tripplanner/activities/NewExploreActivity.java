@@ -103,7 +103,6 @@ public class NewExploreActivity extends AppCompatActivity {
             tabLayout.getTabAt(i).setIcon(icons[i]);
         }*/
 
-        //viewPager.setCurrentItem(0);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setLogo(logo_white);
         toolbar.setTitle("");
