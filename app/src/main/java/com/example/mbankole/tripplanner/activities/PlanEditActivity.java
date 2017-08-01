@@ -39,6 +39,20 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
     Plan plan;
     int position;
     FloatingActionButton fabDone;
+    final Handler handler = new Handler();
+    final Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            if (viewPager.getCurrentItem() == 2) {
+                fabDone.setVisibility(View.GONE);
+                handler.postDelayed(this, 200);
+            }
+            else {
+                fabDone.setVisibility(View.VISIBLE);
+                handler.postDelayed(this, 200);
+            }
+        }
+    };
 
     private static final String TAG = "PLANEDITACTIVITY";
 
@@ -102,21 +116,6 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
             }
         });
 
-        final Handler handler = new Handler();
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (viewPager.getCurrentItem() == 2) {
-                    fabDone.setVisibility(View.GONE);
-                    handler.postDelayed(this, 200);
-                }
-                else {
-                    fabDone.setVisibility(View.VISIBLE);
-                    handler.postDelayed(this, 200);
-                }
-            }
-        });
-
         Menu menu = toolbar.getMenu();
         onCreateOptionsMenu(menu);
 
@@ -162,6 +161,18 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
             }
         });
         return true;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        handler.post(runnable);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        handler.removeCallbacks(runnable);
     }
 
     @Override
