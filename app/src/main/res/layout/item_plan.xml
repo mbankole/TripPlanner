@@ -51,7 +51,9 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
                 android:background="@android:color/transparent"
-                app:srcCompat="@android:drawable/ic_input_add" />
+                android:tint="@color/colorAccent"
+                android:padding="8dp"
+                app:srcCompat="@drawable/ic_star_unfilled" />
 
             <com.example.mbankole.tripplanner.utility.RalewayLightTextView
                 android:id="@+id/tvDate"

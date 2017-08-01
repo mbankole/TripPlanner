@@ -85,9 +85,9 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         }
 
         if (plan.people.contains(currentUser.getUid())) {
-            holder.ibAdd.setVisibility(View.GONE);
+            holder.ibAdd.setImageResource(R.drawable.ic_star_filled);
         }
-        else holder.ibAdd.setVisibility(View.VISIBLE);
+        else holder.ibAdd.setImageResource(R.drawable.ic_star_unfilled);
 
         holder.tvCreator.setText("Created by " + plan.creatorUserName);
         holder.clearLocations();
@@ -142,10 +142,17 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
             final Integer position = getAdapterPosition();
             final Plan plan = mPlans.get(position);
             if (v.getId() == R.id.ibAdd) {
-                plan.people.add(currentUser.getUid());
-                Snackbar.make(v, "Added!", Snackbar.LENGTH_SHORT).show();
-                ibAdd.setVisibility(View.GONE);
-                mDatabase.child("plans").child(plan.uid).setValue(plan);
+                if (plan.people.contains(currentUser.getUid())) {
+                    plan.people.remove(currentUser.getUid());
+                    ibAdd.setImageResource(R.drawable.ic_star_unfilled);
+                    Snackbar.make(v, "\"" + plan.title + "\" removed.", Snackbar.LENGTH_SHORT).show();
+                    mDatabase.child("plans").child(plan.uid).setValue(plan);
+                } else {
+                    plan.people.add(currentUser.getUid());
+                    Snackbar.make(v, "\"" + plan.title + "\" added!", Snackbar.LENGTH_SHORT).show();
+                    ibAdd.setImageResource(R.drawable.ic_star_filled);
+                    mDatabase.child("plans").child(plan.uid).setValue(plan);
+                }
             } else {
                 if (position != RecyclerView.NO_POSITION) {
                     Intent i = new Intent(context, PlanEditActivity.class);
