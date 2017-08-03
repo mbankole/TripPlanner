@@ -11,6 +11,7 @@ import java.util.ArrayList;
  */
 
 //
+    //
 public class User implements Parcelable {
 
     public String name;
