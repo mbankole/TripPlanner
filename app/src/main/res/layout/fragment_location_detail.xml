@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/black" android:layout_margin="8dp"
     android:fitsSystemWindows="true">
 
     <ImageView
@@ -35,36 +35,34 @@
         android:id="@+id/tvAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPrice"
         android:layout_marginRight="16dp"
+        android:layout_toEndOf="@+id/ivMarker"
         android:shadowColor="@color/black"
         android:text="Address goes here \n ZIP\n Country"
         android:textAppearance="@android:style/TextAppearance.Medium"
-        android:textColor="@color/white"
-        android:layout_below="@+id/tvPrice"
-        android:layout_toEndOf="@+id/ivMarker" />
+        android:textColor="@color/white" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btAdd"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/ic_plus"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp" />
+        android:layout_margin="8dp"
+        android:background="@drawable/ic_plus" />
 
-    <Button
+    <ImageButton
         android:id="@+id/btClose"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentStart="true"
-        android:background="@android:drawable/ic_menu_close_clear_cancel"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/tvHours"
-        android:layout_alignTop="@+id/btAdd" />
+        android:background="@drawable/ic_close_white"
+        android:padding="8dp"
+        android:scaleType="fitCenter"
+        android:layout_alignTop="@+id/btAdd"
+        android:layout_toEndOf="@+id/ibRemove" />
 
     <com.example.mbankole.tripplanner.utility.RalewayLightTextView
         android:id="@+id/tvPhone"
@@ -85,11 +83,14 @@
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/btAdd"
         android:layout_alignTop="@+id/btAdd"
-        android:layout_margin="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:background="@android:color/transparent"
-        android:visibility="gone"
         android:scaleType="fitCenter"
+        android:visibility="gone"
         app:srcCompat="@drawable/ic_trash" />
 
     <RatingBar

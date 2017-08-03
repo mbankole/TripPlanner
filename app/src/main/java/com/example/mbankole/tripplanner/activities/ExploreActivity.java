@@ -2,8 +2,10 @@ package com.example.mbankole.tripplanner.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -92,15 +94,54 @@ public class ExploreActivity extends AppCompatActivity {
         });
 
         // Give the TabLayout the ViewPager
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+        tabLayout.setOnTabSelectedListener(
+                new TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
+
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        super.onTabSelected(tab);
+                        int tabIconColor = ContextCompat.getColor(context, R.color.colorPrimary);
+                        if (tabLayout.getSelectedTabPosition() == 0) {
+                            tab.setIcon(R.drawable.ic_globe_filled);
+                        } else {
+                            tab.setIcon(R.drawable.ic_users_filled);
+                        }
+                        tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+                    }
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+                        super.onTabUnselected(tab);
+                        int tabIconColor = ContextCompat.getColor(context, R.color.darkGrey);
+                        if (tabLayout.getSelectedTabPosition() == 0) {
+                            tab.setIcon(R.drawable.ic_globe);
+                        } else {
+                            tab.setIcon(R.drawable.ic_users);
+                        }
+                        tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+                    }
+
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+                        super.onTabReselected(tab);
+                    }
+                }
+        );
+
         int[] icons = {
-                R.drawable.ic_globe,
+                R.drawable.ic_globe_filled,
                 R.drawable.ic_users
+        };
+        int[] colors = {
+                ContextCompat.getColor(context, R.color.colorPrimary),
+                ContextCompat.getColor(context, R.color.darkGrey),
         };
         for (int i = 0; i < tabLayout.getTabCount(); i++) {
             tabLayout.getTabAt(i).setIcon(icons[i]);
+            tabLayout.getTabAt(i).getIcon().setColorFilter(colors[i], PorterDuff.Mode.SRC_IN);
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

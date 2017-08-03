@@ -39,24 +39,27 @@
 
     <Button
         android:id="@+id/btSend"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_alignParentBottom="true"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentEnd="true"
-        android:backgroundTint="@color/colorAccent"
-        android:background="@drawable/ic_send_black_24px" />
+        android:layout_below="@+id/rvMessages"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/ic_send_black_24px"
+        android:backgroundTint="@color/colorAccent" />
 
     <EditText
         android:id="@+id/etMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="false"
-        android:hint="Message"
-        android:layout_marginLeft="7dp"
-        android:layout_marginRight="7dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_toStartOf="@id/btSend" />
+        android:layout_marginLeft="8dp"
+        android:layout_toStartOf="@id/btSend"
+        android:fitsSystemWindows="false"
+        android:hint="Type your message..." />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvMessages"
