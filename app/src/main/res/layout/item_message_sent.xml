@@ -25,6 +25,7 @@
                 android:id="@+id/ivProfileImage"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
                 android:layout_margin="8dp"
                 android:layout_toEndOf="@+id/tvBody"

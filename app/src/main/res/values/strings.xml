@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TripPlanner</string>
+    <string name="app_name">Escapade</string>
     <string name="google_maps_api_key">AIzaSyAu4LnwwfQl6FQhWvl2K_mtjAj844rMyGU</string>
     <string name="popCultureJson">{
 html_attributions: [ ],

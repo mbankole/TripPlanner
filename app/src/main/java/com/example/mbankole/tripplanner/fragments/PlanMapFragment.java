@@ -29,11 +29,13 @@ import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Plan;
 import com.example.mbankole.tripplanner.models.Route;
 import com.example.mbankole.tripplanner.models.User;
+import com.google.android.gms.location.places.Place;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -42,6 +44,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PointOfInterest;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.maps.android.ui.IconGenerator;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -71,6 +75,8 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     private GoogleMap mMap;
     boolean loading = false;
     ProgressBar pbLoading;
+    FirebaseUser currentUser;
+    FirebaseAuth mAuth;
 
     final PlanMapFragment self = this;
 
@@ -97,6 +103,8 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
         // inflate and return the layout
         if (v == null) {
             v = inflater.inflate(R.layout.fragment_map, container, false);
@@ -167,6 +175,8 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         if (places.size() > 1) {
             showRoutes(places);
         }
+        UiSettings mUiSettings = mMap.getUiSettings();
+        mUiSettings.setZoomControlsEnabled(true);
     }
 
     private void enableMyLocation() {
@@ -320,6 +330,7 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
                     LocationDetailFragment frag = LocationDetailFragment.newInstance(loc, false);
                     frag.planMapFragment = self;
                     frag.planEditActivity = planEditActivity;
+                    frag.owner = currentUser.getUid().equals(plan.getCreatorUid());
                     frag.show(fm, "detail");
                 }
             });
@@ -334,5 +345,10 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         }
         Toast toast = Toast.makeText(getContext(), ToastString, Toast.LENGTH_LONG);
         toast.show();
+    }
+
+    public void zoomPlace (Place place) {
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(place.getViewport(), 100);
+        mMap.animateCamera(cu);
     }
 }

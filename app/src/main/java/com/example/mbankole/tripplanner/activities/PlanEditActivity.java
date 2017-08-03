@@ -6,12 +6,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +21,12 @@ import com.example.mbankole.tripplanner.adapters.PlanEditPagerAdapter;
 import com.example.mbankole.tripplanner.fragments.PlanEditTextFragment;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Plan;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 
 import java.util.ArrayList;
 
@@ -31,12 +36,16 @@ import java.util.ArrayList;
 
 public class PlanEditActivity extends AppCompatActivity implements PlanEditTextFragment.PlanEditTextListener {
 
-    PlanEditPagerAdapter fragmentPager;
+    int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
+
+    private GoogleApiClient mGoogleApiClient;
+
+    public PlanEditPagerAdapter fragmentPager;
     ArrayList<String> people;
     ArrayList<Location> places;
-    ViewPager viewPager;
+    public ViewPager viewPager;
     Context context;
-    Plan plan;
+    public Plan plan;
     int position;
     FloatingActionButton fabDone;
     final Handler handler = new Handler();
@@ -129,9 +138,9 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
         super.onCreateOptionsMenu(menu);
         menu.clear();
         getMenuInflater().inflate(R.menu.menu_plan_edit, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
 
+        /*MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -150,7 +159,7 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
             public boolean onQueryTextChange(String newText) {
                 return false;
             }
-        });
+        });*/
         MenuItem miEditText = menu.findItem(R.id.miEditText);
         miEditText.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -160,7 +169,44 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
                 return false;
             }
         });
+
+        MenuItem miSearch = menu.findItem(R.id.miSearch);
+        final PlanEditActivity planEditActivity = this;
+        miSearch.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                try {
+                    Intent intent =
+                            new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).build(planEditActivity);
+                    startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+                } catch (GooglePlayServicesRepairableException e) {
+                    // TODO: Handle the error.
+                } catch (GooglePlayServicesNotAvailableException e) {
+                    // TODO: Handle the error.
+                }
+                return false;
+            }
+        });
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlaceAutocomplete.getPlace(this, data);
+                viewPager.setCurrentItem(0);
+                fragmentPager.getPlanMapFragment().zoomPlace(place);
+                Log.i(TAG, "Place: " + place.getName());
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+                // TODO: Handle the error.
+                Log.i(TAG, status.getStatusMessage());
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+        }
     }
 
     @Override
