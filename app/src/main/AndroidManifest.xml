@@ -32,7 +32,7 @@
         android:supportsRtl="true"
         android:largeHeap="true"
         android:theme="@style/TripPlanner">
-        <activity android:name=".activities.NewExploreActivity">
+        <activity android:name=".activities.ExploreActivity">
 
         </activity>
         <uses-library
