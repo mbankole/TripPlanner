@@ -3,24 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="8dp"
     android:orientation="vertical">
 
-
-    <TextView
+    <com.example.mbankole.tripplanner.utility.RalewayLightTextView
         android:id="@+id/tvRequester"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="TextView" />
+        android:text="User wants to" />
 
-    <TextView
+    <com.example.mbankole.tripplanner.utility.RalewayLightTextView
         android:id="@+id/tvRequestBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/tvRequester"
-        android:text="TextView" />
+        android:text="add location" />
 
     <Button
         android:id="@+id/btApprove"
@@ -44,5 +44,6 @@
         android:layout_height="50dp"
         android:layout_alignTop="@+id/btDeny"
         android:layout_toEndOf="@+id/btDeny"
+        android:scaleType="centerCrop"
         app:srcCompat="@color/black" />
 </RelativeLayout>

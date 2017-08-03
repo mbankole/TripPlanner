@@ -120,7 +120,7 @@ public class PlanMessagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void configureViewHolderRequest(ViewHolderRequest holder, final int position) {
         final Message message = (Message) mObjects.get(position);
         String requestBody = message.getRequestType() + " " + message.getLocationName();
-        String userTitle = message.getSenderUsername() + "wants to ";
+        String userTitle = message.getSenderUsername() + " wants to ";
         Picasso.with(context).load(message.getLcoationImageUrl()).into(holder.ivPreview);
         holder.tvRequestBody.setText(requestBody);
         holder.tvRequester.setText(userTitle);

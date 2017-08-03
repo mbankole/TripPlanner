@@ -20,7 +20,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.R;
@@ -257,6 +256,7 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         Location location = (Location) marker.getTag();
         LocationDetailFragment frag = LocationDetailFragment.newInstance(location, true);
         frag.planEditActivity = planEditActivity;
+        frag.owner = currentUser.getUid().equals(plan.getCreatorUid());
         frag.planMapFragment = this;
         frag.show(fm, "name");
         return false;
@@ -339,12 +339,14 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
 
     public void addLocation(Location location) {
         places.add(location);
+        /**
         String ToastString = "";
         for (int i=0; i<places.size(); i++) {
             ToastString += places.get(i).name;
         }
         Toast toast = Toast.makeText(getContext(), ToastString, Toast.LENGTH_LONG);
         toast.show();
+         **/
     }
 
     public void zoomPlace (Place place) {
