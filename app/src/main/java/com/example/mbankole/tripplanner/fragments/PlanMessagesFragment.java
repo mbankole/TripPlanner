@@ -61,6 +61,7 @@ public class PlanMessagesFragment extends Fragment{
     private DatabaseReference mDatabase;
     DatabaseReference messagesRef;
     User user;
+    User currentTPUser;
     ChatUserAdapter userAdapter;
 
     private static final String TAG = "PLANMESSAGESFRAGMENT";
@@ -143,7 +144,7 @@ public class PlanMessagesFragment extends Fragment{
                     newMessage.setBody(text);
                     newMessage.setSenderUid(currentUser.getUid());
                     newMessage.setSenderUsername(currentUser.getDisplayName());
-                    newMessage.setSenderProfileUrl(user.getImageUrl());
+                    newMessage.setSenderProfileUrl(currentTPUser.getImageUrl());
                     DatabaseReference newMessagedb = mDatabase.child("plan_data").child(planUid).child("messages").push();
                     newMessagedb.setValue(newMessage);
                     etBody.setText("");
@@ -166,8 +167,8 @@ public class PlanMessagesFragment extends Fragment{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
-                    user = singleSnapshot.getValue(User.class);
-                    fixUser(user);
+                    currentTPUser = singleSnapshot.getValue(User.class);
+                    fixUser(currentTPUser);
                 }
             }
 
