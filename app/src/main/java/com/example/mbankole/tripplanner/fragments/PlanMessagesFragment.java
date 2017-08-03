@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mbankole.tripplanner.R;
+import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.adapters.ChatUserAdapter;
 import com.example.mbankole.tripplanner.adapters.PlanMessagesAdapter;
 import com.example.mbankole.tripplanner.models.Message;
@@ -45,6 +46,7 @@ public class PlanMessagesFragment extends Fragment{
     String planUid;
     ArrayList<User> people;
     public Plan plan;
+    public PlanEditActivity planEditActivity;
     TextView tvTitle;
     TextView tvNumberUsers;
     RecyclerView rvUsers;
@@ -150,6 +152,7 @@ public class PlanMessagesFragment extends Fragment{
         });
         rvMessages = (RecyclerView) v.findViewById(R.id.rvMessages);
         messagesAdapter = new PlanMessagesAdapter(objects);
+        messagesAdapter.planEditActivity = planEditActivity;
         rvMessages.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, true));
         rvMessages.setAdapter(messagesAdapter);
 
@@ -197,7 +200,7 @@ public class PlanMessagesFragment extends Fragment{
                 message.setReceived(false);
             }
             else message.setReceived(true);
-            objects.add(0, (Object)message);
+            objects.add(0, message);
             messagesAdapter.notifyItemInserted(0);
             rvMessages.smoothScrollToPosition(0);
         }

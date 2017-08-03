@@ -144,7 +144,7 @@ public class PlanListFragment extends Fragment{
             for (int i = 0; i < plan.places.size() - 1; i++) {
                 Location loc1 = plan.places.get(i);
                 Location loc2 = plan.places.get(i + 1);
-                if (loc1.transport == null || loc1.transport.endId != loc2.googleId) {
+                if (loc1.transport == null || !loc1.transport.endId.equals(loc2.googleId)) {
                     loc1.transport = new TransportOption(loc1, loc2);
                     loc1.transport.mode = TransportOption.Mode.BLANK;
                 }

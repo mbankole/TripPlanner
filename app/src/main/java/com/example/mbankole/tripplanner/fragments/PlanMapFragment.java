@@ -42,6 +42,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PointOfInterest;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.maps.android.ui.IconGenerator;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -71,6 +73,8 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     private GoogleMap mMap;
     boolean loading = false;
     ProgressBar pbLoading;
+    FirebaseUser currentUser;
+    FirebaseAuth mAuth;
 
     final PlanMapFragment self = this;
 
@@ -97,6 +101,8 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
         // inflate and return the layout
         if (v == null) {
             v = inflater.inflate(R.layout.fragment_map, container, false);
@@ -320,6 +326,7 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
                     LocationDetailFragment frag = LocationDetailFragment.newInstance(loc, false);
                     frag.planMapFragment = self;
                     frag.planEditActivity = planEditActivity;
+                    frag.owner = currentUser.getUid().equals(plan.getCreatorUid());
                     frag.show(fm, "detail");
                 }
             });

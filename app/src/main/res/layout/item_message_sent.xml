@@ -10,13 +10,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_gravity="center"
-        card_view:cardBackgroundColor="@color/colorAccent"
+        android:layout_gravity="right"
+        card_view:cardBackgroundColor="@color/colorPrimary"
         card_view:cardCornerRadius="32dp"
         card_view:cardUseCompatPadding="true">
 
         <RelativeLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <com.example.mbankole.tripplanner.utility.CircleImageView

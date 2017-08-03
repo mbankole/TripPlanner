@@ -17,10 +17,16 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Location;
+import com.example.mbankole.tripplanner.models.Message;
 import com.example.mbankole.tripplanner.utility.gradient;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -39,7 +45,10 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
     Button btAdd;
     ImageButton btRemove;
     Button btClose;
-
+    boolean owner;
+    FirebaseUser currentUser;
+    FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     public PlanMapFragment planMapFragment;
     PlanEditActivity planEditActivity;
@@ -66,6 +75,9 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         // Get field from view
         final View viewref = view;
         final Location loc = getArguments().getParcelable("location");
@@ -82,21 +94,53 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
         btAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                planMapFragment.addLocation(loc);
-                Snackbar.make(viewref, "Added!", Snackbar.LENGTH_SHORT).show();
-                planEditActivity.refreshAdd();
-                btAdd.setVisibility(View.GONE);
-                btRemove.setVisibility(View.VISIBLE);
+                if (owner) {
+                    planMapFragment.addLocation(loc);
+                    Snackbar.make(viewref, "Added!", Snackbar.LENGTH_SHORT).show();
+                    planEditActivity.refreshAdd();
+                    btAdd.setVisibility(View.GONE);
+                    btRemove.setVisibility(View.VISIBLE);
+                }
+                else {
+                    Message newRequest = new Message();
+                    newRequest.setRequest(true);
+                    newRequest.setSenderUsername(currentUser.getDisplayName());
+                    newRequest.setRequestType("add");
+                    newRequest.setLocationName(loc.name);
+                    newRequest.setRequestTargetGid(loc.getGoogleId());
+                    newRequest.setLcoationImageUrl(GmapClient.generateImageUrl(loc.photoRef));
+                    newRequest.setSenderUid(currentUser.getUid());
+                    DatabaseReference newRequestdb = mDatabase.child("plan_data").child(planEditActivity.plan.getUid()).child("messages").push();
+                    newRequest.setDbUid(newRequestdb.getKey());
+                    newRequestdb.setValue(newRequest);
+                    Snackbar.make(viewref, "Request Made!", Snackbar.LENGTH_SHORT).show();
+                }
             }
         });
         btRemove = (ImageButton) view.findViewById(R.id.ibRemove);
         btRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                planEditActivity.removeLocation(loc);
-                Snackbar.make(viewref, "Removed!", Snackbar.LENGTH_SHORT).show();
-                btAdd.setVisibility(View.VISIBLE);
-                btRemove.setVisibility(View.GONE);
+                if (owner) {
+                    planEditActivity.removeLocation(loc);
+                    Snackbar.make(viewref, "Removed!", Snackbar.LENGTH_SHORT).show();
+                    btAdd.setVisibility(View.VISIBLE);
+                    btRemove.setVisibility(View.GONE);
+                }
+                else {
+                    Message newRequest = new Message();
+                    newRequest.setRequest(true);
+                    newRequest.setSenderUsername(currentUser.getDisplayName());
+                    newRequest.setRequestType("remove");
+                    newRequest.setLocationName(loc.name);
+                    newRequest.setRequestTargetGid(loc.getGoogleId());
+                    newRequest.setLcoationImageUrl(GmapClient.generateImageUrl(loc.photoRef));
+                    newRequest.setSenderUid(currentUser.getUid());
+                    DatabaseReference newRequestdb = mDatabase.child("plan_data").child(planEditActivity.plan.getUid()).child("messages").push();
+                    newRequest.setDbUid(newRequestdb.getKey());
+                    newRequestdb.setValue(newRequest);
+                    Snackbar.make(viewref, "Request Made!", Snackbar.LENGTH_SHORT).show();
+                }
             }
         });
 

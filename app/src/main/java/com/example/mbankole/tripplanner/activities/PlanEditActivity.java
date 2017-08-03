@@ -31,12 +31,12 @@ import java.util.ArrayList;
 
 public class PlanEditActivity extends AppCompatActivity implements PlanEditTextFragment.PlanEditTextListener {
 
-    PlanEditPagerAdapter fragmentPager;
+    public PlanEditPagerAdapter fragmentPager;
     ArrayList<String> people;
     ArrayList<Location> places;
-    ViewPager viewPager;
+    public ViewPager viewPager;
     Context context;
-    Plan plan;
+    public Plan plan;
     int position;
     FloatingActionButton fabDone;
     final Handler handler = new Handler();
