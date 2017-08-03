@@ -127,7 +127,7 @@ public class PlanMessagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         holder.btApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!currentUser.getDisplayName().equals(planEditActivity.plan.getCreatorUid())) {
+                if (currentUser.getUid().equals(planEditActivity.plan.getCreatorUid())) {
                     GmapClient.getDetailFromId(message.getRequestTargetGid(), new JsonHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -168,7 +168,7 @@ public class PlanMessagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         holder.btDeny.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!currentUser.getDisplayName().equals(planEditActivity.plan.getCreatorUid())) {
+                if (currentUser.getUid().equals(planEditActivity.plan.getCreatorUid())) {
                     mObjects.remove(position);
                     notifyItemRemoved(position);
                     Snackbar.make(planEditActivity.viewPager , "DENIED!", Snackbar.LENGTH_SHORT).show();

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_gravity="center"
+        android:layout_gravity="right"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
@@ -19,7 +19,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="right">
 
             <com.example.mbankole.tripplanner.utility.CircleImageView
                 android:id="@+id/ivProfileImage"
@@ -28,7 +29,6 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
                 android:layout_margin="8dp"
-                android:layout_toEndOf="@+id/tvBody"
                 android:scaleType="centerCrop"
                 app:srcCompat="@color/black" />
 
@@ -38,10 +38,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="24dp"
-                android:layout_toStartOf="@+id/ivProfileImage"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="16dp"
+                android:layout_toLeftOf="@id/ivProfileImage"
+                android:gravity="right"
                 android:text="Message Body goes here"
                 android:textColor="@color/white"
                 android:textSize="16sp" />

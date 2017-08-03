@@ -29,11 +29,13 @@ import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Plan;
 import com.example.mbankole.tripplanner.models.Route;
 import com.example.mbankole.tripplanner.models.User;
+import com.google.android.gms.location.places.Place;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -173,6 +175,8 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         if (places.size() > 1) {
             showRoutes(places);
         }
+        UiSettings mUiSettings = mMap.getUiSettings();
+        mUiSettings.setZoomControlsEnabled(true);
     }
 
     private void enableMyLocation() {
@@ -341,5 +345,10 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         }
         Toast toast = Toast.makeText(getContext(), ToastString, Toast.LENGTH_LONG);
         toast.show();
+    }
+
+    public void zoomPlace (Place place) {
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(place.getViewport(), 100);
+        mMap.animateCamera(cu);
     }
 }
