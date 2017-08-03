@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Created by mbankole on 7/20/17.
  */
 
-public class NewExploreFragmentPagerAdapter extends FragmentPagerAdapter {
+public class ExploreFragmentPagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 2;
     private String tabTitles[] = new String[]{"", ""};
     FragmentManager fragmentManager;
@@ -22,7 +22,7 @@ public class NewExploreFragmentPagerAdapter extends FragmentPagerAdapter {
     ExploreUsersListFragment exploreUsersListFragment;
     ArrayList<Plan> plans;
 
-    public NewExploreFragmentPagerAdapter(FragmentManager fm, ArrayList<Plan> plans) {
+    public ExploreFragmentPagerAdapter(FragmentManager fm, ArrayList<Plan> plans) {
         super(fm);
         fragmentManager = fm;
         this.plans = plans;

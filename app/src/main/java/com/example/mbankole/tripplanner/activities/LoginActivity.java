@@ -178,7 +178,7 @@ public class LoginActivity extends AppCompatActivity {
     public void toExploreActivity(FirebaseUser user) {
         if (user == null) return;
         finish();
-        Intent i = new Intent(LoginActivity.this, NewExploreActivity.class);
+        Intent i = new Intent(LoginActivity.this, ExploreActivity.class);
         startActivity(i);
     }
 

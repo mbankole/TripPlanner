@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.R;
-import com.example.mbankole.tripplanner.adapters.NewExploreFragmentPagerAdapter;
+import com.example.mbankole.tripplanner.adapters.ExploreFragmentPagerAdapter;
 import com.example.mbankole.tripplanner.adapters.PlanAdapter;
 import com.example.mbankole.tripplanner.fragments.ExplorePlansListFragment;
 import com.example.mbankole.tripplanner.models.Plan;
@@ -34,14 +34,14 @@ import java.util.ArrayList;
 
 import static com.example.mbankole.tripplanner.R.drawable.logo_white;
 
-public class NewExploreActivity extends AppCompatActivity {
+public class ExploreActivity extends AppCompatActivity {
 
     final static String TAG = "EXPLOREACTIVITY";
 
     Context context;
     ArrayList<Plan> plans;
     ViewPager viewPager;
-    NewExploreFragmentPagerAdapter fragmentPager;
+    ExploreFragmentPagerAdapter fragmentPager;
     private FirebaseAuth mAuth;
     private FirebaseAnalytics mFirebaseAnalytics;
     private DatabaseReference mDatabase;
@@ -65,7 +65,7 @@ public class NewExploreActivity extends AppCompatActivity {
         mFirebaseAnalytics.setUserProperty("name", currentUser.getDisplayName());
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        fragmentPager = new NewExploreFragmentPagerAdapter(getSupportFragmentManager(), plans);
+        fragmentPager = new ExploreFragmentPagerAdapter(getSupportFragmentManager(), plans);
         viewPager.setAdapter(fragmentPager);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
