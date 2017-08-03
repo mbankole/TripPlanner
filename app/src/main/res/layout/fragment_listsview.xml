@@ -26,10 +26,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:text="Plan Name"
-            android:textColor="@color/white"
             android:layout_margin="8dp"
+            android:text="Plan Name"
             android:textAppearance="@android:style/TextAppearance.Large"
+            android:textColor="@color/white"
             android:textSize="30sp" />
 
         <com.example.mbankole.tripplanner.utility.RalewayLightTextView
@@ -38,8 +38,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/tvPlanName"
-            android:text="Date"
             android:layout_marginLeft="8dp"
+            android:text="Date"
             android:textAppearance="@android:style/TextAppearance.Large"
             android:textColor="@color/white" />
 
@@ -49,8 +49,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/tvNumberUsers"
-            android:text="Created by"
             android:layout_marginLeft="8dp"
+            android:text="Created by"
             android:textAppearance="@android:style/TextAppearance.Large"
             android:textColor="@color/white" />
 
@@ -63,6 +63,17 @@
             android:layout_marginTop="16dp"
             android:text="Overview"
             android:textAppearance="@android:style/TextAppearance.Large" />
+
+        <ImageView
+            android:id="@+id/ivEdit"
+            android:layout_width="20dp"
+            android:layout_height="24dp"
+            android:layout_margin="8dp"
+            android:layout_alignBottom="@+id/tvPlanName"
+            android:layout_alignTop="@+id/tvPlanName"
+            android:layout_toEndOf="@+id/tvPlanName"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_edit" />
 
     </RelativeLayout>
 
