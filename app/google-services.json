@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "965036665691-ejl93ao2jqln8o6gr0ol3m9catq9jol9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mbankole.tripplanner",
+            "certificate_hash": "bfe610c0f3cbd89af74faeb8dc1cc613031fe8df"
+          }
+        },
+        {
           "client_id": "965036665691-c5ilml1jvj5l6rmr5cngeuo4u4vuc25r.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "965036665691-c5ilml1jvj5l6rmr5cngeuo4u4vuc25r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

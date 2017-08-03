@@ -103,6 +103,8 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
                     .fit()
                     .transform(new Blur(context))
                     .into(holder.ivBackground);
+        } else {
+            holder.ivBackground.setImageResource(R.color.black);
         }
     }
 

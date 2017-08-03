@@ -224,12 +224,9 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
             return;
         }
 
-        if (PermissionUtils.hasSelfPermissions(getContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION)) {
-            // Enable the my location layer if the permission has been granted.
+        if (PermissionUtils.hasSelfPermissions(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
             enableMyLocation();
         } else {
-            // Display the missing permission error dialog when the fragments resume.
             mPermissionDenied = true;
         }
     }
@@ -238,8 +235,6 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     public void onResume() {
         super.onResume();
         if (mPermissionDenied) {
-            // Permission was not granted, display error dialog.
-            //showMissingPermissionError();
             mPermissionDenied = false;
         }
     }
@@ -283,20 +278,20 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
                 GmapClient.getDirections(places.get(i), places.get(i + 1), mode, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                    try {
-                        Route rt = Route.routeFromJson(response);
-                        ArrayList<LatLng> tempLatLngArray = new ArrayList<>();
-                        for (int i = 0; i < rt.latLongArray.size(); i++) {
-                            tempLatLngArray.add(rt.latLongArray.get(i).toGLatLng());
+                        try {
+                            Route rt = Route.routeFromJson(response);
+                            ArrayList<LatLng> tempLatLngArray = new ArrayList<>();
+                            for (int i = 0; i < rt.latLongArray.size(); i++) {
+                                tempLatLngArray.add(rt.latLongArray.get(i).toGLatLng());
+                            }
+                            mMap.addPolyline(new PolylineOptions()
+    //                                .color(R.color.colorPrimaryDark)
+                                    .addAll(tempLatLngArray)
+                                    .clickable(true))
+                                    .setTag(rt);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                        mMap.addPolyline(new PolylineOptions()
-//                                .color(R.color.colorPrimaryDark)
-                                .addAll(tempLatLngArray)
-                                .clickable(true))
-                                .setTag(rt);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
                     }
                 });
 
@@ -339,14 +334,6 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
 
     public void addLocation(Location location) {
         places.add(location);
-        /**
-        String ToastString = "";
-        for (int i=0; i<places.size(); i++) {
-            ToastString += places.get(i).name;
-        }
-        Toast toast = Toast.makeText(getContext(), ToastString, Toast.LENGTH_LONG);
-        toast.show();
-         **/
     }
 
     public void zoomPlace (Place place) {
