@@ -94,7 +94,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         for (int i = 0; i < plan.places.size(); i++) {
             holder.addLocation(plan.places.get(i));
         }
-        holder.ivBackground.setColorFilter(Color.argb(65, 0, 0, 0));
+        holder.ivBackground.setColorFilter(Color.argb(75, 0, 0, 0));
         if (plan.places.size() > 0) {
             Location loc = plan.places.get(0);
             loc.photoUrl = GmapClient.generateImageUrl(loc.photoRef);
