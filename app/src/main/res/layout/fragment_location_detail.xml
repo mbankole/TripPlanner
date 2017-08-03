@@ -97,12 +97,12 @@
         style="@style/Widget.AppCompat.RatingBar.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:numStars="5"
-        android:stepSize=".1"
+        android:layout_alignStart="@+id/tvName"
+        android:layout_below="@+id/tvName"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_below="@+id/tvName"
-        android:layout_alignStart="@+id/tvName" />
+        android:numStars="5"
+        android:stepSize=".1" />
 
     <ImageView
         android:id="@+id/ivMarker"
