@@ -5,13 +5,25 @@
     android:layout_height="wrap_content"
     android:weightSum="1">
 
-    <ImageView
-        android:id="@+id/ivLocationImage"
+    <com.example.mbankole.tripplanner.utility.CircleImageView
+        android:id="@+id/ivCircle"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:scaleType="centerCrop"
-        app:srcCompat="@color/black"
+        app:srcCompat="@color/colorAccent"
         android:layout_marginLeft="4dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="4dp"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/ivTransparent" />
+
+    <com.example.mbankole.tripplanner.utility.CircleImageView
+        android:id="@+id/ivLocationImage"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:scaleType="centerCrop"
+        app:srcCompat="@color/black"
+        android:layout_marginLeft="6dp"
         android:layout_marginBottom="8dp"
         android:layout_marginRight="4dp"
         android:layout_centerVertical="true"
@@ -31,7 +43,7 @@
 
     <ImageView
         android:id="@+id/ivTransparent"
-        android:layout_width="32dp"
+        android:layout_width="16dp"
         android:layout_height="56dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
