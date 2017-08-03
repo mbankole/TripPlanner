@@ -37,6 +37,7 @@ public class PlanListFragment extends Fragment{
 
     public Plan plan;
     TextView tvTitle;
+    ImageView ivEdit;
     TextView tvDate;
     TextView tvCreator;
     ImageView ivBackground;
@@ -45,6 +46,8 @@ public class PlanListFragment extends Fragment{
     FragmentManager fm;
     public PlanEditActivity planEditActivity;
     PlanListFragment self;
+
+    int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
 
     public static PlanListFragment newInstance() {
         Bundle args = new Bundle();
@@ -63,6 +66,7 @@ public class PlanListFragment extends Fragment{
         fm = getActivity().getSupportFragmentManager();
         // find RecyclerView
         tvTitle = (TextView) v.findViewById(R.id.tvPlanName);
+        ivEdit = (ImageView) v.findViewById(R.id.ivEdit);
         tvDate = (TextView) v.findViewById(R.id.tvNumberUsers);
         tvCreator = (TextView) v.findViewById(R.id.tvPlanCreator);
         ivBackground = (ImageView) v.findViewById(R.id.ivPlanBackground);
@@ -72,6 +76,24 @@ public class PlanListFragment extends Fragment{
         if (plan.startDate != null) {
             refreshDate();
         }
+
+        ivEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PlanEditTextFragment frag = PlanEditTextFragment.newInstance(plan.title, plan.description);
+                frag.planListFragment = self;
+                frag.show(fm, "edit");
+            }
+        });
+        tvTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PlanEditTextFragment frag = PlanEditTextFragment.newInstance(plan.title, plan.description);
+                frag.planListFragment = self;
+                frag.show(fm, "edit");
+            }
+        });
+
         tvDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
