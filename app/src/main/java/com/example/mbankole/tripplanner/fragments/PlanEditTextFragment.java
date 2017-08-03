@@ -20,6 +20,7 @@ public class PlanEditTextFragment extends DialogFragment{
     EditText etTitle;
     EditText etDescription;
     Button btSubmit;
+    public PlanListFragment planListFragment;
 
     private static final String TAG = "PLANEDITTEXTFRAGMENT";
 
@@ -61,6 +62,7 @@ public class PlanEditTextFragment extends DialogFragment{
                 Plan plan = new Plan();
                 plan.title = etTitle.getText().toString();
                 plan.description = etDescription.getText().toString();
+                planListFragment.tvTitle.setText(plan.title);
                 PlanEditTextListener listener = (PlanEditTextListener) getActivity();
                 listener.onFinishEditText(plan);
                 dismiss();

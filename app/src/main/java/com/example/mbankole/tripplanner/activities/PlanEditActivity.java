@@ -139,37 +139,6 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
         menu.clear();
         getMenuInflater().inflate(R.menu.menu_plan_edit, menu);
 
-        /*MenuItem searchItem = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                // perform query here
-                switch (viewPager.getCurrentItem()) {
-                    case 0:
-                        //map view
-                    case 1:
-                        //
-                    case 2:
-                        //people view
-                }
-                return true;
-            }
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
-            }
-        });*/
-        MenuItem miEditText = menu.findItem(R.id.miEditText);
-        miEditText.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                PlanEditTextFragment frag = PlanEditTextFragment.newInstance(plan.title, plan.description);
-                frag.show(getSupportFragmentManager(), "edit");
-                return false;
-            }
-        });
-
         MenuItem miSearch = menu.findItem(R.id.miSearch);
         final PlanEditActivity planEditActivity = this;
         miSearch.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
