@@ -15,7 +15,7 @@ import com.example.mbankole.tripplanner.models.User;
 
 public class ProfileFragmentPagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 2;
-    private String tabTitles[] = new String[]{"plans", "friends", "interests"};
+    private String tabTitles[] = new String[]{"", "", ""};
     FragmentManager fragmentManager;
     ProfilePlansListFragment profilePlansListFragment;
     ProfileFriendsListFragment profileFriendsListFragment;
