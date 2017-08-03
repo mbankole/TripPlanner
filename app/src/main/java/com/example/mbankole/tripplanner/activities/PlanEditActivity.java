@@ -149,9 +149,9 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
                             new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).build(planEditActivity);
                     startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
                 } catch (GooglePlayServicesRepairableException e) {
-                    // TODO: Handle the error.
+                    Log.e(TAG, "onMenuItemClick: Play services broken", e);
                 } catch (GooglePlayServicesNotAvailableException e) {
-                    // TODO: Handle the error.
+                    Log.e(TAG, "onMenuItemClick: Play services not available", e);
                 }
                 return false;
             }
@@ -169,7 +169,6 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
                 Log.i(TAG, "Place: " + place.getName());
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
-                // TODO: Handle the error.
                 Log.i(TAG, status.getStatusMessage());
 
             } else if (resultCode == RESULT_CANCELED) {
