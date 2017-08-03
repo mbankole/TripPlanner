@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -119,11 +119,9 @@ public class PlanMessagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     public void configureViewHolderRequest(ViewHolderRequest holder, final int position) {
         final Message message = (Message) mObjects.get(position);
-        String requestBody = message.getRequestType() + " " + message.getLocationName();
-        String userTitle = message.getSenderUsername() + " wants to ";
+        String requestBody = message.getSenderUsername() + " wants to " + message.getRequestType() + " " + message.getLocationName();
         Picasso.with(context).load(message.getLcoationImageUrl()).into(holder.ivPreview);
         holder.tvRequestBody.setText(requestBody);
-        holder.tvRequester.setText(userTitle);
         holder.btApprove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -220,18 +218,16 @@ public class PlanMessagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public class ViewHolderRequest extends RecyclerView.ViewHolder {
-        public TextView tvRequester;
         public TextView tvRequestBody;
-        public Button btApprove;
-        public Button btDeny;
+        public ImageButton btApprove;
+        public ImageButton btDeny;
         public ImageView ivPreview;
 
         public ViewHolderRequest(View itemView) {
             super(itemView);
-            tvRequester = (TextView) itemView.findViewById(R.id.tvRequester);
             tvRequestBody = (TextView) itemView.findViewById(R.id.tvRequestBody);
-            btApprove = (Button) itemView.findViewById(R.id.btApprove);
-            btDeny = (Button) itemView.findViewById(R.id.btDeny);
+            btApprove = (ImageButton) itemView.findViewById(R.id.btApprove);
+            btDeny = (ImageButton) itemView.findViewById(R.id.btDeny);
             ivPreview = (ImageView) itemView.findViewById(R.id.ivPreview);
         }
     }
