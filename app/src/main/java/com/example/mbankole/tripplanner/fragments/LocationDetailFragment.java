@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -42,9 +41,9 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
     TextView tvHours;
     TextView tvprice;
     ImageView ivPhoto;
-    Button btAdd;
+    ImageButton btAdd;
     ImageButton btRemove;
-    Button btClose;
+    ImageButton btClose;
     boolean owner;
     FirebaseUser currentUser;
     FirebaseAuth mAuth;
@@ -90,7 +89,7 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
         RatingBar ratingBar = (RatingBar) view.findViewById(R.id.ratingBar);
         LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
         stars.getDrawable(2).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
-        btAdd = (Button) view.findViewById(R.id.btAdd);
+        btAdd = (ImageButton) view.findViewById(R.id.btAdd);
         btAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,7 +144,7 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
         });
 
 
-        btClose = (Button) view.findViewById(R.id.btClose);
+        btClose = (ImageButton) view.findViewById(R.id.btClose);
         btClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

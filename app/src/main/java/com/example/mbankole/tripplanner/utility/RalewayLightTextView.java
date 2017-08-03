@@ -34,4 +34,3 @@ public class RalewayLightTextView extends TextView {
         setTypeface(customFont);
     }
 }
-//
