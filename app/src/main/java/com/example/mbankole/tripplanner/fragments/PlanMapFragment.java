@@ -2,6 +2,7 @@ package com.example.mbankole.tripplanner.fragments;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -209,6 +210,8 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
 
 
     private void addIcon(IconGenerator iconFactory, CharSequence text, Location location, GoogleMap map) {
+        iconFactory.setColor(Color.rgb(103, 181, 167));
+        iconFactory.setTextAppearance(R.style.TextAppearance_AppCompat_Inverse);
         MarkerOptions markerOptions = new MarkerOptions().
                 icon(BitmapDescriptorFactory.fromBitmap(iconFactory.makeIcon(text))).
                 position(location.latLng.toGLatLng()).
@@ -285,7 +288,7 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
                                 tempLatLngArray.add(rt.latLongArray.get(i).toGLatLng());
                             }
                             mMap.addPolyline(new PolylineOptions()
-    //                                .color(R.color.colorPrimaryDark)
+                                    .color(Color.rgb(74, 130, 120))
                                     .addAll(tempLatLngArray)
                                     .clickable(true))
                                     .setTag(rt);

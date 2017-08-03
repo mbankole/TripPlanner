@@ -2,10 +2,12 @@ package com.example.mbankole.tripplanner.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +16,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.adapters.PlanEditPagerAdapter;
@@ -101,17 +102,67 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
         actionBar.setTitle("");
 
         // Give the TabLayout the ViewPager
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
+
+        tabLayout.setOnTabSelectedListener(
+                new TabLayout.ViewPagerOnTabSelectedListener(viewPager) {
+
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        super.onTabSelected(tab);
+                        int tabIconColor = ContextCompat.getColor(context, R.color.colorPrimary);
+                        if (tabLayout.getSelectedTabPosition() == 0) {
+                            tab.setIcon(R.drawable.ic_marker_filled);
+                        } else if (tabLayout.getSelectedTabPosition() == 1) {
+                            tab.setIcon(R.drawable.ic_list_filled);
+                        } else {
+                            tab.setIcon(R.drawable.ic_chat_filled);
+                        }
+                        tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+                    }
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+                        super.onTabUnselected(tab);
+                        int tabIconColor = ContextCompat.getColor(context, R.color.darkGrey);
+                        if (tabLayout.getSelectedTabPosition() == 0) {
+                            tab.setIcon(R.drawable.ic_marker_black);
+                        } else if (tabLayout.getSelectedTabPosition() == 1) {
+                            tab.setIcon(R.drawable.ic_list);
+                        } else {
+                            tab.setIcon(R.drawable.ic_chat);
+                        }
+                        tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
+                    }
+
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+                        super.onTabReselected(tab);
+                    }
+                }
+        );
+
         int[] icons = {
                 R.drawable.ic_marker_black,
                 R.drawable.ic_list,
                 R.drawable.ic_chat,
         };
+        int[] colors = {
+                ContextCompat.getColor(context, R.color.darkGrey),
+                ContextCompat.getColor(context, R.color.colorPrimary),
+                ContextCompat.getColor(context, R.color.darkGrey),
+                ContextCompat.getColor(context, R.color.darkGrey)
+        };
 
-        for (int i = 0; i < tabLayout.getTabCount(); i++) {
-            tabLayout.getTabAt(i).setIcon(icons[i]);
-        }
+            for (int i = 0; i < tabLayout.getTabCount(); i++) {
+                tabLayout.getTabAt(i).setIcon(icons[i]);
+                if (newPlan) {
+                    tabLayout.getTabAt(i).getIcon().setColorFilter(colors[i + 1], PorterDuff.Mode.SRC_IN);
+                } else {
+                    tabLayout.getTabAt(i).getIcon().setColorFilter(colors[i], PorterDuff.Mode.SRC_IN);
+                }
+            }
 
         fabDone = (FloatingActionButton) findViewById(R.id.fabDone);
         fabDone.setOnClickListener(new View.OnClickListener() {
@@ -211,12 +262,14 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
 
     public void removeLocation(Location location) {
         places.remove(location);
+        /**
         String ToastString = "";
         for (int i=0; i<places.size(); i++) {
             ToastString += places.get(i).name;
         }
         Toast toast = Toast.makeText(this, ToastString, Toast.LENGTH_LONG);
         toast.show();
+         **/
         refresh();
     }
 }
