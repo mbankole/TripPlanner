@@ -2,7 +2,6 @@
 package com.example.mbankole.tripplanner.adapters;
 
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,15 +12,17 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.borax12.materialdaterangepicker.time.RadialPickerLayout;
+import com.borax12.materialdaterangepicker.time.TimePickerDialog;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
-import com.example.mbankole.tripplanner.fragments.TimePickerFragment;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.TransportOption;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -34,13 +35,13 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
     Context context;
     public PlanEditActivity planEditActivity;
     PlanLocationsAdapter adapter;
-    FragmentManager fm;
+    android.app.FragmentManager fm;
 
     public PlanLocationsAdapter(List<Location> locations) {
         mLocations = locations;
     }
 
-    public void setFm(FragmentManager fm) {
+    public void setFm(android.app.FragmentManager fm) {
         this.fm = fm;
     }
 
@@ -83,7 +84,7 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
     public int getItemCount() {return mLocations.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, TimePickerDialog.OnTimeSetListener {
 
         public TextView tvLocationname;
         public TextView tvTime;
@@ -173,11 +174,24 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
                 Location location =  mLocations.get(position);
-                TimePickerFragment frag = new TimePickerFragment();
+                /*TimePickerFragment frag = new TimePickerFragment();
                 frag.location = location;
                 frag.adapter = adapter;
-                frag.show(fm, "name");
+                frag.show(fm, "name");*/
+                Calendar now = Calendar.getInstance();
+                TimePickerDialog tpd = TimePickerDialog.newInstance(
+                        this,
+                        now.get(Calendar.HOUR_OF_DAY),
+                        now.get(Calendar.MINUTE),
+                        false
+                );
+                tpd.show(fm, "Timepickerdialog");
             }
+        }
+
+        @Override
+        public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int hourOfDayEnd, int minuteEnd) {
+
         }
     }
 

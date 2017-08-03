@@ -21,6 +21,7 @@ public class PlanEditPagerAdapter extends FragmentPagerAdapter {
     final int PAGE_COUNT = 3;
     private String tabTitles[] = new String[]{"", "", ""};
     FragmentManager fragmentManager;
+    android.app.FragmentManager fragmentManagerApp;
     PlanListFragment planListFragment;
     PlanMapFragment planMapFragment;
     PlanMessagesFragment planMessagesFragment;
@@ -29,9 +30,10 @@ public class PlanEditPagerAdapter extends FragmentPagerAdapter {
     public ArrayList<Location> places;
     public PlanEditActivity planEditActivity;
 
-    public PlanEditPagerAdapter(FragmentManager fm, Plan plan) {
+    public PlanEditPagerAdapter(android.app.FragmentManager fmApp, FragmentManager fm, Plan plan) {
         super(fm);
         fragmentManager = fm;
+        this.fragmentManagerApp = fmApp;
         this.plan = plan;
         this.people = plan.people;
         this.places = plan.places;

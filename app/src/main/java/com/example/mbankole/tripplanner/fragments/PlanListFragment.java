@@ -44,6 +44,7 @@ public class PlanListFragment extends Fragment{
     RecyclerView rvPlanList;
     public PlanLocationsAdapter listAdapter;
     FragmentManager fm;
+    android.app.FragmentManager fmApp;
     public PlanEditActivity planEditActivity;
     PlanListFragment self;
 
@@ -64,6 +65,7 @@ public class PlanListFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_listsview, container, false);
         self = this;
         fm = getActivity().getSupportFragmentManager();
+        fmApp = getActivity().getFragmentManager();
         // find RecyclerView
         tvTitle = (TextView) v.findViewById(R.id.tvPlanName);
         ivEdit = (ImageView) v.findViewById(R.id.ivEdit);
@@ -118,7 +120,7 @@ public class PlanListFragment extends Fragment{
         // construct the adapter from this data source
         listAdapter = new PlanLocationsAdapter(plan.places);
         listAdapter.planEditActivity = planEditActivity;
-        listAdapter.setFm(fm);
+        listAdapter.setFm(fmApp);
 //        locationAdapter.exploreActivity = exploreActivity;
         // RecyclerView setup (layout manager, use adapter)
         rvPlanList.setLayoutManager(new LinearLayoutManager(getContext()));
