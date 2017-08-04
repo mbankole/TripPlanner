@@ -63,14 +63,16 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
         Location location = mLocations.get(position);
         // populate the views according to this data
         holder.tvLocationname.setText(location.name);
-        if (location.startTime != null) {
+        String reportTime;
+        if (location.endTime != null) {
             // Create an instance of SimpleDateFormat used for formatting the string representation of date (month/day/year)
             DateFormat df = new SimpleDateFormat("hh:mm a");
             // Using DateFormat format method we can create a string representation of a date with the defined format.
-            String reportTime = df.format(location.startTime);
+            reportTime = df.format(location.startTime) + " - " + df.format(location.endTime);
             holder.tvTime.setText(reportTime);
             holder.tvTime.setVisibility(View.VISIBLE);
-        } else {
+        }
+        else {
             holder.tvTime.setVisibility(View.GONE);
         }
         Picasso.with(context)
