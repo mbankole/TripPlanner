@@ -53,7 +53,7 @@ public class PlanEditTextFragment extends DialogFragment{
             etTitle.setText(getArguments().getString("title"));
         }
         if (getArguments().getString("description") != null) {
-            //something something description
+            etDescription.setText(getArguments().getString("description"));
         }
 
         btSubmit.setOnClickListener(new View.OnClickListener() {
