@@ -2,6 +2,7 @@ package com.example.mbankole.tripplanner.adapters;
 
 import android.content.Context;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
+import com.example.mbankole.tripplanner.fragments.LocationDetailFragment;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.Message;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,7 +39,7 @@ public class PlanMessagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     List<Object> mObjects;
     Context context;
-    android.app.FragmentManager fm;
+    FragmentManager fm;
     public PlanEditActivity planEditActivity;
     FirebaseUser currentUser;
     FirebaseAuth mAuth;
@@ -49,7 +51,7 @@ public class PlanMessagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         mObjects = objects;
     }
 
-    public void setFm(android.app.FragmentManager fm) {
+    public void setFm(FragmentManager fm) {
         this.fm = fm;
     }
 
@@ -121,6 +123,25 @@ public class PlanMessagesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         final Message message = (Message) mObjects.get(position);
         String requestBody = message.getSenderUsername() + " wants to " + message.getRequestType() + " " + message.getLocationName();
         Picasso.with(context).load(message.getLcoationImageUrl()).into(holder.ivPreview);
+        holder.ivPreview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GmapClient.getDetailFromId(message.getRequestTargetGid(), new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        //Log.d(TAG, response.toString());
+                        Location loc = null;
+                        try {
+                            loc = Location.locationFromJson(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        LocationDetailFragment frag = LocationDetailFragment.newInstance(loc, false);
+                        frag.request = true;
+                        frag.show(fm, "detail");
+                    }});
+            }
+        });
         holder.tvRequestBody.setText(requestBody);
         holder.btApprove.setOnClickListener(new View.OnClickListener() {
             @Override

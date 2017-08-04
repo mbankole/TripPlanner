@@ -33,7 +33,7 @@ import com.squareup.picasso.Picasso;
  *
  */
 
-public class LocationDetailFragment extends DialogFragment implements  View.OnClickListener{
+public class LocationDetailFragment extends DialogFragment implements  View.OnClickListener {
     TextView tvName;
     TextView tvAddress;
     TextView tvPhone;
@@ -51,10 +51,12 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
 
     public PlanMapFragment planMapFragment;
     PlanEditActivity planEditActivity;
+    public Boolean request;
 
     private final String TAG = "POIDETAILFRAGMENT";
 
-    public LocationDetailFragment() {}
+    public LocationDetailFragment() {
+    }
 
     public static LocationDetailFragment newInstance(Location loc, Boolean plan) {
         LocationDetailFragment frag = new LocationDetailFragment();
@@ -90,59 +92,62 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
         LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
         stars.getDrawable(2).setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
         btAdd = (ImageButton) view.findViewById(R.id.btAdd);
-        btAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (owner) {
-                    planMapFragment.addLocation(loc);
-                    Snackbar.make(viewref, "Added!", Snackbar.LENGTH_SHORT).show();
-                    planEditActivity.refreshAdd();
-                    btAdd.setVisibility(View.GONE);
-                    btRemove.setVisibility(View.VISIBLE);
-                }
-                else {
-                    Message newRequest = new Message();
-                    newRequest.setRequest(true);
-                    newRequest.setSenderUsername(currentUser.getDisplayName());
-                    newRequest.setRequestType("add");
-                    newRequest.setLocationName(loc.name);
-                    newRequest.setRequestTargetGid(loc.getGoogleId());
-                    newRequest.setLcoationImageUrl(GmapClient.generateImageUrl(loc.photoRef));
-                    newRequest.setSenderUid(currentUser.getUid());
-                    DatabaseReference newRequestdb = mDatabase.child("plan_data").child(planEditActivity.plan.getUid()).child("messages").push();
-                    newRequest.setDbUid(newRequestdb.getKey());
-                    newRequestdb.setValue(newRequest);
-                    Snackbar.make(viewref, "Request Made!", Snackbar.LENGTH_SHORT).show();
-                }
-            }
-        });
         btRemove = (ImageButton) view.findViewById(R.id.ibRemove);
-        btRemove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (owner) {
-                    planEditActivity.removeLocation(loc);
-                    Snackbar.make(viewref, "Removed!", Snackbar.LENGTH_SHORT).show();
-                    btAdd.setVisibility(View.VISIBLE);
-                    btRemove.setVisibility(View.GONE);
-                }
-                else {
-                    Message newRequest = new Message();
-                    newRequest.setRequest(true);
-                    newRequest.setSenderUsername(currentUser.getDisplayName());
-                    newRequest.setRequestType("remove");
-                    newRequest.setLocationName(loc.name);
-                    newRequest.setRequestTargetGid(loc.getGoogleId());
-                    newRequest.setLcoationImageUrl(GmapClient.generateImageUrl(loc.photoRef));
-                    newRequest.setSenderUid(currentUser.getUid());
-                    DatabaseReference newRequestdb = mDatabase.child("plan_data").child(planEditActivity.plan.getUid()).child("messages").push();
-                    newRequest.setDbUid(newRequestdb.getKey());
-                    newRequestdb.setValue(newRequest);
-                    Snackbar.make(viewref, "Request Made!", Snackbar.LENGTH_SHORT).show();
-                }
-            }
-        });
 
+        if (request) {
+            btAdd.setVisibility(View.GONE);
+            btRemove.setVisibility(View.GONE);
+        } else {
+            btAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (owner) {
+                        planMapFragment.addLocation(loc);
+                        Snackbar.make(viewref, "Added!", Snackbar.LENGTH_SHORT).show();
+                        planEditActivity.refreshAdd();
+                        btAdd.setVisibility(View.GONE);
+                        btRemove.setVisibility(View.VISIBLE);
+                    } else {
+                        Message newRequest = new Message();
+                        newRequest.setRequest(true);
+                        newRequest.setSenderUsername(currentUser.getDisplayName());
+                        newRequest.setRequestType("add");
+                        newRequest.setLocationName(loc.name);
+                        newRequest.setRequestTargetGid(loc.getGoogleId());
+                        newRequest.setLcoationImageUrl(GmapClient.generateImageUrl(loc.photoRef));
+                        newRequest.setSenderUid(currentUser.getUid());
+                        DatabaseReference newRequestdb = mDatabase.child("plan_data").child(planEditActivity.plan.getUid()).child("messages").push();
+                        newRequest.setDbUid(newRequestdb.getKey());
+                        newRequestdb.setValue(newRequest);
+                        Snackbar.make(viewref, "Request Made!", Snackbar.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            btRemove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (owner) {
+                        planEditActivity.removeLocation(loc);
+                        Snackbar.make(viewref, "Removed!", Snackbar.LENGTH_SHORT).show();
+                        btAdd.setVisibility(View.VISIBLE);
+                        btRemove.setVisibility(View.GONE);
+                    } else {
+                        Message newRequest = new Message();
+                        newRequest.setRequest(true);
+                        newRequest.setSenderUsername(currentUser.getDisplayName());
+                        newRequest.setRequestType("remove");
+                        newRequest.setLocationName(loc.name);
+                        newRequest.setRequestTargetGid(loc.getGoogleId());
+                        newRequest.setLcoationImageUrl(GmapClient.generateImageUrl(loc.photoRef));
+                        newRequest.setSenderUid(currentUser.getUid());
+                        DatabaseReference newRequestdb = mDatabase.child("plan_data").child(planEditActivity.plan.getUid()).child("messages").push();
+                        newRequest.setDbUid(newRequestdb.getKey());
+                        newRequestdb.setValue(newRequest);
+                        Snackbar.make(viewref, "Request Made!", Snackbar.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
 
         btClose = (ImageButton) view.findViewById(R.id.btClose);
         btClose.setOnClickListener(new View.OnClickListener() {
@@ -152,7 +157,7 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
             }
         });
 
-        ivPhoto = (ImageView)view.findViewById(R.id.ivPhoto);
+        ivPhoto = (ImageView) view.findViewById(R.id.ivPhoto);
         tvName.setText(loc.name);
         tvAddress.setText(loc.address);
         tvPhone.setText(loc.phoneNumber);
@@ -207,7 +212,7 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
         dismiss();
     }
 
-   // Intent callIntent = new Intent(Intent.ACTION_CALL);
-   // callIntent.setData(Uri.parse("tel:123456789"));
-   // startActivity(callIntent);
+    // Intent callIntent = new Intent(Intent.ACTION_CALL);
+    // callIntent.setData(Uri.parse("tel:123456789"));
+    // startActivity(callIntent);
 }
