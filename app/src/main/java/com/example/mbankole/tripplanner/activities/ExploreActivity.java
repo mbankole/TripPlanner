@@ -6,10 +6,8 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -173,6 +171,7 @@ public class ExploreActivity extends AppCompatActivity {
         super.onCreateOptionsMenu(menu);
         menu.clear();
         getMenuInflater().inflate(R.menu.menu_new_explore, menu);
+        /**
         MenuItem searchItem = menu.findItem(R.id.action_search);
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         //searchView.setVisibility(View.GONE);
@@ -196,6 +195,7 @@ public class ExploreActivity extends AppCompatActivity {
                 return false;
             }
         });
+         **/
         MenuItem miProfile = menu.findItem(R.id.miProfile);
         miProfile.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override

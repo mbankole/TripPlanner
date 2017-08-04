@@ -37,6 +37,7 @@ public class PlanListFragment extends Fragment{
 
     public Plan plan;
     TextView tvTitle;
+    TextView tvDescription;
     ImageView ivEdit;
     TextView tvDate;
     TextView tvCreator;
@@ -68,13 +69,19 @@ public class PlanListFragment extends Fragment{
         fmApp = getActivity().getFragmentManager();
         // find RecyclerView
         tvTitle = (TextView) v.findViewById(R.id.tvPlanName);
+        tvDescription = (TextView) v.findViewById(R.id.tvDescription);
         ivEdit = (ImageView) v.findViewById(R.id.ivEdit);
-        tvDate = (TextView) v.findViewById(R.id.tvNumberUsers);
+        tvDate = (TextView) v.findViewById(R.id.tvDate);
         tvCreator = (TextView) v.findViewById(R.id.tvPlanCreator);
         ivBackground = (ImageView) v.findViewById(R.id.ivPlanBackground);
         rvPlanList = (RecyclerView) v.findViewById(R.id.rvPlanList);
 
         tvTitle.setText(plan.title);
+        if (plan.description != null) {
+            tvDescription.setText(plan.description);
+        } else {
+            tvDescription.setVisibility(View.GONE);
+        }
         if (plan.startDate != null) {
             refreshDate();
         }

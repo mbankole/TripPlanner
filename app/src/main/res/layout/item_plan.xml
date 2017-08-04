@@ -42,7 +42,8 @@
                 android:layout_marginTop="8dp"
                 android:text="Plan Title"
                 android:textAppearance="@android:style/TextAppearance.Large"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:layout_toStartOf="@+id/ibAdd" />
 
             <ImageButton
                 android:id="@+id/ibAdd"
@@ -51,8 +52,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
                 android:background="@android:color/transparent"
-                android:tint="@color/colorAccent"
                 android:padding="8dp"
+                android:tint="@color/colorAccent"
                 app:srcCompat="@drawable/ic_star_unfilled" />
 
             <com.example.mbankole.tripplanner.utility.RalewayLightTextView
@@ -63,24 +64,34 @@
                 android:layout_below="@+id/tvPlanTitle"
                 android:text="Date Range"
                 android:textColor="@color/white"
-                android:textAppearance="@android:style/TextAppearance.Small" />
+                android:textAppearance="@android:style/TextAppearance.Medium" />
 
             <com.example.mbankole.tripplanner.utility.RalewayLightTextView
                 android:id="@+id/tvCreator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/tvPlanTitle"
+                android:layout_alignStart="@+id/tvDate"
                 android:layout_below="@+id/tvDate"
+                android:layout_marginBottom="4dp"
                 android:text="Created by"
-                android:layout_marginBottom="8dp"
                 android:textColor="@color/white"
-                android:textAppearance="@android:style/TextAppearance.Small" />
+                android:textAppearance="@android:style/TextAppearance.Medium" />
+
+            <com.example.mbankole.tripplanner.utility.RalewayMedTextView
+                android:id="@+id/tvDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginBottom="8dp"
+                android:text="This is a brief description of the plan."
+                android:layout_below="@+id/tvCreator"
+                android:layout_alignStart="@+id/tvCreator" />
 
             <LinearLayout
                 android:id="@+id/llLocations"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvCreator"
+                android:layout_below="@+id/tvDescription"
                 android:orientation="vertical" />
 
         </RelativeLayout>

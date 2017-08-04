@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/ivPlanBackground"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="124dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
@@ -30,12 +30,14 @@
         android:id="@+id/tvNumberUsers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:text="n People:"
         android:textAppearance="@android:style/TextAppearance.Large"
         android:textColor="@color/white"
-        android:layout_alignStart="@+id/tvPlanName"
-        android:layout_below="@+id/tvPlanName" />
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="22dp"
+        android:layout_above="@+id/rvMessages"
+        android:layout_alignStart="@+id/tvPlanName" />
 
     <Button
         android:id="@+id/btSend"
