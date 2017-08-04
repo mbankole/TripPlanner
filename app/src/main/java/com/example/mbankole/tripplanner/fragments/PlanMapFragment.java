@@ -254,6 +254,7 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
         Location location = (Location) marker.getTag();
         LocationDetailFragment frag = LocationDetailFragment.newInstance(location, true);
         frag.planEditActivity = planEditActivity;
+        frag.request = false;
         frag.owner = currentUser.getUid().equals(plan.getCreatorUid());
         frag.planMapFragment = this;
         frag.show(fm, "name");
@@ -340,6 +341,7 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
                     LocationDetailFragment frag = LocationDetailFragment.newInstance(loc, false);
                     frag.planMapFragment = self;
                     frag.planEditActivity = planEditActivity;
+                    frag.request = false;
                     frag.owner = currentUser.getUid().equals(plan.getCreatorUid());
                     frag.show(fm, "detail");
                 }

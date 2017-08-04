@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.UUID;
 
 /**
- * Created by mbankole on 7/20/17.
+ * Created by mbankole on 7/20/17...
  */
 
 public class Plan implements Parcelable {
