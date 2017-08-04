@@ -83,7 +83,11 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         } else {
             holder.tvDate.setVisibility(View.GONE);
         }
-
+        if (plan.description != null) {
+            holder.tvDescription.setText(plan.description);
+        } else {
+            holder.tvDescription.setVisibility(View.GONE);
+        }
         if (plan.people.contains(currentUser.getUid())) {
             holder.ibAdd.setImageResource(R.drawable.ic_star_filled);
         }
@@ -123,6 +127,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         public TextView tvPlanTitle;
         public TextView tvDate;
         public TextView tvCreator;
+        public TextView tvDescription;
         public LinearLayout llLocations;
         public ImageButton ibAdd;
         public ImageView ivBackground;
@@ -132,6 +137,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
             tvPlanTitle = (TextView) itemView.findViewById(R.id.tvPlanTitle);
             tvDate = (TextView) itemView.findViewById(R.id.tvDate);
             tvCreator = (TextView) itemView.findViewById(R.id.tvCreator);
+            tvDescription = (TextView) itemView.findViewById(R.id.tvDescription);
             llLocations = (LinearLayout) itemView.findViewById(R.id.llLocations);
             ibAdd = (ImageButton) itemView.findViewById(R.id.ibAdd);
             ivBackground = (ImageView) itemView.findViewById(R.id.ivPlanBackground);

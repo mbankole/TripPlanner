@@ -89,7 +89,7 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
         places = plan.places;
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        fragmentPager = new PlanEditPagerAdapter(getSupportFragmentManager(), plan);
+        fragmentPager = new PlanEditPagerAdapter(getFragmentManager(), getSupportFragmentManager(), plan);
         viewPager.setAdapter(fragmentPager);
         fragmentPager.planEditActivity = this;
 

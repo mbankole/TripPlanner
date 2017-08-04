@@ -154,6 +154,7 @@ public class PlanMessagesFragment extends Fragment{
         rvMessages = (RecyclerView) v.findViewById(R.id.rvMessages);
         messagesAdapter = new PlanMessagesAdapter(objects);
         messagesAdapter.planEditActivity = planEditActivity;
+        messagesAdapter.setFm(getActivity().getSupportFragmentManager());
         rvMessages.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, true));
         rvMessages.setAdapter(messagesAdapter);
 

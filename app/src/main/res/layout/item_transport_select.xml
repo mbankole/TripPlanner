@@ -37,6 +37,7 @@
             android:id="@+id/ivWalk"
             android:layout_width="50dp"
             android:layout_height="32dp"
+            android:scaleType="fitCenter"
             android:tint="@color/darkGrey"
             app:srcCompat="@drawable/ic_walk" />
 
@@ -50,6 +51,7 @@
             android:layout_width="50dp"
             android:layout_height="32dp"
             android:layout_weight="0.02"
+            android:scaleType="fitCenter"
             android:tint="@color/darkGrey"
             app:srcCompat="@drawable/ic_car" />
 
@@ -63,6 +65,7 @@
             android:layout_width="50dp"
             android:layout_height="32dp"
             android:layout_weight="0.26"
+            android:scaleType="fitCenter"
             android:tint="@color/darkGrey"
             app:srcCompat="@drawable/ic_bus" />
 

@@ -10,8 +10,6 @@ import java.util.ArrayList;
  * Created by danahe97 on 7/11/17.
  */
 
-//
-    //
 public class User implements Parcelable {
 
     public String name;

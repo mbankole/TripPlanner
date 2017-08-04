@@ -48,11 +48,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         User user = mUsers.get(position);
         // populate the views according to this data
         holder.tvUsername.setText(user.name);
+        holder.ivUserImage.setImageResource(R.color.black);
         if (user.imageUrl != null) {
             Picasso.with(context)
                     .load(user.imageUrl)
                     .fit()
-                    //.memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)
                     .into(holder.ivUserImage);
         }
     }
@@ -84,5 +84,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 context.startActivity(intent);
             }
         }
+    }
+
+    public void clear() {
+        mUsers.clear();
+        notifyDataSetChanged();
     }
 }

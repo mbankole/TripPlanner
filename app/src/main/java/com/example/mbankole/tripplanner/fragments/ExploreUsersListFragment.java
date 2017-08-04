@@ -3,6 +3,7 @@ package com.example.mbankole.tripplanner.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -37,6 +38,7 @@ public class ExploreUsersListFragment extends Fragment {
     ArrayList<User> friends;
     android.app.FragmentManager fm;
     private DatabaseReference mDatabase;
+    private SwipeRefreshLayout swipeContainer;
 
     public static ExploreUsersListFragment newInstance() {
         Bundle args = new Bundle();
@@ -68,15 +70,21 @@ public class ExploreUsersListFragment extends Fragment {
         rvUsers.setLayoutManager(new GridLayoutManager(getContext(), 2));
         // set the adapter
         rvUsers.setAdapter(userAdapter);
-        /*for (int i=0; i < 1; i++) {
-            //User friend = new User();
-            friends.add(User.generateChandler(getContext()));
-            friends.add(User.generateJoey());
-            friends.add(User.generateMonica());
-            friends.add(User.generatePhoebe());
-            friends.add(User.generateRachel());
-            friends.add(User.generateRoss());
-        }*/
+
+        swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                userAdapter.clear();
+                getUsers();
+            }
+        });
+
+        userAdapter.notifyItemInserted(friends.size() - 1);
         getUsers();
         return v;
     }
@@ -87,6 +95,7 @@ public class ExploreUsersListFragment extends Fragment {
 
     public void getUsers() {
         DatabaseReference ref = mDatabase.child("users");
+        swipeContainer.setRefreshing(true);
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -98,11 +107,13 @@ public class ExploreUsersListFragment extends Fragment {
                     userAdapter.notifyItemInserted(friends.size() - 1);
                     rvUsers.smoothScrollToPosition(0);
                 }
+                swipeContainer.setRefreshing(false);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Log.e(TAG, "onCancelled: shits fucked");
+                swipeContainer.setRefreshing(false);
             }
         });
     }

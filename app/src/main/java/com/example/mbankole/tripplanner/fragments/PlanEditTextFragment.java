@@ -6,8 +6,8 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.models.Plan;
@@ -19,7 +19,7 @@ import com.example.mbankole.tripplanner.models.Plan;
 public class PlanEditTextFragment extends DialogFragment{
     EditText etTitle;
     EditText etDescription;
-    Button btSubmit;
+    ImageButton btSubmit;
     public PlanListFragment planListFragment;
 
     private static final String TAG = "PLANEDITTEXTFRAGMENT";
@@ -47,13 +47,13 @@ public class PlanEditTextFragment extends DialogFragment{
 
         etTitle = (EditText) view.findViewById(R.id.etTitle);
         etDescription = (EditText) view.findViewById(R.id.etDescription);
-        btSubmit = (Button) view.findViewById(R.id.btSubmit);
+        btSubmit = (ImageButton) view.findViewById(R.id.btSubmit);
 
         if (!getArguments().getString("title").equals("New Plan")) {
             etTitle.setText(getArguments().getString("title"));
         }
         if (getArguments().getString("description") != null) {
-            //something something description
+            etDescription.setText(getArguments().getString("description"));
         }
 
         btSubmit.setOnClickListener(new View.OnClickListener() {

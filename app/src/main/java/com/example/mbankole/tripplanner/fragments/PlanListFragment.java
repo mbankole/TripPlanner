@@ -37,6 +37,7 @@ public class PlanListFragment extends Fragment{
 
     public Plan plan;
     TextView tvTitle;
+    TextView tvDescription;
     ImageView ivEdit;
     TextView tvDate;
     TextView tvCreator;
@@ -44,6 +45,7 @@ public class PlanListFragment extends Fragment{
     RecyclerView rvPlanList;
     public PlanLocationsAdapter listAdapter;
     FragmentManager fm;
+    android.app.FragmentManager fmApp;
     public PlanEditActivity planEditActivity;
     PlanListFragment self;
 
@@ -64,15 +66,22 @@ public class PlanListFragment extends Fragment{
         View v = inflater.inflate(R.layout.fragment_listsview, container, false);
         self = this;
         fm = getActivity().getSupportFragmentManager();
+        fmApp = getActivity().getFragmentManager();
         // find RecyclerView
         tvTitle = (TextView) v.findViewById(R.id.tvPlanName);
+        tvDescription = (TextView) v.findViewById(R.id.tvDescription);
         ivEdit = (ImageView) v.findViewById(R.id.ivEdit);
-        tvDate = (TextView) v.findViewById(R.id.tvNumberUsers);
+        tvDate = (TextView) v.findViewById(R.id.tvDate);
         tvCreator = (TextView) v.findViewById(R.id.tvPlanCreator);
         ivBackground = (ImageView) v.findViewById(R.id.ivPlanBackground);
         rvPlanList = (RecyclerView) v.findViewById(R.id.rvPlanList);
 
         tvTitle.setText(plan.title);
+        if (plan.description != null) {
+            tvDescription.setText(plan.description);
+        } else {
+            tvDescription.setVisibility(View.GONE);
+        }
         if (plan.startDate != null) {
             refreshDate();
         }
@@ -118,7 +127,7 @@ public class PlanListFragment extends Fragment{
         // construct the adapter from this data source
         listAdapter = new PlanLocationsAdapter(plan.places);
         listAdapter.planEditActivity = planEditActivity;
-        listAdapter.setFm(fm);
+        listAdapter.setFm(fmApp);
 //        locationAdapter.exploreActivity = exploreActivity;
         // RecyclerView setup (layout manager, use adapter)
         rvPlanList.setLayoutManager(new LinearLayoutManager(getContext()));

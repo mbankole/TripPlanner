@@ -1,8 +1,8 @@
 
 package com.example.mbankole.tripplanner.adapters;
 
+import android.app.FragmentManager;
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,15 +13,18 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.borax12.materialdaterangepicker.time.RadialPickerLayout;
+import com.borax12.materialdaterangepicker.time.TimePickerDialog;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
-import com.example.mbankole.tripplanner.fragments.TimePickerFragment;
 import com.example.mbankole.tripplanner.models.Location;
 import com.example.mbankole.tripplanner.models.TransportOption;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,13 +37,13 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
     Context context;
     public PlanEditActivity planEditActivity;
     PlanLocationsAdapter adapter;
-    FragmentManager fm;
+    android.app.FragmentManager fm;
 
     public PlanLocationsAdapter(List<Location> locations) {
         mLocations = locations;
     }
 
-    public void setFm(FragmentManager fm) {
+    public void setFm(android.app.FragmentManager fm) {
         this.fm = fm;
     }
 
@@ -60,14 +63,16 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
         Location location = mLocations.get(position);
         // populate the views according to this data
         holder.tvLocationname.setText(location.name);
-        if (location.startTime != null) {
+        String reportTime;
+        if (location.endTime != null) {
             // Create an instance of SimpleDateFormat used for formatting the string representation of date (month/day/year)
             DateFormat df = new SimpleDateFormat("hh:mm a");
             // Using DateFormat format method we can create a string representation of a date with the defined format.
-            String reportTime = df.format(location.startTime);
+            reportTime = df.format(location.startTime) + " - " + df.format(location.endTime);
             holder.tvTime.setText(reportTime);
             holder.tvTime.setVisibility(View.VISIBLE);
-        } else {
+        }
+        else {
             holder.tvTime.setVisibility(View.GONE);
         }
         Picasso.with(context)
@@ -126,7 +131,7 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
         public void viewHolderTransportSetup(View itemView) {
             //itemView.setOnClickListener(this);
 
-            final String TAG = "VIEWHOLDERTANSPORT";
+            final String TAG = "VIEWHOLDERTRANSPORT";
 
             final RadioButton rbWalk = (RadioButton) itemView.findViewById(R.id.rbWalk);
             final RadioButton rbDrive = (RadioButton) itemView.findViewById(R.id.rbDrive);
@@ -168,15 +173,66 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
             rbTransit.setOnClickListener(radioClick);
         }
 
+        class TimeChangeAdapter implements TimePickerDialog.OnTimeSetListener {
+
+            public Location location;
+            public PlanLocationsAdapter adapter;
+
+            public TimeChangeAdapter(Location location, PlanLocationsAdapter adapter) {
+                this.location = location;
+                this.adapter = adapter;
+            }
+
+            public void show(FragmentManager fm, String title) {
+                Calendar now = Calendar.getInstance();
+                TimePickerDialog tpd;
+                if (location.startTime != null && location.endTime != null) {
+                    tpd = TimePickerDialog.newInstance(
+                            this,
+                            location.startTime.getHours(),
+                            location.startTime.getMinutes(),
+                            false,
+                            location.endTime.getHours(),
+                            location.endTime.getMinutes()
+                    );
+                } else {
+                    tpd = TimePickerDialog.newInstance(
+                            this,
+                            now.get(Calendar.HOUR_OF_DAY),
+                            now.get(Calendar.MINUTE),
+                            false
+                    );
+                }
+                tpd.show(fm, title);
+            }
+
+            @Override
+            public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int hourOfDayEnd, int minuteEnd) {
+                if (location.startTime == null) {
+                    location.startTime = new Date();
+                }
+                location.startTime.setHours(hourOfDay);
+                location.startTime.setMinutes(minute);
+                if (location.endTime == null) {
+                    location.endTime = new Date();
+                }
+                location.endTime.setHours(hourOfDayEnd);
+                location.endTime.setMinutes(minuteEnd);
+                adapter.update();
+            }
+        }
+
         @Override
         public void onClick(View view) {
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
                 Location location =  mLocations.get(position);
-                TimePickerFragment frag = new TimePickerFragment();
+                /*TimePickerFragment frag = new TimePickerFragment();
                 frag.location = location;
                 frag.adapter = adapter;
-                frag.show(fm, "name");
+                frag.show(fm, "name");*/
+                TimeChangeAdapter thing = new TimeChangeAdapter(location, adapter);
+                thing.show(fm, "");
             }
         }
     }
