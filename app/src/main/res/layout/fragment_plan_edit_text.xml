@@ -35,6 +35,7 @@
         android:scaleType="fitCenter"
         android:tint="@color/colorAccent"
         android:text="OK"
+        android:layout_margin="8dp"
         android:textColor="@android:color/primary_text_dark"
         app:srcCompat="@drawable/ic_check"
         android:layout_below="@+id/etDescription"

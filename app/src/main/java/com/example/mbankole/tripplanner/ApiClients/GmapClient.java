@@ -73,6 +73,18 @@ public class GmapClient {
         client.get(absoluteUrl, params, responseHandler);
     }
 
+    public static void getDirectionsIds(String origin, String destination, String travelMode, AsyncHttpResponseHandler responseHandler) {
+        String relativeUrl = "directions/json";
+        String absoluteUrl = getAbsoluteUrl(relativeUrl);
+        RequestParams params = new RequestParams();
+        params.put("key", API_KEY );
+        params.put("origin", "place_id:" + origin);
+        params.put("destination", "place_id:" + destination);
+        params.put("mode", travelMode);
+        client.get(absoluteUrl, params, responseHandler);
+    }
+
+
     private static String getAbsoluteUrl(String relativeUrl) {
         return BASE_URL + relativeUrl;
     }

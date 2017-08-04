@@ -26,8 +26,8 @@ public class Route implements Parcelable {
     public String duration;
     public String startAddress;
     public String endAddress;
-    public LatLng startLoc;
-    public LatLng endLoc;
+    public DCLatLng startLoc;
+    public DCLatLng endLoc;
 
     public static Route routeFromJson(JSONObject obj) throws JSONException {
         Route route = new Route();
@@ -55,9 +55,9 @@ public class Route implements Parcelable {
         route.duration = legs.getJSONObject("duration").getString("text");
         route.startAddress = legs.getString("start_address");
         route.endAddress = legs.getString("end_address");
-        route.startLoc = new LatLng(legs.getJSONObject("start_location").getDouble("lat"),
+        route.startLoc = new DCLatLng(legs.getJSONObject("start_location").getDouble("lat"),
                 legs.getJSONObject("start_location").getDouble("lng"));
-        route.endLoc = new LatLng(legs.getJSONObject("end_location").getDouble("lat"),
+        route.endLoc = new DCLatLng(legs.getJSONObject("end_location").getDouble("lat"),
                 legs.getJSONObject("end_location").getDouble("lng"));
 
     }
@@ -121,19 +121,19 @@ public class Route implements Parcelable {
         this.endAddress = endAddress;
     }
 
-    public LatLng getStartLoc() {
+    public DCLatLng getStartLoc() {
         return startLoc;
     }
 
-    public void setStartLoc(LatLng startLoc) {
+    public void setStartLoc(DCLatLng startLoc) {
         this.startLoc = startLoc;
     }
 
-    public LatLng getEndLoc() {
+    public DCLatLng getEndLoc() {
         return endLoc;
     }
 
-    public void setEndLoc(LatLng endLoc) {
+    public void setEndLoc(DCLatLng endLoc) {
         this.endLoc = endLoc;
     }
 

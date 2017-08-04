@@ -262,42 +262,54 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
 
     private void showRoutes(ArrayList<Location> places) {
         for (int i = 0; i < places.size() - 1; i++) {
-            if (places.get(i).transport != null && places.get(i).transport.mode != null) {
-                String mode = "";
-                switch (places.get(i).transport.mode) {
-                    case DRIVING:
-                        mode = "driving";
-                        break;
-                    case WALKING:
-                        mode = "walking";
-                        break;
-                    case TRANSIT:
-                        mode = "transit";
-                        break;
-                    default:
-                        mode = null;
-                        break;
+            if (places.get(i).transport.route != null) {
+                Route rt = places.get(i).transport.route;
+                ArrayList<LatLng> tempLatLngArray = new ArrayList<>();
+                for (int j = 0; j < rt.latLongArray.size(); j++) {
+                    tempLatLngArray.add(rt.latLongArray.get(j).toGLatLng());
                 }
-                GmapClient.getDirections(places.get(i), places.get(i + 1), mode, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        try {
-                            Route rt = Route.routeFromJson(response);
-                            ArrayList<LatLng> tempLatLngArray = new ArrayList<>();
-                            for (int i = 0; i < rt.latLongArray.size(); i++) {
-                                tempLatLngArray.add(rt.latLongArray.get(i).toGLatLng());
-                            }
-                            mMap.addPolyline(new PolylineOptions()
-                                    .color(Color.rgb(74, 130, 120))
-                                    .addAll(tempLatLngArray)
-                                    .clickable(true))
-                                    .setTag(rt);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                mMap.addPolyline(new PolylineOptions()
+                        .color(Color.rgb(74, 130, 120))
+                        .addAll(tempLatLngArray)
+                        .clickable(true))
+                        .setTag(rt);
+            } else {
+                if (places.get(i).transport != null && places.get(i).transport.mode != null) {
+                    String mode = "";
+                    switch (places.get(i).transport.mode) {
+                        case DRIVING:
+                            mode = "driving";
+                            break;
+                        case WALKING:
+                            mode = "walking";
+                            break;
+                        case TRANSIT:
+                            mode = "transit";
+                            break;
+                        default:
+                            mode = null;
+                            break;
                     }
-                });
-
+                    GmapClient.getDirections(places.get(i), places.get(i + 1), mode, new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                            try {
+                                Route rt = Route.routeFromJson(response);
+                                ArrayList<LatLng> tempLatLngArray = new ArrayList<>();
+                                for (int i = 0; i < rt.latLongArray.size(); i++) {
+                                    tempLatLngArray.add(rt.latLongArray.get(i).toGLatLng());
+                                }
+                                mMap.addPolyline(new PolylineOptions()
+                                        .color(Color.rgb(74, 130, 120))
+                                        .addAll(tempLatLngArray)
+                                        .clickable(true))
+                                        .setTag(rt);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
             }
         }
     }

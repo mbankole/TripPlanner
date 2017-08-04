@@ -15,17 +15,25 @@ import android.widget.TextView;
 
 import com.borax12.materialdaterangepicker.time.RadialPickerLayout;
 import com.borax12.materialdaterangepicker.time.TimePickerDialog;
+import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.models.Location;
+import com.example.mbankole.tripplanner.models.Route;
 import com.example.mbankole.tripplanner.models.TransportOption;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ericar on 7/11/17.
@@ -80,7 +88,9 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
                 .fit()
                 .into(holder.ivLocationImage);
         holder.removeTransport();
-        if (location.transport != null) holder.addTransport(location.transport);
+        if (location.transport != null) {
+            holder.addTransport(location.transport);
+        }
         else holder.removeTransport();
     }
 
@@ -121,6 +131,11 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
                 case BLANK:
                 default:
             }
+            TextView tvTime = (TextView) v.findViewById(R.id.tvTime);
+            if (transportOption.route != null) {
+                tvTime.setText(transportOption.route.duration);
+            }
+            else tvTime.setText("");
             llTransport.addView(v);
         }
 
@@ -136,13 +151,14 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
             final RadioButton rbWalk = (RadioButton) itemView.findViewById(R.id.rbWalk);
             final RadioButton rbDrive = (RadioButton) itemView.findViewById(R.id.rbDrive);
             final RadioButton rbTransit = (RadioButton) itemView.findViewById(R.id.rbTransit);
+            final TextView tvTime = (TextView) itemView.findViewById(R.id.tvTime);
 
             View.OnClickListener radioClick = new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int position = getAdapterPosition();
+                    final int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
-                        TransportOption transportOption = mLocations.get(position).transport;
+                        final TransportOption transportOption = mLocations.get(position).transport;
                         int id = view.getId();
                         if (id == rbWalk.getId()) {
                             boolean checked = ((RadioButton) view).isChecked();
@@ -150,18 +166,60 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
                             if (checked) {
                                 Log.d(TAG, "onClick: rbWalk selected");
                                 transportOption.mode = TransportOption.Mode.WALKING;
+                                GmapClient.getDirectionsIds(transportOption.startId, transportOption.endId, "walking", new JsonHttpResponseHandler() {
+                                    @Override
+                                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                        try {
+                                            Route rt = Route.routeFromJson(response);
+                                            transportOption.route = rt;
+                                            tvTime.setText(rt.duration);
+                                            notifyItemChanged(position);
+                                            updateMap();
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
                             }
                         } else if (id == rbDrive.getId()) {
                             boolean checked = ((RadioButton) view).isChecked();
                             Log.d(TAG, "onClick: rbDrive");
                             if (checked) {
                                 transportOption.mode = TransportOption.Mode.DRIVING;
+                                GmapClient.getDirectionsIds(transportOption.startId, transportOption.endId, "driving", new JsonHttpResponseHandler() {
+                                    @Override
+                                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                        try {
+                                            Route rt = Route.routeFromJson(response);
+                                            transportOption.route = rt;
+                                            tvTime.setText(rt.duration);
+                                            notifyItemChanged(position);
+                                            updateMap();
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
                             }
                         } else if (id == rbTransit.getId()) {
                             boolean checked = ((RadioButton) view).isChecked();
                             Log.d(TAG, "onClick: rbTransit");
                             if (checked) {
                                 transportOption.mode = TransportOption.Mode.TRANSIT;
+                                GmapClient.getDirectionsIds(transportOption.startId, transportOption.endId, "transit", new JsonHttpResponseHandler() {
+                                    @Override
+                                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                        try {
+                                            Route rt = Route.routeFromJson(response);
+                                            transportOption.route = rt;
+                                            tvTime.setText(rt.duration);
+                                            notifyItemChanged(position);
+                                            updateMap();
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                });
                             }
                         }
                         update();
@@ -239,5 +297,9 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
 
     public void update() {
         planEditActivity.refresh();
+    }
+
+    public void updateMap() {
+        planEditActivity.fragmentPager.getPlanMapFragment().refresh();
     }
 }

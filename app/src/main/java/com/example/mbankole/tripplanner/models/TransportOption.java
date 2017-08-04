@@ -16,6 +16,7 @@ public class TransportOption implements Parcelable {
     public String startId;
     public String endId;
     public String encodedPolyLine;
+    public Route route;
 
     public enum Mode {
         DRIVING,
@@ -117,6 +118,7 @@ public class TransportOption implements Parcelable {
         dest.writeString(this.startId);
         dest.writeString(this.endId);
         dest.writeString(this.encodedPolyLine);
+        dest.writeParcelable(this.route, flags);
         dest.writeInt(this.mode == null ? -1 : this.mode.ordinal());
     }
 
@@ -127,6 +129,7 @@ public class TransportOption implements Parcelable {
         this.startId = in.readString();
         this.endId = in.readString();
         this.encodedPolyLine = in.readString();
+        this.route = in.readParcelable(Route.class.getClassLoader());
         int tmpMode = in.readInt();
         this.mode = tmpMode == -1 ? null : Mode.values()[tmpMode];
     }
