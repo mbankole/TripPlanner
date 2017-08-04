@@ -1,6 +1,7 @@
 
 package com.example.mbankole.tripplanner.adapters;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,6 +24,7 @@ import com.squareup.picasso.Picasso;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -84,7 +86,7 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
     public int getItemCount() {return mLocations.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, TimePickerDialog.OnTimeSetListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         public TextView tvLocationname;
         public TextView tvTime;
@@ -127,7 +129,7 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
         public void viewHolderTransportSetup(View itemView) {
             //itemView.setOnClickListener(this);
 
-            final String TAG = "VIEWHOLDERTANSPORT";
+            final String TAG = "VIEWHOLDERTRANSPORT";
 
             final RadioButton rbWalk = (RadioButton) itemView.findViewById(R.id.rbWalk);
             final RadioButton rbDrive = (RadioButton) itemView.findViewById(R.id.rbDrive);
@@ -169,6 +171,55 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
             rbTransit.setOnClickListener(radioClick);
         }
 
+        class TimeChangeAdapter implements TimePickerDialog.OnTimeSetListener {
+
+            public Location location;
+            public PlanLocationsAdapter adapter;
+
+            public TimeChangeAdapter(Location location, PlanLocationsAdapter adapter) {
+                this.location = location;
+                this.adapter = adapter;
+            }
+
+            public void show(FragmentManager fm, String title) {
+                Calendar now = Calendar.getInstance();
+                TimePickerDialog tpd;
+                if (location.startTime != null && location.endTime != null) {
+                    tpd = TimePickerDialog.newInstance(
+                            this,
+                            location.startTime.getHours(),
+                            location.startTime.getMinutes(),
+                            false,
+                            location.endTime.getHours(),
+                            location.endTime.getMinutes()
+                    );
+                } else {
+                    tpd = TimePickerDialog.newInstance(
+                            this,
+                            now.get(Calendar.HOUR_OF_DAY),
+                            now.get(Calendar.MINUTE),
+                            false
+                    );
+                }
+                tpd.show(fm, title);
+            }
+
+            @Override
+            public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int hourOfDayEnd, int minuteEnd) {
+                if (location.startTime == null) {
+                    location.startTime = new Date();
+                }
+                location.startTime.setHours(hourOfDay);
+                location.startTime.setMinutes(minute);
+                if (location.endTime == null) {
+                    location.endTime = new Date();
+                }
+                location.endTime.setHours(hourOfDayEnd);
+                location.endTime.setMinutes(minuteEnd);
+                adapter.update();
+            }
+        }
+
         @Override
         public void onClick(View view) {
             int position = getAdapterPosition();
@@ -178,20 +229,9 @@ public class PlanLocationsAdapter extends RecyclerView.Adapter<PlanLocationsAdap
                 frag.location = location;
                 frag.adapter = adapter;
                 frag.show(fm, "name");*/
-                Calendar now = Calendar.getInstance();
-                TimePickerDialog tpd = TimePickerDialog.newInstance(
-                        this,
-                        now.get(Calendar.HOUR_OF_DAY),
-                        now.get(Calendar.MINUTE),
-                        false
-                );
-                tpd.show(fm, "Timepickerdialog");
+                TimeChangeAdapter thing = new TimeChangeAdapter(location, adapter);
+                thing.show(fm, "");
             }
-        }
-
-        @Override
-        public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int hourOfDayEnd, int minuteEnd) {
-
         }
     }
 

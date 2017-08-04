@@ -16,7 +16,6 @@ import java.util.Date;
 
 public class TimePickerFragment extends android.support.v4.app.DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
-
     public Location location;
     public PlanLocationsAdapter adapter;
 
