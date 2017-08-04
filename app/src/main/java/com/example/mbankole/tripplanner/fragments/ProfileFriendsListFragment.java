@@ -3,6 +3,7 @@ package com.example.mbankole.tripplanner.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -39,6 +40,7 @@ public class ProfileFriendsListFragment extends Fragment {
     public User user;
     public ArrayList<User> friends;
     android.app.FragmentManager fm;
+    private SwipeRefreshLayout swipeContainer;
 
     private FirebaseAuth mAuth;
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -75,20 +77,25 @@ public class ProfileFriendsListFragment extends Fragment {
         rvUsers.setLayoutManager(new GridLayoutManager(getContext(), 2));
         // set the adapter
         rvUsers.setAdapter(userAdapter);
+
+        swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                userAdapter.clear();
+                getFriends();
+            }
+        });
         getFriends();
         return v;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {}
-
-    public void addItems(ArrayList<User> response) {
-        for (int i = 0; i < response.size(); i++) {
-            User user = response.get(i);
-            friends.add(user);
-            userAdapter.notifyItemInserted(friends.size() - 1);
-        }
-    }
 
     void fixUser(User user) {
         if (user.interests == null) user.interests = new ArrayList<>();
@@ -98,7 +105,11 @@ public class ProfileFriendsListFragment extends Fragment {
 
     public void getFriends() {
         DatabaseReference ref = mDatabase.child("users");
-
+        swipeContainer.setRefreshing(true);
+        if (user.friends.size() < 1) {
+            swipeContainer.setRefreshing(false);
+            return;
+        }
         for (String userId: user.friends) {
             Query userQuery = ref.orderByChild("uid").equalTo(userId);
 
@@ -106,16 +117,19 @@ public class ProfileFriendsListFragment extends Fragment {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
-                        user = singleSnapshot.getValue(User.class);
-                        fixUser(user);
-                        friends.add(user);
+                        User friend = singleSnapshot.getValue(User.class);
+                        fixUser(friend);
+                        friends.add(friend);
                         userAdapter.notifyItemInserted(friends.size() - 1);
                     }
+                    swipeContainer.setRefreshing(false);
+
                 }
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                     Log.e(TAG, "onCancelled: shits fucked");
+                    swipeContainer.setRefreshing(false);
                 }
             });
         }

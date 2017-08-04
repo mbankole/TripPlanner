@@ -85,4 +85,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             }
         }
     }
+
+    public void clear() {
+        mUsers.clear();
+        notifyDataSetChanged();
+    }
 }
