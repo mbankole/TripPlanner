@@ -195,6 +195,16 @@ public class PlanListFragment extends Fragment{
 
     public void addItem() {
         listAdapter.notifyItemInserted(plan.places.size() - 1);
+        if (plan.places.size() > 0) {
+            ivBackground.setColorFilter(Color.argb(65, 0, 0, 0));
+            Location loc = plan.places.get(0);
+            loc.photoUrl = GmapClient.generateImageUrl(loc.photoRef);
+            Picasso.with(getContext())
+                    .load(loc.photoUrl)
+                    .fit()
+                    .transform(new Blur(getContext()))
+                    .into(ivBackground);
+        }
         refresh();
     }
 }
