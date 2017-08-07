@@ -173,8 +173,18 @@ public class ExploreActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (plans.size() == 0) {
-            //loadPlans();
+        if (plans.size() > 0) {
+            if (getIntent().getStringExtra("uid") != null) {
+                for (int i = 0; i < plans.size(); i++) {
+                    if (plans.get(i).getUid().equals(getIntent().getStringExtra("uid"))) {
+                        Intent intent = new Intent(context, PlanEditActivity.class);
+                        intent.putExtra("plan", plans.get(i));
+                        intent.putExtra("position", i);
+                        intent.putExtra("startTab", "wow");
+                        ((Activity)context).startActivityForResult(intent, EDIT_PLAN_REQUEST_CODE);
+                    }
+                }
+            }
         }
     }
 
