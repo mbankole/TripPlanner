@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mbankole.tripplanner.ApiClients.FirebaseClient;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
 import com.example.mbankole.tripplanner.adapters.ChatUserAdapter;
@@ -148,6 +149,9 @@ public class PlanMessagesFragment extends Fragment{
                     DatabaseReference newMessagedb = mDatabase.child("plan_data").child(planUid).child("messages").push();
                     newMessagedb.setValue(newMessage);
                     etBody.setText("");
+                    String title = user.getName() + " sent a message in " + plan.getTitle();
+                    String body = text;
+                    FirebaseClient.sendNotificationTopic(plan.getUid(), title, body);
                 }
             }
         });

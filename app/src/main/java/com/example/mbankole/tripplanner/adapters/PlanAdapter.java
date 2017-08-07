@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
@@ -152,11 +153,13 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
             if (v.getId() == R.id.ibAdd) {
                 if (plan.people.contains(currentUser.getUid())) {
                     plan.people.remove(currentUser.getUid());
+                    FirebaseMessaging.getInstance().unsubscribeFromTopic(plan.getUid());
                     ibAdd.setImageResource(R.drawable.ic_star_unfilled);
                     Snackbar.make(v, "\"" + plan.title + "\" removed.", Snackbar.LENGTH_SHORT).show();
                     mDatabase.child("plans").child(plan.uid).setValue(plan);
                 } else {
                     plan.people.add(currentUser.getUid());
+                    FirebaseMessaging.getInstance().subscribeToTopic(plan.getUid());
                     Snackbar.make(v, "\"" + plan.title + "\" added!", Snackbar.LENGTH_SHORT).show();
                     ibAdd.setImageResource(R.drawable.ic_star_filled);
                     mDatabase.child("plans").child(plan.uid).setValue(plan);

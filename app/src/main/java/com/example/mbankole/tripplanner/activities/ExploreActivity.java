@@ -1,5 +1,6 @@
 package com.example.mbankole.tripplanner.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
@@ -15,8 +16,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.mbankole.tripplanner.R;
+import com.example.mbankole.tripplanner.Services.MyFirebaseInstanceIdService;
 import com.example.mbankole.tripplanner.adapters.ExploreFragmentPagerAdapter;
-import com.example.mbankole.tripplanner.adapters.PlanAdapter;
 import com.example.mbankole.tripplanner.fragments.ExplorePlansListFragment;
 import com.example.mbankole.tripplanner.models.Plan;
 import com.example.mbankole.tripplanner.models.User;
@@ -29,10 +30,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 
 import static com.example.mbankole.tripplanner.R.drawable.logo_white;
+import static com.example.mbankole.tripplanner.adapters.PlanAdapter.EDIT_PLAN_REQUEST_CODE;
 
 public class ExploreActivity extends AppCompatActivity {
 
@@ -70,6 +74,12 @@ public class ExploreActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        startService(new Intent(this, MyFirebaseInstanceIdService.class));
+
+        String token = FirebaseInstanceId.getInstance().getToken();
+
+        mDatabase.child("deviceIds").child(currentUser.getUid()).setValue(token);
+
         DatabaseReference ref = mDatabase.child("users");
 
         Query userQuery = ref.orderByChild("uid").equalTo(currentUser.getUid());
@@ -90,6 +100,8 @@ public class ExploreActivity extends AppCompatActivity {
                 receivedUser = true;
             }
         });
+
+        FirebaseMessaging.getInstance().subscribeToTopic("user_" + currentUser.getUid());
 
         // Give the TabLayout the ViewPager
         final TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
@@ -152,7 +164,40 @@ public class ExploreActivity extends AppCompatActivity {
 
         Toast.makeText(context, "Signed in as " + currentUser.getDisplayName(),
                 Toast.LENGTH_LONG).show();
+        /*if (getIntent().getStringExtra("uid") != null) {
+            launchPlan(getIntent().getStringExtra("uid"));
+        }*/
         loadPlans();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (plans.size() == 0) {
+            //loadPlans();
+        }
+    }
+
+    void launchPlan(String uid) {
+        Query ref = mDatabase.child("plans").orderByChild("uid").equalTo(uid);
+
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
+                    Plan plan = singleSnapshot.getValue(Plan.class);
+                    fixPlan(plan);
+                    Intent i = new Intent(context, PlanEditActivity.class);
+                    i.putExtra("plan", plan);
+                    ((Activity)context).startActivityForResult(i, EDIT_PLAN_REQUEST_CODE);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e(TAG, "onCancelled: shits fucked");
+            }
+        });
     }
 
     void fixUser(User user) {
@@ -221,6 +266,17 @@ public class ExploreActivity extends AppCompatActivity {
                     fixPlan(plan);
                     plans.add(0, plan);
                     fragmentPager.refreshAdd();
+                    if (getIntent().getStringExtra("uid") != null) {
+                        for (int i = 0; i < plans.size(); i++) {
+                            if (plans.get(i).getUid().equals(getIntent().getStringExtra("uid"))) {
+                                Intent intent = new Intent(context, PlanEditActivity.class);
+                                intent.putExtra("plan", plans.get(i));
+                                intent.putExtra("position", i);
+                                intent.putExtra("startTab", "wow");
+                                ((Activity)context).startActivityForResult(intent, EDIT_PLAN_REQUEST_CODE);
+                            }
+                        }
+                    }
                 }
             }
 
@@ -240,7 +296,7 @@ public class ExploreActivity extends AppCompatActivity {
             mDatabase.child("plans").child(newPlan.uid).setValue(newPlan);
             fragmentPager.refreshAdd();
         }
-        if (resultCode == RESULT_OK && requestCode == PlanAdapter.EDIT_PLAN_REQUEST_CODE){
+        if (resultCode == RESULT_OK && requestCode == EDIT_PLAN_REQUEST_CODE){
             Plan newPlan = data.getExtras().getParcelable("plan");
             int position = data.getExtras().getInt("position");
             plans.set(position, newPlan);
