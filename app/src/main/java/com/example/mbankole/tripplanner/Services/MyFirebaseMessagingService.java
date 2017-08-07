@@ -25,10 +25,10 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         Log.d(TAG,"From: " + remoteMessage.getFrom());
-        Log.d(TAG, "Notification Message Title: " + remoteMessage.getData().get("otitle"));
-        Log.d(TAG, "Notification Message Body: " + remoteMessage.getData().get("obody"));
+        Log.d(TAG, "Notification Message Title: " + remoteMessage.getData().get("title"));
+        Log.d(TAG, "Notification Message Body: " + remoteMessage.getData().get("body"));
         if (remoteMessage.getData().size() > 0) {
-            sendNotification(remoteMessage.getData().get("plan"), remoteMessage.getData().get("otitle"), remoteMessage.getData().get("obody")) ;
+            sendNotification(remoteMessage.getData().get("plan"), remoteMessage.getData().get("title"), remoteMessage.getData().get("body")) ;
         }
     }
     private void sendNotification(String target, String title, String message) {
@@ -40,7 +40,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.ic_star_filled)
+                .setSmallIcon(R.drawable.ic_logo)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setAutoCancel(true)
