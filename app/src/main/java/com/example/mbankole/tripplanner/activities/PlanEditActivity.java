@@ -28,6 +28,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 
@@ -172,6 +173,7 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
                 i.putExtra("plan", plan);
                 i.putExtra("position", position);
                 setResult(RESULT_OK, i);
+                FirebaseMessaging.getInstance().subscribeToTopic(plan.getUid());
                 finish();
             }
         });
@@ -181,6 +183,10 @@ public class PlanEditActivity extends AppCompatActivity implements PlanEditTextF
 
         if (!newPlan) {
             viewPager.setCurrentItem(1);
+        }
+
+        if (getIntent().getStringExtra("startTab") != null) {
+            viewPager.setCurrentItem(2);
         }
     }
 

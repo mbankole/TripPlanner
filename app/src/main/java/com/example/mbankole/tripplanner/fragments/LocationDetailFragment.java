@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.example.mbankole.tripplanner.ApiClients.FirebaseClient;
 import com.example.mbankole.tripplanner.ApiClients.GmapClient;
 import com.example.mbankole.tripplanner.R;
 import com.example.mbankole.tripplanner.activities.PlanEditActivity;
@@ -120,6 +121,9 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
                         newRequest.setDbUid(newRequestdb.getKey());
                         newRequestdb.setValue(newRequest);
                         Snackbar.make(viewref, "Request Made!", Snackbar.LENGTH_SHORT).show();
+                        String title = currentUser.getDisplayName() + " made a request in " + planEditActivity.plan.getTitle();
+                        String body = "They want to add " + loc.name;
+                        FirebaseClient.sendNotificationTopic(planEditActivity.plan.getUid(), title, body);
                     }
                 }
             });
@@ -144,6 +148,9 @@ public class LocationDetailFragment extends DialogFragment implements  View.OnCl
                         newRequest.setDbUid(newRequestdb.getKey());
                         newRequestdb.setValue(newRequest);
                         Snackbar.make(viewref, "Request Made!", Snackbar.LENGTH_SHORT).show();
+                        String title = currentUser.getDisplayName() + " made a request in " + planEditActivity.plan.getTitle();
+                        String body = "They want to remove " + loc.name;
+                        FirebaseClient.sendNotificationTopic(planEditActivity.plan.getUid(), title, body);
                     }
                 }
             });
