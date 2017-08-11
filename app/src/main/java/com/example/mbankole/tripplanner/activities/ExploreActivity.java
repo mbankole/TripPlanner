@@ -274,6 +274,9 @@ public class ExploreActivity extends AppCompatActivity {
                 for (DataSnapshot singleSnapshot: dataSnapshot.getChildren()) {
                     Plan plan = singleSnapshot.getValue(Plan.class);
                     fixPlan(plan);
+                    if (plan != null && plan.people.contains(currentUser.getUid())) {
+                        FirebaseMessaging.getInstance().subscribeToTopic(plan.getUid());
+                    }
                     plans.add(0, plan);
                     fragmentPager.refreshAdd();
                     if (getIntent().getStringExtra("uid") != null) {

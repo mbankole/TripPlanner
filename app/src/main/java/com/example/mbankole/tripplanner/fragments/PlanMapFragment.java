@@ -243,10 +243,12 @@ public class PlanMapFragment extends Fragment implements OnMapReadyCallback,
     }
 
     public void refresh() {
-        mMap.clear();
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        addPins(mMap,builder);
-        showRoutes(places);
+        if (mMap != null) {
+            mMap.clear();
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            addPins(mMap, builder);
+            showRoutes(places);
+        }
     }
 
     @Override
